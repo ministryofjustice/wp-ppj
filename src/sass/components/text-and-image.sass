@@ -1,0 +1,52 @@
+.text-and-image
+  border-bottom: 2px solid $color-dark
+  margin: $main-mobile-spacing/2 $main-mobile-spacing
+  position: relative
+
+  &::after
+    content: ""
+    clear: both
+    display: table
+
+  &__image
+    //background-color: $color-dark
+    @extend .u-wireframe-image
+    background: url()
+    float: right
+    //height: 80%
+    margin-left: $main-mobile-spacing
+  //position: absolute
+  //right: $main-mobile-spacing
+  //top: $main-mobile-spacing
+  //width: 40%
+
+  &__title
+    @extend .u-top-border
+    clear: left;
+    float: left
+    font-weight: $font-weight-bold
+    margin-bottom: $main-mobile-spacing/2
+    width: 11rem
+
+  &__text
+    float: left
+    font-size: $font-size-small
+    clear: left
+    width: 10rem
+
+  &__quote
+    font-size: $font-size-tiny
+    font-weight: $font-weight-bold
+    //padding-left: $main-mobile-spacing
+    position: relative
+
+    &:before
+      color: $color-main
+      content: open-quote
+      display: block
+      font-size: 3.6rem
+      line-height: 1rem
+
+//left: 0
+  //position: absolute
+  //top: 0
