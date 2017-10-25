@@ -27,6 +27,8 @@ button
 
 // -- COMPONENTS ------------------------------------------
 
+
+
 .page-container
   width: 100%
 
@@ -89,7 +91,8 @@ button
 
 .call-to-action
   background: $color-main
-  padding: $main-mobile-spacing/2 $main-mobile-spacing
+  margin-bottom: $main-mobile-spacing
+  padding: $main-mobile-spacing
 
   &__list-element
     background: $color-main
@@ -134,52 +137,29 @@ button
     width: 11rem
 
   &__text
+    float: left
+    font-size: $font-size-small
+    clear: left
+    width: 10rem
 
-
-.accordion
-  font-size: $font-size-small
-  padding: $main-mobile-spacing
-
-  &__title
-    @extend .u-top-border
-    font-size: $font-size-medium
-    margin-bottom: $main-mobile-spacing
-
-  &__subtitle
-    margin-bottom: 1rem
-
-  &__list-element
-    border-bottom: 1px solid $color-light
-    padding: $main-mobile-spacing/2 0
+  &__quote
+    font-size: $font-size-tiny
+    font-weight: $font-weight-bold
+    //padding-left: $main-mobile-spacing
     position: relative
 
-    &:first-child
-      border-top: 1px solid $color-light
-
-    &-title
-
-    &-content
-      height: 0
-      overflow: hidden
-      transition: height $main-transition-duration
-
-    &-button
-      cursor: pointer
-      position: absolute
-      right: 0
-      top: .2rem
-
-    &-button:before // TODO change to image
+    &:before
       color: $color-main
-      content: '+'
-      font-size: 2rem
-      font-weight: $font-weight-bold
+      content: open-quote
+      display: block
+      font-size: 3.6rem
+      line-height: 1rem
 
-    &--open
-      .accordion__list-element-content
-        margin-top: $main-mobile-spacing
-        height: initial
-        transition: $main-transition-duration
+    //left: 0
+      //position: absolute
+      //top: 0
+
+@import 'components/accordion'
 
 .banner-image
   @extend .u-wireframe-image
