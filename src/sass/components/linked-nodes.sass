@@ -6,6 +6,7 @@
     font-size: $font-size-medium
     font-weight: $font-weight-bold
     margin-bottom: $main-mobile-spacing/2
+    padding-top: .8rem
 
   &__subtitle
     font-size: $font-size-small
@@ -26,7 +27,7 @@
     position: relative
 
     &:before
-      border: 3px solid $color-dark
+      border: .3rem solid $color-dark
       border-radius: 2rem
       content: counter(li)
       counter-increment: li
@@ -39,6 +40,21 @@
       position: absolute
       text-align: center
       width: 3rem
+
+    &:after
+      background-color: $color-dark
+      content: ''
+      display: block
+      position: absolute
+      width: .3rem
+      height: 1.7rem
+      left: -2.35rem
+      top: -1.7rem
+
+    &:first-child:after
+      display: none
+
+
 
 
   &__list-element-main-text
