@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prison & Probation Jobs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="public/css/main.css">
+    <style>
+</style>
+<script>
+    function toggleOpenAccordion(el) {
+        var openClassName = 'accordion__list-element--open';
+        var listElement = el.closest('.accordion__list-element.js');
+        if (listElement.classList.contains(openClassName)) {
+            listElement.classList.remove(openClassName);
+        } else {
+            listElement.classList.add(openClassName);
+        }
+    }
+
+    function toggleOpenNavMenu(navLink) {
+        console.log('toggleOpenNavMenu');
+        var openClassName = 'page-container--nav-menu-open';
+        var pageContainer = navLink.closest('.page-container.js');
+
+        if (pageContainer.classList.contains(openClassName)) {
+            pageContainer.classList.remove(openClassName);
+        } else {
+            pageContainer.classList.add(openClassName);
+        }
+    }
+</script>
+</head>
+<body>
+    <div class="page-container js">
+
+        <div class="header">
+            <div class="header__logo"></div>
+            <div class="header__text">Want a new challenge? We've got your back</div>
+            <div class="header__nav-link js">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="header__nav-menu">
+                <ul>
+                    <li class="header__nav-menu-list-element">Home</li>
+                    <li class="header__nav-menu-list-element">Apply</li>
+                    <li class="header__nav-menu-list-element">Working as a Prison Officer</li>
+                    <li class="header__nav-menu-list-element">Find a role</li>
+                    <li class="header__nav-menu-list-element">Is it right for me</li>
+                    <li class="header__nav-menu-list-element">Working in a prison setting</li>
+                    <li class="header__nav-menu-list-element">Application steps</li>
+                    <li class="header__nav-menu-list-element">Eligibility Checker</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="call-to-action">
+            <ul class="call-to-action__list">
+                <li class="call-to-action__list-element">Apply</li>
+                <li class="call-to-action__list-element">About the role</li>
+                <li class="call-to-action__list-element">Search</li>
+            </ul>
+        </div>
+
+        <div class="text-and-image">
+            <h2 class="text-and-image__title">Prison Officer</h2>
+            <h3 class="text-and-image__text">Apply for a job, join a service</h3>
+            <div class="text-and-image__image"></div>
+        </div>
+
+        <div class="accordion">
+            <h2 class="accordion__title">Benefits of being a prison officer</h2>
+            <h3 class="accordion__subtitle">Find out everything you need to know about becoming a prison officer</h3>
+            <ul class="accordion__list">
+                <li class="accordion__list-element js">
+                    <h4 class="accordion__list-element-title">Sense of belonging</h4>
+                    <button class="accordion__list-element-button"></button>
+                    <div class="accordion__list-element-content"></div>
+                </li>
+                <li class="accordion__list-element js">
+                    <h4 class="accordion__list-element-title">Do something that matters</h4>
+                    <button class="accordion__list-element-button"></button>
+                    <div class="accordion__list-element-content"></div>
+                </li>
+                <li class="accordion__list-element js">
+                    <h4 class="accordion__list-element-title">Flexibility, pay and holiday</h4>
+                    <button class="accordion__list-element-button"></button>
+                    <div class="accordion__list-element-content"></div>
+                </li>
+                <li class="accordion__list-element js">
+                    <h4 class="accordion__list-element-title">Helping others</h4>
+                    <button class="accordion__list-element-button"></button>
+                    <div class="accordion__list-element-content"></div>
+                </li>
+                <li class="accordion__list-element js">
+                    <h4 class="accordion__list-element-title">Personal development</h4>
+                    <button class="accordion__list-element-button"></button>
+                    <div class="accordion__list-element-content"></div>
+                </li>
+                <li class="accordion__list-element js">
+                    <h4 class="accordion__list-element-title">New skills and challenges</h4>
+                    <button class="accordion__list-element-button"></button>
+                    <div class="accordion__list-element-content"></div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="text-and-image text-and-image--quote" >
+            <h3 class="text-and-image__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam odio justo, auctor quis odio ac, volutpat</h3>
+            <div class="text-and-image__image"></div>
+        </div>
+
+        <div class="accordion">
+            <h2 class="accordion__title">Working in a prison setting</h2>
+            <h3 class="accordion__subtitle">Find out everything you need to know about working in a prison</h3>
+            <ul class="accordion__list">
+                <li class="accordion__list-element js">
+                    <h4 class="accordion__list-element-title">What to expect day-to-day</h4>
+                    <button class="accordion__list-element-button"></button>
+                    <div class="accordion__list-element-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+
+                </li>
+                <li class="accordion__list-element js">
+                    <h4 class="accordion__list-element-title">The value you can bring</h4>
+                    <button class="accordion__list-element-button"></button>
+                    <div class="accordion__list-element-content"></div>
+                </li>
+                <li class="accordion__list-element js">
+                    <h4 class="accordion__list-element-title">Challenges worth facing</h4>
+                    <button class="accordion__list-element-button"></button>
+                    <div class="accordion__list-element-content"></div>
+                </li>
+                <li class="accordion__list-element js">
+                    <h4 class="accordion__list-element-title">Working as a team</h4>
+                    <button class="accordion__list-element-button"></button>
+                    <div class="accordion__list-element-content"></div>
+                </li>
+                <li class="accordion__list-element js">
+                    <h4 class="accordion__list-element-title">Diversity</h4>
+                    <button class="accordion__list-element-button"></button>
+                    <div class="accordion__list-element-content"></div>
+                </li>
+                <li class="accordion__list-element js">
+                    <h4 class="accordion__list-element-title">Making a difference</h4>
+                    <button class="accordion__list-element-button"></button>
+                    <div class="accordion__list-element-content"></div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="banner-image"></div>
+
+        <div class="linked-nodes">
+            <h2 class="linked-nodes__title">Application steps</h2>
+            <h3 class="linked-nodes__subtitle">Find out everything you need to know about joining the prison and probation service</h3>
+
+        </div>
+
+    </div>
+</body>
+</html>
+<script>
+    (function addNavClickEventHandler() {
+        var navLink = document.getElementsByClassName('header__nav-link js')[0];
+        navLink.addEventListener('click', toggleOpenNavMenu.bind(null, navLink))
+
+    })();
+
+    (function addAccordionFillerContent() {  // TODO remove this before launch
+        var elements = document.getElementsByClassName('accordion__list-element js');
+        for (var i = 0; i < elements.length; i++) {
+            var content = elements[i].getElementsByClassName('accordion__list-element-content')[0];
+            content.innerHTML = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+        }
+    })();
+
+    (function addAccordionClickEventHandlers() {
+        var elements = document.getElementsByClassName('accordion__list-element js');
+        for (var i = 0; i < elements.length; i++) {
+            var button = elements[i].getElementsByClassName('accordion__list-element-button')[0];
+            button.addEventListener('click', toggleOpenAccordion.bind(null, elements[i]))
+        }
+    })();
+
+</script>

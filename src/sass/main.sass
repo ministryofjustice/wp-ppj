@@ -1,0 +1,216 @@
+// GENERAL
+
+// include reset
+@import '../css/reset.css'
+
+@import 'variables'
+
+// utilities
+@import 'utilities/_top-border.sass'
+@import 'utilities/_wire-frame.sass'
+
+
+// base reset
+html
+  font-size: 62.5%
+  color: $color-main
+  background-color: $color-white
+  font-family: $sans-serif
+
+body
+  font-size: $font-size-medium
+  -webkit-text-size-adjust: none
+
+button
+  border: none
+  background: none
+
+// -- COMPONENTS ------------------------------------------
+
+.page-container
+  width: 100%
+
+  &--nav-meu-open
+
+    .header
+      background: yellow
+      color: red
+
+      &__nav-menu
+        display: initial
+        position: fixed
+        top: 0
+        bottom: 0
+        left: 0
+        right: 0
+        z-index: 1
+
+.header
+  background: $color-medium
+  padding: $main-mobile-spacing
+
+  // https://jonsuh.com/hamburgers/
+  // https://www.w3schools.com/howto/howto_css_menu_icon.asp
+  &__nav-link
+    cursor: pointer
+    position: absolute
+    right: $main-mobile-spacing
+    top: $main-mobile-spacing
+
+    & > div
+      background: $color-dark
+      height: .5rem
+      margin-top: .5rem
+      width: 3rem
+
+      &:first-child
+        margin-top: 0
+  &__nav-menu
+    display: none
+
+
+  &__logo
+    @extend .u-wireframe-image
+    //background-color: $color-light
+    height: 3rem
+    margin-bottom: $main-mobile-spacing/2
+    width: 10rem
+
+  &__text
+    @extend .u-top-border
+    font-size: $font-size-large
+    width: 10rem
+
+
+.call-to-action
+  background: $color-dark
+  padding: $main-mobile-spacing/2 $main-mobile-spacing
+
+  &__list-element
+    background: $color-light
+    border: 1px solid $color-dark
+    font-size: $font-size-large
+    margin-top: 1rem
+    padding: $main-mobile-spacing/2 $main-mobile-spacing
+    text-align: center
+
+    &:first-child
+      margin-top: 0
+
+.text-and-image
+  padding: $main-mobile-spacing
+  position: relative
+
+  &__image
+    //background-color: $color-dark
+    @extend .u-wireframe-image
+    height: 80%
+    margin-left: $main-mobile-spacing
+    position: absolute
+    right: $main-mobile-spacing
+    top: $main-mobile-spacing
+    width: 40%
+
+  &__title
+    @extend .u-top-border
+    font-weight: $font-weight-bold
+    margin-bottom: $main-mobile-spacing
+    width: 11rem
+
+  &__text
+    width: 12rem
+
+  &--quote
+    .text-and-image
+      &__text
+        font-size: $font-size-small
+        padding-left: $main-mobile-spacing
+        position: relative
+
+        &:before
+          content: open-quote
+          font-size: 3.6rem
+          left: 0
+          position: absolute
+          top: 0
+
+
+.accordion
+  font-size: $font-size-small
+  padding: $main-mobile-spacing
+
+  &__title
+    @extend .u-top-border
+    font-size: $font-size-medium
+    margin-bottom: $main-mobile-spacing
+
+  &__subtitle
+    margin-bottom: 1rem
+
+  &__list-element
+    border-bottom: 1px solid $color-light
+    padding: $main-mobile-spacing/2 0
+    position: relative
+
+    &:first-child
+      border-top: 1px solid $color-light
+
+    &-title
+
+    &-content
+      height: 0
+      overflow: hidden
+      transition: height $main-transition-duration
+
+    &-button
+      cursor: pointer
+      position: absolute
+      right: 0
+      top: .2rem
+
+    &-button:before // TODO change to image
+      content: '+'
+      font-size: 2rem
+      font-weight: $font-weight-bold
+
+    &--open
+      .accordion__list-element-content
+        margin-top: $main-mobile-spacing
+        height: initial
+        transition: $main-transition-duration
+
+.banner-image
+  @extend .u-wireframe-image
+  height: 9rem
+  width: 100%
+// https://www.google.co.uk/search?rlz=1C5CHFA_enGB768GB768&q=css+draw+line+between+elements&oq=css+draw+line+be&gs_l=psy-ab.3.1.0l5j0i22i30k1l5.1752.2140.0.4233.3.3.0.0.0.0.69.169.3.3.0....0...1.1.64.psy-ab..0.3.168....0.sFn_J9E1wJo
+// http://sigmajs.org/
+// https://github.com/musclesoft/jquery-connections
+// https://www.quora.com/What-is-the-best-HTML5-visualization-library-that-can-draw-graphs-nodes-and-edges
+// https://www.w3schools.com/graphics/svg_line.asp
+// https://stackoverflow.com/questions/21864989/draw-lines-between-2-elements-in-html-page
+.linked-nodes
+  padding: $main-mobile-spacing
+
+  &__title
+    @extend .u-top-border
+    font-size: $font-size-medium
+    margin-bottom: $main-mobile-spacing
+
+  &__subtitle
+    font-size: $font-size-small
+
+.page-container--nav-menu-open
+
+    .header
+      background: yellow
+      color: red
+
+      &__nav-menu
+        display: block
+        position: fixed
+        top: 0
+        bottom: 0
+        left: 0
+        right: 0
+        z-index: 1
