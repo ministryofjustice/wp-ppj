@@ -104,41 +104,36 @@ button
       margin-top: 0
 
 .text-and-image
-  padding: $main-mobile-spacing
+  border-bottom: 2px solid $color-dark
+  margin: $main-mobile-spacing/2 $main-mobile-spacing
   position: relative
+
+  &::after
+    content: ""
+    clear: both
+    display: table
 
   &__image
     //background-color: $color-dark
     @extend .u-wireframe-image
-    height: 80%
+    background: url()
+    float: right
+    //height: 80%
     margin-left: $main-mobile-spacing
-    position: absolute
-    right: $main-mobile-spacing
-    top: $main-mobile-spacing
-    width: 40%
+    //position: absolute
+    //right: $main-mobile-spacing
+    //top: $main-mobile-spacing
+    //width: 40%
 
   &__title
     @extend .u-top-border
+    clear: left;
+    float: left
     font-weight: $font-weight-bold
-    margin-bottom: $main-mobile-spacing
+    margin-bottom: $main-mobile-spacing/2
     width: 11rem
 
   &__text
-    width: 12rem
-
-  &--quote
-    .text-and-image
-      &__text
-        font-size: $font-size-small
-        padding-left: $main-mobile-spacing
-        position: relative
-
-        &:before
-          content: open-quote
-          font-size: 3.6rem
-          left: 0
-          position: absolute
-          top: 0
 
 
 .accordion
