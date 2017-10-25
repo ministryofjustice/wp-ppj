@@ -15,18 +15,22 @@
 
 
   &__list-element
-    border-bottom: 1px solid $color-light
-    padding: $main-mobile-spacing/2 0
+    //border-bottom: 1px solid $color-light
     position: relative
 
     &:first-child
       border-top: 1px solid $color-light
 
     &-title
+      padding: $main-mobile-spacing/2 0
+      border-bottom: 1px solid #cccccc;
 
     &-content
+      border-left: 2px solid $color-light
       height: 0
+
       overflow: hidden
+      padding-left: 1rem
       transition: height $main-transition-duration
 
     &-button
@@ -43,6 +47,6 @@
 
     &--open
       .accordion__list-element-content
-      margin-top: $main-mobile-spacing
-      height: initial
-      transition: $main-transition-duration
+        height: initial
+        margin-top: $main-mobile-spacing/2
+        transition: $main-transition-duration
