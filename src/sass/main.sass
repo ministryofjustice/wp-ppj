@@ -13,7 +13,7 @@
 // base reset
 html
   font-size: 62.5%
-  color: $color-main
+  color: $color-dark
   background-color: $color-white
   font-family: $sans-serif
 
@@ -46,7 +46,7 @@ button
         z-index: 1
 
 .header
-  background: $color-medium
+  background: $color-dark
   padding: $main-mobile-spacing
 
   // https://jonsuh.com/hamburgers/
@@ -58,7 +58,7 @@ button
     top: $main-mobile-spacing
 
     & > div
-      background: $color-dark
+      background: $color-white
       height: .5rem
       margin-top: .5rem
       width: 3rem
@@ -80,15 +80,17 @@ button
     @extend .u-top-border
     font-size: $font-size-large
     width: 10rem
+    color: $color-white
 
 
 .call-to-action
-  background: $color-dark
+  background: $color-main
   padding: $main-mobile-spacing/2 $main-mobile-spacing
 
   &__list-element
-    background: $color-light
-    border: 1px solid $color-dark
+    background: $color-main
+    border: 1px solid $color-white
+    color: $color-white
     font-size: $font-size-large
     margin-top: 1rem
     padding: $main-mobile-spacing/2 $main-mobile-spacing
@@ -169,6 +171,7 @@ button
       top: .2rem
 
     &-button:before // TODO change to image
+      color: $color-main
       content: '+'
       font-size: 2rem
       font-weight: $font-weight-bold
