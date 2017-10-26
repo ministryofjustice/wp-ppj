@@ -9,7 +9,6 @@
 @import 'utilities/_top-border.sass'
 @import 'utilities/_wire-frame.sass'
 
-
 // base reset
 *:focus
   outline: none
@@ -30,16 +29,12 @@ button
 
 // -- COMPONENTS ------------------------------------------
 
-
-
 .page-container
   width: 100%
 
   &--nav-meu-open
 
     .header
-      background: yellow
-      color: red
 
       &__nav-menu
         display: initial
@@ -73,12 +68,40 @@ button
         margin-top: 0
 
   &__nav-menu
+    background: $color-dark
+    color: $color-white
     display: none
 
+  &__nav-menu-close-button
+    border: .2rem solid $color-white
+    border-radius: 2rem
+    display: block
+    height: 4rem
+    position: absolute
+    right: 2rem
+    top: 2rem
+    width: 4rem
+
+    &:before
+      color: $color-white
+      content: "\2715"
+      font-size: 2rem
+      line-height: 3.4rem
+      text-align: center
+
+  &__nav-menu-list
+    margin-top: 8rem
+
+  &__nav-menu-list-element
+    border-bottom: 1px solid $color-white
+    font-weight: $font-weight-bold
+    padding: $main-mobile-spacing/1.5
+
+    &:first-child
+      border-top: 1px solid $color-white
 
   &__logo
     @extend .u-wireframe-image
-    //background-color: $color-light
     height: 3rem
     margin-bottom: $main-mobile-spacing/2
     width: 10rem
