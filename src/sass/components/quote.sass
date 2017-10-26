@@ -1,0 +1,17 @@
+.quote
+  display: block
+  font-size: $font-size-medium
+  font-weight: $font-weight-bold
+  margin: $main-mobile-spacing
+  quotes: "“" "”" "‘" "’"
+
+  &:before
+    color: $color-main
+    content: open-quote
+    display: block
+    font-size: 3.6rem
+    line-height: 1rem
+
+  &:after
+    content: close-quote
+    visibility: hidden
