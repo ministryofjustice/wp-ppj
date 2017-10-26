@@ -1,3 +1,5 @@
+import Vue from 'vue';
+import Contact from '../vue/Contact.vue'
 console.log('main.js');
 
 function toggleOpenAccordion(el) {
@@ -45,4 +47,8 @@ window.onload = function() {
             var button = elements[i].getElementsByClassName('accordion__list-element-button')[0];
             button.addEventListener('click', toggleOpenAccordion.bind(null, elements[i]))
         }
-    })();
+    })();    new Vue({
+    new Vue({
+        el: '#contact'
+        , render: h => h(Contact)
+    });
