@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import Contact from '../vue/Contact.vue'
 import Search from '../vue/Search.vue'
-
-console.log('main.js');
+import TextBlock from '../vue/TextBlock.vue'
 
 function toggleOpenAccordion(el) {
     var openClassName = 'accordion__list-element--open';
@@ -18,7 +17,6 @@ function toggleOpenNavMenu(navLink) {
     console.log('toggleOpenNavMenu');
     var openClassName = 'page-container--nav-menu-open';
     var pageContainer = navLink.closest('.page-container.js');
-
     if (pageContainer.classList.contains(openClassName)) {
         pageContainer.classList.remove(openClassName);
     } else {
@@ -27,10 +25,10 @@ function toggleOpenNavMenu(navLink) {
 }
 
 window.onload = function() {
+
     (function addNavClickEventHandler() {
         var navLink = document.getElementsByClassName('header__nav-link js')[0];
         navLink.addEventListener('click', toggleOpenNavMenu.bind(null, navLink));
-
         var closeNavButton = document.getElementsByClassName('header__nav-menu-close-button js')[0];
         closeNavButton.addEventListener('click', toggleOpenNavMenu.bind(null, closeNavButton));
     })();
@@ -51,14 +49,10 @@ window.onload = function() {
         }
     })();
 
+    Vue.component('text-block', TextBlock);
+    Vue.component('search', Search);
+    Vue.component('contact', Contact);
     new Vue({
-        el: '#search'
-        , render: h => h(Search)
-    });
-
-    new Vue({
-        el: '#contact'
-        , render: h => h(Contact)
-    });
-
+        el: '.page-container'
+    })
 };
