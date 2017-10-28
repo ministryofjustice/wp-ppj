@@ -16,10 +16,9 @@
     list-style: decimal
     margin-top: $main-mobile-spacing
 
-
   &__list-element
     font-size: $font-size-tiny
-    height: 5rem
+    height: 4.6rem
     list-style: none
     margin-left: $main-mobile-spacing*2
     padding-left: 1rem
@@ -28,6 +27,7 @@
     &:before
       border: .3rem solid $color-dark
       border-radius: 2rem
+      box-sizing: border-box
       content: counter(li)
       counter-increment: li
       display: block
@@ -35,9 +35,10 @@
       font-weight: $font-weight-bold
       height: 3rem
       left: -4rem
-      line-height: 3rem
+      line-height: 2.49rem
+      padding-left: .66rem
       position: absolute
-      text-align: center
+      //text-align: center
       width: 3rem
 
     &:after
@@ -45,10 +46,10 @@
       content: ''
       display: block
       position: absolute
-      width: .3rem
+      width: .32rem
       height: 1.7rem
-      left: -2.35rem
-      top: -1.7rem
+      left: -2.67rem
+      top: -1.6rem
 
     &:first-child:after
       display: none

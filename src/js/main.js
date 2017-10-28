@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Contact from '../vue/Contact.vue'
+import LinkedNodes from '../vue/LinkedNodes.vue'
 import Search from '../vue/Search.vue'
 import TextBlock from '../vue/TextBlock.vue'
 
@@ -48,7 +49,7 @@ window.onload = function() {
             button.addEventListener('click', toggleOpenAccordion.bind(null, elements[i]))
         }
     })();
-
+    Vue.component('linked-nodes', LinkedNodes);
     Vue.component('text-block', TextBlock);
     Vue.component('search', Search);
     Vue.component('contact', Contact);
