@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Contact from '../vue/Contact.vue'
+import Accordion from '../vue/Accordion.vue'
 import OrderedList from '../vue/OrderedList.vue'
 import Search from '../vue/Search.vue'
 import TextBlock from '../vue/TextBlock.vue'
@@ -42,13 +43,8 @@ window.onload = function() {
         }
     })();
 
-    (function addAccordionClickEventHandlers() {
-        var elements = document.getElementsByClassName('accordion__list-element js');
-        for (var i = 0; i < elements.length; i++) {
-            var button = elements[i].getElementsByClassName('accordion__list-element-button')[0];
-            button.addEventListener('click', toggleOpenAccordion.bind(null, elements[i]))
-        }
-    })();
+    Vue.component('accordion', Accordion);
+    Vue.component('accordion-element', Accordion.childComponents.Element);
     Vue.component('ordered-list', OrderedList);
     Vue.component('ol-element', OrderedList.childComponents.Element);
     Vue.component('text-block', TextBlock);
