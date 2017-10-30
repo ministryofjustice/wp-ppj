@@ -39,19 +39,6 @@ button
 .page-container
   width: 100%
 
-  &--nav-meu-open
-
-    .header
-
-      &__nav-menu
-        display: initial
-        position: fixed
-        top: 0
-        bottom: 0
-        left: 0
-        right: 0
-        z-index: 1
-
 .header
   background: $color-dark
   padding: $main-mobile-spacing
@@ -123,6 +110,16 @@ button
     line-height: 2.2rem
     width: 12rem
 
+  &--nav-menu-open
+    .header
+      &__nav-menu
+        display: initial
+        position: fixed
+        top: 0
+        bottom: 0
+        left: 0
+        right: 0
+        z-index: 1
 
 .call-to-action
   background: $color-main
@@ -148,7 +145,6 @@ button
 @import 'components/search'
 @import 'components/contact'
 
-
 .banner-image
   @extend .u-wireframe-image
   height: 9rem
@@ -161,18 +157,3 @@ button
 // https://stackoverflow.com/questions/21864989/draw-lines-between-2-elements-in-html-page
 
 @import 'components/ordered-list'
-
-.page-container--nav-menu-open
-
-    .header
-      background: yellow
-      color: red
-
-      &__nav-menu
-        display: block
-        position: fixed
-        top: 0
-        bottom: 0
-        left: 0
-        right: 0
-        z-index: 1
