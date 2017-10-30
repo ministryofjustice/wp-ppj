@@ -33,7 +33,6 @@
                                 <iframe width="280"
                                         height="180"
                                         frameborder="0"
-                                        style="border:0"
                                         :src="mapSrc"
                                         allowfullscreen></iframe>
                             </div>
