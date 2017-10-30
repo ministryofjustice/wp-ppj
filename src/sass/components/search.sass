@@ -12,12 +12,13 @@
     border: .2rem solid $color-medium
     box-sizing: border-box
     display: block
+    font-weight: $font-weight-bold
     height: 4rem
     margin: $main-mobile-spacing/2 0
     padding: $main-mobile-spacing/2
     width: 94%
 
-  &__button
+  &__button-search
     background-color: $color-main
     border-radius: 2rem
     color: $color-white
@@ -48,4 +49,56 @@
       top: 2.2rem
       transform: rotate(45deg)
       width: .4rem
+
+  &__view-controls
+    width: 100%
+
+  &__button-view
+    border-radius: 0
+    font-weight: $font-weight-bold
+    padding: $main-mobile-spacing/2
+    border: .1rem solid $color-dark
+    text-align: left
+    width: 49%
+
+    &:first-child
+      border-right: none
+
+    &:last-child
+      border-left: none
+
+    &--active
+      background-color: $color-main
+      border-color: $color-main
+      color: $color-white
+
+  &__job-post
+    border-bottom: .1rem solid $color-light
+    font-size: $font-size-small
+    height: 5rem
+    margin: $main-mobile-spacing/2 0
+    position: relative
+
+    &-distance
+      font-weight: $font-weight-bold
+      left: 0
+      position: absolute
+      top: 0
+
+    &-salary
+      font-weight: $font-weight-bold
+      position: absolute
+      right: 0
+      top: 0
+
+    &-prison
+      bottom: $main-mobile-spacing/2
+      position: absolute
+      left: 0
+
+    &-link
+      bottom: $main-mobile-spacing/2
+      position: absolute
+      right: 0
+      text-decoration: underline
 
