@@ -1,17 +1,37 @@
 .text-block
-  font-size: $font-size-small
+  font-size: $font-size-tiny
   margin: $main-mobile-spacing
 
   &__title
     @extend .u-top-border
-    font-size: $font-size-large
+    font-size: $font-size-medium
+    font-weight: $font-weight-bold
     margin-bottom: $main-mobile-spacing/2
 
-  &__link
-    border: .2rem solid $color-dark
-    display: block
-    font-weight: bold
-    padding: $main-mobile-spacing/2
-
-  p
+  &__subtitle
+    font-weight: $font-weight-bold
+    font-size: $font-size-small
     margin-bottom: $main-mobile-spacing/2
+
+  &__content
+
+    & > h4
+      font-weight: $font-weight-bold
+      font-size: $font-size-small
+      margin: $main-mobile-spacing/2 0
+
+    & li
+      margin: $main-mobile-spacing/2 0
+
+    & ol li
+      list-style-type: decimal
+      margin-left: $main-mobile-spacing/2
+
+    &__link
+      border: .2rem solid $color-dark
+      display: block
+      font-weight: bold
+      padding: $main-mobile-spacing/2
+
+    p
+      margin-bottom: $main-mobile-spacing/2
