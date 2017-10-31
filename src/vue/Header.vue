@@ -2,7 +2,7 @@
     <div class="header"
          :class="{'header--nav-menu-open': menuOpen}">
         <div class="header__logo"></div>
-        <div class="header__text">Want a new challenge? We've got your back</div>
+        <div class="header__text"><slot></slot></div>
         <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
         <nav-menu v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
     </div>
