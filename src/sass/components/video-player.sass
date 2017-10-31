@@ -1,0 +1,26 @@
+.video-player
+  background: $color-dark
+  display: flex
+  height: 15rem
+  justify-content: center
+  align-items: center
+  margin: $main-mobile-spacing/2 $main-mobile-spacing
+
+  &__play-button
+    &:before
+      $diameter: 3rem
+      align-items: center
+      border: .1rem solid $color-light
+      border-radius: 2rem
+      color: $color-light
+      content: '>'
+      cursor: pointer
+      display: flex
+      justify-content: center
+      height: $diameter
+      width: $diameter
+
+    &:hover:before
+      border-color: $color-white
+      color: $color-white
+      transition: all .2s

@@ -5,6 +5,7 @@ import OrderedList from '../vue/OrderedList.vue';
 import PageContainer from '../vue/PageContainer.vue';
 import Search from '../vue/Search.vue';
 import TextBlock from '../vue/TextBlock.vue';
+import VideoPlayer from '../vue/VideoPlayer.vue';
 import Vue from 'vue';
 
 function toggleOpenNavMenu(navLink) {
@@ -37,6 +38,7 @@ window.onload = function() {
     Vue.component('page-container', PageContainer);
     Vue.component('search', Search);
     Vue.component('text-block', TextBlock);
+    Vue.component('video-player', VideoPlayer);
 
     new Vue({
         el: '#site-container'
