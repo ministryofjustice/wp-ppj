@@ -30,14 +30,14 @@
             ` <div class="header__nav-menu">
                 <button class="header__nav-menu-close-button js" @click="closeNavMenu"></button>
                 <ul class="header__nav-menu-list">
-                    <li class="header__nav-menu-list-element">Home</li>
-                    <li class="header__nav-menu-list-element">Apply <span class="header__nav-menu-list-element-subtext">I'm ready to join</span></li>
-                    <li class="header__nav-menu-list-element">Working as a Prison Officer</li>
-                    <li class="header__nav-menu-list-element">Find a role</li>
-                    <li class="header__nav-menu-list-element">Is it right for me</li>
-                    <li class="header__nav-menu-list-element">Working in a prison setting</li>
-                    <li class="header__nav-menu-list-element">Application steps</li>
-                    <li class="header__nav-menu-list-element">Eligibility Checker</li>
+                    <li class="header__nav-menu-list-element"><a href="/">Home</a></li>
+                    <li class="header__nav-menu-list-element"><a href="/apply.html">Apply <span class="header__nav-menu-list-element-subtext">I'm ready to join</span></a></li>
+                    <li class="header__nav-menu-list-element"><a href="">Working as a Prison Officer</a></li>
+                    <li class="header__nav-menu-list-element"><a href="">Find a role</a></li>
+                    <li class="header__nav-menu-list-element"><a href="">Is it right for me</a></li>
+                    <li class="header__nav-menu-list-element"><a href="">Working in a prison setting</a></li>
+                    <li class="header__nav-menu-list-element"><a href="">Application steps</a></li>
+                    <li class="header__nav-menu-list-element"><a href="">Eligibility Checker</a></li>
                 </ul>
             </div>`,
         methods: {

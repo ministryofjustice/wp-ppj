@@ -96,7 +96,12 @@ strong
   &__nav-menu-list-element
     border-bottom: 1px solid $color-white
     font-weight: $font-weight-bold
-    padding: $main-mobile-spacing/1.5
+
+    & > a
+      color: $color-white
+      display: block
+      padding: $main-mobile-spacing/1.5
+      width: 100%
 
     &:first-child
       border-top: 1px solid $color-white
