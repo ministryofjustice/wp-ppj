@@ -109,3 +109,28 @@
       right: 0
       text-decoration: underline
 
+  &__pagination
+    display: flex
+    justify-content: space-between
+    margin: $main-mobile-spacing/2 0
+
+    & > *
+      border: .2rem solid $color-light
+      border-radius: 2rem
+      color: $color-light
+      display: block
+      font-size: $font-size-large
+      font-weight: $font-weight-bold
+      height: 4rem
+      width: 4rem
+
+    &-direction
+      &--active
+        background-color: $color-main
+        border-color: $color-main
+        color: $color-white
+
+    &-link
+      &--active
+        color: $color-dark
+        border-color: $color-dark
