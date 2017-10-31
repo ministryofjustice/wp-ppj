@@ -132,8 +132,8 @@
         data() {
             return {
                 searchResults: {
-                    activeView: 1,
-                    display: true,
+                    activeView: 0,
+                    display: false,
                     postCode: '',
                     urlEncodedPostCode: '',
                     googleMapAPIKey: 'AIzaSyD6bT-hldMJMz4jwUgJ2W1YA-bXpROvKHk',
@@ -174,11 +174,7 @@
             }
         },
         mounted() {
-            this.searchResults.postCode = 'SW1H 9AJ';
+            //this.searchResults.postCode = 'SW1H 9AJ';
         }
     }
 </script>
-
-<style>
-
-</style>
