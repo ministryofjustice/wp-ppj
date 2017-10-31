@@ -1,0 +1,40 @@
+.role-intro
+  margin: $main-mobile-spacing $main-mobile-spacing
+  position: relative
+
+  &__main-section
+    border-bottom: .2rem solid $color-dark
+
+    &::after
+      content: ""
+      clear: both
+      display: table
+
+  &__image
+    @extend .u-wireframe-image
+    display: block
+
+  &__main-title
+    @extend .u-top-border
+    font-weight: $font-weight-bold
+    margin-bottom: $main-mobile-spacing/2
+
+  &__subtitle
+    font-size: $font-size-small
+    font-weight: $font-weight-bold
+    margin-bottom: $main-mobile-spacing/2
+
+  &__position-block
+    border-left: .2rem solid $color-light
+    float: right
+    font-size: $font-size-tiny
+    padding-left: $main-mobile-spacing/2
+    width: 40%
+
+  &__content
+    border-bottom: .2rem solid $color-dark
+    font-size: $font-size-huge
+    font-weight: $font-weight-bold
+    line-height: 1.2
+    margin-top: $main-mobile-spacing/2
+    padding-bottom: $main-mobile-spacing/2

@@ -3,6 +3,7 @@ import Contact from '../vue/Contact.vue';
 import Header from '../vue/Header.vue';
 import OrderedList from '../vue/OrderedList.vue';
 import PageContainer from '../vue/PageContainer.vue';
+import RoleIntro from '../vue/RoleIntro.vue';
 import Search from '../vue/Search.vue';
 import TextBlock from '../vue/TextBlock.vue';
 import TextImageBlock from '../vue/TextImageBlock.vue';
@@ -37,6 +38,7 @@ window.onload = function() {
     Vue.component('ordered-list', OrderedList);
     Vue.component('ol-element', OrderedList.childComponents.Element);
     Vue.component('page-container', PageContainer);
+    Vue.component('role-intro', RoleIntro);
     Vue.component('search', Search);
     Vue.component('text-block', TextBlock);
     Vue.component('text-image-block', TextImageBlock);

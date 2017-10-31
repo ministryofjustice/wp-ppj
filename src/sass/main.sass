@@ -103,6 +103,9 @@ strong
       padding: $main-mobile-spacing/1.5
       width: 100%
 
+      &[href='']
+        color: $color-light
+
     &:first-child
       border-top: 1px solid $color-white
 
@@ -151,9 +154,20 @@ strong
     &:first-child
       margin-top: 0
 
+    & > a
+      color: $color-white
+      cursor: pointer
+      display: block
+
+      &[href='']
+        color: $color-light
+
+
+
 @import 'components/accordion'
 @import 'components/contact'
 @import 'components/quote'
+@import 'components/role-intro'
 @import 'components/search'
 @import 'components/text-and-image'
 @import 'components/text-block'
