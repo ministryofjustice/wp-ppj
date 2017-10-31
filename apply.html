@@ -13,11 +13,18 @@
 
         <page-header>I know what I want, I’m ready to apply</page-header>
 
-        <div class="text-and-image">
-            <img class="text-and-image__image" src="http://via.placeholder.com/140x100" />
-            <h2 class="text-and-image__title">Prison Officer</h2>
-            <h3 class="text-and-image__text">Apply for a job, join a service</h3>
-            <div class="text-and-image__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam odio justo, auctor quis odio ac, volutpat pulvinar neque.</div>
+        <text-image-block
+                my-title="Prison officer"
+                text="Apply for a job, join a service"
+                img-url="http://via.placeholder.com/140x100"
+        >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam odio justo, auctor quis odio ac, volutpat pulvinar neque.
+        </text-image-block>
+
+        <div class="call-to-action">
+            <ul class="call-to-action__list">
+                <li class="call-to-action__list-element">Find a role</li>
+            </ul>
         </div>
 
         <accordion
@@ -90,10 +97,6 @@
             ></ol-element>
         </ordered-list>
 
-        <text-block my-title="Working as a probation officer">
-            <p>Find out everything you need to know about working as a probation officer</p>
-            <a class='text-block__link'>Visit Probation jobs</a>
-        </text-block>
         <accordion
                 title=""
                 subtitle=""
@@ -122,7 +125,11 @@
             </accordion-element>
         </accordion>
 
-        <q class="quote" >Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</q>
+        <div class="text-and-image text-and-image" >
+            <img class="text-and-image__image" src="http://via.placeholder.com/140x100" />
+            <h3 class="text-and-image__quote">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat</h3>
+            <div class="text-and-image__image"></div>
+        </div>
 
         <search></search>
 

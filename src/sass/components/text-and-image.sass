@@ -1,12 +1,14 @@
 .text-and-image
-  border-bottom: 2px solid $color-dark
   margin: $main-mobile-spacing $main-mobile-spacing
   position: relative
 
-  &::after
-    content: ""
-    clear: both
-    display: table
+  &__main-section
+    border-bottom: .2rem solid $color-dark
+
+    &::after
+      content: ""
+      clear: both
+      display: table
 
   &__image
     @extend .u-wireframe-image
@@ -43,3 +45,6 @@
       content: close-quote
       visibility: hidden
 
+  &__content
+    font-size: $font-size-tiny
+    margin-top: $main-mobile-spacing/2

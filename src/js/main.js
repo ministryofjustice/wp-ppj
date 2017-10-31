@@ -5,6 +5,7 @@ import OrderedList from '../vue/OrderedList.vue';
 import PageContainer from '../vue/PageContainer.vue';
 import Search from '../vue/Search.vue';
 import TextBlock from '../vue/TextBlock.vue';
+import TextImageBlock from '../vue/TextImageBlock.vue';
 import VideoPlayer from '../vue/VideoPlayer.vue';
 import Vue from 'vue';
 
@@ -38,6 +39,7 @@ window.onload = function() {
     Vue.component('page-container', PageContainer);
     Vue.component('search', Search);
     Vue.component('text-block', TextBlock);
+    Vue.component('text-image-block', TextImageBlock);
     Vue.component('video-player', VideoPlayer);
 
     new Vue({
