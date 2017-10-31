@@ -12,8 +12,10 @@
     const Element = {
         template:
             `<li class="accordion__list-element" :class="{ 'accordion__list-element--open': open }">
+                <button class="accordion__list-element-button" @click="toggleOpen">
+                    <div></div><div></div>
+                </button>
                 <h4 class="accordion__list-element-title">{{title}}</h4>
-                <button class="accordion__list-element-button" @click="toggleOpen"></button>
                 <div class="accordion__list-element-content"><slot></slot></div>
             </li>`,
         props: ['title'],

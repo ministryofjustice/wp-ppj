@@ -28,23 +28,60 @@
       font-weight: $font-weight-light
       height: 0
       overflow: hidden
-      padding-left: 1rem
+      padding: 0 1rem
       transition: height $main-transition-duration
+
+      & > p
+        margin-top: $main-mobile-spacing/2
+
+        &:first-child
+          margin-top: 0
+
+      & .medium
+        font-size: $font-size-medium
+
+      & .large
+        font-size: $font-size-large
+
+      & .enormous
+        color: $color-main
+        font-size: $font-size-enormous
+        font-weight: $font-weight-bold
 
     &-button
       cursor: pointer
-      position: absolute
-      right: 0
-      top: .2rem
+      display: block
+      float: right
+      margin-top: 1.3rem
 
-    &-button:before // TODO change to image
-      color: $color-main
-      content: '+'
-      font-size: 2rem
-      font-weight: $font-weight-bold
+      & > div
+        background-color: $color-main
+        height: .2rem
+        width: 1rem
+
+        &:first-child
+          transform: rotate(90deg)
+
+        &:last-child
+          transform: translateY(-.2rem)
+
+    //&-button:before // TODO change to image
+    //  color: $color-main
+    //  content: '+'
+    //  display: block
+    //  font-size: 2rem
+    //  font-weight: $font-weight-bold
+    //  height: 1rem
+    //  width: 1rem
 
     &--open
-      .accordion__list-element-content
-        height: initial
-        margin-top: $main-mobile-spacing/2
-        transition: $main-transition-duration
+      .accordion
+        &__list-element
+          &-content
+            height: initial
+            margin-top: $main-mobile-spacing/2
+            transition: all $main-transition-duration
+
+          &-button
+            //transform: rotate(90deg)
+            //transition: all $main-transition-duration
