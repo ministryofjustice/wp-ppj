@@ -1,7 +1,13 @@
 <template>
     <div class="accordion">
-        <h2 class="accordion__title">{{title}}</h2>
-        <h3 class="accordion__subtitle">{{subtitle}}</h3>
+        <h2
+                class="accordion__title"
+                v-if="title"
+        >{{title}}</h2>
+        <h3
+                class="accordion__subtitle"
+                v-if="subtitle"
+        >{{subtitle}}</h3>
         <ol class="accordion__list">
             <slot></slot>
         </ol>
