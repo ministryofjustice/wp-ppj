@@ -5,6 +5,7 @@ import OrderedList from '../vue/OrderedList.vue';
 import PageContainer from '../vue/PageContainer.vue';
 import RoleIntro from '../vue/RoleIntro.vue';
 import Search from '../vue/Search.vue';
+import Tabs from '../vue/Tabs.vue';
 import TextBlock from '../vue/TextBlock.vue';
 import TextImageBlock from '../vue/TextImageBlock.vue';
 import VideoPlayer from '../vue/VideoPlayer.vue';
@@ -40,6 +41,8 @@ window.onload = function() {
     Vue.component('page-container', PageContainer);
     Vue.component('role-intro', RoleIntro);
     Vue.component('search', Search);
+    Vue.component('tabs', Tabs);
+    Vue.component('tab', Tabs.childComponents.Tab);
     Vue.component('text-block', TextBlock);
     Vue.component('text-image-block', TextImageBlock);
     Vue.component('video-player', VideoPlayer);
