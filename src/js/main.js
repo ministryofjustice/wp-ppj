@@ -49,5 +49,10 @@ window.onload = function() {
 
     new Vue({
         el: '#site-container'
-    })
+    });
+
+    // hide html until Vue has rendered
+    const html = document.getElementsByTagName('html')[0];
+    html.style.opacity = 1;
+
 };
