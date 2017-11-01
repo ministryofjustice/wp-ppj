@@ -152,7 +152,6 @@ strong
     color: $color-white
     font-size: $font-size-large
     margin-top: 1rem
-    padding: $main-mobile-spacing/2 $main-mobile-spacing
     text-align: center
 
     &:first-child
@@ -162,9 +161,11 @@ strong
       color: $color-white
       cursor: pointer
       display: block
+      padding: $main-mobile-spacing/2 $main-mobile-spacing
 
       &[href='']
         color: $color-light
+        pointer-events: none // TODO remove
 
 
 
