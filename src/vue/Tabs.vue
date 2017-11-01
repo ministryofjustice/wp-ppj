@@ -4,10 +4,19 @@
             <li class="tabs__nav-link"
                 v-for="(tabTitle, index) in tabTitles"
                 :class="{'tabs__nav-link--active': (activeTab == index)}"
+                @click="displayTab(index)"
             >{{tabTitle}}</li>
         </ul>
         <div class="tabs__content-panel">
-            <slot></slot>
+            <div v-show="activeTab == 0">
+                <slot name="0" ></slot>
+            </div>
+            <div v-show="activeTab == 1">
+                <slot name="1" ></slot>
+            </div>
+            <div v-show="activeTab == 2">
+                <slot name="2" ></slot>
+            </div>
         </div>
     </div>
 </template>
@@ -46,6 +55,9 @@
             Tab: tab
         },
         methods: {
+            displayTab: function(index) {
+                this.activeTab = index;
+            }
         },
         beforeMount() {
             const tabTitles = this.tabTitles;

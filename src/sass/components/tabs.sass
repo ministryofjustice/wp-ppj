@@ -1,14 +1,24 @@
 .tabs
-  margin: $main-mobile-spacing
+  margin: $main-mobile-spacing 0
 
   &__nav
     display: flex
     justify-content: space-between
+    margin: $main-mobile-spacing
 
     &-link
       background-color: $color-dark
       color: $color-white
+      cursor: pointer
       padding: $main-mobile-spacing/2
 
       &--active
         background-color: $color-main
+
+  &__tab
+    & p
+      font-size: $font-size-tiny
+      margin: $main-mobile-spacing/2 $main-mobile-spacing*2 $main-mobile-spacing/2 0
+
+    & table
+      font-size: $font-size-tiny

@@ -27,13 +27,81 @@
         <tabs>
             <tab
                     tab-title="Overview"
-            >Overview</tab>
+                    slot="0"
+            >
+                <div class="u-margin">
+                    <h3 class="common-header">Job description</h3>
+
+                    <h4 class="common-header-small">Sense of belonging</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+
+                    <h4 class="common-header-small">Do something that matters</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+
+                    <h4 class="common-header-small">Helping others</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+
+                    <h4 class="common-header-small">Personal development</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+
+                    <h4 class="common-header-small">New skills and challenges</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+
+                    <h4 class="common-header-small">Flexibility, pay and holiday</h4>
+                    <p>Based on a 37 to 39 hour week</p>
+                    <table class="u-common-table">
+                        <tr>
+                            <td>Inner London</td>
+                            <td>£29,543 to £31,014</td>
+                        </tr>
+                        <tr>
+                            <td>Outer London</td>
+                            <td>£28,064 to £31,453</td>
+                        </tr>
+                        <tr>
+                            <td>South and South East</td>
+                            <td>£25,224 to £28,456</td>
+                        </tr>
+                        <tr>
+                            <td>Elsewhere in England and Wales</td>
+                            <td>£20,751 to £21,902</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <text-image-block
+                        quote="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat"
+                        img-url="http://via.placeholder.com/140x100"
+                >
+                </text-image-block>
+            </tab>
             <tab
                     tab-title="Benefits"
-            >Benefits</tab>
+                    slot="1"
+            >
+                <div class="u-margin">
+                    <h3 class="common-header">A sense of worth</h3>
+
+                    <h4 class="common-header-small">Sense of belonging</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+
+                    <h4 class="common-header-small">Do something that matters</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+
+                    <h4 class="common-header-small">Helping others</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                </div>
+                <text-image-block class="u-no-margin"
+                        quote="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat"
+                        img-url="http://via.placeholder.com/140x100"
+                >
+                </text-image-block>
+
+            </tab>
             <tab
                     tab-title="Day-to-day"
-            >Day-to-day</tab>
+                    slot="2"
+            ></tab>
         </tabs>
 
         <search></search>
