@@ -19,7 +19,6 @@
             </div>`,
         methods: {
             openNavMenu: function() {
-                console.log('sending request-open-nav-menu');
                 this.$emit('request-open-nav-menu', true);
             }
         }

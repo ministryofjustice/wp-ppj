@@ -1,0 +1,99 @@
+.header
+  background: $color-dark
+  background-image: url('/public/img/alcatraz_prison_block_cc_img.jpg')
+  background-position: center center
+  background-size: cover
+  padding: $main-mobile-spacing
+
+  //@include respond-to('portrait')
+  //  .header
+  //    height: 20rem
+
+  // https://jonsuh.com/hamburgers/
+  // https://www.w3schools.com/howto/howto_css_menu_icon.asp
+  &__nav-link
+    cursor: pointer
+    position: absolute
+    right: $main-mobile-spacing
+    top: $main-mobile-spacing
+
+    & > div
+      background: $color-white
+      height: .5rem
+      margin-top: .5rem
+      width: 3rem
+
+      &:first-child
+        margin-top: 0
+
+  &__nav-menu
+    background: $color-dark
+    color: $color-white
+    display: none
+
+  &__nav-menu-close-button
+    border: .2rem solid $color-white
+    border-radius: 2rem
+    display: block
+    height: 3rem
+    position: absolute
+    right: 2rem
+    top: 2rem
+    width: 3rem
+
+    &:before
+      color: $color-white
+      content: "\2715"
+      font-size: 2rem
+      left: -.15rem
+      line-height: 2.4rem
+      position: relative
+      text-align: center
+      top: -.05rem
+
+  &__nav-menu-list
+    margin-top: 8rem
+
+  &__nav-menu-list-element
+    border-bottom: 1px solid $color-white
+    font-weight: $font-weight-bold
+
+    & > a
+      color: $color-white
+      display: block
+      padding: $main-mobile-spacing/1.5
+      width: 100%
+
+      &[href='']
+        color: $color-light
+
+    &:first-child
+      border-top: 1px solid $color-white
+
+    &-subtext
+      font-weight: $font-weight-normal
+
+  &__logo
+    @extend .u-wireframe-image
+    height: 3rem
+    margin-bottom: $main-mobile-spacing/2
+    width: 10rem
+
+  &__text
+    @extend .u-top-border
+    color: $color-white
+    font-size: $font-size-huge
+    font-weight: bold
+    line-height: 2.2rem
+    width: 12rem
+
+  &--nav-menu-open
+    .header
+      &__nav-menu
+        display: initial
+        position: fixed
+        top: 0
+        bottom: 0
+        left: 0
+        right: 0
+        z-index: 1
