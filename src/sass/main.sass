@@ -56,6 +56,14 @@ strong
   margin-bottom: $main-mobile-spacing
   padding: $main-mobile-spacing
 
+  @include bp('portrait')
+    margin: auto
+    width: 80%
+
+  &__list
+    @include bp('portrait')
+      text-align: center
+
   &__list-element
     background: $color-main
     border: 1px solid $color-white
@@ -63,6 +71,11 @@ strong
     font-size: $font-size-large
     margin-top: 1rem
     text-align: center
+
+    @include bp('portrait')
+      display: inline-block
+      margin-top: 0
+      width: 30%
 
     &:first-child
       margin-top: 0
