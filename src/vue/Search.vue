@@ -36,69 +36,71 @@
                                         :src="mapSrc"
                                         allowfullscreen></iframe>
                             </div>
-                            <div class="search__job-post">
-                                <div class="search__job-post-distance">0.88 miles</div>
-                                <div class="search__job-post-position">Prison Officer</div>
-                                <div class="search__job-post-salary">£31,560</div>
-                                <div class="search__job-post-prison">
-                                    <div class="search__job-post-prison-name">HMP Belmarsh</div>
-                                    <div class="search__job-post-prison-city">London</div>
-                                </div>
-                                <a href="/job-post.html" class="search__job-post-link">view job</a>
-                            </div>
+                            <job-summary
+                                    distance="0.88 miles"
+                                    position="Prison Officer"
+                                    salary="31,560"
+                                    prison-name="HMP Belmarsh"
+                                    prison-city="London"
+                            ></job-summary>
                         </div>
                         <div class="search__view-list" v-show="searchResults.activeView == 1">
                             <ul class="search__view-list-list">
-                                <li class="search__job-post">
-                                    <div class="search__job-post-distance">0.88 miles</div>
-                                    <div class="search__job-post-position">Prison Officer</div>
-                                    <div class="search__job-post-salary">£31,560</div>
-                                    <div class="search__job-post-prison">
-                                        <div class="search__job-post-prison-name">HMP Belmarsh</div>
-                                        <div class="search__job-post-prison-city">London</div>
-                                    </div>
-                                    <a href="/job-post.html" class="search__job-post-link">view job</a>
-                                </li>
-                                <li class="search__job-post">
-                                    <div class="search__job-post-distance">1.03 miles</div>
-                                    <div class="search__job-post-position">Prison Officer</div>
-                                    <div class="search__job-post-salary">£22,396</div>
-                                    <div class="search__job-post-prison">
-                                        <div class="search__job-post-prison-name">HMP Pentonville</div>
-                                        <div class="search__job-post-prison-city">London</div>
-                                    </div>
-                                    <a href="/job-post.html" class="search__job-post-link">view job</a>
-                                </li>
-                                <li class="search__job-post">
-                                    <div class="search__job-post-distance">1.15 miles</div>
-                                    <div class="search__job-post-position">Prison Officer</div>
-                                    <div class="search__job-post-salary">£22,396</div>
-                                    <div class="search__job-post-prison">
-                                        <div class="search__job-post-prison-name">HMP Belmarsh</div>
-                                        <div class="search__job-post-prison-city">London</div>
-                                    </div>
-                                    <a href="/job-post.html" class="search__job-post-link">view job</a>
-                                </li>
-                                <li class="search__job-post">
-                                    <div class="search__job-post-distance">0.88 miles</div>
-                                    <div class="search__job-post-position">Prison Officer</div>
-                                    <div class="search__job-post-salary">£29,981</div>
-                                    <div class="search__job-post-prison">
-                                        <div class="search__job-post-prison-name">HMP Belmarsh</div>
-                                        <div class="search__job-post-prison-city">London</div>
-                                    </div>
-                                    <a href="/job-post.html" class="search__job-post-link">view job</a>
-                                </li>
-                                <li class="search__job-post">
-                                    <div class="search__job-post-distance">1.30 miles</div>
-                                    <div class="search__job-post-position">Prison Officer</div>
-                                    <div class="search__job-post-salary">£26,950</div>
-                                    <div class="search__job-post-prison">
-                                        <div class="search__job-post-prison-name">HMP Belmarsh</div>
-                                        <div class="search__job-post-prison-city">London</div>
-                                    </div>
-                                    <a href="/job-post.html" class="search__job-post-link">view job</a>
-                                </li>
+                                <li>
+                                <job-summary
+                                    distance="0.88 miles"
+                                    position="Prison Officer"
+                                    salary="£31,560"
+                                    prison-name="HMP Belmarsh"
+                                    prison-city="London"
+                                    url="/job-post.html"
+                                >
+                                </job-summary>
+                            </li>
+                            <li>
+                                <job-summary
+                                    distance="1.03 miles"
+                                    position="Prison Officer"
+                                    salary="£22,396"
+                                    prison-name="HMP Pentonville"
+                                    prison-city="London"
+                                    url="/job-post.html"
+                                >
+                                </job-summary>
+                            </li>
+                            <li>
+                                <job-summary
+                                    distance="1.15 miles"
+                                    position="Prison Officer"
+                                    salary="£22,396"
+                                    prison-name="HMP Belmarsh"
+                                    prison-city="London"
+                                    url="/job-post.html"
+                                >
+                                </job-summary>
+                            </li>
+                            <li>
+                                <job-summary
+                                    distance="0.88 miles"
+                                    position="Prison Officer"
+                                    salary="£29,981"
+                                    prison-name="HMP Belmarsh"
+                                    prison-city="London"
+                                    url="/job-post.html"
+                                >
+                                </job-summary>
+                            </li>
+                            <li>
+                                <job-summary
+                                    distance="1.30 miles"
+                                    position="Prison Officer"
+                                    salary="£26,950"
+                                    prison-name="HMP Belmarsh"
+                                    prison-city="London"
+                                    url="/job-post.html"
+                                >
+                                </job-summary>
+                            </li>
                             </ul>
                             <div class="search__pagination">
                                 <button class="search__pagination-direction"

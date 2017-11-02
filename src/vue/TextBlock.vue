@@ -1,6 +1,9 @@
 <template>
     <div class="text-block">
-        <h2 class="text-block__title">{{ myTitle }}</h2>
+        <h2
+                class="text-block__title"
+                v-if="myTitle"
+        >{{ myTitle }}</h2>
         <h3
                 class="text-block__subtitle"
                 v-if="subtitle"

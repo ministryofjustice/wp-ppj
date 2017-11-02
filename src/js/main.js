@@ -1,6 +1,7 @@
 import Accordion from '../vue/Accordion.vue';
 import Contact from '../vue/Contact.vue';
 import Header from '../vue/Header.vue';
+import JobSummary from '../vue/JobSummary.vue';
 import OrderedList from '../vue/OrderedList.vue';
 import PageContainer from '../vue/PageContainer.vue';
 import RoleIntro from '../vue/RoleIntro.vue';
@@ -35,10 +36,11 @@ window.onload = function() {
     Vue.component('accordion', Accordion);
     Vue.component('accordion-element', Accordion.childComponents.Element);
     Vue.component('contact', Contact);
-    Vue.component('page-header', Header);
-    Vue.component('ordered-list', OrderedList);
+    Vue.component('job-summary', JobSummary);
     Vue.component('ol-element', OrderedList.childComponents.Element);
+    Vue.component('ordered-list', OrderedList);
     Vue.component('page-container', PageContainer);
+    Vue.component('page-header', Header);
     Vue.component('role-intro', RoleIntro);
     Vue.component('search', Search);
     Vue.component('tabs', Tabs);
