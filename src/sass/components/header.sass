@@ -5,9 +5,8 @@
   background-size: cover
   padding: $main-mobile-spacing
 
-  //@include respond-to('portrait')
-  //  .header
-  //    height: 20rem
+  @include bp('portrait')
+    height: 40rem
 
   // https://jonsuh.com/hamburgers/
   // https://www.w3schools.com/howto/howto_css_menu_icon.asp
@@ -86,6 +85,9 @@
     font-weight: bold
     line-height: 2.2rem
     width: 12rem
+
+    @include bp('portrait')
+      width: 24rem
 
   &--nav-menu-open
     .header
