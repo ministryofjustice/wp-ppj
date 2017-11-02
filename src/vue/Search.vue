@@ -44,7 +44,7 @@
                                     <div class="search__job-post-prison-name">HMP Belmarsh</div>
                                     <div class="search__job-post-prison-city">London</div>
                                 </div>
-                                <a class="search__job-post-link">view job</a>
+                                <a href="/job-post.html" class="search__job-post-link">view job</a>
                             </div>
                         </div>
                         <div class="search__view-list" v-show="searchResults.activeView == 1">
@@ -57,7 +57,7 @@
                                         <div class="search__job-post-prison-name">HMP Belmarsh</div>
                                         <div class="search__job-post-prison-city">London</div>
                                     </div>
-                                    <a class="search__job-post-link">view job</a>
+                                    <a href="/job-post.html" class="search__job-post-link">view job</a>
                                 </li>
                                 <li class="search__job-post">
                                     <div class="search__job-post-distance">1.03 miles</div>
@@ -67,7 +67,7 @@
                                         <div class="search__job-post-prison-name">HMP Pentonville</div>
                                         <div class="search__job-post-prison-city">London</div>
                                     </div>
-                                    <a class="search__job-post-link">view job</a>
+                                    <a href="/job-post.html" class="search__job-post-link">view job</a>
                                 </li>
                                 <li class="search__job-post">
                                     <div class="search__job-post-distance">1.15 miles</div>
@@ -77,7 +77,7 @@
                                         <div class="search__job-post-prison-name">HMP Belmarsh</div>
                                         <div class="search__job-post-prison-city">London</div>
                                     </div>
-                                    <a class="search__job-post-link">view job</a>
+                                    <a href="/job-post.html" class="search__job-post-link">view job</a>
                                 </li>
                                 <li class="search__job-post">
                                     <div class="search__job-post-distance">0.88 miles</div>
@@ -87,7 +87,7 @@
                                         <div class="search__job-post-prison-name">HMP Belmarsh</div>
                                         <div class="search__job-post-prison-city">London</div>
                                     </div>
-                                    <a class="search__job-post-link">view job</a>
+                                    <a href="/job-post.html" class="search__job-post-link">view job</a>
                                 </li>
                                 <li class="search__job-post">
                                     <div class="search__job-post-distance">1.30 miles</div>
@@ -97,7 +97,7 @@
                                         <div class="search__job-post-prison-name">HMP Belmarsh</div>
                                         <div class="search__job-post-prison-city">London</div>
                                     </div>
-                                    <a class="search__job-post-link">view job</a>
+                                    <a href="/job-post.html" class="search__job-post-link">view job</a>
                                 </li>
                             </ul>
                             <div class="search__pagination">

@@ -1,8 +1,19 @@
 <template>
     <div class="header"
-         :class="{'header--nav-menu-open': menuOpen}">
+         :class="{
+           'header--nav-menu-open': menuOpen,
+           'header--style-light': (headerStyle == 'light')
+         }"
+    >
+        <div
+                class="header__img-container"
+                v-if="backgroundImage == true"
+        ></div>
         <div class="header__logo"></div>
-        <div class="header__text"><slot></slot></div>
+        <div
+                class="header__text"
+                v-if="hasDefaultSlot"
+        ><slot></slot></div>
         <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
         <nav-menu v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
     </div>
@@ -47,12 +58,31 @@
     };
 
     export default {
-        props: ['title', 'subtitle'],
+        props: {
+            'title': {
+                default: ''
+            },
+            'subtitle': {
+                default: ''
+            },
+            'header-style': {
+                default: 'dark'
+            },
+            'background-image': {
+                default: true
+            }
+        },
 
         data() {
           return {
               menuOpen: false
           }
+        },
+
+        computed:  {
+            hasDefaultSlot: function() {
+                return !!this.$slots.default
+            }
         },
 
         components: {

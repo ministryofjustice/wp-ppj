@@ -1,9 +1,20 @@
 .header
-  background: $color-dark
-  background-image: url('/public/img/alcatraz_prison_block_cc_img.jpg')
-  background-position: center center
-  background-size: cover
   padding: $main-mobile-spacing
+  position: relative
+
+  &__img-container
+    background: $color-dark
+    background-image: url('/public/img/alcatraz_prison_block_cc_img.jpg')
+    background-position: center center
+    background-size: cover
+
+    bottom: 0
+    left: 0
+    position: absolute
+    right: 0
+    top: 0
+
+
 
   @include bp('portrait')
     height: 40rem
@@ -26,7 +37,7 @@
         margin-top: 0
 
   &__nav-menu
-    background: $color-dark
+    background: $color-dark-transparent
     color: $color-white
     display: none
 
@@ -75,9 +86,14 @@
 
   &__logo
     @extend .u-wireframe-image
+    background: $color-transparent url('/public/img/HMPPS_WHITE_AW.png') no-repeat
+    background-position: center center
+    background-size: contain
     height: 3rem
     margin-bottom: $main-mobile-spacing/2
+    margin-left: -1.7rem // TODO fix image
     width: 10rem
+
 
   &__text
     @extend .u-top-border
@@ -100,3 +116,20 @@
         left: 0
         right: 0
         z-index: 1
+
+  &--style-light
+
+    .header
+      background-color: $color-white
+
+      &__logo
+        background-image: url('/public/img/hmpps-logo.png')
+
+
+      &__text
+        color: $color-dark
+
+      &__nav-link
+
+        & > div
+          background: $color-dark
