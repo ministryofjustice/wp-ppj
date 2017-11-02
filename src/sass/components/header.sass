@@ -54,19 +54,20 @@
     margin-top: 8rem
 
   &__nav-menu-list-element
-    border-bottom: 1px solid $color-white
     font-weight: $font-weight-bold
+    padding: 0 $main-mobile-spacing
 
     & > a
+      border-bottom: 1px solid $color-white
       color: $color-white
       display: block
-      padding: $main-mobile-spacing/1.5
+      padding: $main-mobile-spacing/1.5 0
       width: 100%
 
       &[href='']
         color: $color-light
 
-    &:first-child
+    &:first-child > a
       border-top: 1px solid $color-white
 
     &-subtext
