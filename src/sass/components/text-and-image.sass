@@ -3,12 +3,8 @@
   position: relative
 
   &__main-section
+    @extend .u-clearfix
     border-bottom: .2rem solid $color-dark
-
-    &::after
-      content: ""
-      clear: both
-      display: table
 
   &__image
     @extend .u-wireframe-image
