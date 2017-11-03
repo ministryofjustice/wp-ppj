@@ -3,15 +3,15 @@
         <div
                 class="job-summary__distance"
                 v-if="distance"
-        >0.88 miles</div>
+        >{{distance}}</div>
         <div
                 class="job-summary__position"
                 v-if="position"
-        >Prison Officer</div>
+        >{{position}}</div>
         <div
                 class="job-summary__salary"
                 v-if="salary"
-        >£31,560</div>
+        >{{salary}}</div>
         <div
                 class="job-summary__prison"
                 v-if="prisonName || prisonCity"
@@ -19,11 +19,11 @@
             <div
                     class="job-summary__prison-name"
                     v-if="prisonName"
-            >HMP Belmarsh</div>
+            >{{prisonName}}</div>
             <div
                     class="job-summary__prison-city"
                     v-if="prisonCity"
-            >London</div>
+            >{{prisonCity}}</div>
         </div>
         <a
                 class="job-summary__link"

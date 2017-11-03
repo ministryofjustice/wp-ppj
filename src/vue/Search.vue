@@ -46,61 +46,20 @@
                         </div>
                         <div class="search__view-list" v-show="searchResults.activeView == 1">
                             <ul class="search__view-list-list">
-                                <li>
-                                <job-summary
-                                    distance="0.88 miles"
-                                    position="Prison Officer"
-                                    salary="£31,560"
-                                    prison-name="HMP Belmarsh"
-                                    prison-city="London"
-                                    url="/job-post.html"
+                                <li
+                                        v-for="(job, index) in searchResults.jobs"
+                                        :key="index"
                                 >
-                                </job-summary>
-                            </li>
-                            <li>
-                                <job-summary
-                                    distance="1.03 miles"
-                                    position="Prison Officer"
-                                    salary="£22,396"
-                                    prison-name="HMP Pentonville"
-                                    prison-city="London"
-                                    url="/job-post.html"
-                                >
-                                </job-summary>
-                            </li>
-                            <li>
-                                <job-summary
-                                    distance="1.15 miles"
-                                    position="Prison Officer"
-                                    salary="£22,396"
-                                    prison-name="HMP Belmarsh"
-                                    prison-city="London"
-                                    url="/job-post.html"
-                                >
-                                </job-summary>
-                            </li>
-                            <li>
-                                <job-summary
-                                    distance="0.88 miles"
-                                    position="Prison Officer"
-                                    salary="£29,981"
-                                    prison-name="HMP Belmarsh"
-                                    prison-city="London"
-                                    url="/job-post.html"
-                                >
-                                </job-summary>
-                            </li>
-                            <li>
-                                <job-summary
-                                    distance="1.30 miles"
-                                    position="Prison Officer"
-                                    salary="£26,950"
-                                    prison-name="HMP Belmarsh"
-                                    prison-city="London"
-                                    url="/job-post.html"
-                                >
-                                </job-summary>
-                            </li>
+                                    <job-summary
+                                            :distance="job.distance"
+                                            :position="job.position"
+                                            :salary="job.salary"
+                                            :prison-name="job.prisonName"
+                                            :prison-city="job.prisonCity"
+                                            :url="job.url"
+                                    >
+                                    </job-summary>
+                                </li>
                             </ul>
                             <div class="search__pagination">
                                 <button class="search__pagination-direction"
@@ -143,8 +102,49 @@
                         activePage: 0,
                         forwardEnabled: true,
                         backwardEnabled: false
-                    }
-
+                    },
+                    jobs: [
+                        {
+                            distance: "0.88 miles",
+                            position: "Prison Officer",
+                            salary: "£31,560",
+                            prisonName : "HMP Belmarsh",
+                            prisonCity : "London",
+                            url: "/job-post.html"
+                        },
+                        {
+                            distance: "1.03 miles",
+                            position: "Prison Officer",
+                            salary: "£22,396",
+                            prisonName : "HMP Pentonville",
+                            prisonCity : "London",
+                            url: "/job-post.html"
+                        },
+                        {
+                            distance: "1.15 miles",
+                            position: "Prison Officer",
+                            salary: "£22,396",
+                            prisonName : "HMP Belmarsh",
+                            prisonCity : "London",
+                            url: "/job-post.html"
+                        },
+                        {
+                            distance: "0.88 miles",
+                            position: "Prison Officer",
+                            salary: "£29,981",
+                            prisonName : "HMP Belmarsh",
+                            prisonCity : "London",
+                            url: "/job-post.html"
+                        },
+                        {
+                            distance: "1.30 miles",
+                            position: "Prison Officer",
+                            salary: "£26,950",
+                            prisonName : "HMP Belmarsh",
+                            prisonCity : "London",
+                            url: "/job-post.html"
+                        }
+                    ]
                 },
                 mapSrc: '',
                 titleText: 'Search for vacancies near you',
