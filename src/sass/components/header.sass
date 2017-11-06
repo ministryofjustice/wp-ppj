@@ -3,18 +3,16 @@
   position: relative
 
   &__img-container
-    background: $color-dark
-    background-image: url('/public/img/alcatraz_prison_block_cc_img.jpg')
+    @include background-img('alcatraz_prison_block_cc_img.jpg')
+    background-color: $color-dark
     background-position: center center
     background-size: cover
-
     bottom: 0
     left: 0
     position: absolute
     right: 0
     top: 0
-
-
+    z-index: -1
 
   @include bp('portrait')
     height: 40rem
@@ -86,7 +84,9 @@
 
   &__logo
     @extend .u-wireframe-image
-    background: $color-transparent url('/public/img/HMPPS_WHITE_AW.png') no-repeat
+    @include background-img('HMPPS_WHITE_AW.png')
+    background-color: $color-transparent
+    background-repeat: no-repeat
     background-position: center center
     background-size: contain
     height: 3rem
@@ -123,8 +123,7 @@
       background-color: $color-white
 
       &__logo
-        background-image: url('/public/img/hmpps-logo.png')
-
+        @include background-img('hmpps-logo.png')
 
       &__text
         color: $color-dark
