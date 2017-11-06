@@ -1,0 +1,14 @@
+{
+    "name": "mojd/papj",
+    "type": "project",
+    "authors": [
+        {
+            "name": "James Devon",
+            "email": "james.devon@digital.justice.gov.uk"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "heroku/heroku-buildpack-php" : "dev-master"
+    }
+}
