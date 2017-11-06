@@ -108,28 +108,66 @@
       right: 0
       text-decoration: underline
 
+  &__pagination-links
+    display: flex
+    justify-content: space-between
+
   &__pagination
     display: flex
     justify-content: space-between
     margin: $main-mobile-spacing/2 0
 
-    & > *
-      border: .2rem solid $color-light
+    &-direction, &-link
+      border-width: .2rem
+      border-style: solid
       border-radius: 2rem
-      color: $color-light
       display: block
       font-size: $font-size-large
       font-weight: $font-weight-bold
       height: 4rem
+      transition: all .2s
       width: 4rem
 
     &-direction
+      order: 1000
+      border-color: $color-light
+      color: $color-light
+      cursor: initial
+
+      &:first-child
+        order: initial
+
+      &:hover ~ .search__pagination-link--active
+        border-color: $color-dark
+        color: $color-dark
+
       &--active
         background-color: $color-main
         border-color: $color-main
         color: $color-white
+        cursor: pointer
+
+        &:hover ~ .search__pagination-link--active
+          border-color: $color-dark
+          color: $color-dark
 
     &-link
-      &--active
-        color: $color-dark
+      border-color: $color-light
+      color: $color-light
+
+      &:hover
         border-color: $color-dark
+        color: $color-dark
+
+    &:not(:hover)
+
+      .search__pagination
+
+        &-link
+          color: $color-light
+
+          &--active
+            border-color: $color-dark
+            color: $color-dark
+
+

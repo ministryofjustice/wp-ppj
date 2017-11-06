@@ -68,22 +68,17 @@
                                         :class="{'search__pagination-direction--active': (backwardEnabled == true)}"
                                         @click.stop.prevent="showPreviousPage"
                                 > < </button>
-                                <button class="search__pagination-link"
-                                        :class="{'search__pagination-link--active': (searchResults.listView.activePage == 0)}"
-                                >1</button>
-                                <button class="search__pagination-link"
-                                        :class="{'search__pagination-link--active': (searchResults.listView.activePage == 1)}"
-                                >2</button>
-                                <button class="search__pagination-link"
-                                        :class="{'search__pagination-link--active': (searchResults.listView.activePage == 2)}"
-                                >3</button>
-                                <button class="search__pagination-link"
-                                        :class="{'search__pagination-link--active': (searchResults.listView.activePage == 3)}"
-                                >4</button>
+
                                 <button class="search__pagination-direction"
                                         :class="{'search__pagination-direction--active': (forwardEnabled == true)}"
                                         @click.stop.prevent="showNextPage"
                                 > > </button>
+
+                                <button v-for="n in numberOfResultPages"
+                                        class="search__pagination-link"
+                                        :class="{'search__pagination-link--active': (searchResults.listView.activePage == (n - 1))}"
+                                        @click.stop.prevent="showPage(n-1)"
+                                >{{ n }}</button>
                             </div>
                         </div>
                     </div>
@@ -173,6 +168,88 @@
             prisonName : "HMP Belmarsh",
             prisonCity : "London",
             url: "/job-post.html"
+        },
+
+
+        {
+            distance: "0.88 miles",
+            position: "Prison Officer",
+            salary: "£19,560",
+            prisonName : "HMP Belmarsh",
+            prisonCity : "London",
+            url: "/job-post.html"
+        },
+        {
+            distance: "1.03 miles",
+            position: "Prison Officer",
+            salary: "£32,396",
+            prisonName : "HMP Pentonville",
+            prisonCity : "London",
+            url: "/job-post.html"
+        },
+        {
+            distance: "1.15 miles",
+            position: "Prison Officer",
+            salary: "£32,396",
+            prisonName : "HMP Belmarsh",
+            prisonCity : "London",
+            url: "/job-post.html"
+        },
+        {
+            distance: "0.88 miles",
+            position: "Prison Officer",
+            salary: "£39,981",
+            prisonName : "HMP Belmarsh",
+            prisonCity : "London",
+            url: "/job-post.html"
+        },
+        {
+            distance: "1.30 miles",
+            position: "Prison Officer",
+            salary: "£36,950",
+            prisonName : "HMP Belmarsh",
+            prisonCity : "London",
+            url: "/job-post.html"
+        },
+        {
+            distance: "0.88 miles",
+            position: "Prison Officer",
+            salary: "£51,560",
+            prisonName : "HMP Belmarsh",
+            prisonCity : "London",
+            url: "/job-post.html"
+        },
+        {
+            distance: "1.03 miles",
+            position: "Prison Officer",
+            salary: "£42,396",
+            prisonName : "HMP Pentonville",
+            prisonCity : "London",
+            url: "/job-post.html"
+        },
+        {
+            distance: "1.15 miles",
+            position: "Prison Officer",
+            salary: "£42,396",
+            prisonName : "HMP Belmarsh",
+            prisonCity : "London",
+            url: "/job-post.html"
+        },
+        {
+            distance: "0.88 miles",
+            position: "Prison Officer",
+            salary: "£49,981",
+            prisonName : "HMP Belmarsh",
+            prisonCity : "London",
+            url: "/job-post.html"
+        },
+        {
+            distance: "1.30 miles",
+            position: "Prison Officer",
+            salary: "£46,950",
+            prisonName : "HMP Belmarsh",
+            prisonCity : "London",
+            url: "/job-post.html"
         }
     ];
 
@@ -201,7 +278,6 @@
         computed: {
             numberOfResultPages: function() {
                 const num = Math.ceil(this.searchResults.jobs.length / this.searchResults.listView.resultsPerPage);
-                console.log('num of result pages', num);
                 return num;
             },
             visibleSearchResults: function() {
@@ -243,6 +319,9 @@
             },
             showListView() {
                 this.searchResults.activeView = 1;
+            },
+            showPage(i) {
+                this.searchResults.listView.activePage = i
             },
             showNextPage() {
                 if (this.searchResults.listView.activePage < (this.numberOfResultPages - 1)) {
