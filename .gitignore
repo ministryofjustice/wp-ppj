@@ -1,6 +1,8 @@
 /meta/
 .idea/
 /node_modules/
-/public/
-
+/public/css/
+/public/img/
+/public/js/
+/public/*.html
 /vendor/

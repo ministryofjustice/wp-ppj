@@ -1,6 +1,6 @@
 AuthType Basic
 AuthName "Restricted access"
-AuthUserFile "/app/public/.htpasswd"
+AuthUserFile "/app/public/.htpass"
 Require valid-user
 
 #RewriteEngine On

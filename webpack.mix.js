@@ -15,7 +15,6 @@ mix.js('src/js/main.js', 'public/js')
 if (process.env.MIX_HEROKU) {
     console.log('MIX_HEROKU is true!');
     mix.copy('temp-auth/.htaccess', 'public/.htaccess');
-    mix.copy('temp-auth/.htpasswd', 'public/.htpasswd');
 } else {
     console.log('MIX_HEROKU is false!');
 }
