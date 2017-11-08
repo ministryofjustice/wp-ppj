@@ -50,18 +50,23 @@
       width: .4rem
 
   &__view-controls
+    display: flex
+    justify-content: space-between
     width: 100%
 
   &__button-view
-    border-radius: 0
-    font-weight: $font-weight-bold
-    padding: $main-mobile-spacing/2
     border: .1rem solid $color-dark
+    border-radius: 0
+    flex: 1
+    font-weight: $font-weight-bold
+    margin-left: $main-mobile-spacing/2
+    padding: $main-mobile-spacing/2
     text-align: left
     width: 49%
 
     &:first-child
       border-right: none
+      margin-left: 0
 
     &:last-child
       border-left: none
@@ -78,6 +83,9 @@
   &__map
     display: flex
     justify-content: center
+    height: 20rem
+    width: 100%
+
     & > iframe
       border: .1rem solid $color-light
 
