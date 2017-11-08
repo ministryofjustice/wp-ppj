@@ -1,9 +1,11 @@
 <template>
     <div class="text-and-image">
         <div class="text-and-image__main-section">
-            <img
-                    class="text-and-image__image"
-                    :src="imgUrl" />
+            <div class="text-and-image__image-container">
+                <img
+                        class="text-and-image__image"
+                        :src="imgUrl" />
+            </div>
             <h2
                     class="text-and-image__title"
                     v-if="myTitle"
