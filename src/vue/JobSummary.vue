@@ -3,7 +3,7 @@
         <div
                 class="job-summary__distance"
                 v-if="distance"
-        >{{distance}}</div>
+        >{{distance}} <span v-if="distanceTime">({{distanceTime}})</span></div>
         <div
                 class="job-summary__position"
                 v-if="position"
@@ -36,6 +36,7 @@
     export default {
         props: {
             'distance': {default: ''}
+            , 'distance-time': {default: ''}
             , 'position': {default: ''}
             , 'salary': {default: ''}
             , 'prison-name': {default: ''}

@@ -86,8 +86,15 @@
     height: 20rem
     width: 100%
 
-    & > iframe
-      border: .1rem solid $color-light
+  &__job-marker
+    $size: 1rem
+    background-color: red
+    border: .2rem solid $color-dark
+    border-radius: $size
+    cursor: pointer
+    height: $size
+    position: absolute
+    width: $size
 
   &__job-post
     border-bottom: .1rem solid $color-light
