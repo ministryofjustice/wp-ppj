@@ -29,13 +29,7 @@
                     </div>
                     <div class="search__view-container">
                         <div class="search__view-map" v-show="searchResults.activeView == 0">
-                            <div class="search__map">
-                                <iframe width="280"
-                                        height="180"
-                                        frameborder="0"
-                                        :src="mapSrc"
-                                        allowfullscreen></iframe>
-                            </div>
+                            <div class="search__map"></div>
                             <job-summary
                                     :distance="searchResults.jobs[0].distance"
                                     :position="searchResults.jobs[0].position"
@@ -253,6 +247,65 @@
         }
     ];
 
+    function CustomMarker(latlng, map, args) {
+        this.latlng = latlng;
+        this.args = args;
+        this.setMap(map);
+    }
+
+    CustomMarker.prototype = new google.maps.OverlayView();
+
+    CustomMarker.prototype.draw = function() {
+
+        var self = this;
+
+        var div = this.div;
+
+        if (!div) {
+
+            div = this.div = document.createElement('div');
+
+            div.className = 'marker';
+
+            div.style.position = 'absolute';
+            div.style.cursor = 'pointer';
+            div.style.width = '20px';
+            div.style.height = '20px';
+            div.style.background = 'blue';
+
+            if (typeof(self.args.marker_id) !== 'undefined') {
+                div.dataset.marker_id = self.args.marker_id;
+            }
+
+            google.maps.event.addDomListener(div, "click", function(event) {
+                alert('You clicked on a custom marker!');
+                google.maps.event.trigger(self, "click");
+            });
+
+            var panes = this.getPanes();
+            panes.overlayImage.appendChild(div);
+        }
+
+        var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
+
+        if (point) {
+            div.style.left = (point.x - 10) + 'px';
+            div.style.top = (point.y - 20) + 'px';
+        }
+    };
+
+    CustomMarker.prototype.remove = function() {
+        if (this.div) {
+            this.div.parentNode.removeChild(this.div);
+            this.div = null;
+        }
+    };
+
+    CustomMarker.prototype.getPosition = function() {
+        return this.latlng;
+    };
+
+
     export default {
         data() {
             return {
@@ -261,7 +314,8 @@
                     display: false,
                     postCode: '',
                     urlEncodedPostCode: '',
-                    googleMapAPIKey: 'AIzaSyD6bT-hldMJMz4jwUgJ2W1YA-bXpROvKHk',
+                    //googleMapAPIKey: 'AIzaSyD6bT-hldMJMz4jwUgJ2W1YA-bXpROvKHk',
+                    googleMapAPIKey: 'AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA',
                     listView: {
                         activePage: 0,
                         resultsPerPage: 5,
@@ -271,6 +325,11 @@
                     jobs: dummyJobs
                 },
                 mapSrc: '',
+                mapOptions: {
+                    zoom: 10,
+                    center: new google.maps.LatLng(0.0,0.0),
+                    disableDefaultUI: false
+                },
                 titleText: 'Search for vacancies near you',
                 placeHolderText: 'Enter your post code'
             }
@@ -298,21 +357,41 @@
             }
         },
         watch: {
-            'searchResults.postCode': function(val) {
-                this.searchResults.urlEncodedPostCode = encodeURIComponent(val);
-            },
-            'searchResults.urlEncodedPostCode': function(val) {
-                if (val) {
-                    const result = "https://www.google.com/maps/embed/v1/place?q="
-                        + val
-                        + "&key=" + this.searchResults.googleMapAPIKey;
-                    this.mapSrc = result;
-                }
-            }
+
         },
         methods: {
+            createMarker(lat, lng) {
+                const latLng = new google.maps.LatLng(lat, lng);
+
+                return new CustomMarker(
+                    latLng,
+                    this.map,
+                    {
+                        marker_id: '123'
+                    }
+                );
+            },
+            updateMapWithGeocoderResults(results, status) {
+                const self = this;
+                if (status == google.maps.GeocoderStatus.OK) {
+                    const location = results[0].geometry.location;
+                    const latLng = new google.maps.LatLng(location.lat(), location.lng());
+                    const mapOptions = Object.assign({}, self.mapOptions, {center: latLng});
+                    self.map = new google.maps.Map(document.getElementsByClassName('search__map')[0], mapOptions);
+                    const marker = new google.maps.Marker({
+                        map: self.map,
+                        position: latLng
+                    });
+                    this.searchResults.display = true;
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            },
             search() {
-                this.searchResults.display = true;
+                new google.maps.Geocoder().geocode(
+                    { 'address': this.searchResults.postCode},
+                    this.updateMapWithGeocoderResults
+                );
             },
             showMapView() {
                 this.searchResults.activeView = 0;
@@ -335,7 +414,6 @@
             }
         },
         mounted() {
-            //this.searchResults.postCode = 'SW1H 9AJ';
         }
     }
 </script>

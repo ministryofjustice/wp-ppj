@@ -49,7 +49,7 @@ window.onload = function() {
     Vue.component('text-image-block', TextImageBlock);
     Vue.component('video-player', VideoPlayer);
 
-    new Vue({
+    var vm = new Vue({
         el: '#site-container'
     });
 
@@ -58,3 +58,4 @@ window.onload = function() {
     html.style.opacity = 1;
 
 };
+
