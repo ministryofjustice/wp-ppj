@@ -10,7 +10,9 @@
                     v-model="searchResults.postCode"
                 />
                 <button class="search__button-search"
-                        @click.stop.prevent="search">
+                        @click.stop.prevent="search"
+                        :disabled="searchResults.postCode == ''"
+                >
                     <div class="search__button-search-circle"></div>
                     <div class="search__button-search-rectangle"></div>
                 </button>

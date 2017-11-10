@@ -26,11 +26,15 @@
     position: absolute
     right: 0
     top: 0
+    transition: background-color $main-transition-duration
     width: 4rem
+
+    &:disabled
+      background-color: $color-light
 
     &-circle
       $diameter: 1.7rem
-      background: $color-main
+      background: inherit
       border: .25rem solid $color-white
       border-radius: 1.1rem
       display: inline-block
@@ -106,6 +110,7 @@
         border-color: $color-white
 
     &--datum
+      box-shadow: none
 
 
   &__job-post
