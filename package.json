@@ -9,9 +9,11 @@
     "cross-env": "^5.1.0",
     "laravel-mix": "^1.5.1",
     "node-sass": "^4.5.3",
+    "scrollpoints": "^0.4.0",
     "vue": "^2.5.2",
     "vue-loader": "^13.3.0",
-    "vue-template-compiler": "^2.5.2"
+    "vue-template-compiler": "^2.5.2",
+    "waypoints": "^4.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

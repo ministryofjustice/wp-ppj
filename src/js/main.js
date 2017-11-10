@@ -1,3 +1,8 @@
+//import Waypoint from 'waypoint';
+//Scrollpoints = require('scrollpoints');
+import scrollpoints from 'scrollpoints';
+import Vue from 'vue';
+
 import Accordion from '../vue/Accordion.vue';
 import Contact from '../vue/Contact.vue';
 import Header from '../vue/Header.vue';
@@ -10,7 +15,7 @@ import Tabs from '../vue/Tabs.vue';
 import TextBlock from '../vue/TextBlock.vue';
 import TextImageBlock from '../vue/TextImageBlock.vue';
 import VideoPlayer from '../vue/VideoPlayer.vue';
-import Vue from 'vue';
+
 
 function toggleOpenNavMenu(navLink) {
     console.log('toggleOpenNavMenu');
@@ -52,6 +57,23 @@ window.onload = function() {
     var vm = new Vue({
         el: '#site-container'
     });
+
+    const scrollPointConfig = {
+      when: 'entering'
+    };
+    console.log('here');
+    const elems = document.querySelectorAll('.l-full, .l-half');
+    //elems.concat(document.querySelectorAll('.l-half'));
+    for (let i in elems) {
+        scrollpoints.add(
+            elems[i],
+            (el)=>{
+                console.log('scrolled into view');
+                el.style.opacity = 1
+            },
+            scrollPointConfig
+        )
+    }
 
     // hide html until Vue has rendered
     const html = document.getElementsByTagName('html')[0];
