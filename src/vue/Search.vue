@@ -395,8 +395,8 @@
             return {
                 searchResults: {
                     activeView: 0,
-                    display: true, // TODO revert
-                    postCode: 'SW1H 1AJ',
+                    display: false,
+                    postCode: '',//'SW1H 1AJ',
                     urlEncodedPostCode: '',
                     googleMapAPIKey: 'AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA',
                     listView: {
