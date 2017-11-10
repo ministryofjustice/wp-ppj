@@ -7,3 +7,4 @@
 /public/*.html
 /vendor/
 temp-auth/.htpasswd
+mix-manifest.json
