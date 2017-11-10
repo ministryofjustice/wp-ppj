@@ -3,7 +3,15 @@
         <div
                 class="job-summary__distance"
                 v-if="distance"
-        >{{distance}} <span v-if="distanceTime">({{distanceTime}})</span></div>
+        >
+            <span
+                    class="job-summary__distance-miles"
+            >{{distance}}</span>
+            <span
+                    class="job-summary__distance-time"
+                    v-if="distanceTime"
+            >({{distanceTime}})</span>
+        </div>
         <div
                 class="job-summary__position"
                 v-if="position"

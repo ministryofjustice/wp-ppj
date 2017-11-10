@@ -30,15 +30,23 @@
                     <div class="search__view-container">
                         <div class="search__view-map" v-show="searchResults.activeView == 0">
                             <div class="search__map"></div>
-                            <job-summary
-                                    :distance="searchResults.jobs[0].distance"
-                                    :position="searchResults.jobs[0].position"
-                                    :salary="searchResults.jobs[0].salary"
-                                    :prison-name="searchResults.jobs[0].organisationName"
-                                    :prison-city="searchResults.jobs[0].organisationCity"
-                                    :url="searchResults.jobs[0].url"
-                            >
-                            </job-summary>
+                            <ul class="search__view-list-list">
+                                <li
+                                        v-for="(job, index) in searchResults.jobLocationGroups[searchResults.selectedJobLocationGroup]"
+                                        :key="index"
+                                >
+                                    <job-summary
+                                            :distance="job.distance"
+                                            :distance-time="job.distanceTime"
+                                            :position="job.position"
+                                            :salary="job.salary"
+                                            :prison-name="job.organisationName"
+                                            :prison-city="job.organisationCity"
+                                            :url="job.url"
+                                    >
+                                    </job-summary>
+                                </li>
+                            </ul>
                         </div>
                         <div class="search__view-list" v-show="searchResults.activeView == 1">
                             <ul class="search__view-list-list">
@@ -83,6 +91,10 @@
 </template>
 
 <script>
+    function getFirstElementInObject(obj) {
+        return obj[Object.keys(obj)[0]];
+    }
+
     const dummyJobs = [
         // page 1
         {
@@ -301,45 +313,59 @@
     }
 
     function styleMarker(div, args) {
-        div.style.position = 'absolute';
-        div.style.cursor = 'pointer';
-        div.style.width = '10px';
-        div.style.height = '10px';
-        div.style.border = '2px solid black';
-        div.style.borderRadius = '10px';
 
         if (args.solid) {
             div.style.background = 'black';
-        } else {
-
         }
+
+        if (args.selected) {
+            div.classList.add('search__map-marker--selected');
+        }
+    }
+
+    function changeSelectedMarker(div) {
+        // find all markers
+        const searchMap = div.closest('.search__map');
+
+        // remove any selected marker classes
+        const jobMarkers = searchMap.querySelectorAll('.search__map-marker--job-location-group.search__map-marker--selected');
+        for (let i in jobMarkers) {
+            if (typeof jobMarkers[i].classList !== 'undefined') {
+                const classList = jobMarkers[i].classList;
+                classList.remove('search__map-marker--selected');
+            }
+        }
+
+        // add selected marker class to this marker
+        div.classList.add('search__map-marker--selected');
     }
 
     CustomMarker.prototype = new google.maps.OverlayView();
 
     CustomMarker.prototype.draw = function() {
-        console.log('drawing marker');
 
         var self = this;
-
         var div = this.div;
 
         if (!div) {
-
             div = this.div = document.createElement('div');
-
-            div.className = 'search_job-marker';
-
+            div.classList.add('search__map-marker');
+            div.classList.add(self.args.class);
             styleMarker(div, self.args);
 
             if (typeof(self.args.marker_id) !== 'undefined') {
                 div.dataset.marker_id = self.args.marker_id;
             }
 
-            google.maps.event.addDomListener(div, "click", function(event) {
-                alert('You clicked on a custom marker!');
-                google.maps.event.trigger(self, "click");
-            });
+            if (typeof self.args.clickCallback !== 'undefined'){
+                google.maps.event.addDomListener(div, "click", function(event) {
+                    google.maps.event.trigger(self, "click");
+                    changeSelectedMarker(div);
+
+                        self.args.clickCallback(self.args.groupId);
+
+                });
+            }
 
             var panes = this.getPanes();
             panes.overlayImage.appendChild(div);
@@ -364,7 +390,6 @@
         return this.latlng;
     };
 
-
     export default {
         data() {
             return {
@@ -380,11 +405,14 @@
                         forwardEnabled: true,
                         backwardEnabled: false
                     },
-                    jobs: dummyJobs
+                    jobs: dummyJobs,
+                    jobLocationGroups: {},
+                    selectedJobLocationGroup: '',
+                    visibleJobLocationGroup: null
                 },
                 mapSrc: '',
                 mapOptions: {
-                    zoom: 8,
+                    zoom: 9,
                     center: new google.maps.LatLng(0.0,0.0),
                     disableDefaultUI: false
                 },
@@ -415,41 +443,75 @@
             }
         },
         watch: {
-
+            selectedJobLocationGroup: function(selectedJobLocationGroup) {
+                if (selectedJobLocationGroup) {
+                    this.searchResults.visibleJobLocationGroup = searchResults.jobLocationGroups[selectedJobLocationGroup];
+                }
+            }
         },
         methods: {
-            updateMapWithJobMarkers(jobs){
-                for (let i = 0; i < jobs.length; i++) {
-                    const latLng = new google.maps.LatLng(jobs[i].lat, jobs[i].lng);
-                    new CustomMarker(latLng, this.map, {marker_id: '123', solid: true});
+            updateSelectedJobLocationGroup(id) {
+                this.searchResults.selectedJobLocationGroup = id;
+            },
+            updateMapWithJobLocationGroupMarkers(jobLocationGroups) {
+                const markerArgs = [];
+                for (let group in jobLocationGroups) {
+
+                    markerArgs.push({
+                            class: 'search__map-marker--job-location-group',
+                            solid: true,
+                            amount: jobLocationGroups[group].length,
+                            groupId: group,
+                            clickCallback: this.updateSelectedJobLocationGroup.bind(this, group)
+                    });
+                }
+                for (let i in markerArgs) {
+                    if (i == 0) {
+                        markerArgs[i].selected = true;
+                        this.updateSelectedJobLocationGroup(markerArgs[i].groupId);
+                    }
+                    const latLngArr = markerArgs[i].groupId.split(',');
+                    const latLng = new google.maps.LatLng(latLngArr[0], latLngArr[1]);
+                    new CustomMarker(
+                        latLng,
+                        this.map,
+                        markerArgs[i]
+                    );
                 }
             },
-            updateJobsWithDistanceMatrixData(elements) {
+            updateJobsWithDistanceMatrixData(jobs, elements) {
                 for (let i = 0; i < elements.length; i++) {
                     const el = elements[i];
-                    const job = this.searchResults.jobs[i];
+                    const job = jobs[i];
                     job.distance = el.distance.text;
                     job.distanceTime = el.duration.text;
                 }
             },
-            handleDistanceMatrixData(response, status) {
-                console.log('handleDistanceMatrixData');
-                if (status != google.maps.DistanceMatrixStatus.OK) {
-                    //$('#result').html(err);
-                } else {
-                    var origin = response.originAddresses[0];
-                    var destination = response.destinationAddresses[0];
-                    if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
-                        //$('#result').html("Better get on a plane. There are no roads between " + origin + " and " + destination);
-                        console.log('distance matrix: zero results');
+            createJobLocationGroups(jobs) {
+                const jobLocationGroups = {};
+                for (let i = 0; i < jobs.length; i++) {
+                    const latLngStr = jobs[i].lat + ',' + jobs[i].lng;
+                    if (typeof jobLocationGroups[latLngStr] == 'undefined') {
+                        jobLocationGroups[latLngStr] = [jobs[i]];
                     } else {
-                        var distance = response.rows[0].elements[0].distance;
-                        var distance_value = distance.value;
-                        var distance_text = distance.text;
-                        var miles = distance_text.substring(0, distance_text.length - 3);
-                        //$('#result').html("It is " + miles + " miles from " + origin + " to " + destination);
-
-                        this.updateJobsWithDistanceMatrixData(response.rows[0].elements);
+                        jobLocationGroups[latLngStr].push(jobs[i]);
+                    }
+                }
+                return jobLocationGroups;
+            },
+            handleDistanceMatrixData(response, status) {
+                if (status != google.maps.DistanceMatrixStatus.OK) {
+                    // TODO handle no distance matrix response
+                } else {
+                    if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
+                        console.error('distance matrix: zero results'); // TODO handle zero results
+                    } else {
+                        const sr = this.searchResults;
+                        this.updateJobsWithDistanceMatrixData(sr.jobs, response.rows[0].elements);
+                        sr.jobLocationGroups = this.createJobLocationGroups(sr.jobs);
+                        sr.selectedJobLocationGroup = getFirstElementInObject(sr.jobLocationGroups);
+                        this.updateMapWithJobLocationGroupMarkers(sr.jobLocationGroups);
+                        sr.display = true;
                     }
                 }
             },
@@ -473,16 +535,15 @@
                 if (status == google.maps.GeocoderStatus.OK) {
                     const location = results[0].geometry.location;
                     const latLng = new google.maps.LatLng(location.lat(), location.lng());
+
+                    // create map
                     const mapOptions = Object.assign({}, this.mapOptions, {center: latLng});
                     this.map = new google.maps.Map(document.getElementsByClassName('search__map')[0], mapOptions);
-                    new CustomMarker(latLng, this.map, {marker_id: '123', solid: false});
 
-                    const locationString = '' + location.lat() + ',' + location.lng();
-                    this.updateJobsWithGeocoderData(locationString);
+                    // create custom marker for the search datum
+                    new CustomMarker(latLng, this.map, {class: 'search__map-marker--datum'});
 
-                    this.updateMapWithJobMarkers(this.searchResults.jobs);
-
-                    this.searchResults.display = true;
+                    this.updateJobsWithGeocoderData(location.lat() + ',' + location.lng());
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
                 }

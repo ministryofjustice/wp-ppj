@@ -86,15 +86,27 @@
     height: 20rem
     width: 100%
 
-  &__job-marker
-    $size: 1rem
-    background-color: red
-    border: .2rem solid $color-dark
+  &__map-marker
+    $c: &
+    $size: 1.5rem
+    border-color: $color-dark
+    border-style: solid
+    border-width: .2rem
     border-radius: $size
+    box-shadow: 0 0 3px 3px rgba(0,0,0,.2)
     cursor: pointer
     height: $size
     position: absolute
     width: $size
+
+    &--job-location-group
+      background-color: black
+
+      &#{$c}--selected // .search__map-marker--job-location-group.search__map-marker--selected
+        border-color: $color-white
+
+    &--datum
+
 
   &__job-post
     border-bottom: .1rem solid $color-light
