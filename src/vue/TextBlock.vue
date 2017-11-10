@@ -2,8 +2,8 @@
     <div class="text-block">
         <h2
                 class="text-block__title"
-                v-if="myTitle"
-        >{{ myTitle }}</h2>
+                v-if="mainTitle"
+        >{{ mainTitle }}</h2>
         <h3
                 class="text-block__subtitle"
                 v-if="subtitle"
@@ -15,6 +15,6 @@
 </template>
 <script>
     export default {
-        props: ['my-title', 'subtitle']
+        props: ['main-title', 'subtitle']
     }
 </script>

@@ -1,16 +1,31 @@
 .text-and-image
   $c: &
-  margin: $main-mobile-spacing $main-mobile-spacing
+  @extend .u-clearfix
+  margin: 0 $main-mobile-spacing
   position: relative
+
+  &__wrapper
+    border-bottom: .2rem solid $color-dark
+    display: flex
+    flex-direction: row-reverse
 
   &__main-section
     @extend .u-clearfix
     border-bottom: .2rem solid $color-dark
 
+  &__text-container
+    @extend .u-clearfix
+    width: 50%
+
   &__image-container
-    float: right
-    margin-left: $main-mobile-spacing
-    width: 15rem
+    align-self: flex-end
+    bottom: .2rem
+    //margin-bottom: $main-mobile-spacing/2
+    //margin-left: $main-mobile-spacing
+    //position: absolute
+    //right: 0
+    //float: right
+    width: 50%
 
     @include bp('portrait')
       width: 50rem
@@ -26,17 +41,20 @@
     @extend .common-header
     clear: left
     float: left
-    width: 11rem
+    width: initial
 
   &__text
+    clear: left
     float: left
     font-size: $font-size-small
-    clear: left
-    width: 10rem
+    padding-right: $main-mobile-spacing
+    padding-bottom: $main-mobile-spacing/2
+    //width: 50%
 
   &__quote
     font-size: $font-size-tiny
     font-weight: $font-weight-bold
+    margin-bottom: $main-mobile-spacing/2
     position: relative
 
     &:before
@@ -50,16 +68,43 @@
       content: close-quote
       visibility: hidden
 
+  &__quote-source
+    color: $color-light
+    font-size: $font-size-tiny
+
   &__content
     font-size: $font-size-tiny
     margin-top: $main-mobile-spacing/2
 
   &--inlaid-text
-    margin: $main-mobile-spacing 0
+    $shade: rgba(0,0,0,.6)
+    color: $color-white
+    margin: 0
     overflow: hidden
 
+    #{$c}__wrapper
+      display: block
+
+    #{$c}__text-container
+      background-color: $shade
+      box-shadow: 0 0 3rem 3rem $shade
+      padding: $main-mobile-spacing
+      width: 80%
+
+    #{$c}__title,
+    #{$c}__text
+      width: 100%
+
+    #{$c}__title
+      font-size: $font-size-large
+      margin: $main-mobile-spacing/2 0
+
     #{$c}__main-section
+      background-color: $shade
       border: none
+      box-shadow: 0 0 3rem 3rem $shade
+      padding: $main-mobile-spacing
+      width: 80%
 
     #{$c}__image-container
       bottom: 0
@@ -72,11 +117,7 @@
       z-index: -1
 
     #{$c}__text
-      $shade: rgba(0,0,0,.5)
-      background-color: $shade
-      box-shadow: 0 0 3rem 3rem $shade
-      color: $color-white
-      font-size: $font-size-large
-      line-height: 1.2
-      padding: $main-mobile-spacing
-      width: 80%
+      font-size: $font-size-small
+      line-height: 1.25
+
+

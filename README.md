@@ -7,6 +7,10 @@ This website is to facilitate the MoJ with hiring for prison and probation jobs,
 * It uses static HTML and Vue.js.
 * It has only been styled for mobile device use.
 
+## Refactoring
+Rename $main-mobile-spacing to $common-spacing
+Change $common-spacing to 1rem
+
 ## Go live tasks
 * minify js
 * convert vue from development to production

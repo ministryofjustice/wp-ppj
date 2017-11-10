@@ -1,6 +1,6 @@
 .text-block
   font-size: $font-size-tiny
-  margin: $main-mobile-spacing
+  margin: 0 $main-mobile-spacing
 
   &__title
     @extend .common-header
@@ -19,17 +19,25 @@
 
     & li
       margin: $main-mobile-spacing/2 0
+      margin-left: $main-mobile-spacing/2
 
     & ol li
       list-style-type: decimal
-      margin-left: $main-mobile-spacing/2
 
+    & ul li
+      list-style-type: square
+      margin-left: $main-mobile-spacing
 
     p
-      margin-bottom: $main-mobile-spacing
+      margin-bottom: $main-mobile-spacing/2
+
+    p:last-of-type
+      margin-bottom: 0
 
   &__link
     border: .2rem solid $color-dark
     display: block
     font-weight: bold
+    margin: $main-mobile-spacing/2 0
     padding: $main-mobile-spacing/2
+    text-align: center
