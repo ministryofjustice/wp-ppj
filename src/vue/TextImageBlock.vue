@@ -1,5 +1,7 @@
 <template>
-    <div class="text-and-image">
+    <div class="text-and-image"
+         :class="typeClass"
+    >
         <div class="text-and-image__main-section">
             <div class="text-and-image__image-container">
                 <img
@@ -26,6 +28,15 @@
 </template>
 <script>
     export default {
-        props: ['my-title', 'text', 'img-url', 'quote']
+        props: ['my-title', 'text', 'img-url', 'quote', 'type'],
+        computed: {
+            typeClass: function() {
+                if (this.type) {
+                    return 'text-and-image--' + this.type;
+                } else {
+                    return ''
+                }
+            }
+        }
     }
 </script>

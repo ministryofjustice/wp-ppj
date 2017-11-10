@@ -1,4 +1,5 @@
 .text-and-image
+  $c: &
   margin: $main-mobile-spacing $main-mobile-spacing
   position: relative
 
@@ -52,3 +53,30 @@
   &__content
     font-size: $font-size-tiny
     margin-top: $main-mobile-spacing/2
+
+  &--inlaid-text
+    margin: $main-mobile-spacing 0
+    overflow: hidden
+
+    #{$c}__main-section
+      border: none
+
+    #{$c}__image-container
+      bottom: 0
+      left: 0
+      margin: 0
+      position: absolute
+      right: 0
+      top: 0
+      width: 100%
+      z-index: -1
+
+    #{$c}__text
+      $shade: rgba(0,0,0,.5)
+      background-color: $shade
+      box-shadow: 0 0 3rem 3rem $shade
+      color: $color-white
+      font-size: $font-size-large
+      line-height: 1.2
+      padding: $main-mobile-spacing
+      width: 80%
