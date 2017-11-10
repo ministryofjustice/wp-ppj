@@ -61,14 +61,13 @@ window.onload = function() {
     const scrollPointConfig = {
       when: 'entering'
     };
-    console.log('here');
-    const elems = document.querySelectorAll('.l-full, .l-half');
-    //elems.concat(document.querySelectorAll('.l-half'));
-    for (let i in elems) {
+
+    // fade content in on scroll
+    const els = document.querySelectorAll('.l-full, .l-half');
+    for (let i in els) {
         scrollpoints.add(
-            elems[i],
+            els[i],
             (el)=>{
-                console.log('scrolled into view');
                 el.style.opacity = 1
             },
             scrollPointConfig
