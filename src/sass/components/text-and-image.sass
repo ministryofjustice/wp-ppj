@@ -15,16 +15,12 @@
 
   &__text-container
     @extend .u-clearfix
+    padding-right: $main-mobile-spacing
     width: 50%
 
   &__image-container
     align-self: flex-end
     bottom: .2rem
-    //margin-bottom: $main-mobile-spacing/2
-    //margin-left: $main-mobile-spacing
-    //position: absolute
-    //right: 0
-    //float: right
     width: 50%
 
     @include bp('portrait')
@@ -43,6 +39,11 @@
     float: left
     width: initial
 
+  &__subtitle
+    font-weight: $font-weight-bold
+    font-size: $font-size-small
+    margin-bottom: $main-mobile-spacing/2
+
   &__text
     clear: left
     float: left
@@ -51,18 +52,19 @@
     padding-bottom: $main-mobile-spacing/2
     //width: 50%
 
-  &__quote
+  &__quote-container
     font-size: $font-size-tiny
     font-weight: $font-weight-bold
     margin-bottom: $main-mobile-spacing/2
     position: relative
 
-    &:before
-      color: $color-main
-      content: open-quote
-      display: block
-      font-size: 3.6rem
-      line-height: 1rem
+  &__quote-mark:before
+    color: $color-main
+    content: open-quote
+    display: block
+    font-size: 6rem
+    line-height: 1rem
+    margin-top: 2.1rem
 
     &:after
       content: close-quote

@@ -35,24 +35,42 @@ img
 html
   font-family: $sans-serif
 
-html
-  font-size: 62.5%
+h1,h2,h3,h4,h5,h6
+  font-family: $sans-serif-strong
 
+html
+  font-size: 62.5% // 1 rem now equals 10px
+
+body
+  font-size: $font-size-medium
+  -webkit-text-size-adjust: none
+
+h2
+  font-size: $font-size-huge
+
+h3
+  font-size: $font-size-medium
+
+h1,h2,h3,h4,h5,h6,
+strong
+  font-weight: $font-weight-bold
+
+h1,h2,h3,h4,h5,h6,
+p
+  margin: 0 0 .65em 0
+
+// TODO use this instead :
+// http://vuetips.com/v-cloak-directive-hides-html-on-startup
 html
   opacity: 0
 
 *:focus
   outline: none
 
-body
-  font-size: $font-size-medium
-  -webkit-text-size-adjust: none
-
-strong
-  font-weight: $font-weight-bold
 
 
 // globals
+
 .medium
   font-size: $font-size-medium
 

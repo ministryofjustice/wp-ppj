@@ -22,20 +22,21 @@
     position: relative
 
     &:before
+      align-items: center
       border: .3rem solid $color-dark
       border-radius: 2rem
       box-sizing: border-box
       content: counter(li)
       counter-increment: li
-      display: block
+      display: flex
       font-size: $font-size-large
       font-weight: $font-weight-bold
       height: 3rem
-      left: -4rem
+      justify-content: center
+      left: -3.1rem
       line-height: 2.49rem
-      padding-left: .66rem
+      padding: .1rem .1rem 0 0
       position: absolute
-      //text-align: center
       width: 3rem
 
     &:after
@@ -45,7 +46,7 @@
       position: absolute
       width: .32rem
       height: 1.7rem
-      left: -2.67rem
+      left: -1.8rem
       top: -1.6rem
 
     &:first-child:after
