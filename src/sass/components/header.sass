@@ -1,4 +1,5 @@
 .header
+  height: 24rem
   padding: $main-mobile-spacing
   position: relative
 
@@ -28,8 +29,8 @@
     & > div
       background: $color-white
       height: .5rem
-      margin-top: .5rem
-      width: 3rem
+      margin-top: .45rem
+      width: $main-mobile-spacing * 1.5
 
       &:first-child
         margin-top: 0
@@ -42,19 +43,19 @@
   &__nav-menu-close-button
     border: .2rem solid $color-white
     border-radius: 2rem
-    display: block
-    height: 3rem
+    display: flex
+    height: $main-mobile-spacing * 1.5
+    justify-content: center
     position: absolute
-    right: 2rem
-    top: 2rem
-    width: 3rem
+    right: $main-mobile-spacing
+    top: $main-mobile-spacing
+    width: $main-mobile-spacing * 1.5
 
     &:before
       color: $color-white
       content: "\2715"
-      font-size: 2rem
-      left: -.15rem
-      line-height: 2.4rem
+      font-size: $main-mobile-spacing
+      font-weight: $font-weight-bold
       position: relative
       text-align: center
       top: -.05rem
@@ -89,8 +90,8 @@
     background-repeat: no-repeat
     background-position: center center
     background-size: contain
-    height: 3rem
-    margin-bottom: $main-mobile-spacing/2
+    height: $main-mobile-spacing * 2
+    margin-bottom: $main-mobile-spacing * 1.5
     margin-left: -1.7rem // TODO fix image
     width: 10rem
 
