@@ -4,6 +4,7 @@
 /public/css/
 /public/img/
 /public/js/
+/public/fonts/
 /public/*.html
 /vendor/
 temp-auth/.htpasswd

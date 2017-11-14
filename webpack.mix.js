@@ -5,6 +5,7 @@ mix.js('src/js/main.js', 'public/js')
     .sass('src/sass/main.sass', 'public/css')
     .copy('src/img/*', 'public/img/')
     .copy('src/html/*', 'public/')
+    .copy('src/fonts/*', 'public/fonts')
 ;
 
 // mix.browserSync({
