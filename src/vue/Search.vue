@@ -44,6 +44,7 @@
                                             :salary="job.salary"
                                             :prison-name="job.organisationName"
                                             :prison-city="job.organisationCity"
+                                            :prison-page-link="job.organisationPageLink"
                                             :url="job.url"
                                     >
                                     </job-summary>
@@ -114,7 +115,7 @@
             distance: "1.03 miles",
             distanceTime: '', position: "Prison Officer",
             salary: "£22,396",
-            organisationName : "HMP Pentonville",
+            organisationName : "HMP Pentonville", organisationPageLink: '/hmp-pentonville.html',
             organisationCity : "London",
             url: "/job-post.html",
             lat: 51.5449765,
@@ -166,7 +167,7 @@
             distance: "1.03 miles",
             distanceTime: '', position: "Prison Officer",
             salary: "£32,396",
-            organisationName : "HMP Pentonville",
+            organisationName : "HMP Pentonville", organisationPageLink: '/hmp-pentonville.html',
             organisationCity : "London",
             url: "/job-post.html",
             lat: 51.5449765,
@@ -218,7 +219,7 @@
             distance: "1.03 miles",
             distanceTime: '', position: "Prison Officer",
             salary: "£32,396",
-            organisationName : "HMP Pentonville",
+            organisationName : "HMP Pentonville", organisationPageLink: '/hmp-pentonville.html',
             organisationCity : "London",
             url: "/job-post.html",
             lat: 51.5449765,
@@ -270,7 +271,7 @@
             distance: "1.03 miles",
             distanceTime: '', position: "Prison Officer",
             salary: "£42,396",
-            organisationName : "HMP Pentonville",
+            organisationName : "HMP Pentonville", organisationPageLink: '/hmp-pentonville.html',
             organisationCity : "London",
             url: "/job-post.html",
             lat: 51.5449765,

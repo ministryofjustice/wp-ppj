@@ -27,7 +27,9 @@
             <div
                     class="job-summary__prison-name"
                     v-if="prisonName"
-            >{{prisonName}}</div>
+            >
+                <a :href="prisonPageLink">{{prisonName}}</a>
+            </div>
             <div
                     class="job-summary__prison-city"
                     v-if="prisonCity"
@@ -50,6 +52,7 @@
             , 'prison-name': {default: ''}
             , 'prison-city': {default: ''}
             , 'url': {default: '/job-post.html'}
+            , 'prison-page-link': {default: ''}
         }
     }
 </script>
