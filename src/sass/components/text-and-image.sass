@@ -54,7 +54,6 @@
     font-size: $font-size-small
     padding-right: $main-mobile-spacing
     padding-bottom: $main-mobile-spacing/2
-    //width: 50%
 
   &__quote-container
     font-size: $font-size-tiny
@@ -70,9 +69,10 @@
     line-height: 1rem
     margin-top: 2.1rem
 
-    &:after
-      content: close-quote
-      visibility: hidden
+  &__quote-mark:after
+    content: close-quote
+    float: right
+    visibility: hidden
 
   &__quote-source
     color: $color-light
