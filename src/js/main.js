@@ -28,7 +28,7 @@ function toggleOpenNavMenu(navLink) {
     }
 }
 
-window.onload = function() {
+window.addEventListener('load', function() {
 
     (function addAccordionFillerContent() {  // TODO remove this before launch
         const elements = document.getElementsByClassName('accordion__list-element js');
@@ -55,8 +55,20 @@ window.onload = function() {
     Vue.component('video-player', VideoPlayer);
 
     var vm = new Vue({
-        el: '#site-container'
+        el: '#site-container',
+        methods: {
+            pageLoaded: function() {
+                this.$emit('pageLoaded');
+            }
+        },
+        mounted() {
+            console.log('App mounted');
+            console.dir(document.getElementsByClassName('text-and-image__map')[0]);
+            //this.pageLoaded();
+        }
     });
+
+
 
     const scrollPointConfig = {
       when: 'entering'
@@ -78,5 +90,5 @@ window.onload = function() {
     const html = document.getElementsByTagName('html')[0];
     html.style.opacity = 1;
 
-};
+}, false);
 
