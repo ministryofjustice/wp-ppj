@@ -100,7 +100,7 @@
     function getFirstElementInObject(obj) {
         return obj[Object.keys(obj)[0]];
     }
-    
+
     export default {
         data() {
             return {

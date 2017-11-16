@@ -76,6 +76,8 @@
 
       &[href='']
         color: $color-light
+        pointer-events: none
+        cursor: default
 
     &:first-child > a
       border-top: 1px solid $color-white
@@ -99,6 +101,7 @@
   &__text
     @extend .u-top-border
     color: $color-white
+    font-family: $sans-serif-strong
     font-size: $font-size-huge
     font-weight: bold
     line-height: 2.8rem
