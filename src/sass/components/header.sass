@@ -4,7 +4,6 @@
   position: relative
 
   &__img-container
-    @include background-img('header.jpg')
     background-color: $color-dark
     background-position: center center
     background-size: cover
@@ -13,7 +12,46 @@
     position: absolute
     right: 0
     top: 0
+
+  &__carousel-image
+    height: 100%
+    left: 0
+    opacity: 0
+    position: absolute
+    top: 0
+    width: 100%
+    transition: opacity $main-transition-duration
+    transition-delay: $main-transition-duration
     z-index: -1
+
+    &--active
+      opacity: 1
+      transition: opacity $main-transition-duration
+      transition-delay: 0s
+      z-index: 0
+
+
+  &__carousel-controls-container
+    position: absolute
+    bottom: $main-mobile-spacing
+    text-align: center
+    width: 100%
+    z-index: 1
+
+  &__carousel-button
+    $size: .8rem
+    border: .2rem solid $color-light
+    border-radius: $size
+    cursor: pointer
+    display: inline-block
+    height: $size
+    margin: $main-mobile-spacing/4
+    padding: 0
+    width: $size
+    transition: background-color $main-transition-duration
+
+    &--active
+      background-color: $color-light
 
   @include bp('portrait')
     height: 40rem
@@ -95,8 +133,9 @@
     height: $main-mobile-spacing * 2
     margin-bottom: $main-mobile-spacing * 1.5
     margin-left: -1.7rem // TODO fix image
+    position: relative
     width: 10rem
-
+    z-index: 1
 
   &__text
     @extend .u-top-border

@@ -5,14 +5,28 @@
            'header--style-light': (headerStyle == 'light')
          }"
     >
-        <div
-                class="header__img-container"
-                v-if="backgroundImage == true"
-        ></div>
         <div class="header__logo"></div>
-        <div
-                class="header__text"
-                v-if="hasDefaultSlot"
+        <div class="header__img-container"
+             v-if="backgroundImage == true"
+        >
+            <img class="header__carousel-image"
+                 v-for="(url, index) in carouselImageURLs"
+                 :src="url"
+                 :class="[{'header__carousel-image--active': (index == selectedCarouselImg) }]"
+            />
+            <div class="header__carousel-controls-container"
+                 v-if="carouselImageURLs.length > 1">
+                <button class="header__carousel-button"
+                        v-for="(url, index) in carouselImageURLs"
+                        :class="[{'header__carousel-button--active': (index == selectedCarouselImg) }]"
+                        @click="changeCarouselImage(index)"
+                >
+                </button>
+            </div>
+        </div>
+
+        <div class="header__text"
+             v-if="hasDefaultSlot"
         ><slot></slot></div>
         <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
         <nav-menu v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
@@ -28,6 +42,7 @@
                 <div></div>
                 <div></div>
             </div>`,
+
         methods: {
             openNavMenu: function() {
                 this.$emit('request-open-nav-menu', true);
@@ -51,6 +66,7 @@
                     <li class="header__nav-menu-list-element"><a href="">Eligibility Checker</a></li>
                 </ul>
             </div>`,
+
         methods: {
             closeNavMenu: function() {
                 this.$emit('request-close-nav-menu', true);
@@ -71,18 +87,28 @@
             },
             'background-image': {
                 default: true
+            },
+            'carousel-images': {
+                default: ''
             }
         },
 
         data() {
           return {
-              menuOpen: false
+              menuOpen: false,
+              selectedCarouselImg: 0,
+              carouselIntervalId: -1,
+              foo: true
           }
         },
 
         computed:  {
             hasDefaultSlot: function() {
                 return !!this.$slots.default
+            },
+            carouselImageURLs: function() {
+                const urls = this.carouselImages.split(',');
+                return urls;
             }
         },
 
@@ -97,7 +123,27 @@
             },
             closeNavMenu(){
                 this.menuOpen = false;
+            },
+            changeCarouselImage(index) {
+                if (this.selectedCarouselImg == index) {
+                    this.startCarouselTransition();
+                } else {
+                    this.selectedCarouselImg = index;
+                    clearInterval(this.carouselIntervalId);
+                }
+            },
+            startCarouselTransition(){
+                if (this.carouselImageURLs.length > 1) {
+                    this.carouselIntervalId = setInterval(()=>{
+                        this.selectedCarouselImg =
+                            (this.selectedCarouselImg + 1) % this.carouselImageURLs.length
+                    }, 5000)
+                }
             }
+        },
+
+        mounted() {
+            this.startCarouselTransition();
         },
 
         childComponents: {
