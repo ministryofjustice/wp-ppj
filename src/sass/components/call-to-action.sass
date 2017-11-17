@@ -13,11 +13,12 @@
   &__list-element
     background: $color-main
     border: 1px solid $color-white
-    border-radius: 1em
+    border-radius: 20em
     color: $color-white
     font-size: $font-size-large
     margin-top: 1rem
     text-align: center
+    text-transform: uppercase
 
     @include bp('portrait')
       display: inline-block
@@ -32,7 +33,11 @@
       cursor: pointer
       display: block
       font-family: $sans-serif-strong
-      padding: $main-mobile-spacing/2 $main-mobile-spacing
+      line-height: 2.2rem
+      padding: $main-mobile-spacing
+      position: relative
+      top: .2rem
+      vertical-align: text-bottom
 
       &[href='']
         //color: $color-light
