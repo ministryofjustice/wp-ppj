@@ -48,7 +48,9 @@
       & > div
         background-color: $color-main
         height: .2rem
+        opacity: 1
         width: 1rem
+        transition: opacity $main-transition-duration
 
         &:first-child
           transform: rotate(90deg)
@@ -76,3 +78,8 @@
           &-button
             //transform: rotate(90deg)
             //transition: all $main-transition-duration
+
+          &-button
+            & > div
+              &:first-child
+                opacity: 0
