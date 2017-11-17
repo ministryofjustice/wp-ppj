@@ -42,9 +42,9 @@
                                             :distance-time="job.distanceTime"
                                             :position="job.position"
                                             :salary="job.salary"
-                                            :prison-name="job.organisationName"
-                                            :prison-city="job.organisationCity"
-                                            :prison-page-link="job.organisationPageLink"
+                                            :prison-name="job.organizationName"
+                                            :prison-city="job.organizationCity"
+                                            :prison-page-link="job.organizationPageLink"
                                             :url="job.url"
                                     >
                                     </job-summary>
@@ -62,8 +62,8 @@
                                             :distance-time="job.distanceTime"
                                             :position="job.position"
                                             :salary="job.salary"
-                                            :prison-name="job.organisationName"
-                                            :prison-city="job.organisationCity"
+                                            :prison-name="job.organizationName"
+                                            :prison-city="job.organizationCity"
                                             :url="job.url"
                                     >
                                     </job-summary>

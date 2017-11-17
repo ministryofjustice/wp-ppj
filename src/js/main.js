@@ -8,6 +8,8 @@ import Contact from '../vue/Contact.vue';
 import Header from '../vue/Header.vue';
 import JobSummary from '../vue/JobSummary.vue';
 import OrderedList from '../vue/OrderedList.vue';
+import OrganizationSearch from '../vue/OrganizationSearch.vue';
+import OrganizationSummary from '../vue/OrganizationSummary.vue';
 import PageContainer from '../vue/PageContainer.vue';
 import RoleIntro from '../vue/RoleIntro.vue';
 import Search from '../vue/Search.vue';
@@ -44,6 +46,8 @@ window.addEventListener('load', function() {
     Vue.component('job-summary', JobSummary);
     Vue.component('ol-element', OrderedList.childComponents.Element);
     Vue.component('ordered-list', OrderedList);
+    Vue.component('organization-search', OrganizationSearch);
+    Vue.component('organization-summary', OrganizationSummary);
     Vue.component('page-container', PageContainer);
     Vue.component('page-header', Header);
     Vue.component('role-intro', RoleIntro);
@@ -67,8 +71,6 @@ window.addEventListener('load', function() {
             //this.pageLoaded();
         }
     });
-
-
 
     const scrollPointConfig = {
       when: 'entering'
