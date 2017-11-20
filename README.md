@@ -7,6 +7,13 @@ This website is to facilitate the MoJ with hiring for prison and probation jobs,
 * It uses static HTML and Vue.js.
 * It has only been styled for mobile device use.
 
+## To do
+- Fix transition of carousel
+- Fix search button
+- Video player cover image
+- Numbered accordion on apply page
+- Quote layout
+
 ## Refactoring
 Rename $main-mobile-spacing to $common-spacing
 Change $common-spacing to 1rem
