@@ -16,6 +16,7 @@ This website is to facilitate the MoJ with hiring for prison and probation jobs,
 ## Done
 - Fix search button
 - Numbered accordion on apply page
+- Add content to role page
 
 ## Refactoring
 Rename $main-mobile-spacing to $common-spacing

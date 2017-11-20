@@ -1,31 +1,33 @@
 .tabs
-  margin: $main-mobile-spacing 0
+  margin: 0 0 $main-mobile-spacing
 
   &__nav
     display: flex
-    justify-content: space-between
-    margin: $main-mobile-spacing
+    flex-wrap: wrap
+    justify-content: flex-start
+    padding: 0 $main-mobile-spacing/2
+    margin-bottom: $main-mobile-spacing
 
     &-link
       background-color: $color-dark
       color: $color-white
       cursor: pointer
-      flex: 1 1 auto
+      //flex: 1 1 auto
       font-family: $sans-serif-strong
-      margin-left: 1rem
+      margin: $main-mobile-spacing/4 $main-mobile-spacing/2
       padding: $main-mobile-spacing*3/4 $main-mobile-spacing*7/8 $main-mobile-spacing/2 $main-mobile-spacing*3/4
       text-align: center
 
       &:first-child
-        margin-left: 0
+        //margin-left: 0
 
       &--active
         background-color: $color-main
 
   &__tab
     & p
-      font-size: $font-size-tiny
-      margin: .4em 1em 1em 0
+      //font-size: $font-size-tiny
+      //margin: .4em 1em 1em 0
 
     & table
-      font-size: $font-size-tiny
+      //font-size: $font-size-tiny
