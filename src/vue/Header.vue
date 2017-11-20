@@ -5,7 +5,7 @@
            'header--style-light': (headerStyle == 'light')
          }"
     >
-        <div class="header__logo"></div>
+        <a href="/" class="header__logo"></a>
         <div class="header__img-container"
              v-if="backgroundImage == true"
         >
@@ -59,11 +59,8 @@
                     <li class="header__nav-menu-list-element"><a href="apply.html">Apply <span class="header__nav-menu-list-element-subtext">I'm ready to join</span></a></li>
                     <li class="header__nav-menu-list-element"><a href="role.html">Working as a Prison Officer</a></li>
                     <li class="header__nav-menu-list-element"><a href="prison-search.html">Prison search</a></li>
-                    <li class="header__nav-menu-list-element"><a href="">Find a role</a></li>
-                    <li class="header__nav-menu-list-element"><a href="">Is it right for me</a></li>
-                    <li class="header__nav-menu-list-element"><a href="">Working in a prison setting</a></li>
-                    <li class="header__nav-menu-list-element"><a href="">Application steps</a></li>
-                    <li class="header__nav-menu-list-element"><a href="">Eligibility Checker</a></li>
+                    <li class="header__nav-menu-list-element"><a href="/hmp-pentonville.html">HMP Pentonville</a></li>
+                    <li class="header__nav-menu-list-element"><a href="/job-post.html">Job post</a></li>
                 </ul>
             </div>`,
 
