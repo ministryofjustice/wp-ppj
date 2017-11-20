@@ -10,11 +10,12 @@ This website is to facilitate the MoJ with hiring for prison and probation jobs,
 ## To do
 - Video player cover image
 - Fix transition of carousel
-- Numbered accordion on apply page
+  (slick carousel)
 - Quote layout
 
 ## Done
 - Fix search button
+- Numbered accordion on apply page
 
 ## Refactoring
 Rename $main-mobile-spacing to $common-spacing

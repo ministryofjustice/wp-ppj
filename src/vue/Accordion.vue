@@ -1,5 +1,7 @@
 <template>
-    <div class="accordion">
+    <div class="accordion"
+         :class="{'accordion--numbered': numbered}"
+    >
         <h2
                 class="accordion__title"
                 v-if="title"
@@ -18,10 +20,8 @@
     const Element = {
         template:
             `<li class="accordion__list-element" :class="{ 'accordion__list-element--open': open }">
-                <button class="accordion__list-element-button" @click="toggleOpen">
-                    <div></div><div></div>
-                </button>
-                <h4 class="accordion__list-element-title">{{title}} <span class="accordion__list-element-subtitle">{{subtitle}}</span></h4>
+                <button class="accordion__list-element-button" @click="toggleOpen">&#x2795;</button>
+                <div class="accordion__list-element-header"><h4 class="accordion__list-element-title">{{title}} <span class="accordion__list-element-subtitle">{{subtitle}}</span></h4></div>
                 <div class="accordion__list-element-content"><slot></slot></div>
             </li>`,
         props: ['title', 'subtitle'],
@@ -37,7 +37,11 @@
         }
     };
     export default {
-        props: ['title', 'subtitle'],
+        props: {
+            title: String,
+            subtitle: String,
+            numbered: {type: String, default: ''}
+        },
         childComponents: {
             Element
         }
