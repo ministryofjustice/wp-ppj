@@ -107,7 +107,7 @@
                 searchResults: {
                     activeView: 0,
                     display: false,
-                    postCode: '',//'SW1H 1AJ',
+                    postCode: 'SW1H 1AJ',
                     urlEncodedPostCode: '',
                     googleMapAPIKey: 'AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA',
                     listView: {
@@ -221,8 +221,17 @@
                         this.updateJobsWithDistanceMatrixData(sr.jobs, response.rows[0].elements);
                         sr.jobLocationGroups = this.createJobLocationGroups(sr.jobs);
                         sr.selectedJobLocationGroup = getFirstElementInObject(sr.jobLocationGroups);
-                        this.updateMapWithJobLocationGroupMarkers(sr.jobLocationGroups);
                         sr.display = true;
+
+                        // create map now that containing div is visible
+                        this.map = new google.maps.Map(
+                            document.getElementsByClassName('search__map')[0]
+                            , this.mapOptions
+                        );
+
+                        // create map markers
+                        new CustomMarker(this.mapOptions.center, this.map, {class: 'search__map-marker--datum'});
+                        this.updateMapWithJobLocationGroupMarkers(sr.jobLocationGroups);
                     }
                 }
             },
@@ -243,19 +252,14 @@
                     }, this.handleDistanceMatrixData);
             },
             processGeocoderResults(results, status) {
+                console.log('processGeocoderResults');
                 if (status == google.maps.GeocoderStatus.OK) {
+                    console.log('processGeocoderResults status is ok');
                     const location = results[0].geometry.location;
                     const latLng = new google.maps.LatLng(location.lat(), location.lng());
 
                     // create map
-                    const mapOptions = Object.assign({}, this.mapOptions, {center: latLng});
-                    this.map = new google.maps.Map(
-                        document.getElementsByClassName('search__map')[0]
-                        , mapOptions
-                    );
-
-                    // create custom marker for the search datum
-                    new CustomMarker(latLng, this.map, {class: 'search__map-marker--datum'});
+                    this.mapOptions = Object.assign({}, this.mapOptions, {center: latLng});
 
                     this.updateJobsWithGeocoderData(location.lat() + ',' + location.lng());
                 } else {
@@ -263,6 +267,7 @@
                 }
             },
             search() {
+                console.log('search', this.searchResults.postCode);
                 new google.maps.Geocoder().geocode(
                     { 'address': this.searchResults.postCode},
                     this.processGeocoderResults

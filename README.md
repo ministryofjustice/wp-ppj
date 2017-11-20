@@ -8,11 +8,13 @@ This website is to facilitate the MoJ with hiring for prison and probation jobs,
 * It has only been styled for mobile device use.
 
 ## To do
-- Fix transition of carousel
-- Fix search button
 - Video player cover image
+- Fix transition of carousel
 - Numbered accordion on apply page
 - Quote layout
+
+## Done
+- Fix search button
 
 ## Refactoring
 Rename $main-mobile-spacing to $common-spacing
