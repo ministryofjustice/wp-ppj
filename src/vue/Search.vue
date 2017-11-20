@@ -107,7 +107,7 @@
                 searchResults: {
                     activeView: 0,
                     display: false,
-                    postCode: 'SW1H 1AJ',
+                    postCode: '',//'SW1H 1AJ',
                     urlEncodedPostCode: '',
                     googleMapAPIKey: 'AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA',
                     listView: {
