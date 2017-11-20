@@ -1,5 +1,5 @@
 .text-block
-  font-size: $font-size-tiny
+  font-size: $font-size-small
   margin: 0 $main-mobile-spacing
 
   &__title
@@ -24,8 +24,8 @@
       list-style-type: decimal
 
     & ul li
-      list-style-type: square
-      margin-left: $main-mobile-spacing
+      list-style-type: disc
+      margin-left: 2rem
 
     p
       margin-bottom: $main-mobile-spacing/2
@@ -33,10 +33,14 @@
     p:last-of-type
       margin-bottom: 0
 
-  &__link
+    a
+      text-decoration: underline
+
+  @at-root a#{&}__link // https://stackoverflow.com/questions/17268051/sass-combining-parent-using-ampersand-with-base-element
     border: .2rem solid $color-dark
     display: block
     font-weight: bold
     margin: $main-mobile-spacing/2 0
     padding: $main-mobile-spacing/2
     text-align: center
+    text-decoration: none

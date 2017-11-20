@@ -21,10 +21,10 @@
                 <button class="accordion__list-element-button" @click="toggleOpen">
                     <div></div><div></div>
                 </button>
-                <h4 class="accordion__list-element-title">{{title}}</h4>
+                <h4 class="accordion__list-element-title">{{title}} <span class="accordion__list-element-subtitle">{{subtitle}}</span></h4>
                 <div class="accordion__list-element-content"><slot></slot></div>
             </li>`,
-        props: ['title'],
+        props: ['title', 'subtitle'],
         data() {
           return {
               open: false

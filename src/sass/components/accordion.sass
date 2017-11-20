@@ -17,13 +17,15 @@
 
     &-title
       border-bottom: 1px solid #cccccc
-      font-weight: $font-weight-bold
       margin-bottom: 0
       padding: $main-mobile-spacing/2 0
 
+    &-subtitle
+      font-family: $sans-serif
+      font-weight: $font-weight-normal
 
     &-content
-      border-left: 2px solid $color-light
+      border-left: .4rem solid $color-light
       font-weight: $font-weight-light
       height: 0
       overflow: hidden
@@ -35,6 +37,9 @@
 
         &:first-child
           margin-top: 0
+
+        &:last-child
+          margin-bottom: 0
 
       & > a
         text-decoration: underline
