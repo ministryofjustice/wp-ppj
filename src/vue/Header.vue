@@ -5,35 +5,33 @@
            'header--style-light': (headerStyle == 'light')
          }"
     >
-        <a href="/" class="header__logo"></a>
+
         <div class="header__img-container"
              v-if="backgroundImage == true"
         >
-            <img class="header__carousel-image"
-                 v-for="(url, index) in carouselImageURLs"
-                 :src="url"
-                 :class="[{'header__carousel-image--active': (index == selectedCarouselImg) }]"
-            />
-            <div class="header__carousel-controls-container"
-                 v-if="carouselImageURLs.length > 1">
-                <button class="header__carousel-button"
-                        v-for="(url, index) in carouselImageURLs"
-                        :class="[{'header__carousel-button--active': (index == selectedCarouselImg) }]"
-                        @click="changeCarouselImage(index)"
-                >
-                </button>
-            </div>
-        </div>
+            <slick ref="slick" :options="slickOptions">
 
-        <div class="header__text"
-             v-if="hasDefaultSlot"
-        ><slot></slot></div>
-        <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
-        <nav-menu v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
+                <img class="header__carousel-image"
+                     v-for="(url, index) in carouselImageURLs"
+                     :src="url"
+                />
+            </slick>
+        </div>
+        <div class="header__overlay">
+            <a href="/" class="header__logo"></a>
+            <div class="header__text"
+                 v-if="hasDefaultSlot"
+            ><slot></slot></div>
+            <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
+            <nav-menu v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
+        </div>
     </div>
 </template>
 <script>
     import Vue from 'vue';
+
+    import Slick from 'vue-slick';
+
 
     const NavLink = {
         template:
@@ -95,7 +93,15 @@
               menuOpen: false,
               selectedCarouselImg: 0,
               carouselIntervalId: -1,
-              foo: true
+              foo: true,
+              slickOptions: {
+                  arrows: false,
+                  autoplay: true,
+                  autoplaySpeed: 5000,
+                  dots: true,
+                  fade: true,
+                  slidesToShow: 1,
+              }
           }
         },
 
@@ -111,7 +117,8 @@
 
         components: {
             'nav-menu': NavMenu,
-            'nav-link': NavLink
+            'nav-link': NavLink,
+            Slick
         },
 
         methods: {
@@ -136,7 +143,19 @@
                             (this.selectedCarouselImg + 1) % this.carouselImageURLs.length
                     }, 5000)
                 }
-            }
+            },
+            next() {
+                this.$refs.slick.next();
+            },
+            prev() {
+                this.$refs.slick.prev();
+            },
+            reInit() {
+                // Helpful if you have to deal with v-for to update dynamic lists
+                this.$nextTick(() => {
+                    this.$refs.slick.reSlick();
+                });
+            },
         },
 
         mounted() {
