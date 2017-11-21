@@ -64,11 +64,6 @@ window.addEventListener('load', function() {
             pageLoaded: function() {
                 this.$emit('pageLoaded');
             }
-        },
-        mounted() {
-            console.log('App mounted');
-            console.dir(document.getElementsByClassName('text-and-image__map')[0]);
-            //this.pageLoaded();
         }
     });
 

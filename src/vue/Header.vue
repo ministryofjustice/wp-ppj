@@ -32,7 +32,6 @@
 
     import Slick from 'vue-slick';
 
-
     const NavLink = {
         template:
             `<div class="header__nav-link js" @click="openNavMenu">
@@ -99,7 +98,7 @@
                   autoplay: true,
                   autoplaySpeed: 5000,
                   dots: true,
-                  fade: true,
+                  //fade: true,
                   slidesToShow: 1,
               }
           }
