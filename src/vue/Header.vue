@@ -54,11 +54,11 @@
                 <button class="header__nav-menu-close-button js" @click="closeNavMenu"></button>
                 <ul class="header__nav-menu-list">
                     <li class="header__nav-menu-list-element"><a href="/">Home</a></li>
-                    <li class="header__nav-menu-list-element"><a href="apply.html">Apply <span class="header__nav-menu-list-element-subtext">I'm ready to join</span></a></li>
-                    <li class="header__nav-menu-list-element"><a href="role.html">Working as a Prison Officer</a></li>
-                    <li class="header__nav-menu-list-element"><a href="prison-search.html">Prison search</a></li>
-                    <li class="header__nav-menu-list-element"><a href="/hmp-pentonville.html">HMP Pentonville</a></li>
-                    <li class="header__nav-menu-list-element"><a href="/job-post.html">Job post</a></li>
+                    <li class="header__nav-menu-list-element"><a href="role.html">About the role</a></li>
+                    <li class="header__nav-menu-list-element"><a href="apply.html">How to apply</a></li>
+                    <li class="header__nav-menu-list-element"><a href="prison-search.html">Prison search (demo only)</a></li>
+                    <li class="header__nav-menu-list-element"><a href="/hmp-pentonville.html">HMP Pentonville (demo only)</a></li>
+                    <li class="header__nav-menu-list-element"><a href="/job-post.html">Job post (demo only)</a></li>
                 </ul>
             </div>`,
 
