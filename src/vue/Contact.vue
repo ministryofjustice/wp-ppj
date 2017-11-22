@@ -1,5 +1,5 @@
 <template>
-    <div class="contact">
+    <div class="contact" v-cloak>
         <h2 class="contact__title">Contact us</h2>
         <ul class="contact__list">
             <li class="contact__list-element">

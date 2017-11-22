@@ -1,5 +1,5 @@
 <template>
-    <div class="video-player">
+    <div class="video-player" v-cloak>
         <!--<div class="video-player__play-button"></div>-->
         <iframe v-if="src"
                 :src="src"

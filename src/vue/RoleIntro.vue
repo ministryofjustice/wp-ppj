@@ -1,5 +1,5 @@
 <template>
-    <div class="role-intro">
+    <div class="role-intro" v-cloak>
         <h2 class="role-intro__main-title">{{mainTitle}}</h2>
         <h2 class="role-intro__subtitle">{{subtitle}}</h2>
         <div class="role-intro__main-section">

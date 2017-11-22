@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs">
+    <div class="tabs" v-cloak>
         <ul class="tabs__nav">
             <li class="tabs__nav-link"
                 v-for="(tabTitle, index) in tabTitles"

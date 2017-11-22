@@ -1,5 +1,5 @@
 <template>
-    <div class="text-block">
+    <div class="text-block" v-cloak>
         <h2
                 class="text-block__title"
                 v-if="mainTitle"

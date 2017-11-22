@@ -1,5 +1,5 @@
 <template>
-    <div class="ordered-list">
+    <div class="ordered-list" v-cloak>
         <h2 class="ordered-list__title">{{title}}</h2>
         <h3 class="ordered-list__subtitle">{{subtitle}}</h3>
         <ol class="ordered-list__list">

@@ -1,5 +1,5 @@
 <template>
-    <div class="job-summary">
+    <div class="job-summary" v-cloak>
         <div
                 class="job-summary__distance"
                 v-if="distance"

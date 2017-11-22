@@ -1,6 +1,7 @@
 <template>
     <div class="accordion"
          :class="{'accordion--numbered': numbered}"
+         v-cloak
     >
         <h2
                 class="accordion__title"

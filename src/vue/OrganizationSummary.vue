@@ -1,5 +1,5 @@
 <template>
-    <div class="organization-summary">
+    <div class="organization-summary" v-cloak>
         <div class="organization-summary__name"><strong>{{name}}</strong></div>
         <div class="organization-summary__address-line-1">{{addressLine1}}</div>
         <div class="organization-summary__address-line-2">{{addressLine2}}</div>

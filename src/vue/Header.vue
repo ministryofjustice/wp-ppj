@@ -4,6 +4,7 @@
            'header--nav-menu-open': menuOpen,
            'header--style-light': (headerStyle == 'light')
          }"
+         v-cloak
     >
 
         <div class="header__img-container"

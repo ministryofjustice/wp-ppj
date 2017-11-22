@@ -1,5 +1,5 @@
 <template>
-        <div class="search">
+        <div class="search" v-cloak>
             <h2 class="search__title">{{ titleText }}</h2>
             <form class="search__form">
                 <input

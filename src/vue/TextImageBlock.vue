@@ -1,6 +1,7 @@
 <template>
     <div class="text-and-image"
          :class="typeClass"
+         v-cloak
     >
         <div class="text-and-image__wrapper">
             <div class="text-and-image__image-container">

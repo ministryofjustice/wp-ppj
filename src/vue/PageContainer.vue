@@ -1,6 +1,8 @@
 <template>
     <div class="page-container js"
-         :class="{'page-container--nav-menu-open' : menuOpen}">
+         :class="{'page-container--nav-menu-open' : menuOpen}"
+         v-cloak
+    >
         <slot></slot>
     </div>
 </template>
