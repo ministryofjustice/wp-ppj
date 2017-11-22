@@ -9,14 +9,17 @@ This website is to facilitate the MoJ with hiring for prison and probation jobs,
 
 ## To do
 - Video player cover image
-- Fix transition of carousel
-  (slick carousel)
 - Quote layout
+- fade in menu
+
 
 ## Done
 - Fix search button
 - Numbered accordion on apply page
 - Add content to role page
+- Fix transition of carousel (slick carousel)
+- Remove contact us section for now
+- fix job post header
 
 ## Refactoring
 Rename $main-mobile-spacing to $common-spacing
