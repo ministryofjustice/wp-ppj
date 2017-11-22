@@ -124,9 +124,11 @@
         methods: {
             openNavMenu() {
                 this.menuOpen = true;
+                document.getElementsByTagName('body')[0].style.overflow = 'hidden';
             },
             closeNavMenu(){
                 this.menuOpen = false;
+                document.getElementsByTagName('body')[0].style.overflow = '';
             },
             changeCarouselImage(index) {
                 if (this.selectedCarouselImg == index) {

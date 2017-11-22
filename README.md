@@ -11,7 +11,7 @@ This website is to facilitate the MoJ with hiring for prison and probation jobs,
 - Video player cover image
 - Quote layout
 - fade in menu
-
+- sticky header?
 
 ## Done
 - Fix search button
@@ -20,6 +20,7 @@ This website is to facilitate the MoJ with hiring for prison and probation jobs,
 - Fix transition of carousel (slick carousel)
 - Remove contact us section for now
 - fix job post header
+- stop scrolling under nav menu
 
 ## Refactoring
 Rename $main-mobile-spacing to $common-spacing
