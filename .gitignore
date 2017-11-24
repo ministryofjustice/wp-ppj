@@ -1,4 +1,15 @@
+# Editors
 .idea/
+
+# Application
+web/app/plugins/*
+!web/app/plugins/.gitkeep
+web/app/mu-plugins/*/
+web/app/upgrade
+web/app/languages
+web/app/uploads/*
+!web/app/uploads/.gitkeep
+
 /web/app/themes/ppj/meta/
 /web/app/themes/ppj/node_modules/
 /web/app/themes/ppj/public/css/
@@ -9,3 +20,16 @@
 /web/app/themes/ppj/vendor/
 /web/app/themes/ppj/temp-auth/.htpasswd
 /web/app/themes/ppj/mix-manifest.json
+
+# WordPress
+web/wp
+web/.htaccess
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Composer
+vendor/*
+!vendor/.gitkeep

@@ -1,11 +1,13 @@
 const mix = require('laravel-mix');
+const dest = '../web/app/themes/ppj/';
+//const dest = 'public/';
 
-mix.js('src/js/main.js', 'public/js')
+mix.js('src/js/main.js'       , dest + 'js')
+    .sass('src/sass/main.sass', dest + 'css')
+    .copy('src/img/*'         , dest + 'img/')
+    .copy('src/html/*'        , dest + '')
+    .copy('src/fonts/*'       , dest + 'fonts')
     .sourceMaps()
-    .sass('src/sass/main.sass', 'public/css')
-    .copy('src/img/*', 'public/img/')
-    .copy('src/html/*', 'public/')
-    .copy('src/fonts/*', 'public/fonts')
 ;
 
 // mix.browserSync({
