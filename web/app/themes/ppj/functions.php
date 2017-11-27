@@ -25,13 +25,32 @@ class ppj {
     }
 
     public static function partial($templateModel, $slug, $name='') {
-        error_log('ppj::partial');
         return self::template($templateModel, 'partials/' . $slug, $name);
     }
 
 
     public static function dump($var) {
         echo "<pre>" . print_r($var, true) . "</pre>";
+    }
+
+    public static function controller($acf) {
+        $output = '';
+        foreach($acf as $fieldGroup) {
+            switch( $fieldGroup['block_type']) {
+                case 'call to action':
+                    $output .= ppj::partial($fieldGroup, 'callToAction');
+                    break;
+
+                case 'text block':
+                    $output .= ppj::partial($fieldGroup, 'textBlock');
+                    break;
+
+                case 'text image block':
+                    $output .= ppj::partial($fieldGroup, 'textImageBlock');
+                    break;
+            }
+        }
+        return $output;
     }
 
 }
