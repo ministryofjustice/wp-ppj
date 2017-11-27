@@ -48,6 +48,10 @@ class ppj {
                 case 'text image block':
                     $output .= ppj::partial($fieldGroup, 'textImageBlock');
                     break;
+
+                case 'search':
+                    $output .= ppj::partial($fieldGroup, 'search');
+                    break;
             }
         }
         return $output;

@@ -15,17 +15,6 @@
    <?php echo ppj::controller($page_blocks); ?>
 
     <div class="l-full">
-        <search></search>
-    </div>
-
-    <div class="l-full">
-        <text-block main-title="See more prison and probation jobs">
-            <a class='text-block__link'>Probation officer</a>
-            <a class='text-block__link'>Probation service officer</a>
-        </text-block>
-    </div>
-
-    <div class="l-full">
         <contact></contact>
     </div>
 
