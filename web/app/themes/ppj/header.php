@@ -16,3 +16,10 @@
 <body  <?php body_class(); ?>>
 <div id="site-container">
 <page-container>
+    <page-header carousel-images="
+    /app/themes/PPJ/dest/img/30-B3mC72t-copy_tablet.jpg,
+    /app/themes/PPJ/dest/img/header.jpg,
+    /app/themes/PPJ/dest/img/30-B3mC72t-copy_tablet.jpg,
+    /app/themes/PPJ/dest/img/header.jpg">
+        You, at your best<br/>Be a prison officer
+    </page-header>
