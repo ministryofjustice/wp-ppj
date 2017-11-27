@@ -1,4 +1,9 @@
-<?php ?>
+<?php
+
+$carousel = get_field('carousel');
+$header_text = get_field('header_text');
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,11 +20,18 @@
 </head>
 <body  <?php body_class(); ?>>
 <div id="site-container">
+    <?php
+
+    $carouselImages = [];
+    foreach ($carousel as $slide) {
+        array_push($carouselImages, $slide['image']['url']);
+    }
+
+    $carouselImagesAttr = implode(',', $carouselImages);
+
+    ?>
 <page-container>
-    <page-header carousel-images="
-    /app/themes/PPJ/dest/img/30-B3mC72t-copy_tablet.jpg,
-    /app/themes/PPJ/dest/img/header.jpg,
-    /app/themes/PPJ/dest/img/30-B3mC72t-copy_tablet.jpg,
-    /app/themes/PPJ/dest/img/header.jpg">
-        You, at your best<br/>Be a prison officer
+    <page-header carousel-images="<?= $carouselImagesAttr ?>">
+        <?php echo $header_text; ?>
     </page-header>
+

@@ -24,8 +24,9 @@
                  v-if="hasDefaultSlot"
             ><slot></slot></div>
             <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
-            <nav-menu v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
+
         </div>
+        <nav-menu v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
     </div>
 </template>
 <script>

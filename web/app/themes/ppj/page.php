@@ -1,7 +1,9 @@
 <?php
-    get_header();
-    $page_blocks = get_field('page_blocks');
-    //ppj::dump($page_blocks);
+
+get_header();
+$page_blocks = get_field('page_blocks');
+//ppj::dump($page_blocks);
+
 ?>
 
    <?php echo ppj::controller($page_blocks); ?>
