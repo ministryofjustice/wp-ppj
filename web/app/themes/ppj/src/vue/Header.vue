@@ -9,7 +9,11 @@
         <div class="header__img-container"
              v-if="backgroundImage == true"
         >
-            <slick ref="slick" :options="slickOptions">
+            <img class="header__carousel-image"
+                 v-if="(carouselImageURLs.length ==  1)"
+                 :src="carouselImageURLs[0]"
+            />
+            <slick ref="slick" :options="slickOptions" v-if="(carouselImageURLs.length > 1)">
 
                 <img class="header__carousel-image"
                      v-for="(url, index) in carouselImageURLs"
