@@ -6,7 +6,6 @@
          }"
          v-cloak
     >
-
         <div class="header__img-container"
              v-if="backgroundImage == true"
         >
@@ -26,7 +25,7 @@
             <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
 
         </div>
-        <nav-menu v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
+        <nav-menu :menu-data='menuData' v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
     </div>
 </template>
 <script>
@@ -54,12 +53,7 @@
             ` <div class="header__nav-menu">
                 <button class="header__nav-menu-close-button js" @click="closeNavMenu"></button>
                 <ul class="header__nav-menu-list">
-                    <li class="header__nav-menu-list-element"><a href="/">Home</a></li>
-                    <li class="header__nav-menu-list-element"><a href="role.html">About the role</a></li>
-                    <li class="header__nav-menu-list-element"><a href="apply.html">How to apply</a></li>
-                    <li class="header__nav-menu-list-element"><a href="prison-search.html">Prison search (demo only)</a></li>
-                    <li class="header__nav-menu-list-element"><a href="/hmp-pentonville.html">HMP Pentonville (demo only)</a></li>
-                    <li class="header__nav-menu-list-element"><a href="/job-post.html">Job post (demo only)</a></li>
+                    <li v-for="item in menuData" class="header__nav-menu-list-element"><a :href="item.url">{{item['title']}}</a></li>
                 </ul>
             </div>`,
 
@@ -67,7 +61,12 @@
             closeNavMenu: function() {
                 this.$emit('request-close-nav-menu', true);
             }
-        }
+        },
+
+        mounted() {
+        },
+
+        props: ['menu-data']
     };
 
     export default {
@@ -86,6 +85,9 @@
             },
             'carousel-images': {
                 default: ''
+            },
+            'menu-data': {
+                default: {}
             }
         },
 
@@ -100,7 +102,6 @@
                   autoplay: true,
                   autoplaySpeed: 5000,
                   dots: true,
-                  //fade: true,
                   slidesToShow: 1,
               }
           }
