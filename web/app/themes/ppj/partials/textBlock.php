@@ -1,20 +1,20 @@
 <?php
 
-global $ppj_model;
-$m = $ppj_model;
+global $ppj_template_data;
+$td = $ppj_template_data;
 
 ?>
 
 <div class="l-full">
     <div class="text-block">
         <h2 class="text-block__title">
-            <?= $m['title'] ?>
+            <?= $td['title'] ?>
         </h2>
         <h3 class="text-block__subtitle">
-            <?= $m['subtitle']?>
+            <?= $td['subtitle']?>
         </h3>
         <div class="text-block__content">
-            <?= $m['content']?>
+            <?= $td['content']?>
         </div>
     </div>
 </div>

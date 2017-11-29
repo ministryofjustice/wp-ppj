@@ -1,7 +1,7 @@
 <?php
 
-global $ppj_model;
-$m = $ppj_model;
+global $ppj_template_data;
+$m = $ppj_template_data;
 
 ?>
 

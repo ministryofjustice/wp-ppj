@@ -1,63 +1,83 @@
 <?php
+namespace ppj;
 
-$ppj_model = null;
+function enqueue_scripts() {
 
-class ppj {
+    $root_dir = get_template_directory_uri() . '/dest/';
+    wp_enqueue_style( 'main-css', $root_dir . 'css/main.css' , null, '1.0');
+    wp_enqueue_script( 'main-js', $root_dir . 'js/main.js'   , null, '1.0', true );
+}
 
-    public static function enqueue_scripts() {
+function template($data, $slug, $name='') {
+    global $ppj_template_data;
+    $ppj_template_data = $data;
 
-        $root_dir = get_template_directory_uri() . '/dest/';
-        wp_enqueue_style( 'main-css', $root_dir . 'css/main.css' , null, '1.0');
-        wp_enqueue_script( 'main-js', $root_dir . 'js/main.js'   , null, '1.0', true );
-    }
+    ob_start();
+    get_template_part($slug, $name);
+    $output = ob_get_contents();
+    ob_end_clean();
 
-    public static function template($templateModel, $slug, $name='') {
-        global $ppj_model;
-        $ppj_model = $templateModel;
+    $ppj_template_data = null;
+    return $output;
+}
 
-        ob_start();
-        get_template_part($slug, $name);
-        $output = ob_get_contents();
-        ob_end_clean();
-
-        $ppj_model = null;
-        return $output;
-    }
-
-    public static function partial($templateModel, $slug, $name='') {
-        return self::template($templateModel, 'partials/' . $slug, $name);
-    }
+function partial($data, $slug, $name='') {
+    return template($data, 'partials/' . $slug, $name);
+}
 
 
-    public static function dump($var) {
-        echo "<pre>" . print_r($var, true) . "</pre>";
-    }
+function dump($var) {
+    echo "<pre>" . print_r($var, true) . "</pre>";
+}
 
-    public static function controller($acf) {
-        $output = '';
+function renderPageBlockData($acf) {
+    $output = '';
+    if (isset($acf) && is_array($acf)) {
         foreach($acf as $fieldGroup) {
-            switch( $fieldGroup['block_type']) {
-                case 'call to action':
-                    $output .= ppj::partial($fieldGroup, 'callToAction');
+            $blockType = $fieldGroup['acf_fc_layout'];
+            //error_log('renderPageBlockData ' . $blockType);
+            switch($blockType) {
+                case 'call_to_action':
+                    $output .= partial($fieldGroup, 'callToAction');
                     break;
 
-                case 'text block':
-                    $output .= ppj::partial($fieldGroup, 'textBlock');
+                case 'text_block':
+                    $output .= partial($fieldGroup, 'textBlock');
                     break;
 
-                case 'text image block':
-                    $output .= ppj::partial($fieldGroup, 'textImageBlock');
+                case 'text_image_block':
+                    $output .= partial($fieldGroup, 'textImageBlock');
                     break;
 
                 case 'search':
-                    $output .= ppj::partial($fieldGroup, 'search');
+                    $output .= partial($fieldGroup, 'search');
                     break;
+
+                case 'ordered_list':
+                    $output .= partial($fieldGroup, 'orderedList');
+                    break;
+
+                case 'accordion':
+                    $output .= partial($fieldGroup, 'accordion');
+                    break;
+
+                case 'role_intro':
+                    $output .= partial($fieldGroup, 'roleIntro');
+                    break;
+
+                case 'tabs':
+                    $output .= partial($fieldGroup, 'tabs');
+                    break;
+
+                default:
+                    error_log('renderPageBlockData unrecognized block type ' . $blockType);
             }
         }
-        return $output;
     }
-
+    return $output;
 }
 
-add_action( 'wp_enqueue_scripts', 'ppj::enqueue_scripts' );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
+
+
 ?>
