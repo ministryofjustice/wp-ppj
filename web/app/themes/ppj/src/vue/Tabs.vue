@@ -8,15 +8,7 @@
             >{{tabTitle}}</li>
         </ul>
         <div class="tabs__content-panel">
-            <div v-show="activeTab == 0">
-                <slot name="0" ></slot>
-            </div>
-            <div v-show="activeTab == 1">
-                <slot name="1" ></slot>
-            </div>
-            <div v-show="activeTab == 2">
-                <slot name="2" ></slot>
-            </div>
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -29,17 +21,26 @@
             `<div
                  class="tabs__tab"
                  :class="{'tabs__tab--active': active}"
+                 v-show="active"
                  >
                  <slot></slot>
             </div>`,
-        props: ['tab-title'],
+        props: [
+            'tab-title',
+            'tab-id'
+        ],
         data() {
             return {
-                active: false
+                active: (this.tabId == 0)
             }
         },
         mounted() {
             bus.$emit('tab-mounted', this.tabTitle);
+        },
+        watch: {
+            '$parent.activeTab': function(index) {
+                this.active = (index == this.tabId);
+            }
         }
     };
 
