@@ -34,43 +34,48 @@ function renderPageBlockData($acf) {
     $output = '';
     if (isset($acf) && is_array($acf)) {
         foreach($acf as $fieldGroup) {
-            $blockType = $fieldGroup['acf_fc_layout'];
-            //error_log('renderPageBlockData ' . $blockType);
-            switch($blockType) {
-                case 'call_to_action':
-                    $output .= partial($fieldGroup, 'callToAction');
-                    break;
+            if (isset($fieldGroup['show']) && $fieldGroup['show'] == '') {
+                continue;
+            } else {
+                $blockType = $fieldGroup['acf_fc_layout'];
 
-                case 'text_block':
-                    $output .= partial($fieldGroup, 'textBlock');
-                    break;
+                //error_log('renderPageBlockData ' . $blockType);
+                switch($blockType) {
+                    case 'call_to_action':
+                        $output .= partial($fieldGroup, 'callToAction');
+                        break;
 
-                case 'text_image_block':
-                    $output .= partial($fieldGroup, 'textImageBlock');
-                    break;
+                    case 'text_block':
+                        $output .= partial($fieldGroup, 'textBlock');
+                        break;
 
-                case 'search':
-                    $output .= partial($fieldGroup, 'search');
-                    break;
+                    case 'text_image_block':
+                        $output .= partial($fieldGroup, 'textImageBlock');
+                        break;
 
-                case 'ordered_list':
-                    $output .= partial($fieldGroup, 'orderedList');
-                    break;
+                    case 'search':
+                        $output .= partial($fieldGroup, 'search');
+                        break;
 
-                case 'accordion':
-                    $output .= partial($fieldGroup, 'accordion');
-                    break;
+                    case 'ordered_list':
+                        $output .= partial($fieldGroup, 'orderedList');
+                        break;
 
-                case 'role_intro':
-                    $output .= partial($fieldGroup, 'roleIntro');
-                    break;
+                    case 'accordion':
+                        $output .= partial($fieldGroup, 'accordion');
+                        break;
 
-                case 'tabs':
-                    $output .= partial($fieldGroup, 'tabs');
-                    break;
+                    case 'role_intro':
+                        $output .= partial($fieldGroup, 'roleIntro');
+                        break;
 
-                default:
-                    error_log('renderPageBlockData unrecognized block type ' . $blockType);
+                    case 'tabs':
+                        $output .= partial($fieldGroup, 'tabs');
+                        break;
+
+                    default:
+                        error_log('renderPageBlockData unrecognized block type ' . $blockType);
+                }
             }
         }
     }
