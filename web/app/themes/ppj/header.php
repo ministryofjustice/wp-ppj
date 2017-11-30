@@ -23,14 +23,9 @@ $mainMenuJSON = json_encode(wp_get_nav_menu_items('Main menu'));
 <html lang="en">
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <title>Prison & Probation Jobs</title>
+    <title><?php echo get_bloginfo( 'name' ); ?> - <?php the_title(); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA"></script>
-    <script>
-        var mainMenuJSON = <?= $mainMenuJSON ?>;
-    </script>
-
-
     <?php wp_head(); ?>
 </head>
 
