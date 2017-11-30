@@ -40,9 +40,10 @@
     const NavLink = {
         template:
             `<div class="header__nav-link js" @click="openNavMenu">
+                <!--<div></div>
                 <div></div>
-                <div></div>
-                <div></div>
+                <div></div>-->
+                MENU
             </div>`,
 
         methods: {
@@ -171,6 +172,8 @@
         },
 
         mounted() {
+            //console.log(this.carouselImageURLs);
+            //console.log(' carouselImages length ' + this.carouselImageURLs.length);
             this.startCarouselTransition();
         },
 
