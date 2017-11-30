@@ -87,8 +87,29 @@ function renderPageBlockData($acf) {
     }
     return $output;
 }
-
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
 
+function stopAutoInsertionOfPTags() {
+    remove_filter('the_content', 'wpautop');
+    remove_filter ('acf_the_content', 'wpautop');
+}
+add_action('acf/init', __NAMESPACE__ . '\\stopAutoInsertionOfPTags', 15);
+
+function stopEmojicons() {
+    // https://wordpress.stackexchange.com/questions/185577/disable-emojicons-introduced-with-wp-4-2
+    // all actions related to emojis
+    remove_action( 'admin_print_styles', 'print_emoji_styles' );
+    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+    remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+    remove_action( 'wp_print_styles', 'print_emoji_styles' );
+    remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+    remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+    remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+
+    // filter to remove TinyMCE emojis
+    add_filter( 'tiny_mce_plugins', 'disable_emojicons_tinymce' );
+}
+
+add_action('acf/init', __NAMESPACE__ . '\\stopEmojicons', 15);
 
 ?>
