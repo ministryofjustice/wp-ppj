@@ -4,11 +4,15 @@
 $header_text = get_field('header_text');
 
 // carousel data
-$carouselImages = [];
-foreach (get_field('carousel') as $slide) {
-    array_push($carouselImages, $slide['image']['url']);
+if ($carouselData = get_field('carousel')) {
+    foreach ($carouselData as $slide) {
+        $carouselImages[] = $slide['image']['url'];
+    }
+    $carouselImagesAttr = implode(',', $carouselImages);
+} else {
+    $carouselImagesAttr = '';
+    $headerStyle = 'light';
 }
-$carouselImagesAttr = implode(',', $carouselImages);
 
 // menu data
 $mainMenuJSON = json_encode(wp_get_nav_menu_items('Main menu'));
@@ -32,13 +36,11 @@ $mainMenuJSON = json_encode(wp_get_nav_menu_items('Main menu'));
 
 <body  <?php body_class(); ?>>
 <div id="site-container">
-    <?php
-
-
-    ?>
-<page-container>
-    <page-header :menu-data='<?= $mainMenuJSON ?>'
-                 carousel-images="<?= $carouselImagesAttr ?>">
-        <?php echo $header_text; ?>
-    </page-header>
+    <page-container>
+        <page-header :menu-data='<?= $mainMenuJSON ?>'
+                     carousel-images="<?= $carouselImagesAttr ?>"
+                     header-style="<?= $headerStyle ?>"
+        >
+            <?php echo $header_text; ?>
+        </page-header>
 

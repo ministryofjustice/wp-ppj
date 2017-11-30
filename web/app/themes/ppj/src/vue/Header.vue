@@ -7,7 +7,7 @@
          v-cloak
     >
         <div class="header__img-container"
-             v-if="backgroundImage == true"
+             v-if="(backgroundImage == true) && (carouselImageURLs.length > 0)"
         >
             <img class="header__carousel-image"
                  v-if="(carouselImageURLs.length ==  1)"
@@ -116,8 +116,12 @@
                 return !!this.$slots.default
             },
             carouselImageURLs: function() {
-                const urls = this.carouselImages.split(',');
-                return urls;
+                if (this.carouselImages) {
+                    const urls = this.carouselImages.split(',');
+                    return urls;
+                } else {
+                    return [];
+                }
             }
         },
 
