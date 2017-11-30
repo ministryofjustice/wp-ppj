@@ -2,6 +2,7 @@
 
 // header text
 $header_text = get_field('header_text');
+$header_subtext = get_field('header_subtext');
 
 // carousel data
 if ($carouselData = get_field('carousel')) {
@@ -35,7 +36,8 @@ $mainMenuJSON = json_encode(wp_get_nav_menu_items('Main menu'));
         <page-header :menu-data='<?= $mainMenuJSON ?>'
                      carousel-images="<?= $carouselImagesAttr ?>"
                      header-style="<?= $headerStyle ?>"
+                     header-subtext="<?= $header_subtext; ?>"
         >
-            <?php echo $header_text; ?>
+            <?= $header_text; ?>
         </page-header>
 

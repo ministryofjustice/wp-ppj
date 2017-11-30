@@ -6,28 +6,36 @@
          }"
          v-cloak
     >
-        <div class="header__img-container"
-             v-if="(backgroundImage == true) && (carouselImageURLs.length > 0)"
-        >
-            <img class="header__carousel-image"
-                 v-if="(carouselImageURLs.length ==  1)"
-                 :src="carouselImageURLs[0]"
-            />
-            <slick ref="slick" :options="slickOptions" v-if="(carouselImageURLs.length > 1)">
-
+        <div class="header__hero">
+            <div class="header__img-container"
+                 v-if="(backgroundImage == true) && (carouselImageURLs.length > 0)"
+            >
                 <img class="header__carousel-image"
-                     v-for="(url, index) in carouselImageURLs"
-                     :src="url"
+                     v-if="(carouselImageURLs.length ==  1)"
+                     :src="carouselImageURLs[0]"
                 />
-            </slick>
-        </div>
-        <div class="header__overlay">
-            <a href="/" class="header__logo"></a>
-            <div class="header__text"
-                 v-if="hasDefaultSlot"
-            ><slot></slot></div>
-            <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
+                <slick ref="slick" :options="slickOptions" v-if="(carouselImageURLs.length > 1)">
 
+                    <img class="header__carousel-image"
+                         v-for="(url, index) in carouselImageURLs"
+                         :src="url"
+                    />
+                </slick>
+            </div>
+            <div class="header__overlay">
+                <a href="/" class="header__logo"></a>
+                <div class="header__text-container">
+                    <div class="header__text"
+                         v-if="hasDefaultSlot"
+                    ><slot></slot></div>
+                    <div class="header__subtext"
+                         v-if="headerSubtext">
+                        {{headerSubtext}}
+                    </div>
+                </div>
+                <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
+
+            </div>
         </div>
         <nav-menu :menu-data='menuData' v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
     </div>
@@ -84,6 +92,9 @@
             },
             'header-style': {
                 default: 'dark'
+            },
+            'header-subtext': {
+                default: ''
             },
             'background-image': {
                 default: true
