@@ -102,12 +102,18 @@
     }
 
     export default {
+        props: {
+          'default-search-term': {
+              default: '',
+              type: String
+          }
+        },
         data() {
             return {
                 searchResults: {
                     activeView: 0,
                     display: false,
-                    postCode: '',//'SW1H 1AJ',
+                    postCode: this.defaultSearchTerm,//'',//'SW1H 1AJ',
                     urlEncodedPostCode: '',
                     googleMapAPIKey: 'AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA',
                     listView: {
@@ -125,7 +131,9 @@
                 mapOptions: {
                     zoom: 9,
                     center: new google.maps.LatLng(0.0,0.0),
-                    disableDefaultUI: false
+                    disableDefaultUI: false,
+                    streetViewControl: false,
+                    mapTypeControl: false,
                 },
                 titleText: 'Search for vacancies near you',
                 placeHolderText: 'Enter your post code'
@@ -230,7 +238,12 @@
                         );
 
                         // create map markers
-                        new CustomMarker(this.mapOptions.center, this.map, {class: 'search__map-marker--datum'});
+                        //new CustomMarker(this.mapOptions.center, this.map, {class: 'search__map-marker--datum'});
+                        var marker = new google.maps.Marker({
+                            position: this.mapOptions.center,
+                            map: this.map,
+                            label: this.postCode
+                        });
                         this.updateMapWithJobLocationGroupMarkers(sr.jobLocationGroups);
                     }
                 }
@@ -294,6 +307,10 @@
             }
         },
         mounted() {
+            console.log('about to search ...');
+            if (this.searchResults.postCode) {
+                this.search();
+            }
         }
     }
 </script>
