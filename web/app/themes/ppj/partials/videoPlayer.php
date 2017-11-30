@@ -5,21 +5,29 @@
 
     //ppj\dump($td);
 ?>
-<div class="video-player">
-    <!--<div class="video-player__play-button"></div>-->
-    <?php
-    switch($td['host']) {
+<div class="l-full">
+    <div class="video-player__container">
+        <div class="video-player">
+            <!--<div class="video-player__play-button"></div>-->
+            <?php
+            switch($td['host']) {
 
-        case 'youtube':
-            echo ppj\partial($td, 'videoPlayer', 'youtube');
-            break;
+                case 'youtube':
+                    echo ppj\partial($td, 'videoPlayer', 'youtube');
+                    break;
 
-        case 'wistia':
-            echo ppj\partial($td, 'videoPlayer', 'wistia');
-            break;
+                case 'wistia':
+                    echo ppj\partial($td, 'videoPlayer', 'wistia');
+                    break;
 
-        default:
-            error_log('video type not recognized');
-    }
-    ?>
+                case 'raptMedia':
+                    echo ppj\partial($td, 'videoPlayer', 'raptMedia');
+                    break;
+
+                default:
+                    error_log('video type not recognized');
+            }
+            ?>
+        </div>
+    </div>
 </div>

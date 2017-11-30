@@ -56,7 +56,7 @@ window.addEventListener('load', function() {
     Vue.component('tab', Tabs.childComponents.Tab);
     Vue.component('text-block', TextBlock);
     Vue.component('text-image-block', TextImageBlock);
-    Vue.component('video-player', VideoPlayer);
+    //Vue.component('video-player', VideoPlayer);
 
     var vm = new Vue({
         el: '#site-container',
