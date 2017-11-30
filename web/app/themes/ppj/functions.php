@@ -6,6 +6,8 @@ function enqueue_scripts() {
     $root_dir = get_template_directory_uri() . '/dest/';
     wp_enqueue_style( 'main-css', $root_dir . 'css/main.css' , null, '1.0');
     wp_enqueue_script( 'main-js', $root_dir . 'js/main.js'   , null, '1.0', true );
+    wp_enqueue_script( 'wistia-e-v1', 'https://fast.wistia.com/assets/external/E-v1.js'   , null, '1.0', false );
+
 }
 
 function template($data, $slug, $name='') {
@@ -71,6 +73,10 @@ function renderPageBlockData($acf) {
 
                     case 'tabs':
                         $output .= partial($fieldGroup, 'tabs');
+                        break;
+
+                    case 'video':
+                        $output .= partial($fieldGroup, 'videoPlayer');
                         break;
 
                     default:
