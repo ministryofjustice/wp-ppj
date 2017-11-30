@@ -1,9 +1,10 @@
-.u-top-border
+
+@mixin u-top-border($size: 'large', $style: 'dark')
   padding-top: $main-mobile-spacing * 3/4
   position: relative
 
   &:before
-    border-top-color: inherit
+    border-top-color: $color-main
     border-top-style: solid
     border-top-width: .4rem
     content: ''
@@ -13,17 +14,17 @@
     top: -.2rem
     width: 4rem
 
-.u-top-border-small
-  padding-top: .8rem
-  position: relative
+    @if $style == "light"
+      border-top-color: $color-white
 
-  &:before
-    border-top-color: inherit
-    border-top-style: solid
-    border-top-width: .2rem
-    content: ''
-    height: .2rem
-    left: 0
-    position: absolute
-    top: -.2rem
-    width: 2.4rem
+    @if $size == "small"
+      border-top-width: .2rem
+      height: .2rem
+      top: -.2rem
+      width: 2.4rem
+
+  @if $size == "small"
+    padding-top: .8rem
+
+
+
