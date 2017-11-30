@@ -29,18 +29,56 @@
       margin-left: 2rem
 
     p
-      margin-bottom: $main-mobile-spacing/2
+      margin-bottom: $main-mobile-spacing
       //margin-right: $main-mobile-spacing/2
-      padding-right: $main-mobile-spacing
+      //padding-right: $main-mobile-spacing
+      line-height: 1.3em
 
     p:last-of-type
-      margin-bottom: 0
+      //margin-bottom: 0
 
     a
       text-decoration: underline
 
     hr
       margin-right: $main-mobile-spacing * 2
+
+  &__quote
+    background-color: $color-main
+    border-top-right-radius: $main-mobile-spacing * 2
+    border-bottom-right-radius: $main-mobile-spacing * 2
+    color: $color-white
+    font-family: $sans-serif-strong
+    font-size: $font-size-large
+    padding: $main-mobile-spacing*1.5 $main-mobile-spacing
+
+  &__quote-content
+    line-height: 1.3em
+
+    &:before
+      content: open-quote
+
+    &:after
+    content: close-quote
+
+  &__quote-mark:before
+    color: $color-white
+    content: open-quote
+    display: block
+    font-size: 8rem
+    line-height: 1rem
+    margin-top: 2.1rem
+
+  &__quote-mark:after
+    content: close-quote
+    float: right
+    visibility: hidden
+
+  &__quote-source
+    color: $color-white
+    font-family: $sans-serif
+    font-size: $font-size-medium
+    margin-top: $main-mobile-spacing
 
   @at-root a#{&}__link // https://stackoverflow.com/questions/17268051/sass-combining-parent-using-ampersand-with-base-element
     background-color: $color-main
@@ -53,4 +91,4 @@
     padding: $main-mobile-spacing *.8
     text-align: center
     text-decoration: none
-    //text-transform: uppercase
+    text-transform: uppercase
