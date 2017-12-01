@@ -8,6 +8,6 @@ ARG COMPOSER_USER
 ARG COMPOSER_PASS
 
 RUN make clean && \
-    make create-composer-auth && \
+    bin/composer-auth.sh && \
     make build && \
-    make remove-composer-auth
+    rm -f auth.json

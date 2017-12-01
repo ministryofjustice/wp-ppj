@@ -9,6 +9,8 @@ It will provide you with a skeleton WordPress installation which runs locally in
 - Based on [roots/bedrock](https://roots.io/bedrock)
 - Dependency management with [Composer](https://getcomposer.org)
 - Enhanced password hashing using bcrypt
+- Builds into a docker image
+- Docker-compose is used to run as a local development server
 
 ## Requirements
 
@@ -19,11 +21,10 @@ It will provide you with a skeleton WordPress installation which runs locally in
 
 ## Getting Started
 
-1. Clone this repo to your local machine. Since you'll be using this as a starter for your project, you'll want to delete the `.git` directory and initiate it as a new repository.
+1. Clone this repo to your local machine. Since you'll be using this as a starter for your project, you'll want to delete the `.git` directory.
     ```bash
     git clone git@github.com:ministryofjustice/wp-template.git .
     rm -rf .git
-    git init
     ```
 
 2. Create a `.env` file by copying from `.env.example`:
@@ -37,6 +38,8 @@ It will provide you with a skeleton WordPress installation which runs locally in
     ```bash
     make build
     ```
+
+    If you experience any errors at this point, it may be due to being unable to access the private composer repository. [More details here](#private-composer-repository).
 
 4. Start the dory proxy, if it's not already running.
     ```bash
@@ -131,6 +134,27 @@ To use WP-CLI, your docker container must already be running. (This will probabl
     ```bash
     wp user list
     ```
+
+## Email delivery
+
+When running locally for development, emails sent by WordPress are not delivered. Instead they are captured by [mailcatcher](https://mailcatcher.me/).
+
+To see emails, go to http://mail.`SERVER_NAME` (i.e. the hostname set in your `.env` file) in your browser.
+e.g. http://mail.example.docker
+
+This will load a webmail-like interface and display all emails that WordPress has sent.
+
+## Make commands
+
+There are several `make` commands configured in the `Makefile`. These are mostly just convenience wrappers for longer or more complicated commands.
+
+| Command      | Descrption                                                                                                                                                                                           |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `make build` | Run the build script to install application dependencies and build theme assets. This will typically involve installing composer packages and compiling SASS stylesheets.                            |
+| `make clean` | Alias of `git clean -xdf`. Restore the git working copy to its original state. This will remove uncommitted changes and ignored files.                                                               |
+| `make run`   | Alias of `docker-compose up`. Launch the application locally using `docker-compose`.                                                                                                                 |
+| `make bash`  | Open a bash shell on the WordPress docker container. The [WP-CLI](https://wp-cli.org/) is accessible as `wp`. The application must already be running (e.g. via `make run`) before this can be used. |
+| `make test`  | Run tests on the application. Out of the box this will run PHP CodeSniffer (code linter).                                                                                                            |
 
 ## Bedrock
 
