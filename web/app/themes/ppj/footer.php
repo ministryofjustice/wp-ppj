@@ -1,7 +1,7 @@
 <?php ?>
 
 <div class="footer">
-    <div class="l-full">
+    <div class="l-full l-footer">
         <div class="footer__container">
             <ul class="footer__nav-links">
                 <li class="footer__nav-link">
