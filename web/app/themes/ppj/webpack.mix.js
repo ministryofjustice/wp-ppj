@@ -9,6 +9,10 @@ mix.js('src/js/main.js'        , dest + 'js')
     .copy('src/html/*'         , dest + '')
     .copy('src/fonts/*'        , dest + 'fonts')
     .sourceMaps()
-    .version()
+
 ;
+
+if (mix.inProduction()) {
+    //mix.version();
+}
 
