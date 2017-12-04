@@ -1,11 +1,9 @@
 {
-  "name": "papj",
+  "name": "ppj",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "browser-sync": "^2.18.13",
-    "browser-sync-webpack-plugin": "^1.2.0",
     "cross-env": "^5.1.1",
     "jquery": "^3.2.1",
     "laravel-mix": "^1.6.1",
@@ -13,16 +11,18 @@
     "scrollpoints": "^0.4.0",
     "vue": "^2.5.8",
     "vue-loader": "^13.5.0",
-    "vue-slick": "^1.1.12",
-    "vue-template-compiler": "^2.5.8"
+    "vue-slick": "^1.1.12"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "browser-sync-webpack-plugin": "^1.2.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "hot": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "production": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "heroku-postbuild": "htpasswd -b public/.htpass papj $PASS; npm update; npm run dev;"
+    "production": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "author": "",
   "license": "ISC"
