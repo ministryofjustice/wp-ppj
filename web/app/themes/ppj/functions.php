@@ -79,6 +79,10 @@ function renderPageBlockData($acf) {
                         $output .= partial($fieldGroup, 'videoPlayer');
                         break;
 
+                    case 'image_block':
+                        $output .= partial($fieldGroup, 'imageBlock');
+                        break;
+
                     case 'navigation_block':
                         $output .= partial($fieldGroup, 'navigationBlock');
                         break;
