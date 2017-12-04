@@ -109,7 +109,16 @@ function stopEmojicons() {
     // filter to remove TinyMCE emojis
     add_filter( 'tiny_mce_plugins', 'disable_emojicons_tinymce' );
 }
-
 add_action('acf/init', __NAMESPACE__ . '\\stopEmojicons', 15);
+
+function videoPlayer($attrs) {
+    $a = shortcode_atts( array(
+        'host' => 'youtube',
+        'id' => ''
+    ), $attrs );
+
+    return partial($a, 'videoPlayer');
+}
+add_shortcode('video-player', __NAMESPACE__ . '\\videoPlayer');
 
 ?>

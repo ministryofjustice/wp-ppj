@@ -5,9 +5,12 @@
 
     //ppj\dump($td);
 ?>
-<div class="l-full">
-    <div class="video-player__container">
-        <div class="video-player">
+
+    <div class="video-player video-player--<?= $td['host'] ?>">
+        <?php if (isset($td['title'])): ?>
+            <h3><?= $td['title'] ?></h3>
+        <?php endif; ?>
+        <div class="video-player__video-container">
             <!--<div class="video-player__play-button"></div>-->
             <?php
             switch($td['host']) {
@@ -30,4 +33,3 @@
             ?>
         </div>
     </div>
-</div>
