@@ -11,3 +11,8 @@ set -e
 composer install
 
 # Build theme assets here
+cd web/app/themes/ppj
+npm install
+npm run production
+rm -rf node_modules
+cd ../../../..
