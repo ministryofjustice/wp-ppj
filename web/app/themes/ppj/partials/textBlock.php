@@ -47,7 +47,7 @@ $td = $ppj_template_data;
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
-            
+
         <?php endif; ?>
         
     </div>

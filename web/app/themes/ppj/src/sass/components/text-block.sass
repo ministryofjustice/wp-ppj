@@ -35,13 +35,32 @@
       line-height: 1.3em
 
     p:last-of-type
-      //margin-bottom: 0
+      margin-bottom: 0
 
     a
       text-decoration: underline
 
     hr
       margin-right: $main-mobile-spacing * 2
+
+    th
+      font-family: $sans-serif-strong
+      line-height: 1.3
+      padding: $main-mobile-spacing/2
+      text-align: left
+
+    td
+      padding: $main-mobile-spacing/2
+      text-align: left
+
+    tr
+      border-bottom: 1px solid $color-light
+
+      &:first-child
+        border-bottom: none
+
+    table.three-columns th
+      width: 33%
 
   &__quote
     background-color: $color-main
@@ -50,7 +69,7 @@
     color: $color-white
     font-family: $sans-serif-strong
     font-size: $font-size-large
-    padding: $main-mobile-spacing*1.5 $main-mobile-spacing
+    padding: $main-mobile-spacing * 2 $main-mobile-spacing $main-mobile-spacing*1.5
 
   &__quote-content
     line-height: 1.3em
@@ -59,7 +78,7 @@
       content: open-quote
 
     &:after
-    content: close-quote
+      content: close-quote
 
   &__quote-mark:before
     color: $color-white
@@ -87,7 +106,7 @@
     color: $color-white
     display: block
     font-weight: bold
-    margin: $main-mobile-spacing/2 0
+    margin: $main-mobile-spacing 0 0
     padding: $main-mobile-spacing *.8
     text-align: center
     text-decoration: none
