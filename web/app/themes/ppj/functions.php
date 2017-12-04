@@ -79,6 +79,10 @@ function renderPageBlockData($acf) {
                         $output .= partial($fieldGroup, 'videoPlayer');
                         break;
 
+                    case 'navigation_block':
+                        $output .= partial($fieldGroup, 'navigationBlock');
+                        break;
+
                     default:
                         error_log('renderPageBlockData unrecognized block type ' . $blockType);
                 }
