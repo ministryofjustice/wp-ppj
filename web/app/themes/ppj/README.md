@@ -8,6 +8,11 @@ This website is to facilitate the MoJ with hiring for prison and probation jobs,
 * It has only been styled for mobile device use.
 
 ## To do
+- my story image
+- job post data
+- upload correct images
+- ensure links work
+
 - Video player cover image
 - Quote layout
 - fade in menu

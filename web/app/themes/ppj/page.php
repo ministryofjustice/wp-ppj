@@ -7,8 +7,4 @@ $page_blocks = get_field('page_blocks');
 
    <?php echo ppj\renderPageBlockData($page_blocks); ?>
 
-    <div class="l-full">
-        <contact></contact>
-    </div>
-
 <?php get_footer();
