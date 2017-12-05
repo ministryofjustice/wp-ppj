@@ -10,6 +10,7 @@ if ($carouselData = get_field('carousel')) {
         $carouselImages[] = $slide['image']['url'];
     }
     $carouselImagesAttr = implode(',', $carouselImages);
+    $headerStyle = '';
 } else {
     $carouselImagesAttr = '';
     $headerStyle = 'light';
