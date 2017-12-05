@@ -64,6 +64,7 @@
                                             :salary="job.salary"
                                             :prison-name="job.organizationName"
                                             :prison-city="job.organizationCity"
+                                            :prison-page-link="job.organizationPageLink"
                                             :url="job.url"
                                     >
                                     </job-summary>
