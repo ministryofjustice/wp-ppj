@@ -6,7 +6,7 @@ $td = $ppj_template_data;
 ?>
 
 <div class="l-full">
-    <accordion numbered="<?= $td['numbered'] ?>">
+    <accordion numbered="<?= (!empty($td['numbered']) ? 'true' : '') ?>">
 
         <?php if (isset($td['records']) && is_array($td['records']) ): ?>
 
