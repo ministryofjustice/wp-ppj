@@ -7,10 +7,6 @@
             <span
                     class="job-summary__distance-miles"
             >{{distance}}</span>
-            <span
-                    class="job-summary__distance-time"
-                    v-if="distanceTime"
-            >({{distanceTime}})</span>
         </div>
         <div
                 class="job-summary__position"
