@@ -1,5 +1,6 @@
 .accordion
   $c: &
+  $border: 1px solid $color-light
   font-size: $font-size-small
   margin: 0 $main-mobile-spacing
 
@@ -14,12 +15,17 @@
     position: relative
 
     &:first-child
-      border-top: 1px solid $color-light
+      border-top: $border
 
     &-header
-      border-bottom: 1px solid #cccccc
+      border-bottom: $border
+      display: flex
+      justify-content: space-between
       margin-bottom: 0
       padding: $main-mobile-spacing/2 0
+
+      &:last-of-type
+
 
     &-title
       display: list-item
@@ -50,26 +56,37 @@
         text-decoration: underline
 
     &-button
+      $size: 1.8rem
+      height: $size
+      width: $size
+
+      &-container
+        display: flex
+        height: $size
+        width: $size
+
       //color: $color-main // https://stackoverflow.com/questions/32413731/color-for-unicode-emoji/39776303#39776303
       color: transparent
       cursor: pointer
       display: block
       float: right
       font-size: $font-size-small
-      margin-top: .2rem
+      line-height: 1
       padding: 0
       position: relative
       text-shadow: 0 0 0 $color-main
-      //top: .2rem
       transform: rotate(0deg)
       transition: all $main-transition-duration
 
     &--open
+      border-bottom: $border
+
       .accordion
         &__list-element
+
           &-content
             height: initial
-            margin-top: $main-mobile-spacing/2
+            margin: $main-mobile-spacing/2 0
 
           &-button
             transform: rotate(90deg)
@@ -85,7 +102,6 @@
         display: block
 
       &__list-element-title
-        //background: red
         display: list-item
         list-style-type: decimal
         margin-left: $main-mobile-spacing
