@@ -59,8 +59,13 @@
       &:first-child
         border-bottom: none
 
-    table.three-columns th
-      width: 33%
+    table
+      margin: $main-mobile-spacing 0
+      width: 100%
+
+    table.three-columns
+      & > th
+        width: 33%
 
   &__quote
     background-color: $color-main
@@ -73,7 +78,7 @@
 
   &__quote-content
     line-height: 1.3em
-    
+
   &__quote-mark:before
     color: $color-white
     content: open-quote
