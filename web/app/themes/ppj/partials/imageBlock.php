@@ -5,7 +5,7 @@ $td = $ppj_template_data;
 
 ?>
 
-<div class="l-full">
+<div class="l-<?= $td['width']; ?>">
     <div class="image-block">
         <div class="image-block__image-container">
             <img class="image-block__image"

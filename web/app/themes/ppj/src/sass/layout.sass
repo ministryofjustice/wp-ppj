@@ -1,9 +1,17 @@
 .l-full
   @extend .u-clearfix
+  clear: both
   opacity: 0
   margin: $main-mobile-spacing * 1.5 0
+  position: relative
   transition: opacity 1s
   width: 100%
+
+  @include bp('large')
+    margin-left: auto
+    margin-right: auto
+    //width: 144rem
+    width: 120rem
 
 .l-half
   margin: $main-mobile-spacing 0

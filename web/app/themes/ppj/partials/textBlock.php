@@ -5,7 +5,7 @@ $td = $ppj_template_data;
 
 ?>
 
-<div class="l-full">
+<div class="l-<?= $td['width']; ?>">
     <div class="text-block">
         <?php if ($td['type'] == 'regular'): ?>
 
@@ -49,6 +49,6 @@ $td = $ppj_template_data;
             <?php endif; ?>
 
         <?php endif; ?>
-        
+
     </div>
 </div>
