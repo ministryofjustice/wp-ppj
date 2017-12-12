@@ -2,8 +2,17 @@
   font-size: $font-size-small
   margin: 0 $main-mobile-spacing
 
+  @include bp('portrait')
+    font-size: $font-size-medium
+
+  @include bp('landscape')
+    font-size: $font-size-large-medium
+
   &__title
     @extend .common-header
+
+    @include bp('portrait')
+      font-size: $font-size-quite-huge
 
   &__subtitle
     font-weight: $font-weight-bold
@@ -70,11 +79,11 @@
         width: 33%
 
   &__quote
-    background-color: $color-main
+    background-color: $color-tertiary
+    border-bottom-left-radius: $main-mobile-spacing * 2
+    border-top-left-radius: $main-mobile-spacing * 2
     border-top-right-radius: $main-mobile-spacing * 2
-    border-bottom-right-radius: $main-mobile-spacing * 2
     color: $color-white
-    font-weight: $font-weight-bold
     font-size: $font-size-large
     padding: $main-mobile-spacing * 2 $main-mobile-spacing $main-mobile-spacing*1.5
 
@@ -103,7 +112,6 @@
 
   @at-root a#{&}__link // https://stackoverflow.com/questions/17268051/sass-combining-parent-using-ampersand-with-base-element
     background-color: $color-main
-    //border: .2rem solid $color-dark
     border-radius: $main-mobile-spacing * 2
     color: $color-white
     display: block
@@ -113,3 +121,8 @@
     text-align: center
     text-decoration: none
     text-transform: uppercase
+
+    @include bp('portrait')
+      margin-left: auto
+      margin-right: auto
+      width: 34.4rem
