@@ -23,18 +23,24 @@
                 </slick>
             </div>
             <div class="header__overlay">
-                <a href="/" class="header__logo"></a>
-                <div class="header__text-container">
-                    <div class="header__text"
-                         v-if="hasDefaultSlot"
-                    ><slot></slot></div>
-                    <div class="header__subtext"
-                         v-if="headerSubtext">
-                        {{headerSubtext}}
-                    </div>
+                <div class="l-full">
+                  <div class="header__top-container">
+                    <a href="/" class="header__logo"></a>
+                    <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
+                  </div>
                 </div>
-                <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
 
+                <div class="l-full">
+                  <div class="header__text-container">
+                      <div class="header__text"
+                           v-if="hasDefaultSlot"
+                      ><slot></slot></div>
+                      <div class="header__subtext"
+                           v-if="headerSubtext">
+                          {{headerSubtext}}
+                      </div>
+                  </div>
+                </div>
             </div>
         </div>
         <nav-menu :menu-data='menuData' v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
@@ -42,7 +48,6 @@
 </template>
 <script>
     import Vue from 'vue';
-
     import Slick from 'vue-slick';
 
     const NavLink = {

@@ -3,8 +3,14 @@
   box-sizing: content-box
   height: 18rem
 
+  @include bp('portrait')
+    border-bottom-width: .8rem
+
   .home &
     height: 24rem
+
+    @include bp('portrait')
+      height: 40rem
 
   &__hero
     height: 100%
@@ -12,12 +18,19 @@
     background: green
 
   &__overlay
+    display: flex
+    flex-direction: column
     height: 100%
-    padding: $main-mobile-spacing
+    justify-content: space-between
     pointer-events: none
     position: absolute
     top: 0
     width: 100%
+
+  &__top-container
+    display: flex
+    justify-content: space-between
+    margin: 0 $main-mobile-spacing
 
   &__carousel-image
     height: 100%
@@ -94,9 +107,6 @@
     &--active
       background-color: $color-light
 
-  @include bp('portrait')
-    height: 40rem
-
   // https://jonsuh.com/hamburgers/
   // https://www.w3schools.com/howto/howto_css_menu_icon.asp
   &__nav-link
@@ -105,11 +115,9 @@
     border-radius: $main-mobile-spacing * 2
     color: $color-white
     cursor: pointer
+    height: 3.6rem
     padding: .3em .7em .3em
     pointer-events: auto
-    position: absolute
-    right: $main-mobile-spacing
-    top: $main-mobile-spacing
 
     & > div
       background: $color-white
@@ -178,33 +186,45 @@
     background-position: center center
     background-size: contain
     display: block
-    height: $main-mobile-spacing * 2
-    margin-bottom: $main-mobile-spacing * 1.5
-    margin-left: -1.7rem // TODO fix image
+    height: 3.6rem
+    width: 8.4rem
     pointer-events: auto
-    width: 10rem
-    //z-index: 1
+
+
+    @include bp('portrait')
+      height: 5.2rem
+      width: 12rem
 
   &__text-container
-    padding: $main-mobile-spacing * 2 $main-mobile-spacing
-    position: absolute
-    left: 0
-    bottom: 0
+    margin: 0 $main-mobile-spacing
+
+    @include bp('large')
+      position: relative
 
   &__text
     @include u-top-border('large', 'light')
     color: $color-white
+    font-size: $font-size-very-large
     font-weight: $font-weight-bold
-    font-size: $font-size-huge
     line-height: 1.3em
 
     @include bp('portrait')
-      width: 24rem
+      font-size: $font-size-huge
+      line-height: 1.2em
+
+    @include bp('landscape')
+      font-size: $font-size-gigantic
 
   &__subtext
     color: $color-white
     font-size: $font-size-large
     margin-top: .5em
+
+    @include bp('portrait')
+      font-size: $font-size-fairly-huge
+
+    @include bp('landscape')
+      font-size: $font-size-really-huge
 
   &--nav-menu-open
     .header
