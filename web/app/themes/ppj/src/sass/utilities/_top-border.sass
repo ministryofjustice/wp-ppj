@@ -4,18 +4,24 @@
   position: relative
 
   &:before
-    border-top-color: $color-main
+    border-top-color: $color-tertiary
     border-top-style: solid
-    border-top-width: .4rem
+    border-top-width: .15em
     content: ''
-    left: 0
+    display: block
     height: .2rem
-    position: absolute
-    top: -.2rem
-    width: 4rem
+    position: relative
+    top: -.1em
+    width: 2.5em
+
+    @include bp('portrait')
+      border-top-color: $color-grey-medium
 
     @if $style == "light"
       border-top-color: $color-white
+
+      @include bp('portrait')
+        border-top-color: $color-white
 
     @if $size == "small"
       border-top-width: .2rem
