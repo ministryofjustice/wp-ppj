@@ -3,9 +3,18 @@
 global $ppj_template_data;
 $td = $ppj_template_data;
 
-?>
+// the default format of this new acf select field is different if it hasn't been saved
+if (is_array($td['width'])) {
+  $layout = 'l-' . $td['width'][0];
+} else {
+  $layout = 'l-' . $td['width'];
+}
 
-<div class="l-<?= $td['width']; ?>">
+?>
+<div class="<?= $layout ?>"
+     id="<?= urlencode(strtolower($td['title'])) ?>"
+>
+
     <div class="text-block">
         <?php if ($td['type'] == 'regular'): ?>
 
