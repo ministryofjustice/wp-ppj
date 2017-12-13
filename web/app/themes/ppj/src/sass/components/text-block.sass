@@ -106,18 +106,13 @@
     font-weight: $font-weight-bold
     line-height: 1.3em
 
-  &__quote-mark:before
-    color: $color-white
-    content: open-quote
+  &__quote-mark
+    @include background-img('svg/quote_icon.svg')
+    background-repeat: no-repeat
     display: block
-    font-size: 8rem
-    line-height: 1rem
-    margin-top: 2.1rem
+    height: 3rem
+    margin: 2.1rem 0 1rem
 
-  &__quote-mark:after
-    content: close-quote
-    float: right
-    visibility: hidden
 
   &__quote-source
     color: $color-white
