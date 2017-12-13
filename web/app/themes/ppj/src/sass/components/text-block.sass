@@ -78,6 +78,21 @@
       & > th
         width: 33%
 
+    p.portrait
+      text-align: center
+      width: 100%
+
+      & > img
+        border-radius: 50%
+        border: solid .5rem $color-main
+        margin: auto
+        padding: .2rem
+        width: 50%
+
+        @include bp('portrait')
+          width: 20rem
+
+
   &__quote
     background-color: $color-tertiary
     border-bottom-left-radius: $main-mobile-spacing * 2
