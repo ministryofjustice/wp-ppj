@@ -211,8 +211,10 @@
     @include u-top-border('large', 'light')
     color: $color-white
     font-size: $font-size-very-large
-    font-weight: $font-weight-bold
     line-height: 1.3em
+
+    &, & > p
+      font-weight: $font-weight-bold
 
     @include bp('portrait')
       font-size: $font-size-huge
