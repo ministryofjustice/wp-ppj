@@ -24,7 +24,12 @@
 
                     <div class="accordion__list-element-header">
                         <h4 class="accordion__list-element-title">{{title}} <span class="accordion__list-element-subtitle">{{subtitle}}</span></h4>
-                        <div class="accordion__list-element-button-container"><button class="accordion__list-element-button" @click="toggleOpen">&#x2795;</button></div>
+                        <div class="accordion__list-element-button-container">
+                            <button class="accordion__list-element-button" @click="toggleOpen">
+                                <div class="accordion__list-element-button-bar accordion__list-element-button-bar--horizontal"></div>
+                                <div class="accordion__list-element-button-bar accordion__list-element-button-bar--vertical"></div>
+                            </button>
+                        </div>
                     </div>
                 <div class="accordion__list-element-content"><slot></slot></div>
             </li>`,
