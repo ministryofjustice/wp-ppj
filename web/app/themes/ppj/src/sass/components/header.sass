@@ -116,9 +116,14 @@
     border-radius: $main-mobile-spacing * 2
     color: $color-white
     cursor: pointer
+    font-weight: $font-weight-bold
     height: 3.6rem
     padding: .3em .7em .3em
     pointer-events: auto
+    text-align: center
+
+    @include bp('portrait')
+      width: 11.3rem
 
     & > div
       background: $color-white
