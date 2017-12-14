@@ -33,7 +33,7 @@
                         <div class="search__view-map" v-show="searchResults.activeView == 0">
                             <div class="search__map"></div>
                             <ul class="search__view-list-list">
-                                <li v-for="(job, index) in searchResults.jobLocationGroups[searchResults.selectedJobLocationGroup]"
+                                <li v-for="(job, index) in searchResults.jobLocationGroups[searchResults.selectedJobLocationGroupId]"
                                     :key="index" >
                                     <job-summary :distance="job.distance"
                                                  :distance-time="job.distanceTime"
@@ -122,7 +122,7 @@
                     orderBy: 'distance',
                     //orderedJobs: dummyJobs,
                     jobLocationGroups: {},
-                    selectedJobLocationGroup: '',
+                    selectedJobLocationGroupId: '',
                     visibleJobLocationGroup: null
                 },
                 mapSrc: '',
@@ -153,7 +153,7 @@
                         * listView.resultsPerPage,
                     endIndex = startIndex + listView.resultsPerPage
                 ;
-                const orderedJobs = _.orderBy(this.searchResults.jobs, [this.orderBy]);
+                const orderedJobs = _.orderBy(this.searchResults.jobs, [this.searchResults.orderBy]);
 
                 return orderedJobs.slice(startIndex, endIndex);
             },
@@ -168,16 +168,11 @@
         },
 
         watch: {
-            selectedJobLocationGroup: function(selectedJobLocationGroup) {
-                if (selectedJobLocationGroup) {
-                    this.searchResults.visibleJobLocationGroup = searchResults.jobLocationGroups[selectedJobLocationGroup];
+            selectedJobLocationGroupId: function(selectedJobLocationGroupId) {
+                if (selectedJobLocationGroupId) {
+                    this.searchResults.visibleJobLocationGroup = searchResults.jobLocationGroups[selectedJobLocationGroupId];
                 }
             },
-
-//            'searchResults.jobs': function(jobs) {
-//                console.log('change - searchResults.jobs');
-//                this.orderJobs('distance');
-//            },
 
             'searchResults.activeView': function() {
                 console.log('watch - searchResults.activeView');
@@ -185,31 +180,24 @@
         },
 
         methods: {
-            orderJobsBy(jobs, orderBy) {
-                console.log('order jobs by', orderBy);
-                return
-            },
-
-            updateSelectedJobLocationGroup(id) {
-                this.searchResults.selectedJobLocationGroup = id;
+            updateSelectedJobLocationGroupId(id) {
+                this.searchResults.selectedJobLocationGroupId = id;
             },
 
             updateMapWithJobLocationGroupMarkers(jobLocationGroups) {
                 const markerArgs = [];
                 for (let group in jobLocationGroups) {
-
                     markerArgs.push({
-                            class: 'search__map-marker--job-location-group',
-                            solid: true,
-                            amount: jobLocationGroups[group].length,
-                            groupId: group,
-                            clickCallback: this.updateSelectedJobLocationGroup.bind(this, group)
+                        class: 'search__map-marker--job-location-group',
+                        solid: true,
+                        amount: jobLocationGroups[group].length,
+                        groupId: group,
+                        clickCallback: this.updateSelectedJobLocationGroupId.bind(this, group)
                     });
                 }
                 for (let i in markerArgs) {
-                    if (i == 0) {
+                    if (markerArgs[i].groupId == this.searchResults.selectedJobLocationGroupId) {
                         markerArgs[i].selected = true;
-                        this.updateSelectedJobLocationGroup(markerArgs[i].groupId);
                     }
                     const latLngArr = markerArgs[i].groupId.split(',');
                     const latLng = new google.maps.LatLng(latLngArr[0], latLngArr[1]);
@@ -225,13 +213,21 @@
                 for (let i = 0; i < elements.length; i++) {
                     const el = elements[i];
                     const job = jobs[i];
-                    job.distance = parseFloat(el.distance.text).toFixed(1);
+                    job.distance = parseFloat(parseFloat(el.distance.text).toFixed(1));
                     job.distanceTime = el.duration.text;
                 }
+
+                jobs = _.orderBy(jobs, [this.searchResults.orderBy]);
             },
 
-            createJobLocationGroups(jobs) {
+            createJobLocationGroups() {
+                console.log('createJobLocationGroups');
+
+                const jobs = this.searchResults.jobs;
                 const jobLocationGroups = {};
+                let closestJobLocationGroupDistance = Number.MAX_SAFE_INTEGER;
+                let closestJobLocationGroupId = null;
+
                 for (let i = 0; i < jobs.length; i++) {
                     const latLngStr = jobs[i].lat + ',' + jobs[i].lng;
                     if (typeof jobLocationGroups[latLngStr] == 'undefined') {
@@ -239,8 +235,17 @@
                     } else {
                         jobLocationGroups[latLngStr].push(jobs[i]);
                     }
+
+                    if (jobs[i].distance < closestJobLocationGroupDistance) {
+
+                      closestJobLocationGroupDistance = jobs[i].distance;
+                      console.log('closest job group distance so far is ', closestJobLocationGroupDistance);
+                      closestJobLocationGroupId = latLngStr;
+                      console.log('closest job group so far is ', closestJobLocationGroupId);
+                    }
                 }
-                return jobLocationGroups;
+                this.searchResults.jobLocationGroups = jobLocationGroups;
+                this.searchResults.selectedJobLocationGroupId = closestJobLocationGroupId;
             },
 
             handleDistanceMatrixData(response, status) {
@@ -250,10 +255,8 @@
                     if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
                         console.error('distance matrix: zero results'); // TODO handle zero results
                     } else {
-                        //const sr = this.searchResults;
                         this.updateJobsWithDistanceMatrixData(this.searchResults.jobs, response.rows[0].elements);
-                        this.searchResults.jobLocationGroups = this.createJobLocationGroups(this.searchResults.jobs);
-                        this.searchResults.selectedJobLocationGroup = getFirstElementInObject(this.searchResults.jobLocationGroups);
+                        this.createJobLocationGroups();
                         this.searchResults.display = true;
 
                         // create map now that containing div is visible
@@ -263,7 +266,6 @@
                         );
 
                         // create map markers
-                        //new CustomMarker(this.mapOptions.center, this.map, {class: 'search__map-marker--datum'});
                         var marker = new google.maps.Marker({
                             position: this.mapOptions.center,
                             map: this.map,
@@ -339,7 +341,7 @@
                 }
             }
         },
-      
+
         mounted() {
             console.log('about to search ...');
             if (this.searchResults.postCode) {
