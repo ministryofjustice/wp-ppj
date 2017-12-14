@@ -24,9 +24,15 @@
       justify-content: space-between
       margin-bottom: 0
       padding: $main-mobile-spacing/2 0
+      pointer-events: none
+      transition: background-color $main-transition-duration
 
-      &:last-of-type
+      &:hover
+        background-color: $color-extremely-light
 
+      @include bp('portrait')
+        cursor: pointer
+        pointer-events: initial
 
     &-title
       display: list-item
@@ -59,26 +65,26 @@
     &-button
       $length: 1.8rem
       $thickness: $length/4
-      height: $length
-      width: $length
-
-      &-container
-        display: flex
-        height: $length
-        width: $length
-
       //color: $color-main // https://stackoverflow.com/questions/32413731/color-for-unicode-emoji/39776303#39776303
       color: transparent
       cursor: pointer
       display: block
       float: right
       font-size: $font-size-small
+      height: $length
       line-height: 1
       padding: 0
+      pointer-events: initial
       position: relative
       text-shadow: 0 0 0 $color-main
       transform: rotate(0deg)
       transition: all $main-transition-duration
+      width: $length
+
+      &-container
+        display: flex
+        height: $length
+        width: $length
 
       &-bar
         background-color: $color-main

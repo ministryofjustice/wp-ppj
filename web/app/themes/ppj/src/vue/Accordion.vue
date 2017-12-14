@@ -22,10 +22,10 @@
         template:
             `<li class="accordion__list-element" :class="{ 'accordion__list-element--open': open }">
 
-                    <div class="accordion__list-element-header">
+                    <div class="accordion__list-element-header" @click="toggleOpen">
                         <h4 class="accordion__list-element-title">{{title}} <span class="accordion__list-element-subtitle">{{subtitle}}</span></h4>
                         <div class="accordion__list-element-button-container">
-                            <button class="accordion__list-element-button" @click="toggleOpen">
+                            <button class="accordion__list-element-button">
                                 <div class="accordion__list-element-button-bar accordion__list-element-button-bar--horizontal"></div>
                                 <div class="accordion__list-element-button-bar accordion__list-element-button-bar--vertical"></div>
                             </button>
