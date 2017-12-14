@@ -2,71 +2,63 @@
         <div class="search" v-cloak>
             <h2 class="search__title">{{ titleText }}</h2>
             <form class="search__form">
-                <input
-                    type="text"
-                    class="search__input"
-                    :placeholder="placeHolderText"
-                    editable="editable"
-                    v-model="searchResults.postCode"
-                />
+
+                <input type="text"
+                       class="search__input"
+                       :placeholder="placeHolderText"
+                       editable="editable"
+                       v-model="searchResults.postCode" />
+
                 <button class="search__button-search"
                         @click.stop.prevent="search"
-                        :disabled="searchResults.postCode == ''"
-                >
+                        :disabled="searchResults.postCode == ''" >
                     <div class="search__button-search-circle"></div>
                     <div class="search__button-search-rectangle"></div>
                 </button>
+
                 <div class="search__results" v-show="searchResults.display">
+
                     <div class="search__view-controls">
-                        <button
-                                class="search__button-view"
+                        <button class="search__button-view"
                                 :class="{'search__button-view--active': (searchResults.activeView == 0)}"
                                 @click.stop.prevent="showMapView"
                         >Map view</button>
-                        <button
-                                class="search__button-view"
+                        <button class="search__button-view"
                                 :class="{'search__button-view--active': (searchResults.activeView == 1)}"
                                 @click.stop.prevent="showListView"
                         >List view</button>
                     </div>
+
                     <div class="search__view-container">
                         <div class="search__view-map" v-show="searchResults.activeView == 0">
                             <div class="search__map"></div>
                             <ul class="search__view-list-list">
-                                <li
-                                        v-for="(job, index) in searchResults.jobLocationGroups[searchResults.selectedJobLocationGroup]"
-                                        :key="index"
-                                >
-                                    <job-summary
-                                            :distance="job.distance"
-                                            :distance-time="job.distanceTime"
-                                            :position="job.position"
-                                            :salary="job.salary"
-                                            :prison-name="job.organizationName"
-                                            :prison-city="job.organizationCity"
-                                            :prison-page-link="job.organizationPageLink"
-                                            :url="job.url"
-                                    >
+                                <li v-for="(job, index) in searchResults.jobLocationGroups[searchResults.selectedJobLocationGroup]"
+                                    :key="index" >
+                                    <job-summary :distance="job.distance"
+                                                 :distance-time="job.distanceTime"
+                                                 :position="job.position"
+                                                 :salary="job.salary"
+                                                 :prison-name="job.organizationName"
+                                                 :prison-city="job.organizationCity"
+                                                 :prison-page-link="job.organizationPageLink"
+                                                 :url="job.url" >
                                     </job-summary>
                                 </li>
                             </ul>
                         </div>
                         <div class="search__view-list" v-show="searchResults.activeView == 1">
                             <ul class="search__view-list-list">
-                                <li
-                                        v-for="(job, index) in visibleSearchResults"
-                                        :key="index"
-                                >
-                                    <job-summary
-                                            :distance="job.distance"
-                                            :distance-time="job.distanceTime"
-                                            :position="job.position"
-                                            :salary="job.salary"
-                                            :prison-name="job.organizationName"
-                                            :prison-city="job.organizationCity"
-                                            :prison-page-link="job.organizationPageLink"
-                                            :url="job.url"
-                                    >
+                                <li v-for="(job, index) in visibleSearchResults"
+                                    :key="index" >
+                                    <job-summary :distance="job.distance"
+                                                 :distance-time="job.distanceTime"
+                                                 :position="job.position"
+                                                 :salary="job.salary"
+                                                 :prison-name="job.organizationName"
+                                                 :prison-city="job.organizationCity"
+                                                 :prison-page-link="job.organizationPageLink"
+                                                 :url="job.url" >
                                     </job-summary>
                                 </li>
                             </ul>
@@ -88,6 +80,7 @@
                                 >{{ n }}</button>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </form>
@@ -95,6 +88,7 @@
 </template>
 
 <script>
+    import _ from 'lodash';
     import dummyJobs from '../js/dummyJobs';
     import CustomMarker from '../js/CustomMarker';
 
@@ -109,6 +103,7 @@
               type: String
           }
         },
+
         data() {
             return {
                 searchResults: {
@@ -124,6 +119,8 @@
                         backwardEnabled: false
                     },
                     jobs: dummyJobs,
+                    orderBy: 'distance',
+                    //orderedJobs: dummyJobs,
                     jobLocationGroups: {},
                     selectedJobLocationGroup: '',
                     visibleJobLocationGroup: null
@@ -140,12 +137,15 @@
                 placeHolderText: 'Enter your post code'
             }
         },
+
         computed: {
             numberOfResultPages: function() {
                 const num = Math.ceil(this.searchResults.jobs.length / this.searchResults.listView.resultsPerPage);
                 return num;
             },
+
             visibleSearchResults: function() {
+                console.log('computing visible search results');
                 const
                     listView = this.searchResults.listView,
                     startIndex =
@@ -153,26 +153,47 @@
                         * listView.resultsPerPage,
                     endIndex = startIndex + listView.resultsPerPage
                 ;
-                return this.searchResults.jobs.slice(startIndex, endIndex);
+                const orderedJobs = _.orderBy(this.searchResults.jobs, [this.orderBy]);
+
+                return orderedJobs.slice(startIndex, endIndex);
             },
+
             backwardEnabled: function() {
                 return (this.searchResults.listView.activePage > 0);
             },
+
             forwardEnabled: function() {
                 return (this.searchResults.listView.activePage < (this.numberOfResultPages - 1));
             }
         },
+
         watch: {
             selectedJobLocationGroup: function(selectedJobLocationGroup) {
                 if (selectedJobLocationGroup) {
                     this.searchResults.visibleJobLocationGroup = searchResults.jobLocationGroups[selectedJobLocationGroup];
                 }
+            },
+
+//            'searchResults.jobs': function(jobs) {
+//                console.log('change - searchResults.jobs');
+//                this.orderJobs('distance');
+//            },
+
+            'searchResults.activeView': function() {
+                console.log('watch - searchResults.activeView');
             }
         },
+
         methods: {
+            orderJobsBy(jobs, orderBy) {
+                console.log('order jobs by', orderBy);
+                return
+            },
+
             updateSelectedJobLocationGroup(id) {
                 this.searchResults.selectedJobLocationGroup = id;
             },
+
             updateMapWithJobLocationGroupMarkers(jobLocationGroups) {
                 const markerArgs = [];
                 for (let group in jobLocationGroups) {
@@ -199,14 +220,16 @@
                     );
                 }
             },
+
             updateJobsWithDistanceMatrixData(jobs, elements) {
                 for (let i = 0; i < elements.length; i++) {
                     const el = elements[i];
                     const job = jobs[i];
-                    job.distance = el.distance.text;
+                    job.distance = parseFloat(el.distance.text).toFixed(1);
                     job.distanceTime = el.duration.text;
                 }
             },
+
             createJobLocationGroups(jobs) {
                 const jobLocationGroups = {};
                 for (let i = 0; i < jobs.length; i++) {
@@ -219,6 +242,7 @@
                 }
                 return jobLocationGroups;
             },
+
             handleDistanceMatrixData(response, status) {
                 if (status != google.maps.DistanceMatrixStatus.OK) {
                     // TODO handle no distance matrix response
@@ -226,11 +250,11 @@
                     if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
                         console.error('distance matrix: zero results'); // TODO handle zero results
                     } else {
-                        const sr = this.searchResults;
-                        this.updateJobsWithDistanceMatrixData(sr.jobs, response.rows[0].elements);
-                        sr.jobLocationGroups = this.createJobLocationGroups(sr.jobs);
-                        sr.selectedJobLocationGroup = getFirstElementInObject(sr.jobLocationGroups);
-                        sr.display = true;
+                        //const sr = this.searchResults;
+                        this.updateJobsWithDistanceMatrixData(this.searchResults.jobs, response.rows[0].elements);
+                        this.searchResults.jobLocationGroups = this.createJobLocationGroups(this.searchResults.jobs);
+                        this.searchResults.selectedJobLocationGroup = getFirstElementInObject(this.searchResults.jobLocationGroups);
+                        this.searchResults.display = true;
 
                         // create map now that containing div is visible
                         this.map = new google.maps.Map(
@@ -245,10 +269,11 @@
                             map: this.map,
                             label: this.postCode
                         });
-                        this.updateMapWithJobLocationGroupMarkers(sr.jobLocationGroups);
+                        this.updateMapWithJobLocationGroupMarkers(this.searchResults.jobLocationGroups);
                     }
                 }
             },
+
             updateJobsWithGeocoderData(origin) {
                 const jobLatLngStrs = [];
                 for (let job of this.searchResults.jobs) {
@@ -265,6 +290,7 @@
                         avoidTolls: false
                     }, this.handleDistanceMatrixData);
             },
+
             processGeocoderResults(results, status) {
                 console.log('processGeocoderResults');
                 if (status == google.maps.GeocoderStatus.OK) {
@@ -280,6 +306,7 @@
                     alert('Geocode was not successful for the following reason: ' + status);
                 }
             },
+
             search() {
                 console.log('search', this.searchResults.postCode);
                 new google.maps.Geocoder().geocode(
@@ -287,26 +314,32 @@
                     this.processGeocoderResults
                 );
             },
+
             showMapView() {
                 this.searchResults.activeView = 0;
             },
+
             showListView() {
                 this.searchResults.activeView = 1;
             },
+
             showPage(i) {
                 this.searchResults.listView.activePage = i
             },
+
             showNextPage() {
                 if (this.searchResults.listView.activePage < (this.numberOfResultPages - 1)) {
                     this.searchResults.listView.activePage++
                 }
             },
+
             showPreviousPage() {
                 if (this.searchResults.listView.activePage > 0) {
                     this.searchResults.listView.activePage--
                 }
             }
         },
+      
         mounted() {
             console.log('about to search ...');
             if (this.searchResults.postCode) {
