@@ -19,6 +19,9 @@
     font-size: $font-size-small
 
   &__content
+    img
+      width: 100%
+
     & > h4
       font-weight: $font-weight-bold
       font-size: $font-size-small
@@ -89,7 +92,6 @@
         @include bp('portrait')
           width: 20rem
 
-
   &__quote
     background-color: $color-tertiary
     border-bottom-left-radius: $main-mobile-spacing * 2
@@ -109,7 +111,6 @@
     display: block
     height: 3rem
     margin: 2.1rem 0 1rem
-
 
   &__quote-source
     color: $color-white
