@@ -1,14 +1,14 @@
 <?php
 
-    global $ppj_template_data;
-    $td = $ppj_template_data;
-    $componentClass = 'text-and-image--';
+global $ppj_template_data;
+$td = $ppj_template_data;
+$componentClass = 'text-and-image--';
 
-    if (isset($td['style']) && $td['style'] !== 'default') {
-        $classModifier = $componentClass . $td['style']; //str_replace(' ', '-', $td['style']);
-    } else {
-        $classModifier = '';
-    }
+if (isset($td['style']) && $td['style'] !== 'default') {
+    $classModifier = $componentClass . $td['style']; //str_replace(' ', '-', $td['style']);
+} else {
+    $classModifier = '';
+}
 
 ?>
 
@@ -35,7 +35,7 @@
 
                 <?php if ($td['subtitle']): ?>
                     <h3 class="text-block__subtitle">
-                        <?= $td['subtitle']?>
+                        <?= $td['subtitle'] ?>
                     </h3>
                 <?php endif; ?>
 
@@ -43,17 +43,17 @@
                     <h3 class="text-and-image__quote-container">
                         <div class="text-and-image__quote-mark"></div>
                         <div class="text-and-image__quote-text">
-                            <?= $td['quote']?>
+                            <?= $td['quote'] ?>
                         </div>
                     </h3>
 
                     <h3 class="text-and-image__quote-source">
-                        <?= $td['quote_source']?>
+                        <?= $td['quote_source'] ?>
                     </h3>
                 <?php endif; ?>
 
                 <div class="text-and-image__text">
-                    <?= $td['content']?>
+                    <?= $td['content'] ?>
                 </div>
 
                 <div class="text-and-image__content">

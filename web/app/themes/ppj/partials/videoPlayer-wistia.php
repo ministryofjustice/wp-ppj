@@ -8,10 +8,10 @@ $td = $ppj_template_data;
  * may need to enqueue scripts before page renders by searching which wsi
  */
 ?>
-<!--<script src="//fast.wistia.com/embed/medias/--><?//= $td['id'] ?><!--.jsonp" async></script>-->
+<!--<script src="//fast.wistia.com/embed/medias/--><? //= $td['id'] ?><!--.jsonp" async></script>-->
 
 <!--<script src="//fast.wistia.com/assets/external/E-v1.js" async></script>-->
-<!--<div class="wistia_embed wistia_async_--><?//= $td['id'] ?><!--" style="height:349px;width:620px">&nbsp;</div>-->
+<!--<div class="wistia_embed wistia_async_--><? //= $td['id'] ?><!--" style="height:349px;width:620px">&nbsp;</div>-->
 
 <iframe src="//fast.wistia.net/embed/iframe/<?= $td['id'] ?>"
         allowtransparency="true"

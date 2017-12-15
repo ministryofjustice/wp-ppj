@@ -14,11 +14,11 @@ $td = $ppj_template_data;
             <ul>
                 <?php foreach ($td['links'] as $link) : ?>
                     <li class="nav-block__link">
-                        <a  href="<?= $link['page'] ?>">
+                        <a href="<?= $link['page'] ?>">
                             <?= $link['link_text'] ?>
                         </a>
                     </li>
-                <?php endforeach;?>
+                <?php endforeach; ?>
             </ul>
         <?php endif; ?>
     </div>
