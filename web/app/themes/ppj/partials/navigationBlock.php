@@ -10,7 +10,7 @@ $td = $ppj_template_data;
         <div class="nav-block__title">
             NEXT
         </div>
-        <?php if (isset($td['links']) && is_array($td['links'])): ?>
+        <?php if (isset($td['links']) && is_array($td['links'])) : ?>
             <ul>
                 <?php foreach ($td['links'] as $link) : ?>
                     <li class="nav-block__link">

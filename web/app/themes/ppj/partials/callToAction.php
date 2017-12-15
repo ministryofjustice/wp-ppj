@@ -5,7 +5,7 @@ $td = $ppj_template_data;
 //ppj::dump($td);
 ?>
 
-<?php if (isset($td['records']) && is_array($td['records'])):
+<?php if (isset($td['records']) && is_array($td['records'])) :
 //error_log('got call to action links');
     ?>
     <div class="call-to-action">

@@ -7,14 +7,13 @@ $td = $ppj_template_data;
 ?>
 
 <div class="video-player video-player--<?= $td['host'] ?>">
-    <?php if (isset($td['title'])): ?>
+    <?php if (isset($td['title'])) : ?>
         <h3><?= $td['title'] ?></h3>
     <?php endif; ?>
     <div class="video-player__video-container">
         <!--<div class="video-player__play-button"></div>-->
         <?php
         switch ($td['host']) {
-
             case 'youtube':
                 echo ppj\partial($td, 'videoPlayer', 'youtube');
                 break;

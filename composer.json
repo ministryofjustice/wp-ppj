@@ -31,7 +31,8 @@
     "acf/advanced-custom-fields-pro": "*"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^3.0.2"
+    "squizlabs/php_codesniffer": "^3.0.2",
+    "phpmd/phpmd" : "@stable"
   },
   "extra": {
     "installer-paths": {

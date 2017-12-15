@@ -9,28 +9,26 @@ if (is_array($td['width'])) {
 } else {
     $layout = 'l-' . $td['width'];
 }
-
 ?>
 <div class="<?= $layout ?>"
      id="<?= urlencode(strtolower($td['title'])) ?>"
 >
 
     <div class="text-block">
-        <?php if ($td['type'] == 'regular'): ?>
-
-            <?php if ($td['title']): ?>
+        <?php if ($td['type'] == 'regular') : ?>
+            <?php if ($td['title']) : ?>
                 <h2 class="text-block__title">
                     <?= $td['title'] ?>
                 </h2>
             <?php endif; ?>
 
-            <?php if ($td['subtitle']): ?>
+            <?php if ($td['subtitle']) : ?>
                 <h3 class="text-block__subtitle">
                     <?= $td['subtitle'] ?>
                 </h3>
             <?php endif; ?>
 
-            <?php if ($td['content']): ?>
+            <?php if ($td['content']) : ?>
                 <div class="text-block__content">
                     <?= $td['content'] ?>
                 </div>
@@ -38,10 +36,8 @@ if (is_array($td['width'])) {
 
         <?php endif; ?>
 
-        <?php if ($td['type'] == 'quote'): ?>
-
-            <?php if ($td['quote']): ?>
-
+        <?php if ($td['type'] == 'quote') : ?>
+            <?php if ($td['quote']) : ?>
                 <div class="text-block__quote">
                     <div class="text-block__quote-mark"></div>
 
@@ -49,7 +45,7 @@ if (is_array($td['width'])) {
                         <?= $td['quote'] ?>
                     </div>
 
-                    <?php if ($td['quote_source']): ?>
+                    <?php if ($td['quote_source']) : ?>
                         <div class="text-block__quote-source">
                             <?= $td['quote_source'] ?>
                         </div>

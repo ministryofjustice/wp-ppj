@@ -7,9 +7,8 @@ $td = $ppj_template_data;
 
 <tabs>
 
-    <?php if (isset($td['records']) && is_array($td['records'])): ?>
-
-        <?php for ($i = 0; $i < count($td['records']); $i++):
+    <?php if (isset($td['records']) && is_array($td['records'])) : ?>
+        <?php for ($i = 0; $i < count($td['records']); $i++) :
             $el = $td['records'][$i];
             ?>
 

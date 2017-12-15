@@ -20,26 +20,26 @@ if (isset($td['style']) && $td['style'] !== 'default') {
                      src="<?= $td['image']['url']; ?>"
                 />
 
-                <?php if (isset($td['map'])): ?>
+                <?php if (isset($td['map'])) : ?>
                     <div class="text-and-image__map">
                     </div>
                 <?php endif; ?>
             </div>
             <div class="text-and-image__text-container">
 
-                <?php if ($td['title']): ?>
+                <?php if ($td['title']) : ?>
                     <h2 class="text-and-image__title">
                         <?= $td['title'] ?>
                     </h2>
                 <?php endif; ?>
 
-                <?php if ($td['subtitle']): ?>
+                <?php if ($td['subtitle']) : ?>
                     <h3 class="text-block__subtitle">
                         <?= $td['subtitle'] ?>
                     </h3>
                 <?php endif; ?>
 
-                <?php if ($td['quote']): ?>
+                <?php if ($td['quote']) : ?>
                     <h3 class="text-and-image__quote-container">
                         <div class="text-and-image__quote-mark"></div>
                         <div class="text-and-image__quote-text">
