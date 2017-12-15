@@ -2,14 +2,14 @@
   $c: &
   $border: 1px solid $color-light
   font-size: $font-size-small
-  margin: 0 $main-mobile-spacing
+  margin: 0 $common-spacing
 
   &__title
     @extend .common-header
 
   &__subtitle
     font-weight: $font-weight-bold
-    margin-bottom: $main-mobile-spacing
+    margin-bottom: $common-spacing
 
   &__list-element
     position: relative
@@ -23,7 +23,7 @@
       display: flex
       justify-content: space-between
       margin-bottom: 0
-      padding: $main-mobile-spacing/2 0
+      padding: $common-spacing/2 0
       pointer-events: none
       transition: background-color $main-transition-duration
 
@@ -51,7 +51,7 @@
       transition: all $main-transition-duration
 
       & > p
-        margin-top: $main-mobile-spacing/2
+        margin-top: $common-spacing/2
 
         &:first-child
           margin-top: 0
@@ -107,7 +107,7 @@
 
           &-content
             height: initial
-            margin: $main-mobile-spacing/2 0
+            margin: $common-spacing/2 0
 
           &-button
             //transform: rotate(90deg)
@@ -125,5 +125,5 @@
       &__list-element-title
         display: list-item
         list-style-type: decimal
-        margin-left: $main-mobile-spacing
+        margin-left: $common-spacing
 

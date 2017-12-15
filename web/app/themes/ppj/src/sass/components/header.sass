@@ -30,7 +30,7 @@
   &__top-container
     display: flex
     justify-content: space-between
-    margin: 0 $main-mobile-spacing
+    margin: 0 $common-spacing
 
   &__carousel-image
     height: 100%
@@ -66,7 +66,7 @@
       width: 100%
 
       & > li
-        margin: $main-mobile-spacing/2
+        margin: $common-spacing/2
 
         &.slick-active > button
           background: $color-light
@@ -87,7 +87,7 @@
 
   &__carousel-controls-container
     position: absolute
-    bottom: $main-mobile-spacing
+    bottom: $common-spacing
     text-align: center
     width: 100%
     z-index: 1
@@ -99,7 +99,7 @@
     cursor: pointer
     display: inline-block
     height: $size
-    margin: $main-mobile-spacing/4
+    margin: $common-spacing/4
     padding: 0
     width: $size
     transition: background-color $main-transition-duration
@@ -112,7 +112,7 @@
   &__nav-link
     background-color: $color-main
     border: solid .2rem $color-white
-    border-radius: $main-mobile-spacing * 2
+    border-radius: $common-spacing * 2
     color: $color-white
     cursor: pointer
     font-weight: $font-weight-bold
@@ -128,7 +128,7 @@
       background: $color-white
       height: .5rem
       margin-top: .4rem
-      width: $main-mobile-spacing * 1.5
+      width: $common-spacing * 1.5
 
       &:first-child
         margin-top: 0
@@ -142,17 +142,17 @@
     border: .2rem solid $color-white
     border-radius: 2rem
     display: flex
-    height: $main-mobile-spacing * 1.5
+    height: $common-spacing * 1.5
     justify-content: center
     position: absolute
-    right: $main-mobile-spacing
-    top: $main-mobile-spacing
-    width: $main-mobile-spacing * 1.5
+    right: $common-spacing
+    top: $common-spacing
+    width: $common-spacing * 1.5
 
     &:before
       color: $color-white
       content: "\2715"
-      font-size: $main-mobile-spacing
+      font-size: $common-spacing
       font-weight: $font-weight-bold
       position: relative
       text-align: center
@@ -163,13 +163,13 @@
 
   &__nav-menu-list-element
     font-weight: $font-weight-bold
-    padding: 0 $main-mobile-spacing
+    padding: 0 $common-spacing
 
     & > a
       border-bottom: 1px solid $color-white
       color: $color-white
       display: block
-      padding: $main-mobile-spacing/1.5 0
+      padding: $common-spacing/1.5 0
       width: 100%
 
       &[href='']
@@ -201,7 +201,7 @@
       width: 12rem
 
   &__text-container
-    margin: 0 $main-mobile-spacing
+    margin: 0 $common-spacing
 
     @include bp('large')
       position: relative
