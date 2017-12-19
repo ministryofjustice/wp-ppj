@@ -6,6 +6,15 @@
          }"
          v-cloak
     >
+        <div class="l-site-header">
+            <div class="header__site-header">
+              <div class="header__site-header-content">
+                <a href="/" class="header__logo"></a>
+                <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
+                <nav-menu :menu-data='menuData' v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
+              </div>
+            </div>
+        </div>
         <div class="header__hero">
             <div class="header__img-container"
                  v-if="(backgroundImage == true) && (carouselImageURLs.length > 0)"
@@ -24,13 +33,6 @@
             </div>
             <div class="header__overlay">
                 <div class="l-full">
-                  <div class="header__top-container">
-                    <a href="/" class="header__logo"></a>
-                    <nav-link v-on:request-open-nav-menu="openNavMenu"></nav-link>
-                  </div>
-                </div>
-
-                <div class="l-full">
                   <div class="header__text-container">
                       <div class="header__text"
                            v-if="hasDefaultSlot"
@@ -43,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <nav-menu :menu-data='menuData' v-on:request-close-nav-menu="closeNavMenu"></nav-menu>
+
     </div>
 </template>
 <script>
