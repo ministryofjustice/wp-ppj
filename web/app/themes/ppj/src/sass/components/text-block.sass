@@ -14,11 +14,18 @@
     @include bp('portrait')
       font-size: $font-size-quite-huge
 
+    @include bp('large')
+      font-size: $font-size-almost-huge
+
   &__subtitle
     font-weight: $font-weight-bold
     font-size: $font-size-small
 
   &__content
+
+    @include bp('large')
+      font-size: $font-size-really-very-large
+
     img
       width: 100%
 
@@ -28,7 +35,6 @@
       margin: 1.8rem 0
 
     & li
-      font-size: $font-size-small
       margin: $common-spacing/2 0
       margin-left: $common-spacing
       padding-right: $common-spacing * 2
@@ -101,6 +107,8 @@
     font-size: $font-size-large
     padding: $common-spacing * 2 $common-spacing $common-spacing*1.5
 
+    @include bp('large')
+      font-size: $font-size-almost-huge
 
   &__quote-content
     font-weight: $font-weight-bold
@@ -136,6 +144,7 @@
     text-transform: uppercase
 
     @include bp('portrait')
+      margin-top: $common-spacing * 2
       margin-left: auto
       margin-right: auto
       width: 34.4rem
