@@ -1,5 +1,4 @@
 # Prison and Probation Jobs
-
 This website is to facilitate the MoJ with hiring for prison and probation jobs, among others.
 
 ## Status
@@ -8,28 +7,7 @@ This website is to facilitate the MoJ with hiring for prison and probation jobs,
 * It has only been styled for mobile device use.
 
 ## To do
-- my story image
-- job post data
-- upload correct images
-- ensure links work
-
-- Video player cover image
-- Quote layout
-- fade in menu
-- sticky header?
-
-## Done
-- Fix search button
-- Numbered accordion on apply page
-- Add content to role page
-- Fix transition of carousel (slick carousel)
-- Remove contact us section for now
-- fix job post header
-- stop scrolling under nav menu
-
-## Refactoring
-Rename $main-mobile-spacing to $common-spacing
-Change $common-spacing to 1rem
+https://trello.com/b/BgCwNGdN/prison-probation-jobs-website?menu=filter&filter=label:none,label:Development
 
 ## Go live tasks
 * minify js
