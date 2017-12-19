@@ -5,7 +5,7 @@
         <div class="footer__container">
             <ul class="footer__nav-links">
                 <li class="footer__nav-link">
-                    <a href="/terms-conditions">Terms & Conditions</a>
+                    <a href="/terms-conditions">Terms and conditions</a>
                 </li>
                 <li class="footer__nav-link">
                     <a href="/cookies">Cookies</a>
