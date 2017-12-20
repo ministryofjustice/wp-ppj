@@ -191,8 +191,12 @@
     padding: 0 $common-spacing
 
     @include bp('landscape')
+      border: none
+      border-left: .1rem solid $color-light
+      height: 2rem
+      line-height: 1
+      margin-left: $common-spacing
       padding: 0
-      padding-left: $common-spacing
 
     & > a
       border-bottom: 1px solid $color-white
@@ -203,18 +207,40 @@
 
       @include bp('landscape')
         border: none
+        margin-left: $common-spacing
         padding: 0
+        padding-bottom: $common-spacing * .4
+        text-transform: uppercase
+        width: inherit
+
+        &:after
+          border-bottom-color: $color-transparent
+          border-bottom-style: solid
+          border-bottom-width: .3rem
+          bottom: -.6rem
+          content: ''
+          display: block
+          height: 0
+          position: relative
+          transition: border-bottom-color $main-transition-duration
+
+        &:hover:after
+          border-bottom-color: $color-white
 
       &[href='']
         color: $color-light
         pointer-events: none
         cursor: default
 
-    &:first-child > a
-      border-top: 1px solid $color-white
+    &:first-child
+      & > a
+        border-top: 1px solid $color-white
 
       @include bp('landscape')
         display: none
+
+    &:nth-child(2)
+      border-left: none
 
     &-subtext
       font-weight: $font-weight-normal
