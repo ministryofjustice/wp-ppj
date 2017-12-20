@@ -133,7 +133,7 @@
                     streetViewControl: false,
                     mapTypeControl: false,
                 },
-                titleText: 'Search for vacancies near you',
+                titleText: 'Search for jobs',
                 placeHolderText: 'Enter your post code'
             }
         },
