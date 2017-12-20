@@ -2,7 +2,7 @@
     <div class="header"
          :class="{
            'header--nav-menu-open': menuOpen,
-           'header--style-light': (headerStyle == 'light')
+           'header--style-dark': (headerStyle == 'dark')
          }"
          v-cloak
     >

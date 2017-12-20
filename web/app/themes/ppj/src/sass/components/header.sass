@@ -306,26 +306,14 @@
         right: 0
         z-index: 10
 
-  &--style-light
+  &--style-dark
     height: auto
     border: none
 
+    .l-site-header
+      position: relative
+
     .header
-
-      &__logo
-        @include background-img('hmpps-logo.png')
-        margin-bottom: 0
-
-      &__overlay
-        position: initial
-
-      &__text
-        color: $color-dark
-
-      &__nav-link
-        background-color: inherit
-        border-color: $color-light
-        color: $color-dark
-
-        & > div
-          background: $color-dark
+      &__site-header
+        background-color: $color-dark
+        background: linear-gradient(to bottom left, $color-gradient-dark, $color-gradient-light)

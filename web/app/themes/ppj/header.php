@@ -13,7 +13,7 @@ if ($carouselData = get_field('carousel')) {
     $headerStyle = '';
 } else {
     $carouselImagesAttr = '';
-    $headerStyle = 'light';
+    $headerStyle = 'dark';
 }
 
 // menu data
