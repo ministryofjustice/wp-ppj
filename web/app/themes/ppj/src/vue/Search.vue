@@ -18,17 +18,6 @@
 
                 <div class="search__results" v-show="searchResults.display">
 
-                    <div class="search__view-controls">
-                        <button class="search__button-view"
-                                :class="{'search__button-view--active': (searchResults.activeView == 0)}"
-                                @click.stop.prevent="showMapView"
-                        >Map view</button>
-                        <button class="search__button-view"
-                                :class="{'search__button-view--active': (searchResults.activeView == 1)}"
-                                @click.stop.prevent="showListView"
-                        >List view</button>
-                    </div>
-
                     <div class="search__view-container">
                         <div class="search__view-map" v-show="searchResults.activeView == 0">
                             <div class="search__map"></div>
