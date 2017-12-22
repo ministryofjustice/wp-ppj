@@ -73,7 +73,10 @@
             ` <div class="header__nav-menu">
                 <button class="header__nav-menu-close-button js" @click="closeNavMenu"></button>
                 <ul class="header__nav-menu-list">
-                    <li v-for="item in menuData" class="header__nav-menu-list-element"><a :href="item.url">{{item['title']}}</a></li>
+                    <li v-for="item in menuData"
+                        class="header__nav-menu-list-element"
+                        :class="{'header__nav-menu-list-element--selected' : item.selected}"
+                    ><a :href="item.url">{{item['title']}}</a></li>
                 </ul>
             </div>`,
 
@@ -190,8 +193,6 @@
         },
 
         mounted() {
-            //console.log(this.carouselImageURLs);
-            //console.log(' carouselImages length ' + this.carouselImageURLs.length);
             this.startCarouselTransition();
         },
 

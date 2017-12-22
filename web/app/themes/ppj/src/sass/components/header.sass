@@ -1,3 +1,15 @@
+.underlined-link
+  &:after
+    @include bp('landscape')
+      border-bottom-color: $color-transparent
+      border-bottom-style: solid
+      border-bottom-width: .3rem
+      bottom: -.6rem
+      content: ''
+      display: block
+      height: 0
+      position: relative
+
 .header
   border-bottom: .4rem solid $color-very-light
   box-sizing: content-box
@@ -190,6 +202,13 @@
     font-weight: $font-weight-bold
     padding: 0 $common-spacing
 
+    &--selected > a
+      @extend .underlined-link
+
+      &:after
+        @include bp('landscape')
+          border-bottom-color: $color-light
+
     @include bp('landscape')
       border: none
       border-left: .1rem solid $color-light
@@ -204,6 +223,7 @@
       display: block
       padding: $common-spacing/1.5 0
       width: 100%
+      @extend .underlined-link
 
       @include bp('landscape')
         border: none
@@ -214,14 +234,6 @@
         width: inherit
 
         &:after
-          border-bottom-color: $color-transparent
-          border-bottom-style: solid
-          border-bottom-width: .3rem
-          bottom: -.6rem
-          content: ''
-          display: block
-          height: 0
-          position: relative
           transition: border-bottom-color $main-transition-duration
 
         &:hover:after

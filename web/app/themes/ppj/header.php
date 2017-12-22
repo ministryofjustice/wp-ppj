@@ -1,8 +1,9 @@
 <?php
+global $post;
 
 // header text
-$header_text = get_field('header_text');
-$header_subtext = get_field('header_subtext');
+$header_text    = get_field( 'header_text' );
+$header_subtext = get_field( 'header_subtext' );
 
 // carousel data
 if ( $carouselData = get_field( 'carousel' ) ) {
@@ -17,8 +18,17 @@ if ( $carouselData = get_field( 'carousel' ) ) {
 }
 
 // menu data
-$mainMenuJSON = json_encode(wp_get_nav_menu_items('Main menu'));
-
+$navMenuItems         = wp_get_nav_menu_items( 'Main menu' );
+$filteredNavMenuItems = [];
+foreach ( $navMenuItems as $item ) {
+    $same                   = ( $post->ID == $item->object_id );
+    $filteredNavMenuItems[] = [
+        'title'    => $item->title,
+        'url'      => $item->url,
+        'selected' => $same
+    ];
+}
+$mainMenuJSON = json_encode( $filteredNavMenuItems );
 ?>
 
 <!DOCTYPE html>
