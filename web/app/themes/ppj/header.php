@@ -5,15 +5,15 @@ $header_text = get_field('header_text');
 $header_subtext = get_field('header_subtext');
 
 // carousel data
-if ($carouselData = get_field('carousel')) {
-    foreach ($carouselData as $slide) {
+if ( $carouselData = get_field( 'carousel' ) ) {
+    foreach ( $carouselData as $slide ) {
         $carouselImages[] = $slide['image']['url'];
     }
-    $carouselImagesAttr = implode(',', $carouselImages);
-    $headerStyle = '';
+    $carouselImagesAttr = implode( ',', $carouselImages );
+    $headerStyle        = '';
 } else {
     $carouselImagesAttr = '';
-    $headerStyle = 'dark';
+    $headerStyle        = 'dark';
 }
 
 // menu data
