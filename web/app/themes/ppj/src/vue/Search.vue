@@ -123,7 +123,7 @@
                     mapTypeControl: false,
                 },
                 titleText: 'Search for jobs',
-                placeHolderText: 'Enter your post code'
+                placeHolderText: 'Enter location'
             }
         },
 
