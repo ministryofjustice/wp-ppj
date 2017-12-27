@@ -11,7 +11,7 @@
         <div
                 class="job-summary__position"
                 v-if="position"
-        >{{position}}</div>
+        >Prison Officer</div>
         <div
                 class="job-summary__salary"
                 v-if="salary"
