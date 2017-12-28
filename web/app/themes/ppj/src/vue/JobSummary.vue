@@ -1,17 +1,15 @@
 <template>
     <div class="job-summary" v-cloak>
         <div
-                class="job-summary__distance"
-                v-if="distance"
-        >
-            <span
-                    class="job-summary__distance-miles"
-            >{{distance}}</span>
-        </div>
-        <div
                 class="job-summary__position"
                 v-if="position"
         >Prison Officer</div>
+        <div
+                class="job-summary__distance"
+                v-if="formattedDistance"
+        >
+          {{formattedDistance}}
+        </div>
         <div
                 class="job-summary__salary"
                 v-if="salary"
@@ -24,12 +22,11 @@
                     class="job-summary__prison-name"
                     v-if="prisonName"
             >
-                <a :href="prisonPageLink">{{prisonName}}</a>
+              {{prisonName}}
             </div>
-            <div
-                    class="job-summary__prison-city"
-                    v-if="prisonCity"
-            >{{prisonCity}}</div>
+          <div
+            class="job-summary__prison-city"
+          >London</div>
         </div>
         <a
                 class="job-summary__link"
@@ -49,6 +46,20 @@
             , 'prison-city': {default: ''}
             , 'url': {default: '/job-post.html'}
             , 'prison-page-link': {default: ''}
+        },
+      data() {
+        return {
+          formattedDistance: ' '
         }
+      },
+      watch: {
+          distance: function() {
+            if (this.distance) {
+              this.formattedDistance = parseFloat(this.distance).toFixed(1) + ' mi.';
+            } else {
+              this.formattedDistance =  ' ';
+            }
+          }
+      }
     }
 </script>
