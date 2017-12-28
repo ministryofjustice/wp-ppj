@@ -51,7 +51,13 @@
       watch: {
           distance: function() {
             if (this.distance) {
-              this.formattedDistance = parseFloat(this.distance).toFixed(1) + ' mi.';
+              let distanceStr = '';
+              if (this.distance > 10) {
+                distanceStr = Math.round(parseFloat(this.distance));
+              } else {
+                distanceStr = parseFloat(this.distance).toFixed(1);
+              }
+              this.formattedDistance =  distanceStr + ' mi.';
             } else {
               this.formattedDistance =  ' ';
             }
