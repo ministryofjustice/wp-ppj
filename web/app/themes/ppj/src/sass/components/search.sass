@@ -9,13 +9,14 @@
 
   &__input
     border: .2rem solid $color-medium
+    border-radius: 2em
     box-sizing: border-box
     display: block
     font-weight: $font-weight-bold
     height: 4rem
-    margin: $common-spacing/2 0
-    padding: $common-spacing/2
-    width: 94%
+    margin: $common-spacing 0
+    padding: $common-spacing/2 $common-spacing
+    width: 100%
 
   &__button-search
     background-color: $color-main
@@ -86,18 +87,93 @@
   &__view-container
     margin: $common-spacing/2 0
 
+  &__map-view
+    @include bp('portrait')
+      display: flex
+      flex-direction: row-reverse
+      justify-content: space-between
+
+  &__rectangle
+    @include bp('portrait')
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+
+  &__map-container
+    @include bp('portrait')
+      flex-basis: 66%
+
+  &__view-list-container
+
+    @include bp('portrait')
+      flex-basis: 33%
+      margin-right: $common-spacing
+      position: relative
+
+  &__view-list
+    @include bp('portrait')
+      overflow-y: auto
+      height: 100%
+
+    &-element
+      $border: .1rem solid $color-light
+      background-color: $color-white
+      border: $border
+      border-left: none
+      border-right: none
+      border-top: none
+      cursor: pointer
+      padding: $common-spacing/2 $common-spacing
+
+      &:first-child
+        border-top: $border
+
+      &:last-child
+        position: relative
+
+      // https://codepen.io/anon/pen/opBRLp
+      &:nth-last-child(2):after
+        background: linear-gradient(to top, $color-white, $color-transparent)
+        bottom: 0
+        content: ''
+        display: block
+        height: $common-spacing * 5
+        left: 0
+        position: absolute
+        right: 0
+
+      &:hover:nth-last-child(2):after
+        cursor: s-resize
+
+  &__square-box
+    @include bp('portrait')
+      height: 0
+      padding-bottom: 100%
+      position: relative
+      width: 100%
+
   &__map
     display: flex
     justify-content: center
     height: 20rem
     width: 100%
 
+    @include bp('portrait')
+      bottom: 0
+      height: 100%
+      left: 0
+      position: absolute
+      right: 0
+      top: 0
+
   &__map-marker
     $c: &
     $size: 1.5rem
     border-color: $color-dark
     border-style: solid
-    border-width: .2rem
+    border-width: .4rem
     border-radius: $size
     box-shadow: 0 0 3px 3px rgba(0,0,0,.2)
     cursor: pointer
@@ -106,17 +182,18 @@
     width: $size
 
     &--job-location-group
-      background-color: black
+      background-color: $color-white
+      border-color: $color-dark
 
       &#{$c}--selected // .search__map-marker--job-location-group.search__map-marker--selected
-        border-color: $color-white
+        border-color: $color-secondary
+        border-width: .6rem
 
     &--datum
       box-shadow: none
 
 
   &__job-post
-    border-bottom: .1rem solid $color-light
     font-size: $font-size-small
     line-height: 1.2
     padding: $common-spacing/2 0

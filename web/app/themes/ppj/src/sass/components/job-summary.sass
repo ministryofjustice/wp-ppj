@@ -4,7 +4,7 @@
   position: relative
 
   &__distance
-    height: 1em
+    height: 1.3em
 
     &-time
       color: #cccccc
@@ -27,3 +27,17 @@
 
   &__prison-name > a
     text-decoration: underline
+
+  &--selected
+
+    &:before
+      background-color: $color-secondary
+      border-radius: $common-spacing
+      content: ' '
+      display: block
+      height: 100%
+      width: $common-spacing / 2
+      position: absolute
+      left: - $common-spacing
+      top: 0
+      bottom: 0

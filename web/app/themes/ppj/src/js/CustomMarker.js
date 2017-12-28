@@ -6,11 +6,6 @@ function CustomMarker(latlng, map, args) {
 }
 
 function styleMarker(div, args) {
-
-    if (args.solid) {
-      
-    }
-
     if (args.selected) {
         div.classList.add('search__map-marker--selected');
     }
@@ -33,6 +28,11 @@ function changeSelectedMarker(div) {
     div.classList.add('search__map-marker--selected');
 }
 
+CustomMarker.changeSelectedMarkerByGroupId = function(groupId) {
+  const marker = document.querySelector('[data-group-id="' + groupId + '"]');
+  changeSelectedMarker(marker);
+};
+
 CustomMarker.prototype = new google.maps.OverlayView();
 
 CustomMarker.prototype.draw = function() {
@@ -44,6 +44,7 @@ CustomMarker.prototype.draw = function() {
         div = this.div = document.createElement('div');
         div.classList.add('search__map-marker');
         div.classList.add(self.args.class);
+        div.setAttribute('data-group-id', self.args.groupId);
         styleMarker(div, self.args);
 
         if (typeof(self.args.marker_id) !== 'undefined') {
@@ -53,10 +54,7 @@ CustomMarker.prototype.draw = function() {
         if (typeof self.args.clickCallback !== 'undefined'){
             google.maps.event.addDomListener(div, "click", function(event) {
                 google.maps.event.trigger(self, "click");
-                changeSelectedMarker(div);
-
                 self.args.clickCallback(self.args.groupId);
-
             });
         }
 
