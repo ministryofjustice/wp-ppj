@@ -93,7 +93,6 @@
 </template>
 
 <script>
-  import _ from 'lodash';
   import dummyJobs from '../js/dummyJobs';
   import CustomMarker from '../js/CustomMarker';
 
