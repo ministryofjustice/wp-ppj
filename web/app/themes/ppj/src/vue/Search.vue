@@ -106,6 +106,7 @@
 
     data() {
       return {
+        deviceIsMobile: false,
         searchResults: {
           activeView: 0,
           display: true,//false,
@@ -368,6 +369,12 @@
     },
 
     mounted() {
+      this.deviceIsMobile = (window.innerWidth < 768);
+      
+      if (this.deviceIsMobile) {
+        this.mapOptions.zoom = 6;
+      }
+
       this.createMap();
 
       if (this.searchResults.searchTerm) {
