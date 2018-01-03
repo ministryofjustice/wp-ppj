@@ -172,6 +172,11 @@
     },
 
     methods: {
+
+      isDeviceMobile() {
+        return (window.innerWidth < 768);
+      },
+
       toRadians(degrees) {
         return degrees * (Math.PI / 180);
       },
@@ -369,9 +374,8 @@
     },
 
     mounted() {
-      this.deviceIsMobile = (window.innerWidth < 768);
-      
-      if (this.deviceIsMobile) {
+
+      if (this.isDeviceMobile()) {
         this.mapOptions.zoom = 6;
       }
 
