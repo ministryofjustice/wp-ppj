@@ -33,7 +33,7 @@
 <script>
     export default {
         props: {
-            'distance': {default: 0}
+              'distance': {default: 0}
             , 'distance-time': {default: ''}
             , 'position': {default: ''}
             , 'salary': {default: ''}
@@ -43,25 +43,23 @@
             , 'prison-page-link': {default: ''}
             , 'selected': {default: false}
         },
-      data() {
-        return {
-          formattedDistance: ' '
-        }
-      },
-      watch: {
-          distance: function() {
-            if (this.distance) {
-              let distanceStr = '';
-              if (this.distance > 10) {
-                distanceStr = Math.round(parseFloat(this.distance));
-              } else {
-                distanceStr = parseFloat(this.distance).toFixed(1);
-              }
-              this.formattedDistance =  distanceStr + ' mi.';
-            } else {
-              this.formattedDistance =  ' ';
-            }
+
+      computed: {
+        formattedDistance: function() {
+
+          let distanceStr = '';
+          const suffix = ' mi.';
+
+          if (this.distance > 10) {
+            distanceStr = Math.round(parseFloat(this.distance)) + suffix;
+          } else if (this.distance > 0) {
+            distanceStr = parseFloat(this.distance).toFixed(1) + suffix;
+          } else {
+            distanceStr = ' ';
           }
+
+          return distanceStr;
+        }
       }
     }
 </script>

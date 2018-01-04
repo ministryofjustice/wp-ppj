@@ -259,12 +259,15 @@
       updateJobsDistance(lat, lng) {
         console.log('updateJobsDistance');
         for (let i = 0; i < this.searchResults.jobs.length; i++) {
-          this.searchResults.jobs[i].distance = this.calculateDistanceBetweenTwoLatLngPoints(
+
+          const newDistance = this.calculateDistanceBetweenTwoLatLngPoints(
             lat,
             lng,
             this.searchResults.jobs[i].prison_location.lat,
             this.searchResults.jobs[i].prison_location.lng
           );
+
+          this.searchResults.jobs[i].distance = newDistance;
         }
 
         this.searchResults.jobs.sort(function (a, b) {
