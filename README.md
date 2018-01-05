@@ -4,6 +4,40 @@ Use this template to bootstrap a new WordPress project for use in the MOJ docker
 
 It will provide you with a skeleton WordPress installation which runs locally in docker, and pre-configured with composer for dependency management.
 
+## NB
+In web/app/themes/ppj/package.json a dependency on the package
+marked@0.3.9 was created. 
+Marked@0.3.6 was originally just a dependency of laravel mix
+```└─┬ laravel-mix@1.7.2
+     └─┬ webpack-notifier@1.5.0
+       └─┬ node-notifier@4.6.1
+         └─┬ cli-usage@0.1.4
+           └── marked@0.3.6 
+```
+But github alerted us to the fact that this package has a known security vulnerability
+https://github.com/ministryofjustice/wp-ppj/network/dependencies#30432977
+
+So an updated version of this package (0.3.9) has been made a dependency of 
+web/app/themes/ppj/package.json
+```├─┬ laravel-mix@1.7.2
+   │ └─┬ webpack-notifier@1.5.0
+   │   └─┬ node-notifier@4.6.1
+   │     └─┬ cli-usage@0.1.4
+   │       └── marked@0.3.9  deduped
+   └── marked@0.3.9 
+   ```
+Once package cli-usage updates it dependency on marked@0.3.6, 
+we should drop our explicit dependency on marked@0.3.9 
+
+In addition, because package vue has been updated to 2.5.13, 
+the package vue-template-compiler (which is a dependency of package laravel-mix)
+was too old. 
+The version of package vue-template-compiler must be later 
+than the version of package vue.
+Therefore this project now has an explicit dependency on vue-template-compiler.
+This should be removed later if possible.
+
+
 ## Features
 
 - Based on [roots/bedrock](https://roots.io/bedrock)
