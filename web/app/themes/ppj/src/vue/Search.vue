@@ -171,13 +171,20 @@
         return visibleSearchResults;
       },
 
+      convertGroupIdToCoords(groupId) {
+        const array = groupId.split(',');
+        return {lat: array[0], lng: array[1]};
+      },
+
       focusOnJobLocationGroup(groupId) {
         this.updateSelectedJobLocationGroupId(groupId);
         CustomMarker.changeSelectedMarkerByGroupId(groupId);
+        const coords = this.convertGroupIdToCoords(groupId);
+        this.recenterMap(coords.lat, coords.lng);
       },
 
       recenterMap(lat, lng) {
-        this.map.setCenter(new google.maps.LatLng(lat, lng));
+        this.map.panTo(new google.maps.LatLng(lat, lng));
       },
 
       updateMapWithJobLocationGroupMarkers(jobLocationGroups) {
