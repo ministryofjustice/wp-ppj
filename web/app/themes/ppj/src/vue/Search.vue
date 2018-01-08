@@ -36,8 +36,8 @@
                       @click="focusOnJobLocationGroup(job.jobLocationGroupId)">
                     <job-summary :distance="job.distance"
                                  :distance-time="job.distanceTime"
-                                 :position="job.title"
-                                 :prison-city="job.organizationCity"
+                                 :position="job.role"
+                                 :prison-city="job.prison_location.town"
                                  :prison-name="job.prison_name"
                                  :prison-page-link="job.url"
                                  :salary="job.salary"
@@ -72,7 +72,7 @@
 </template>
 
 <script>
-  import dummyJobs from '../js/dummyJobs';
+  import axios from 'axios';
   import CustomMarker from '../js/CustomMarker';
 
   export default {
@@ -87,6 +87,8 @@
       return {
         deviceIsMobile: false,
 
+        vacanciesDataURL: 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/vacancies.json',
+
         searchResults: {
           activeView: 0,
           display: true,//false,
@@ -99,7 +101,7 @@
             forwardEnabled: true,
             backwardEnabled: false
           },
-          jobs: dummyJobs,
+          jobs: [],
           orderBy: 'distance',
           jobLocationGroups: {},
           orderedJobLocationGroups: [],
@@ -107,7 +109,6 @@
           searchTermMarker: {},
           selectedJobLocationGroupId: '',
           visibleJobLocationGroup: null,
-
         },
 
         mapSrc: '',
@@ -297,8 +298,6 @@
           document.getElementsByClassName('search__map')[0]
           , this.mapOptions
         );
-        this.createJobLocationGroups();
-        this.updateMapWithJobLocationGroupMarkers(this.searchResults.jobLocationGroups);
       },
 
       updateSearchTermMarker(lat, lng) {
@@ -408,12 +407,22 @@
       }
 
       this.createMap();
+      const self = this;
 
-      if (this.searchResults.searchTerm) {
-        this.search();
-      } else {
+      axios.get(this.vacanciesDataURL)
+        .then( response => {
+          self.searchResults.jobs = response.data;
+          self.createJobLocationGroups();
+          self.updateMapWithJobLocationGroupMarkers(self.searchResults.jobLocationGroups);
+          if (self.searchResults.searchTerm) {
+            self.search();
+          } else {
 
-      }
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   }
 </script>
