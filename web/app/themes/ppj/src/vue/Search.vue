@@ -161,18 +161,15 @@
         this.searchResults.selectedJobLocationGroupId = groupId;
       },
 
-      computeVisibleSearchResults(orderedJobLocationGroups, jobLocationGroupsPerPage, activePageNumber) {
-        const selectedJobLocationGroups = orderedJobLocationGroups.slice().splice(
-          jobLocationGroupsPerPage * activePageNumber,
-          jobLocationGroupsPerPage
-        );
-        const visibleSearchResults = [];
-        for (const i in selectedJobLocationGroups) {
-          for (const j in selectedJobLocationGroups[i]) {
-            visibleSearchResults.push(selectedJobLocationGroups[i][j]);
+      calculateActivePageFromGroupId(groupId) {
+        const groups = this.searchResults.orderedJobLocationGroups;
+        for (let i in groups) {
+          i = parseInt(i);
+          if (groups[i][0].jobLocationGroupId == groupId) {
+            this.searchResults.listView.activePage = Math.floor(i / this.searchResults.listView.resultsPerPage);
+            return;
           }
         }
-        return visibleSearchResults;
       },
 
       convertGroupIdToCoords(groupId) {
@@ -187,7 +184,7 @@
         this.recenterMap(coords.lat, coords.lng);
 
         if (this.deviceIsMobile) {
-
+          this.calculateActivePageFromGroupId(groupId);
         } else {
           document.querySelector(`.search__view-list-element[data-group-id='${groupId}']`).scrollIntoView();
         }
@@ -331,6 +328,7 @@
       },
 
       search() {
+        this.searchResults.listView.activePage = 0;
         new google.maps.Geocoder().geocode(
           {'address': 'UK ' + this.searchResults.searchTerm},
           this.processGeocoderResults
@@ -381,17 +379,23 @@
       },
 
       visibleSearchResults: function() {
-        let visibleSearchResults = [];
+        let results = [];
+
         if (this.deviceIsMobile) {
-          visibleSearchResults = this.computeVisibleSearchResults(
-            this.searchResults.orderedJobLocationGroups,
-            this.searchResults.listView.resultsPerPage,
-            this.searchResults.listView.activePage
-          )
+          const selectedJobLocationGroups = this.searchResults.orderedJobLocationGroups.slice().splice(
+            this.searchResults.listView.resultsPerPage * this.searchResults.listView.activePage,
+            this.searchResults.listView.resultsPerPage
+          );
+          for (const i in selectedJobLocationGroups) {
+            for (const j in selectedJobLocationGroups[i]) {
+              results.push(selectedJobLocationGroups[i][j]);
+            }
+          }
+
         } else {
-          visibleSearchResults = this.searchResults.jobs;
+          results = this.searchResults.jobs;
         }
-        return visibleSearchResults;
+        return results;
       }
     },
 
