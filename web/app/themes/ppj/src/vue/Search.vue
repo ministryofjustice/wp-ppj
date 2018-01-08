@@ -30,18 +30,21 @@
 
                 <ul class="search__view-list">
                   <li class="search__view-list-element"
-                      v-for="(job, index) in visibleSearchResults"
+                      :data-group-id="job.jobLocationGroupId"
                       :key="job.jobLocationGroupId"
+                      v-for="(job, index) in visibleSearchResults"
                       @click="focusOnJobLocationGroup(job.jobLocationGroupId)">
                     <job-summary :distance="job.distance"
                                  :distance-time="job.distanceTime"
                                  :position="job.title"
-                                 :salary="job.salary"
-                                 :prison-name="job.prison_name"
                                  :prison-city="job.organizationCity"
+                                 :prison-name="job.prison_name"
                                  :prison-page-link="job.url"
+                                 :salary="job.salary"
+                                 :selected="job.jobLocationGroupId == searchResults.selectedJobLocationGroupId"
+                                 :title="job.title"
                                  :url="job.url"
-                                 :selected="job.jobLocationGroupId == searchResults.selectedJobLocationGroupId">
+                    >
                     </job-summary>
                   </li>
                 </ul>
@@ -181,6 +184,12 @@
         CustomMarker.changeSelectedMarkerByGroupId(groupId);
         const coords = this.convertGroupIdToCoords(groupId);
         this.recenterMap(coords.lat, coords.lng);
+
+        if (this.deviceIsMobile) {
+
+        } else {
+          document.querySelector(`.search__view-list-element[data-group-id='${groupId}']`).scrollIntoView();
+        }
       },
 
       recenterMap(lat, lng) {
