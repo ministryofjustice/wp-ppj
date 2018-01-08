@@ -131,18 +131,20 @@
         border-top: $border
 
       &:last-child
-        position: relative
+        @include bp('portrait')
+          position: relative
 
       // https://codepen.io/anon/pen/opBRLp
       &:nth-last-child(2):after
-        background: linear-gradient(to top, $color-white, $color-transparent)
-        bottom: 0
-        content: ''
-        display: block
-        height: $common-spacing * 5
-        left: 0
-        position: absolute
-        right: 0
+        @include bp('portrait')
+          background: linear-gradient(to top, $color-white, $color-transparent)
+          bottom: 0
+          content: ''
+          display: block
+          height: $common-spacing * 5
+          left: 0
+          position: absolute
+          right: 0
 
       &:hover:nth-last-child(2):after
         cursor: s-resize
