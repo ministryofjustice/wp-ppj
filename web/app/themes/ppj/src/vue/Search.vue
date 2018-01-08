@@ -27,12 +27,12 @@
             </div>
             <div class="search__view-list-container">
               <div class="search__rectangle">
+
                 <ul class="search__view-list">
                   <li class="search__view-list-element"
-                      v-for="(job, index) in searchResults.visibleSearchResults"
+                      v-for="(job, index) in visibleSearchResults"
                       :key="job.jobLocationGroupId"
-                      @click="focusOnJobLocationGroup(job.jobLocationGroupId)"
-                  >
+                      @click="focusOnJobLocationGroup(job.jobLocationGroupId)">
                     <job-summary :distance="job.distance"
                                  :distance-time="job.distanceTime"
                                  :position="job.title"
@@ -41,51 +41,27 @@
                                  :prison-city="job.organizationCity"
                                  :prison-page-link="job.url"
                                  :url="job.url"
-                                 :selected="job.jobLocationGroupId == searchResults.selectedJobLocationGroupId"
-                    >
+                                 :selected="job.jobLocationGroupId == searchResults.selectedJobLocationGroupId">
                     </job-summary>
                   </li>
                 </ul>
+
+                <div class="search__pagination"
+                     v-if="deviceIsMobile">
+                  <button class="search__pagination-direction"
+                          :class="{'search__pagination-direction--active': (backwardEnabled == true)}"
+                          @click.stop.prevent="showPreviousPage"> <
+                  </button>
+                  {{searchResults.listView.activePage + 1}} of {{numberOfResultPages}}
+                  <button class="search__pagination-direction"
+                          :class="{'search__pagination-direction--active': (forwardEnabled == true)}"
+                          @click.stop.prevent="showNextPage"> >
+                  </button>
+                </div>
+
               </div>
             </div>
           </div>
-          <div class="search__list-view" v-show="searchResults.activeView == 1">
-            <ul class="search__list-view-list">
-              <li v-for="(job, index) in searchResults.visibleSearchResults"
-                  :key="index">
-                <job-summary :distance="job.distance"
-                             :distance-time="job.distanceTime"
-                             :position="job.title"
-                             :salary="job.salary"
-                             :prison-name="job.prison_name"
-                             :prison-city="job.organizationCity"
-                             :prison-page-link="job.url"
-                             :url="job.url">
-                </job-summary>
-              </li>
-            </ul>
-            <div class="search__pagination">
-              <button class="search__pagination-direction"
-                      :class="{'search__pagination-direction--active': (backwardEnabled == true)}"
-                      @click.stop.prevent="showPreviousPage"
-              > <
-              </button>
-
-              <button class="search__pagination-direction"
-                      :class="{'search__pagination-direction--active': (forwardEnabled == true)}"
-                      @click.stop.prevent="showNextPage"
-              > >
-              </button>
-
-              <button v-for="n in numberOfResultPages"
-                      class="search__pagination-link"
-                      :class="{'search__pagination-link--active': (searchResults.listView.activePage == (n - 1))}"
-                      @click.stop.prevent="showPage(n-1)"
-              >{{ n }}
-              </button>
-            </div>
-          </div>
-
         </div>
       </div>
     </form>
@@ -107,6 +83,7 @@
     data() {
       return {
         deviceIsMobile: false,
+
         searchResults: {
           activeView: 0,
           display: true,//false,
@@ -122,12 +99,16 @@
           jobs: dummyJobs,
           orderBy: 'distance',
           jobLocationGroups: {},
+          orderedJobLocationGroups: [],
+          searchTerm: '',
           searchTermMarker: {},
           selectedJobLocationGroupId: '',
           visibleJobLocationGroup: null,
-          visibleSearchResults: dummyJobs
+
         },
+
         mapSrc: '',
+
         mapOptions: {
           zoom: 7,
           center: new google.maps.LatLng(52.4832138, -1.5947146),
@@ -135,39 +116,10 @@
           streetViewControl: false,
           mapTypeControl: false,
         },
+
         titleText: 'Search for jobs',
+
         placeHolderText: 'Enter location'
-      }
-    },
-
-    computed: {
-      numberOfResultPages: function () {
-        const num = Math.ceil(this.searchResults.jobs.length / this.searchResults.listView.resultsPerPage);
-        return num;
-      },
-
-      defaultSearchResults: function () {
-        return this.searchResults.jobs;
-      },
-
-      backwardEnabled: function () {
-        return (this.searchResults.listView.activePage > 0);
-      },
-
-      forwardEnabled: function () {
-        return (this.searchResults.listView.activePage < (this.numberOfResultPages - 1));
-      }
-    },
-
-    watch: {
-      selectedJobLocationGroupId: function (selectedJobLocationGroupId) {
-        if (selectedJobLocationGroupId) {
-          this.searchResults.visibleJobLocationGroup = searchResults.jobLocationGroups[selectedJobLocationGroupId];
-        }
-      },
-
-      'searchResults.activeView': function () {
-        console.log('watch - searchResults.activeView');
       }
     },
 
@@ -205,26 +157,23 @@
         this.searchResults.selectedJobLocationGroupId = groupId;
       },
 
-      setVisibleSearchResults() {
-
-        if (window.innerWidth < 768) {
-          const
-            listView = this.searchResults.listView,
-            startIndex =
-              listView.activePage
-              * listView.resultsPerPage,
-            endIndex = startIndex + listView.resultsPerPage
-          ;
-          this.searchResults.visibleSearchResults = this.searchResults.jobs.slice(startIndex, endIndex);
-        } else {
-          this.searchResults.visibleSearchResults = this.searchResults.jobs;
+      computeVisibleSearchResults(orderedJobLocationGroups, jobLocationGroupsPerPage, activePageNumber) {
+        const selectedJobLocationGroups = orderedJobLocationGroups.slice().splice(
+          jobLocationGroupsPerPage * activePageNumber,
+          jobLocationGroupsPerPage
+        );
+        const visibleSearchResults = [];
+        for (const i in selectedJobLocationGroups) {
+          for (const j in selectedJobLocationGroups[i]) {
+            visibleSearchResults.push(selectedJobLocationGroups[i][j]);
+          }
         }
+        return visibleSearchResults;
       },
 
       focusOnJobLocationGroup(groupId) {
         this.updateSelectedJobLocationGroupId(groupId);
         CustomMarker.changeSelectedMarkerByGroupId(groupId);
-        this.setVisibleSearchResults();
       },
 
       recenterMap(latLngStr) {
@@ -237,7 +186,7 @@
           markerArgs.push({
             class: 'search__map-marker--job-location-group',
             solid: true,
-            amount: jobLocationGroups[group].length,
+            amount: jobLocationGroups[group].jobs.length,
             groupId: group,
             clickCallback: this.focusOnJobLocationGroup.bind(this, group)
           });
@@ -257,7 +206,8 @@
       },
 
       updateJobsDistance(lat, lng) {
-        console.log('updateJobsDistance');
+
+        // calculate distance
         for (let i = 0; i < this.searchResults.jobs.length; i++) {
 
           const newDistance = this.calculateDistanceBetweenTwoLatLngPoints(
@@ -273,11 +223,27 @@
         this.searchResults.jobs.sort(function (a, b) {
           return a.distance - b.distance;
         });
+
+        this.searchResults.orderedJobLocationGroups = [];
+        for (const group in this.searchResults.jobLocationGroups) {
+          const newDistance = this.calculateDistanceBetweenTwoLatLngPoints(
+            lat,
+            lng,
+            this.searchResults.jobLocationGroups[group].jobs[0].prison_location.lat,
+            this.searchResults.jobLocationGroups[group].jobs[0].prison_location.lng
+          );
+          this.searchResults.jobLocationGroups[group].distance = newDistance;
+          this.searchResults.orderedJobLocationGroups.push(this.searchResults.jobLocationGroups[group].jobs);
+        }
+
+        this.searchResults.orderedJobLocationGroups.sort(function (a, b) {
+          return a[0].distance - b[0].distance;
+        });
       },
 
       createJobLocationGroups() {
-        console.log('createJobLocationGroups');
 
+        // iterate over the jobs and put them in the correct jobLocationGroup
         const jobs = this.searchResults.jobs;
         const jobLocationGroups = {};
         let closestJobLocationGroupDistance = Number.MAX_SAFE_INTEGER;
@@ -287,9 +253,9 @@
           const latLngStr = jobs[i].prison_location.lat + ',' + jobs[i].prison_location.lng;
 
           if (typeof jobLocationGroups[latLngStr] == 'undefined') {
-            jobLocationGroups[latLngStr] = [jobs[i]];
+            jobLocationGroups[latLngStr] = {jobs: [jobs[i]]};
           } else {
-            jobLocationGroups[latLngStr].push(jobs[i]);
+            jobLocationGroups[latLngStr].jobs.push(jobs[i]);
           }
 
           jobs[i].jobLocationGroupId = latLngStr;
@@ -301,6 +267,13 @@
         }
         this.searchResults.jobLocationGroups = jobLocationGroups;
         this.searchResults.selectedJobLocationGroupId = closestJobLocationGroupId;
+
+        // initialize orderedJobLocationGroups array
+        this.searchResults.orderedJobLocationGroups = [];
+        for (const id in this.searchResults.jobLocationGroups) {
+          this.searchResults.orderedJobLocationGroups.push(this.searchResults.jobLocationGroups[id].jobs);
+        }
+
       },
 
       createMap() {
@@ -325,7 +298,6 @@
       },
 
       processGeocoderResults(results, status) {
-        console.log('processGeocoderResults');
         if (status == google.maps.GeocoderStatus.OK) {
           console.log('processGeocoderResults status is ok');
           const
@@ -335,7 +307,6 @@
           ;
 
           this.updateJobsDistance(lat, lng);
-          this.setVisibleSearchResults();
           this.updateSearchTermMarker(lat, lng);
         } else {
           // TODO handle no connection to google geocoder api
@@ -344,7 +315,6 @@
       },
 
       search() {
-        console.log('search', this.searchResults.searchTerm);
         new google.maps.Geocoder().geocode(
           {'address': this.searchResults.searchTerm},
           this.processGeocoderResults
@@ -376,9 +346,47 @@
       }
     },
 
+    computed: {
+      numberOfResultPages: function () {
+        const num = Math.ceil(this.searchResults.orderedJobLocationGroups.length / this.searchResults.listView.resultsPerPage);
+        return num;
+      },
+
+      defaultSearchResults: function () {
+        return this.searchResults.jobs;
+      },
+
+      backwardEnabled: function () {
+        return (this.searchResults.listView.activePage > 0);
+      },
+
+      forwardEnabled: function () {
+        return (this.searchResults.listView.activePage < (this.numberOfResultPages - 1));
+      },
+
+      visibleSearchResults: function() {
+        let visibleSearchResults = [];
+        if (this.deviceIsMobile) {
+          visibleSearchResults = this.computeVisibleSearchResults(
+            this.searchResults.orderedJobLocationGroups,
+            this.searchResults.listView.resultsPerPage,
+            this.searchResults.listView.activePage
+          )
+        } else {
+          visibleSearchResults = this.searchResults.jobs;
+        }
+        return visibleSearchResults;
+      }
+    },
+
+    watch: {
+
+    },
+
     mounted() {
 
       if (this.isDeviceMobile()) {
+        this.deviceIsMobile = true;
         this.mapOptions.zoom = 6;
       }
 
@@ -387,7 +395,7 @@
       if (this.searchResults.searchTerm) {
         this.search();
       } else {
-        this.setVisibleSearchResults();
+
       }
     }
   }
