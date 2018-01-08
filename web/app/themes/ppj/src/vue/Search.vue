@@ -316,7 +316,7 @@
 
       search() {
         new google.maps.Geocoder().geocode(
-          {'address': this.searchResults.searchTerm},
+          {'address': 'UK ' + this.searchResults.searchTerm},
           this.processGeocoderResults
         );
       },
