@@ -176,8 +176,8 @@
         CustomMarker.changeSelectedMarkerByGroupId(groupId);
       },
 
-      recenterMap(latLngStr) {
-
+      recenterMap(lat, lng) {
+        this.map.setCenter(new google.maps.LatLng(lat, lng));
       },
 
       updateMapWithJobLocationGroupMarkers(jobLocationGroups) {
@@ -308,6 +308,7 @@
 
           this.updateJobsDistance(lat, lng);
           this.updateSearchTermMarker(lat, lng);
+          this.recenterMap(lat, lng);
         } else {
           // TODO handle no connection to google geocoder api
           alert('Geocode was not successful for the following reason: ' + status);
