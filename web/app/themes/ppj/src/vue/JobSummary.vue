@@ -10,7 +10,7 @@
       {{formattedDistance}}
     </div>
     <div class="job-summary__salary"
-         v-if="salary">{{salary}}
+         v-if="formattedSalary">{{formattedSalary}}
     </div>
     <div class="job-summary__prison"
          v-if="prisonName || prisonCity">
@@ -68,6 +68,10 @@
             break;
         }
         return formattedRoleText;
+      },
+
+      formattedSalary: function() {
+        return '£' + Intl.NumberFormat().format(this.salary)
       }
     }
   }
