@@ -7,6 +7,15 @@
   &__form
     position: relative
 
+  &__geolocation
+    font-size: $font-size-small
+    font-weight: $font-weight-bold
+    text-decoration: underline
+
+    &--is-busy
+      color: $color-light
+      transition: color $main-transition-duration
+
   &__input
     border: .2rem solid $color-medium
     border-radius: 2em

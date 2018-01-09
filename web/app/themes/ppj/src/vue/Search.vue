@@ -16,6 +16,14 @@
         <div class="search__button-search-rectangle"></div>
       </button>
 
+      <a class="search__geolocation"
+         :class="{'search__geolocation--is-busy': (geoLocationIsBusy == true)}"
+         v-if="geoLocationIsAvailable"
+         @click.stop.prevent="useGeoLocation"
+      >
+        Use my current location
+      </a>
+
       <div class="search__results" v-show="searchResults.display">
 
         <div class="search__view-container">
@@ -102,6 +110,10 @@
     data() {
       return {
         deviceIsMobile: false,
+
+        geoLocationIsAvailable: false,
+
+        geoLocationIsBusy: false,
 
         vacanciesDataURL: 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/vacancies.json',
 
@@ -325,18 +337,22 @@
         }
       },
 
+      handleNewSearchLocation(lat, lng) {
+        this.searchResults.listView.activePage = 0;
+        this.updateJobsDistance(lat, lng);
+        this.updateSearchTermMarker(lat, lng);
+        this.recenterMap(lat, lng);
+      },
+
       processGeocoderResults(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           console.log('processGeocoderResults status is ok');
-          const
-            location = results[0].geometry.location,
-            lat = location.lat(),
-            lng = location.lng()
-          ;
 
-          this.updateJobsDistance(lat, lng);
-          this.updateSearchTermMarker(lat, lng);
-          this.recenterMap(lat, lng);
+          this.handleNewSearchLocation(
+            results[0].geometry.location.lat(),
+            results[0].geometry.location.lng()
+          );
+
         } else {
           // TODO handle no connection to google geocoder api
           alert('Geocode was not successful for the following reason: ' + status);
@@ -344,11 +360,20 @@
       },
 
       search() {
-        this.searchResults.listView.activePage = 0;
         new google.maps.Geocoder().geocode(
           {'address': 'UK ' + this.searchResults.searchTerm},
           this.processGeocoderResults
         );
+      },
+
+      useGeoLocation() {
+        this.searchResults.searchTerm = '';
+        this.geoLocationIsBusy = true;
+        navigator.geolocation.getCurrentPosition(position => {
+          console.log(position.coords.latitude, position.coords.longitude);
+          this.handleNewSearchLocation(position.coords.latitude, position.coords.longitude);
+          this.geoLocationIsBusy = false;
+        });
       },
 
       showMapView() {
@@ -434,14 +459,19 @@
         this.mapOptions.zoom = 6;
       }
 
-      this.createMap();
-      const self = this;
+      if ("geolocation" in navigator) {
+        this.geoLocationIsAvailable = true;
+      }
 
+      this.createMap();
+
+      const self = this;
       axios.get(this.vacanciesDataURL)
         .then( response => {
           self.searchResults.jobs = response.data;
           self.createJobLocationGroups();
           self.updateMapWithJobLocationGroupMarkers(self.searchResults.jobLocationGroups);
+
           if (self.searchResults.searchTerm) {
             self.search();
           } else {
