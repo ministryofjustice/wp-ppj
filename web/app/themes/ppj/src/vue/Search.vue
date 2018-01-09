@@ -41,7 +41,7 @@
                       :data-group-id="job.jobLocationGroupId"
                       :key="job.jobLocationGroupId"
                       v-for="(job, index) in visibleSearchResults"
-                      @click="focusOnJobLocationGroup(job.jobLocationGroupId)">
+                      @click="handleVacancyClick(job.jobLocationGroupId)">
                     <job-summary :distance="job.distance"
                                  :distance-time="job.distanceTime"
                                  :position="job.role"
@@ -141,6 +141,8 @@
 
         mapSrc: '',
 
+        defaultZoomLevel: 7,
+
         mapOptions: {
           zoom: 7,
           center: new google.maps.LatLng(52.4832138, -1.5947146),
@@ -210,12 +212,20 @@
         CustomMarker.changeSelectedMarkerByGroupId(groupId);
         const coords = this.convertGroupIdToCoords(groupId);
         this.recenterMap(coords.lat, coords.lng);
+        this.map.setZoom(this.defaultZoomLevel + 2);
+      },
 
+      handleMapMarkerClick(groupId) {
         if (this.deviceIsMobile) {
           this.calculateActivePageFromGroupId(groupId);
         } else {
           document.querySelector(`.search__view-list-element[data-group-id='${groupId}']`).scrollIntoView();
         }
+        this.focusOnJobLocationGroup(groupId);
+      },
+
+      handleVacancyClick(groupId) {
+        this.focusOnJobLocationGroup(groupId);
       },
 
       recenterMap(lat, lng) {
@@ -230,7 +240,7 @@
             solid: true,
             amount: jobLocationGroups[group].jobs.length,
             groupId: group,
-            clickCallback: this.focusOnJobLocationGroup.bind(this, group)
+            clickCallback: this.handleMapMarkerClick.bind(this, group)
           });
         }
         for (let i in markerArgs) {
@@ -319,6 +329,7 @@
       },
 
       createMap() {
+        this.mapOptions.zoom = this.defaultZoomLevel;
         this.map = new google.maps.Map(
           document.getElementsByClassName('search__map')[0]
           , this.mapOptions
