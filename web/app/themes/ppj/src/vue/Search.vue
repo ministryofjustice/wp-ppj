@@ -51,15 +51,31 @@
 
                 <div class="search__pagination"
                      v-if="deviceIsMobile">
+                  <a class="search__pagination-skip-link"
+                     :class="{'search__pagination-skip-link--enabled': (backwardEnabled == true)}"
+                     @click.stop.prevent="showFirstPage">
+                    first</a>
                   <button class="search__pagination-direction"
-                          :class="{'search__pagination-direction--active': (backwardEnabled == true)}"
+                          :class="{'search__pagination-direction--enabled': (backwardEnabled == true)}"
                           @click.stop.prevent="showPreviousPage"> <
                   </button>
-                  {{searchResults.listView.activePage + 1}} of {{numberOfResultPages}}
+                  <div class="search__pagination-page-numbers-container">
+                    <div class="search__pagination-current-page-number">
+                      {{searchResults.listView.activePage + 1}}
+                    </div>
+                    <div class="search__pagination-of">of</div>
+                    <div class="search__pagination-total-pages">
+                      {{numberOfResultPages}}
+                    </div>
+                  </div>
                   <button class="search__pagination-direction"
-                          :class="{'search__pagination-direction--active': (forwardEnabled == true)}"
+                          :class="{'search__pagination-direction--enabled': (forwardEnabled == true)}"
                           @click.stop.prevent="showNextPage"> >
                   </button>
+                  <a class="search__pagination-skip-link"
+                     :class="{'search__pagination-skip-link--enabled': (forwardEnabled == true)}"
+                     @click.stop.prevent="showLastPage"
+                  >last</a>
                 </div>
 
               </div>
@@ -357,6 +373,14 @@
         if (this.searchResults.listView.activePage > 0) {
           this.searchResults.listView.activePage--
         }
+      },
+
+      showFirstPage() {
+        this.showPage(0);
+      },
+
+      showLastPage() {
+        this.showPage(this.numberOfResultPages - 1);
       }
     },
 

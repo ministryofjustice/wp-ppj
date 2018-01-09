@@ -202,13 +202,41 @@
 
   &__pagination
     display: flex
+    font-size: $font-size-small
     justify-content: space-between
     margin: $common-spacing/2 0
+
+    &-skip-link
+      color: $color-light
+      display: flex
+      align-items: center
+      margin: 0 $common-spacing
+      text-decoration: underline
+
+      &--enabled
+        color: $color-dark
+
+    &-page-numbers-container
+      align-items: center
+      display: flex
+      justify-content: space-around
+      margin: 0 $common-spacing
+
+      & > *
+        width: 2rem
+
+    &-of
+      text-align: center
+
+    &-current-page-number
+      text-align: right
+
+    &-total-pages
 
     &-direction, &-link
       border-width: .2rem
       border-style: solid
-      border-radius: 2rem
+      border-radius: 1rem
       display: block
       font-size: $font-size-large
       font-weight: $font-weight-bold
@@ -217,7 +245,6 @@
       width: 4rem
 
     &-direction
-      order: 1000
       border-color: $color-light
       color: $color-light
       cursor: initial
@@ -225,17 +252,16 @@
       &:first-child
         order: initial
 
-      &:hover ~ .search__pagination-link--active
+      &:hover ~ .search__pagination-link--enabled
         border-color: $color-dark
         color: $color-dark
 
-      &--active
-        background-color: $color-main
-        border-color: $color-main
-        color: $color-white
+      &--enabled
+        border-color: $color-dark
+        color: $color-dark
         cursor: pointer
 
-        &:hover ~ .search__pagination-link--active
+        &:hover ~ .search__pagination-link--enabled
           border-color: $color-dark
           color: $color-dark
 
@@ -254,7 +280,7 @@
         &-link
           color: $color-light
 
-          &--active
+          &--enabled
             border-color: $color-dark
             color: $color-dark
 
