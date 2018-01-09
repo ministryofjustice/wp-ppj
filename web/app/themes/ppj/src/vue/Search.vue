@@ -104,6 +104,10 @@
       'default-search-term': {
         default: '',
         type: String
+      },
+      'title': {
+        default: '',
+        type: String
       }
     },
 
@@ -151,7 +155,7 @@
           mapTypeControl: false,
         },
 
-        titleText: 'Search for jobs',
+        titleText: this.title,
 
         placeHolderText: 'Enter location'
       }

@@ -6,5 +6,7 @@ $td = $ppj_template_data;
 ?>
 
 <div class="l-full">
-    <search default-search-term="<?= $td['default_search_term'] ?>"></search>
+    <search default-search-term="<?= $td['default_search_term'] ?>"
+            title="<?= $td['title'] ?>"
+    ></search>
 </div>
