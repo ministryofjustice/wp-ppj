@@ -1,20 +1,45 @@
 .search
   margin: 0 $common-spacing
 
+  @include bp('portrait')
+    text-align: center
+
   &__title
     @extend .common-header
+    @include bp('portrait')
+      margin: auto
+      margin-bottom: $common-spacing
+
+  &__prompt
+    @include bp('portrait')
+      font-size: $font-size-medium
 
   &__form
     position: relative
 
+    @include bp('portrait')
+      margin: auto
+      width: 40rem
+
   &__geolocation
+    display: flex
     font-size: $font-size-small
     font-weight: $font-weight-bold
+    margin: $common-spacing 0
     text-decoration: underline
+    transition: $main-transition-duration
+
+    @include bp('portrait')
+      justify-content: center
+
+    &-icon
+      $size: 2rem
+      height: $size
+      margin-right: .4rem
+      width: $size
 
     &--is-busy
-      color: $color-light
-      transition: color $main-transition-duration
+      opacity: 0.5
 
   &__input
     border: .2rem solid $color-medium

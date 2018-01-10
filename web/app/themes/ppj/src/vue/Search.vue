@@ -1,7 +1,7 @@
 <template>
   <div class="search" v-cloak>
     <h2 class="search__title">{{ titleText }}</h2>
-    <p>Location (postcode, town, region)</p>
+    <p class="search_prompt">Location (postcode, town, region)</p>
     <form class="search__form">
       <input type="text"
              class="search__input"
@@ -21,77 +21,81 @@
          v-if="geoLocationIsAvailable"
          @click.stop.prevent="useGeoLocation"
       >
+        <img class="search__geolocation-icon"
+          src="/app/themes/ppj/dest/img/svg/geolocation.svg"
+          alt="Icon for geolocation button">
         Use my current location
       </a>
 
-      <div class="search__results" v-show="searchResults.display">
+    </form>
 
-        <div class="search__view-container">
-          <div class="search__map-view" v-show="searchResults.activeView == 0">
-            <div class="search__map-container">
-              <div class="search__square-box">
-                <div class="search__map"></div>
-              </div>
+    <div class="search__results" v-show="searchResults.display">
+
+      <div class="search__view-container">
+        <div class="search__map-view" v-show="searchResults.activeView == 0">
+          <div class="search__map-container">
+            <div class="search__square-box">
+              <div class="search__map"></div>
             </div>
-            <div class="search__view-list-container">
-              <div class="search__rectangle">
+          </div>
+          <div class="search__view-list-container">
+            <div class="search__rectangle">
 
-                <ul class="search__view-list">
-                  <li class="search__view-list-element"
-                      :data-group-id="job.jobLocationGroupId"
-                      :key="job.jobLocationGroupId"
-                      v-for="(job, index) in visibleSearchResults"
-                      @click="handleVacancyClick(job.jobLocationGroupId)">
-                    <job-summary :distance="job.distance"
-                                 :distance-time="job.distanceTime"
-                                 :position="job.role"
-                                 :prison-city="job.prison_location.town"
-                                 :prison-name="job.prison_name"
-                                 :prison-page-link="job.url"
-                                 :salary="job.salary"
-                                 :selected="job.jobLocationGroupId == searchResults.selectedJobLocationGroupId"
-                                 :title="job.title"
-                                 :url="job.url"
-                    >
-                    </job-summary>
-                  </li>
-                </ul>
+              <ul class="search__view-list">
+                <li class="search__view-list-element"
+                    :data-group-id="job.jobLocationGroupId"
+                    :key="job.jobLocationGroupId"
+                    v-for="(job, index) in visibleSearchResults"
+                    @click="handleVacancyClick(job.jobLocationGroupId)">
+                  <job-summary :distance="job.distance"
+                               :distance-time="job.distanceTime"
+                               :position="job.role"
+                               :prison-city="job.prison_location.town"
+                               :prison-name="job.prison_name"
+                               :prison-page-link="job.url"
+                               :salary="job.salary"
+                               :selected="job.jobLocationGroupId == searchResults.selectedJobLocationGroupId"
+                               :title="job.title"
+                               :url="job.url"
+                  >
+                  </job-summary>
+                </li>
+              </ul>
 
-                <div class="search__pagination"
-                     v-if="deviceIsMobile">
-                  <a class="search__pagination-skip-link"
-                     :class="{'search__pagination-skip-link--enabled': (backwardEnabled == true)}"
-                     @click.stop.prevent="showFirstPage">
-                    first</a>
-                  <button class="search__pagination-direction"
-                          :class="{'search__pagination-direction--enabled': (backwardEnabled == true)}"
-                          @click.stop.prevent="showPreviousPage"> <
-                  </button>
-                  <div class="search__pagination-page-numbers-container">
-                    <div class="search__pagination-current-page-number">
-                      {{searchResults.listView.activePage + 1}}
-                    </div>
-                    <div class="search__pagination-of">of</div>
-                    <div class="search__pagination-total-pages">
-                      {{numberOfResultPages}}
-                    </div>
+              <div class="search__pagination"
+                   v-if="deviceIsMobile">
+                <a class="search__pagination-skip-link"
+                   :class="{'search__pagination-skip-link--enabled': (backwardEnabled == true)}"
+                   @click.stop.prevent="showFirstPage">
+                  first</a>
+                <button class="search__pagination-direction"
+                        :class="{'search__pagination-direction--enabled': (backwardEnabled == true)}"
+                        @click.stop.prevent="showPreviousPage"> <
+                </button>
+                <div class="search__pagination-page-numbers-container">
+                  <div class="search__pagination-current-page-number">
+                    {{searchResults.listView.activePage + 1}}
                   </div>
-                  <button class="search__pagination-direction"
-                          :class="{'search__pagination-direction--enabled': (forwardEnabled == true)}"
-                          @click.stop.prevent="showNextPage"> >
-                  </button>
-                  <a class="search__pagination-skip-link"
-                     :class="{'search__pagination-skip-link--enabled': (forwardEnabled == true)}"
-                     @click.stop.prevent="showLastPage"
-                  >last</a>
+                  <div class="search__pagination-of">of</div>
+                  <div class="search__pagination-total-pages">
+                    {{numberOfResultPages}}
+                  </div>
                 </div>
-
+                <button class="search__pagination-direction"
+                        :class="{'search__pagination-direction--enabled': (forwardEnabled == true)}"
+                        @click.stop.prevent="showNextPage"> >
+                </button>
+                <a class="search__pagination-skip-link"
+                   :class="{'search__pagination-skip-link--enabled': (forwardEnabled == true)}"
+                   @click.stop.prevent="showLastPage"
+                >last</a>
               </div>
+
             </div>
           </div>
         </div>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
