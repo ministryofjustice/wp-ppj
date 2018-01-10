@@ -215,29 +215,38 @@
         return {lat: array[0], lng: array[1]};
       },
 
+      zoom() {
+        if (this.map.getZoom() == this.defaultZoomLevel) {
+          this.map.setZoom(this.defaultZoomLevel + 2);
+        } else {
+
+        }
+      },
+
       focusOnJobLocationGroup(groupId) {
         this.updateSelectedJobLocationGroupId(groupId);
         CustomMarker.changeSelectedMarkerByGroupId(groupId);
-        const coords = this.convertGroupIdToCoords(groupId);
-        this.recenterMap(coords.lat, coords.lng);
-        this.map.setZoom(this.defaultZoomLevel + 2);
+        this.zoom();
+      },
+
+      recenterMap(lat, lng) {
+        this.map.panTo(new google.maps.LatLng(lat, lng));
       },
 
       handleMapMarkerClick(groupId) {
         if (this.deviceIsMobile) {
           this.calculateActivePageFromGroupId(groupId);
         } else {
-          document.querySelector(`.search__view-list-element[data-group-id='${groupId}']`).scrollIntoView();
+          document.querySelector(`.search__view-list-element[data-group-id='${groupId}']`)
+            .scrollIntoView({ behavior: 'smooth' });
         }
         this.focusOnJobLocationGroup(groupId);
       },
 
       handleVacancyClick(groupId) {
+        const coords = this.convertGroupIdToCoords(groupId);
+        this.recenterMap(coords.lat, coords.lng);
         this.focusOnJobLocationGroup(groupId);
-      },
-
-      recenterMap(lat, lng) {
-        this.map.panTo(new google.maps.LatLng(lat, lng));
       },
 
       updateMapWithJobLocationGroupMarkers(jobLocationGroups) {
