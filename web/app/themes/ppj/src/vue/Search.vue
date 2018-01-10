@@ -218,7 +218,7 @@
 
       zoom() {
         if (this.map.getZoom() == this.defaultZoomLevel) {
-          this.map.setZoom(this.defaultZoomLevel + 2);
+          this.map.setZoom(this.defaultZoomLevel + 1);
         } else {
 
         }
