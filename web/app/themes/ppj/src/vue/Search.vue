@@ -102,6 +102,7 @@
 <script>
   import axios from 'axios';
   import CustomMarker from '../js/CustomMarker';
+  import dummyJobs from '../js/dummyJobs';
 
   export default {
     props: {
@@ -137,7 +138,7 @@
             forwardEnabled: true,
             backwardEnabled: false
           },
-          jobs: [],
+          jobs: dummyJobs,
           orderBy: 'distance',
           jobLocationGroups: {},
           orderedJobLocationGroups: [],
@@ -496,7 +497,7 @@
       const self = this;
       axios.get(this.vacanciesDataURL)
         .then( response => {
-          self.searchResults.jobs = response.data;
+          //self.searchResults.jobs = response.data; TODO revert
           self.createJobLocationGroups();
           self.updateMapWithJobLocationGroupMarkers(self.searchResults.jobLocationGroups);
 
