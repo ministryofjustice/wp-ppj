@@ -227,6 +227,9 @@
       focusOnJobLocationGroup(groupId) {
         this.updateSelectedJobLocationGroupId(groupId);
         CustomMarker.changeSelectedMarkerByGroupId(groupId);
+
+        const coords = this.convertGroupIdToCoords(groupId);
+        this.recenterMap(coords.lat, coords.lng);
         this.zoom();
       },
 
@@ -245,8 +248,6 @@
       },
 
       handleVacancyClick(groupId) {
-        const coords = this.convertGroupIdToCoords(groupId);
-        this.recenterMap(coords.lat, coords.lng);
         this.focusOnJobLocationGroup(groupId);
       },
 
