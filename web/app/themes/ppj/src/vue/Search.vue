@@ -421,6 +421,7 @@
         this.geoLocationIsBusy = true;
         navigator.geolocation.getCurrentPosition(position => {
           console.log(position.coords.latitude, position.coords.longitude);
+          this.searchResults.searchTerm = position.coords.latitude + ',' + position.coords.longitude;
           this.handleNewSearchLocation(position.coords.latitude, position.coords.longitude);
           this.geoLocationIsBusy = false;
         });
