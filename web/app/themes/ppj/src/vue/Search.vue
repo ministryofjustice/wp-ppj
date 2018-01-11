@@ -45,8 +45,8 @@
               <ul class="search__view-list">
                 <li class="search__view-list-element"
                     :data-group-id="job.jobLocationGroupId"
-                    :key="job.jobLocationGroupId"
                     v-for="(job, index) in visibleSearchResults"
+                    :key="index"
                     @click="handleVacancyClick(job.jobLocationGroupId)">
                   <job-summary :distance="job.distance"
                                :distance-time="job.distanceTime"
