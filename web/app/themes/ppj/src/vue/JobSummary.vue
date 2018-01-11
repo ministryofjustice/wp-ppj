@@ -47,7 +47,7 @@
       formattedDistance: function () {
 
         let distanceStr = '';
-        const suffix = ' mi.';
+        const suffix = ' miles';
 
         if (this.distance > 10) {
           distanceStr = Math.round(parseFloat(this.distance)) + suffix;
