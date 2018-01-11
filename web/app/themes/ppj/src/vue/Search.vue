@@ -158,6 +158,7 @@
           disableDefaultUI: false,
           streetViewControl: false,
           mapTypeControl: false,
+          gestureHandling: 'greedy',
         },
 
         titleText: this.title,
