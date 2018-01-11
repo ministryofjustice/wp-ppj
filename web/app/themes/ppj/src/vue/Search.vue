@@ -39,6 +39,7 @@
             </div>
           </div>
           <div class="search__view-list-container">
+            <div class="search__jobs-available"><span>{{searchResults.jobs.length }}</span> jobs available:</div>
             <div class="search__rectangle">
 
               <ul class="search__view-list">
@@ -61,36 +62,34 @@
                   </job-summary>
                 </li>
               </ul>
-
-              <div class="search__pagination"
-                   v-if="deviceIsMobile">
-                <a class="search__pagination-skip-link"
-                   :class="{'search__pagination-skip-link--enabled': (backwardEnabled == true)}"
-                   @click.stop.prevent="showFirstPage">
-                  first</a>
-                <button class="search__pagination-direction"
-                        :class="{'search__pagination-direction--enabled': (backwardEnabled == true)}"
-                        @click.stop.prevent="showPreviousPage"> <
-                </button>
-                <div class="search__pagination-page-numbers-container">
-                  <div class="search__pagination-current-page-number">
-                    {{searchResults.listView.activePage + 1}}
-                  </div>
-                  <div class="search__pagination-of">of</div>
-                  <div class="search__pagination-total-pages">
-                    {{numberOfResultPages}}
-                  </div>
+            </div>
+            <div class="search__pagination"
+                 v-if="deviceIsMobile">
+              <a class="search__pagination-skip-link"
+                 :class="{'search__pagination-skip-link--enabled': (backwardEnabled == true)}"
+                 @click.stop.prevent="showFirstPage">
+                first</a>
+              <button class="search__pagination-direction"
+                      :class="{'search__pagination-direction--enabled': (backwardEnabled == true)}"
+                      @click.stop.prevent="showPreviousPage"> <
+              </button>
+              <div class="search__pagination-page-numbers-container">
+                <div class="search__pagination-current-page-number">
+                  {{searchResults.listView.activePage + 1}}
                 </div>
-                <button class="search__pagination-direction"
-                        :class="{'search__pagination-direction--enabled': (forwardEnabled == true)}"
-                        @click.stop.prevent="showNextPage"> >
-                </button>
-                <a class="search__pagination-skip-link"
-                   :class="{'search__pagination-skip-link--enabled': (forwardEnabled == true)}"
-                   @click.stop.prevent="showLastPage"
-                >last</a>
+                <div class="search__pagination-of">of</div>
+                <div class="search__pagination-total-pages">
+                  {{numberOfResultPages}}
+                </div>
               </div>
-
+              <button class="search__pagination-direction"
+                      :class="{'search__pagination-direction--enabled': (forwardEnabled == true)}"
+                      @click.stop.prevent="showNextPage"> >
+              </button>
+              <a class="search__pagination-skip-link"
+                 :class="{'search__pagination-skip-link--enabled': (forwardEnabled == true)}"
+                 @click.stop.prevent="showLastPage"
+              >last</a>
             </div>
           </div>
         </div>

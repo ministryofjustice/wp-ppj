@@ -1,4 +1,5 @@
 .search
+  $border: .1rem solid $color-light
   margin: 0 $common-spacing
 
   @include bp('portrait')
@@ -88,6 +89,15 @@
       transform: rotate(45deg)
       width: .4rem
 
+  &__jobs-available
+    font-weight: $font-weight-bold
+    margin: $common-spacing/2 0
+
+    @include bp('portrait')
+      text-align: left
+      position: relative
+      top: 4rem
+
   &__view-controls
     display: flex
     justify-content: space-between
@@ -103,6 +113,12 @@
       justify-content: space-between
 
   &__rectangle
+    border-bottom: $border
+    border-top: $border
+    border-bottom-width: .2rem
+    border-top-width: .2rem
+    box-sizing: border-box
+
     @include bp('portrait')
       position: absolute
       top: 0
@@ -115,7 +131,6 @@
       flex-basis: 66%
 
   &__view-list-container
-
     @include bp('portrait')
       flex-basis: 33%
       margin-right: $common-spacing
@@ -127,17 +142,13 @@
       height: 100%
 
     &-element
-      $border: .1rem solid $color-light
       background-color: $color-white
-      border: $border
-      border-left: none
-      border-right: none
-      border-top: none
+      border-top: $border
       cursor: pointer
       padding: $common-spacing/2 $common-spacing
 
       &:first-child
-        border-top: $border
+        border-top: none
 
       &:last-child
         @include bp('portrait')
