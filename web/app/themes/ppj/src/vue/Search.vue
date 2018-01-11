@@ -345,6 +345,24 @@
           this.searchResults.orderedJobLocationGroups.push(this.searchResults.jobLocationGroups[id].jobs);
         }
 
+        // initially sort the job location groups by town name
+        this.searchResults.orderedJobLocationGroups.sort(function (a, b) {
+          const
+            aTown = a[0].prison_location.town,
+            bTown = b[0].prison_location.town
+          ;
+          if (aTown < bTown) {
+            return -1;
+          } else {
+            if (aTown > bTown) {
+              return 1;
+            } else {
+              return 0;
+            }
+          }
+        });
+
+        this.updateMapWithJobLocationGroupMarkers(this.searchResults.jobLocationGroups);
       },
 
       createMap() {
@@ -458,32 +476,37 @@
       },
 
       visibleSearchResults: function() {
-        let results = [];
 
-        if (this.deviceIsMobile) {
-          const selectedJobLocationGroups = this.searchResults.orderedJobLocationGroups.slice().splice(
-            this.searchResults.listView.resultsPerPage * this.searchResults.listView.activePage,
-            this.searchResults.listView.resultsPerPage
-          );
+        if (this.mounted) {
+
+          if (Object.keys(this.searchResults.jobLocationGroups).length === 0) {
+            this.createJobLocationGroups();
+          }
+
+          let selectedJobLocationGroups = null;
+          if (this.deviceIsMobile) {
+            selectedJobLocationGroups = this.searchResults.orderedJobLocationGroups.slice().splice(
+              this.searchResults.listView.resultsPerPage * this.searchResults.listView.activePage,
+              this.searchResults.listView.resultsPerPage
+            );
+          } else {
+            selectedJobLocationGroups = this.searchResults.orderedJobLocationGroups;
+          }
+
+          const results = [];
           for (const i in selectedJobLocationGroups) {
             for (const j in selectedJobLocationGroups[i]) {
               results.push(selectedJobLocationGroups[i][j]);
             }
           }
 
-        } else {
-          results = this.searchResults.jobs;
+          return results;
         }
-        return results;
+
       }
     },
 
-    watch: {
-
-    },
-
-    mounted() {
-
+    created() {
       if (this.isDeviceMobile()) {
         this.deviceIsMobile = true;
         this.mapOptions.zoom = 6;
@@ -492,15 +515,19 @@
       if ("geolocation" in navigator) {
         this.geoLocationIsAvailable = true;
       }
+    },
 
-      this.createMap();
-
+    mounted() {
       const self = this;
+      this.createMap();
+      this.mounted = true;
+
       axios.get(this.vacanciesDataURL)
         .then( response => {
-          //self.searchResults.jobs = response.data; TODO revert
-          self.createJobLocationGroups();
-          self.updateMapWithJobLocationGroupMarkers(self.searchResults.jobLocationGroups);
+          // TODO revert
+          //self.searchResults.jobs = response.data;
+          //self.createJobLocationGroups();
+          //self.updateMapWithJobLocationGroupMarkers(self.searchResults.jobLocationGroups);
 
           if (self.searchResults.searchTerm) {
             self.search();
