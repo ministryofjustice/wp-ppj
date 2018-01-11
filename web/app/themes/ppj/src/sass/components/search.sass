@@ -43,7 +43,7 @@
       opacity: 0.5
 
   &__input
-    border: .2rem solid $color-medium
+    border: .2rem solid $color-light
     border-radius: 2em
     box-sizing: border-box
     display: block
@@ -51,7 +51,11 @@
     height: 4rem
     margin: $common-spacing 0
     padding: $common-spacing/2 $common-spacing
+    transition: $main-transition-duration
     width: 100%
+
+    &--in-use
+      border-color: $color-main
 
   &__button-search
     background-color: $color-main
@@ -64,9 +68,6 @@
     top: 0
     transition: background-color $main-transition-duration
     width: 4rem
-
-    &:disabled
-      background-color: $color-light
 
     &-circle
       $diameter: 1.7rem
