@@ -17,16 +17,16 @@
         <div class="search__button-search-rectangle"></div>
       </button>
 
-      <a class="search__geolocation"
-         :class="{'search__geolocation--is-busy': (geoLocationIsBusy == true)}"
-         v-if="geoLocationIsAvailable"
-         @click.stop.prevent="useGeoLocation"
+      <div class="search__geolocation"
+           :class="{'search__geolocation--is-busy': (geoLocationIsBusy == true)}"
       >
-        <img class="search__geolocation-icon"
-          src="/app/themes/ppj/dest/img/svg/geolocation.svg"
-          alt="Icon for geolocation button">
-        Use my current location
-      </a>
+        <a class="search__geolocation-button"
+           v-if="geoLocationIsAvailable"
+           @click.stop.prevent="useGeoLocation"
+        ><img class="search__geolocation-icon"
+            src="/app/themes/ppj/dest/img/svg/geolocation.svg"
+            alt="Icon for geolocation button"><span>Use my current location</span></a>
+      </div>
 
     </form>
 
