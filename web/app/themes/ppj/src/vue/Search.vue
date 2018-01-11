@@ -162,7 +162,9 @@
 
         titleText: this.title,
 
-        placeHolderText: 'Enter location'
+        placeHolderText: 'e.g. SW1A 2LW, Birmingham or Essex',
+
+        mounted: false,
       }
     },
 
