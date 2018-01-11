@@ -1,7 +1,7 @@
 <template>
   <div class="search" v-cloak>
     <h2 class="search__title">{{ titleText }}</h2>
-    <p class="search_prompt">Location (postcode, town, region)</p>
+    <p class="search_prompt">Enter location (postcode, town or region)</p>
     <form class="search__form">
       <input type="text"
              class="search__input"
