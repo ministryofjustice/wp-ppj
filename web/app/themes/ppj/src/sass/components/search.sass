@@ -50,12 +50,15 @@
     border-radius: 2em
     box-sizing: border-box
     display: block
-    font-weight: $font-weight-bold
+    font-size: $font-size-quite-tiny
     height: 4rem
     margin: $common-spacing 0
     padding: $common-spacing/2 $common-spacing
     transition: $main-transition-duration
     width: 100%
+
+    @include bp('portrait')
+      font-size: $font-size-small
 
     &:focus
       border-color: $color-main
