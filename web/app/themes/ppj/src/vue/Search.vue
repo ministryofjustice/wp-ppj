@@ -8,11 +8,11 @@
              :placeholder="placeHolderText"
              editable="editable"
              v-model="searchResults.searchTerm"
-             :class="{'search__input--in-use': (searchResults.searchTerm !== '')}"
       />
 
       <button class="search__button-search"
-              @click.stop.prevent="search">
+              @click.stop.prevent="search"
+              :disabled="searchResults.searchTerm == ''">
         <div class="search__button-search-circle"></div>
         <div class="search__button-search-rectangle"></div>
       </button>
