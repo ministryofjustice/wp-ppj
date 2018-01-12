@@ -175,6 +175,7 @@
         mapSrc: '',
 
         defaultZoomLevel: 7,
+        initialZoom: false,
 
         mapOptions: {
           zoom: 7,
@@ -249,10 +250,9 @@
       },
 
       zoom() {
-        if (this.map.getZoom() == this.defaultZoomLevel) {
+        if (!this.initialZoom) {
+          this.initialZoom = true;
           this.map.setZoom(this.defaultZoomLevel + 2);
-        } else {
-
         }
       },
 
@@ -423,6 +423,8 @@
         this.updateJobsDistance(lat, lng);
         this.updateSearchTermMarker(lat, lng);
         this.recenterMap(lat, lng);
+        this.initialZoom = false;
+        this.zoom();
       },
 
       processGeocoderResults(results, status) {
