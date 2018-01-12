@@ -146,7 +146,6 @@
         deviceIsMobile: false,
 
         geoLocationIsAvailable: false,
-
         geoLocationIsBusy: false,
         geoLocationIsActive: false,
 
@@ -165,7 +164,6 @@
             backwardEnabled: false
           },
           jobs: dummyJobs,
-          orderBy: 'distance',
           jobLocationGroups: {},
           orderedJobLocationGroups: [],
           searchTerm: '',
