@@ -170,6 +170,10 @@
           fullscreenControl: false,
           mapTypeControl: false,
           gestureHandling: 'greedy',
+          zoomControl: true,
+          zoomControlOptions: {
+            position: google.maps.ControlPosition.TOP_RIGHT
+          },
         },
 
         titleText: this.title,
