@@ -56,8 +56,7 @@
         </a>
       </div>
 
-    <div class="search__results" v-show="searchResults.display">
-
+    <div class="search__results">
       <div class="search__view-container">
         <div class="search__map-view" v-show="searchResults.activeView == 0">
           <div class="search__map-container">
@@ -155,7 +154,6 @@
 
         searchResults: {
           activeView: 0,
-          display: true,//false,
           clearSearchAvailable: false,
           postCode: this.defaultSearchTerm,//'',//'SW1H 1AJ',
           urlEncodedPostCode: '',
