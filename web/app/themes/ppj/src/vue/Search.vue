@@ -436,7 +436,7 @@
 
         } else {
           // TODO handle no connection to google geocoder api
-          alert('Geocode was not successful for the following reason: ' + status);
+          console.error('Geocode was not successful for the following reason: ' + status);
         }
       },
 
