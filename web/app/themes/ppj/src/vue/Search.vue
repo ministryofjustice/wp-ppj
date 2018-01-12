@@ -14,7 +14,7 @@
       <div class="search__button-clear-search-container">
         <button class="search__button-clear-search"
                 :class="{'search__button-clear-search--enabled': searchResults.clearSearchAvailable}"
-                :disable="!searchResults.clearSearchAvailable"
+                :disabled="!searchResults.clearSearchAvailable"
                 @click.stop.prevent="handleClearSearchClick"
         >&#10005;</button>
       </div>
