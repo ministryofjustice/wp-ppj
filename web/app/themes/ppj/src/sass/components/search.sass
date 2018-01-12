@@ -23,6 +23,7 @@
       width: 40rem
 
   &__geolocation
+    $gl: &
     display: flex
     font-size: $font-size-small
     font-weight: $font-weight-bold
@@ -44,6 +45,13 @@
 
     &--is-busy
       opacity: 0.5
+
+    &--is-active
+      #{$gl}-icon
+        fill: purple
+
+      #{$gl}-button
+        color: purple
 
   &__input
     border: .2rem solid $color-light

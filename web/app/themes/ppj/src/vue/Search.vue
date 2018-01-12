@@ -10,8 +10,7 @@
              v-model="searchResults.searchTerm"
              @blur.stop.prevent="handleSearchInputBlur"
              @focus.stop.prevent="handleSearchInputFocus"
-             @keypress="handleSearchInputKeyPress"
-      />
+             @keypress="handleSearchInputKeyPress"/>
       <div class="search__button-clear-search-container">
         <button class="search__button-clear-search"
                 :class="{'search__button-clear-search--enabled': searchResults.clearSearchAvailable}"
@@ -29,14 +28,32 @@
     </div>
 
       <div class="search__geolocation"
-           :class="{'search__geolocation--is-busy': (geoLocationIsBusy == true)}"
-      >
+           :class="{
+                'search__geolocation--is-busy': (geoLocationIsBusy == true),
+                'search__geolocation--is-active': geoLocationIsActive
+            }">
         <a class="search__geolocation-button"
            v-if="geoLocationIsAvailable"
-           @click.stop.prevent="useGeoLocation"
-        ><img class="search__geolocation-icon"
-            src="/app/themes/ppj/dest/img/svg/geolocation.svg"
-            alt="Icon for geolocation button"><span>Use my current location</span></a>
+           @click.stop.prevent="useGeoLocation">
+          <svg version="1.1"
+               id="Layer_1"
+               xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink"
+               x="0px"
+               y="0px"
+               viewBox="0 0 20 20"
+               xml:space="preserve"
+               class="search__geolocation-icon"
+          ><path class="st0" d="M17.5,9.3c-0.3-3.6-3.2-6.5-6.8-6.8V0H9.3v2.5C5.7,2.9,2.9,5.7,2.5,9.3H0v1.4h2.5c0.3,3.6,3.2,6.5,6.8,6.8V20
+              h1.4v-2.5c3.6-0.3,6.5-3.2,6.8-6.8H20V9.3H17.5z M16.1,10c0,0.2,0,0.5,0,0.7c-0.3,2.8-2.6,5.1-5.4,5.4c-0.2,0-0.5,0-0.7,0
+              s-0.5,0-0.7,0c-2.8-0.3-5.1-2.6-5.4-5.4c0-0.2,0-0.5,0-0.7s0-0.5,0-0.7c0.3-2.8,2.6-5.1,5.4-5.4c0.2,0,0.5,0,0.7,0s0.5,0,0.7,0
+              c2.8,0.3,5.1,2.6,5.4,5.4C16.1,9.5,16.1,9.8,16.1,10z"/>
+            <path class="st0" d="M10.6,6.9c-0.2,0-0.4-0.1-0.6-0.1c-0.2,0-0.4,0-0.6,0.1C8.2,7.2,7.2,8.2,6.9,9.4c0,0.2-0.1,0.4-0.1,0.6
+              s0,0.4,0.1,0.6c0.2,1.3,1.2,2.2,2.5,2.5c0.2,0,0.4,0.1,0.6,0.1c0.2,0,0.4,0,0.6-0.1c1.3-0.2,2.2-1.2,2.5-2.5
+              c0-0.2,0.1-0.4,0.1-0.6s0-0.4-0.1-0.6C12.8,8.2,11.8,7.2,10.6,6.9z"/>
+          </svg>
+          <span>Use my current location</span>
+        </a>
       </div>
 
     <div class="search__results" v-show="searchResults.display">
@@ -132,6 +149,7 @@
         geoLocationIsAvailable: false,
 
         geoLocationIsBusy: false,
+        geoLocationIsActive: false,
 
         vacanciesDataURL: 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/vacancies.json',
 
@@ -392,6 +410,7 @@
       },
 
       updateSearchTermMarker(lat, lng) {
+        this.geoLocationIsActive = false;
         if (typeof this.searchResults.searchTermMarker.markerDiv == 'undefined') {
           this.searchResults.searchTermMarker.markerDiv = new google.maps.Marker({
             position: {lat, lng},
@@ -461,9 +480,10 @@
         this.geoLocationIsBusy = true;
         navigator.geolocation.getCurrentPosition(position => {
           console.log(position.coords.latitude, position.coords.longitude);
-          this.searchResults.searchTerm = position.coords.latitude + ',' + position.coords.longitude;
+          this.searchResults.clearSearchAvailable = true;
           this.handleNewSearchLocation(position.coords.latitude, position.coords.longitude);
           this.geoLocationIsBusy = false;
+          this.geoLocationIsActive = true;
         });
       },
 
