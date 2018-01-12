@@ -63,17 +63,19 @@
     &:focus
       border-color: $color-main
 
+  $formHeight: 4rem
+
   &__button-search
     background-color: $color-main
     border-radius: 2rem
     color: $color-white
     display: block
-    height: 4rem
+    height: $formHeight
     position: absolute
     right: 0
     top: 0
     transition: background-color $main-transition-duration
-    width: 4rem
+    width: $formHeight
 
     &-circle
       $diameter: 1.7rem
@@ -95,6 +97,26 @@
       top: 2.2rem
       transform: rotate(45deg)
       width: .4rem
+
+  &__button-clear-search
+    border-left: $border
+    color: transparent
+    font-size: $font-size-small
+    margin: 1rem 0
+    opacity: 0
+    text-shadow: 0 0 0 $color-light
+    transition: $main-transition-duration
+    width: $formHeight
+
+    &--enabled
+      opacity: 1
+
+    &-container
+      display: flex
+      height: $formHeight
+      position: absolute
+      right: 4rem
+      top: 0
 
   &__jobs-available
     font-weight: $font-weight-bold

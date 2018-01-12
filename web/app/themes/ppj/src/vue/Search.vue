@@ -2,13 +2,23 @@
   <div class="search" v-cloak>
     <h2 class="search__title">{{ titleText }}</h2>
     <p class="search_prompt">Enter location (postcode, town or region)</p>
-    <form class="search__form">
+    <div class="search__form">
       <input type="text"
              class="search__input"
              :placeholder="placeHolderText"
              editable="editable"
              v-model="searchResults.searchTerm"
+             @blur.stop.prevent="handleSearchInputBlur"
+             @focus.stop.prevent="handleSearchInputFocus"
+             @keypress="handleSearchInputKeyPress"
       />
+      <div class="search__button-clear-search-container">
+        <button class="search__button-clear-search"
+                :class="{'search__button-clear-search--enabled': searchResults.clearSearchAvailable}"
+                :disable="!searchResults.clearSearchAvailable"
+                @click.stop.prevent="handleClearSearchClick"
+        >&#10005;</button>
+      </div>
 
       <button class="search__button-search"
               @click.stop.prevent="search"
@@ -16,6 +26,7 @@
         <div class="search__button-search-circle"></div>
         <div class="search__button-search-rectangle"></div>
       </button>
+    </div>
 
       <div class="search__geolocation"
            :class="{'search__geolocation--is-busy': (geoLocationIsBusy == true)}"
@@ -27,8 +38,6 @@
             src="/app/themes/ppj/dest/img/svg/geolocation.svg"
             alt="Icon for geolocation button"><span>Use my current location</span></a>
       </div>
-
-    </form>
 
     <div class="search__results" v-show="searchResults.display">
 
@@ -129,6 +138,7 @@
         searchResults: {
           activeView: 0,
           display: true,//false,
+          clearSearchAvailable: false,
           postCode: this.defaultSearchTerm,//'',//'SW1H 1AJ',
           urlEncodedPostCode: '',
           googleMapAPIKey: 'AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA',
@@ -411,11 +421,35 @@
         }
       },
 
+      handleSearchInputBlur() {
+        if (this.searchResults.searchTerm) {
+          this.searchResults.clearSearchAvailable = true;
+        }
+      },
+
+      handleSearchInputFocus() {
+        this.searchResults.clearSearchAvailable = false;
+      },
+
+      handleSearchInputKeyPress(e) {
+        if(e.keyCode === 13){
+          e.preventDefault();
+          this.search();
+        }
+      },
+
+      handleClearSearchClick() {
+        this.searchResults.searchTerm = '';
+        this.searchResults.clearSearchAvailable = false;
+        document.getElementsByClassName('search__input')[0].focus();
+      },
+
       search() {
         new google.maps.Geocoder().geocode(
           {'address': 'UK ' + this.searchResults.searchTerm},
           this.processGeocoderResults
         );
+        document.getElementsByClassName('search__input')[0].blur();
       },
 
       useGeoLocation() {
