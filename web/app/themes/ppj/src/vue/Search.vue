@@ -157,6 +157,7 @@
           center: new google.maps.LatLng(52.4832138, -1.5947146),
           disableDefaultUI: false,
           streetViewControl: false,
+          fullscreenControl: false,
           mapTypeControl: false,
           gestureHandling: 'greedy',
         },
