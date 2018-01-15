@@ -1,19 +1,19 @@
 .underlined-link
   &:after
-    @include bp('landscape')
-      border-bottom-color: $color-transparent
-      border-bottom-style: solid
-      border-bottom-width: .3rem
-      bottom: -.6rem
-      content: ''
-      display: block
-      height: 0
-      position: relative
+    border-bottom-color: $color-white
+    border-bottom-style: solid
+    border-bottom-width: .3rem
+    bottom: -.4rem
+    content: ''
+    display: block
+    height: 0
+    position: relative
 
 .header
   border-bottom: .4rem solid $color-very-light
   box-sizing: content-box
   height: 18rem
+  z-index: 3
 
   @include bp('portrait')
     border-bottom-width: .8rem
@@ -51,6 +51,8 @@
       margin-top: 0
       opacity: 1
       padding: $common-spacing
+      @include bp('portrait')
+        align-items: center
 
   &__carousel-image
     height: 100%
@@ -199,11 +201,14 @@
       margin-top: $common-spacing
 
   &__nav-menu-list-element
+    $nmle: &
     font-weight: $font-weight-bold
     padding: 0 $common-spacing
 
-    &--selected > a
-      @extend .underlined-link
+    &--selected
+
+      #{$nmle}-text
+        @extend .underlined-link
 
       &:after
         @include bp('landscape')
@@ -217,13 +222,15 @@
       margin-left: $common-spacing
       padding: 0
 
+    &-text
+      display: inline-block
+
     & > a
       border-bottom: 1px solid $color-white
       color: $color-white
       display: block
       padding: $common-spacing/1.5 0
       width: 100%
-      @extend .underlined-link
 
       @include bp('landscape')
         border: none

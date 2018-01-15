@@ -75,8 +75,11 @@
                 <ul class="header__nav-menu-list">
                     <li v-for="item in menuData"
                         class="header__nav-menu-list-element"
-                        :class="{'header__nav-menu-list-element--selected' : item.selected}"
-                    ><a :href="item.url">{{item['title']}}</a></li>
+                        :class="{'header__nav-menu-list-element--selected' : item.selected}">
+                        <a :href="item.url">
+                          <span class="header__nav-menu-list-element-text">{{item['title']}}</span>
+                        </a>
+                    </li>
                 </ul>
             </div>`,
 
