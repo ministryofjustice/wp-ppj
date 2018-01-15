@@ -10,12 +10,20 @@
 
   &__title
     @extend .common-header
+    font-size: 2.2rem
+    line-height: 2.6rem
 
     @include bp('portrait')
-      font-size: $font-size-quite-huge
+      font-size: 3rem
+      line-height: 3.6rem
+
+    @include bp('landscape')
+      font-size: 3.8rem
+      line-height: 4.6rem
 
     @include bp('large')
-      font-size: $font-size-almost-huge
+      font-size: 4.4rem
+      line-height: 5rem
 
   &__subtitle
     font-weight: $font-weight-bold
