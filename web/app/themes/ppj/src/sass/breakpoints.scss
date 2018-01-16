@@ -1,8 +1,8 @@
 $breakpoints: (
   'portrait'  : ( min-width:  768px ),
   'landscape' : ( min-width:  1024px ),
-  //'large'     : ( min-width: 1440px ) // TODO revert - using smaller bp to make developing on smaller screen easier
-  'large'     : ( min-width: 1200px )
+  'large'     : ( min-width: 1440px ) // TODO revert - using smaller bp to make developing on smaller screen easier
+  //'large'     : ( min-width: 1200px )
 );
 
 @mixin bp($name) {
