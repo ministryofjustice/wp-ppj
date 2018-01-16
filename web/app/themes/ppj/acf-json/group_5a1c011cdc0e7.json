@@ -305,6 +305,21 @@
                             "ajax": 0,
                             "return_format": "value",
                             "placeholder": ""
+                        },
+                        {
+                            "key": "field_5a5dd37a55946",
+                            "label": "Link",
+                            "name": "link",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array"
                         }
                     ],
                     "min": "",
@@ -1335,5 +1350,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1515517044
+    "modified": 1516098455
 }

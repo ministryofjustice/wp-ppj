@@ -169,33 +169,36 @@
       font-size: 2.8rem
       line-height: 3.8rem
 
-  @at-root a#{&}__link // https://stackoverflow.com/questions/17268051/sass-combining-parent-using-ampersand-with-base-element
+  &__link-container
+    text-align: center
+
+  &__link // https://stackoverflow.com/questions/17268051/sass-combining-parent-using-ampersand-with-base-element
     background-color: $color-main
     border-radius: $common-spacing * 2
     color: $color-white
-    display: block
+    display: inline-block
     font-size: 1.8rem
     font-weight: $font-weight-bold
-    line-height: 2.4rem
-    margin: $common-spacing 0 0
-    padding: $common-spacing *.8
+    line-height: 2rem
+    margin: $common-spacing auto
+    padding: 1rem 2rem
     text-align: center
     text-decoration: none
     text-transform: uppercase
 
     @include bp('portrait')
       font-size: 2rem
-      line-height: 2.8rem
       margin-top: $common-spacing * 2
       margin-left: auto
       margin-right: auto
-      width: 34.4rem
 
     @include bp('landscape')
       font-size: 2.4rem
-      line-height: 3rem
+      line-height: 2.4rem
+      padding: 1.5rem 1.7rem
 
     @include bp('large')
       font-size: 2.8rem
-      line-height: 3.4rem
+      line-height: 2.8rem
+      padding: 2.2rem
 
