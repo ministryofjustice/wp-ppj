@@ -1,6 +1,13 @@
 .triple-text-block
   margin: $common-spacing
 
+  @include bp('portrait')
+    margin: auto
+    width: 75%
+
+  @include bp('large')
+    width: 66%
+
   &__title
     @extend .common-header
 
