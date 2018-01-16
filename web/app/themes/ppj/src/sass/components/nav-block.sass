@@ -4,6 +4,16 @@
   padding: $common-spacing
   border-top-right-radius: $common-spacing
 
+  @include bp('portrait')
+    margin-left: auto
+    margin-right: auto
+    width: 75%
+
+  @include bp('landscape')
+
+  @include bp('large')
+    width: 66%
+
   &__title
     font-weight: $font-weight-bold
     margin-bottom: $common-spacing
