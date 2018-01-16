@@ -4,9 +4,14 @@
 
   @include bp('portrait')
     font-size: $font-size-medium
+    margin: auto
+    width: 75%
 
   @include bp('landscape')
     font-size: $font-size-large-medium
+
+  @include bp('large')
+    width: 66%
 
   &__title
     @extend .common-header
