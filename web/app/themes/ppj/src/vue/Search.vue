@@ -163,7 +163,7 @@
             forwardEnabled: true,
             backwardEnabled: false
           },
-          jobs: dummyJobs,
+          jobs: [], //dummyJobs,
           jobLocationGroups: {},
           orderedJobLocationGroups: [],
           searchTerm: '',
@@ -585,10 +585,8 @@
 
       axios.get(this.vacanciesDataURL)
         .then( response => {
-          // TODO revert
-          //self.searchResults.jobs = response.data;
-          //self.createJobLocationGroups();
-          //self.updateMapWithJobLocationGroupMarkers(self.searchResults.jobLocationGroups);
+
+          self.searchResults.jobs = response.data;
 
           if (self.searchResults.searchTerm) {
             self.search();
