@@ -147,7 +147,9 @@
         width: 50%
 
         @include bp('portrait')
-          width: 20rem
+          $size: 20rem
+          height: $size
+          width: $size
 
   &__quote
     background-color: $color-tertiary
