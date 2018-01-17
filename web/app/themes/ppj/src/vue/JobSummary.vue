@@ -2,8 +2,11 @@
   <div class="job-summary"
        :class="{'job-summary--selected': selected}">
     <div class="job-summary__position"
-         v-if="formattedRole">
+         v-if="false">
       {{formattedRole}}
+    </div>
+    <div class="job-summary__prison-name"
+         v-if="prisonName">{{prisonName}}
     </div>
     <div class="job-summary__distance"
          v-if="formattedDistance">
@@ -14,9 +17,6 @@
     </div>
     <div class="job-summary__prison"
          v-if="prisonName || prisonCity">
-      <div class="job-summary__prison-name"
-           v-if="prisonName">{{prisonName}}
-      </div>
       <div class="job-summary__prison-city">
         {{prisonCity}}
       </div>

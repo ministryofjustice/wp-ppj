@@ -65,7 +65,7 @@
             </div>
           </div>
           <div class="search__view-list-container">
-            <div class="search__jobs-available"><span>{{searchResults.jobs.length }}</span> jobs available:</div>
+            <div class="search__jobs-available"><span>{{searchResults.jobs.length }}</span> prison officer jobs available:</div>
             <div class="search__rectangle">
 
               <ul class="search__view-list">
