@@ -478,7 +478,7 @@
         this.geoLocationIsBusy = true;
         navigator.geolocation.getCurrentPosition(position => {
           console.log(position.coords.latitude, position.coords.longitude);
-          this.searchResults.clearSearchAvailable = true;
+          this.searchResults.clearSearchAvailable = !!this.searchResults.searchTerm;
           this.handleNewSearchLocation(position.coords.latitude, position.coords.longitude);
           this.geoLocationIsBusy = false;
           this.geoLocationIsActive = true;
