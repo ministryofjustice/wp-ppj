@@ -110,15 +110,24 @@
 
     & li
       margin: $common-spacing/2 0
-      margin-left: $common-spacing
+      margin-left: 1.8rem
       padding-right: $common-spacing * 2
+
+      @include bp('portrait')
+        margin-left: 1.9rem
+
+      @include bp('landscape')
+        margin-left: 2.4rem
+
+      @include bp('large')
+        margin-left: 2.6rem
+
 
     & ol li
       list-style-type: decimal
 
     & ul li
       list-style-type: disc
-      margin-left: 2rem
 
     p
       margin-bottom: $common-spacing
