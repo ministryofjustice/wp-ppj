@@ -169,15 +169,17 @@
         width: 33%
 
     p.portrait
+      margin-bottom: $common-spacing
+      margin-top: $common-spacing
       text-align: center
-      width: 100%
 
       & > img
         border-radius: 50%
         border: solid .5rem $color-main
+        height: 50vw
         margin: auto
         padding: .2rem
-        width: 50%
+        width: 50vw
 
         @include bp('portrait')
           $size: 20rem
