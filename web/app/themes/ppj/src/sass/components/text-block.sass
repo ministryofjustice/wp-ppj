@@ -207,11 +207,24 @@
       line-height: 3.8rem
 
   &__link-container
+    display: flex
+    position: relative
     text-align: center
+
+    &:before
+      background: $color-light
+      content: ' '
+      display: inline-block
+      height: .2rem
+      position: absolute
+      top: 50%
+      width: 100%
 
   &__link // https://stackoverflow.com/questions/17268051/sass-combining-parent-using-ampersand-with-base-element
     background-color: $color-main
+    border-bottom: .2rem solid $color-main-shadow
     border-radius: 5rem
+    box-shadow: 0 0 0 .3rem $color-white;
     color: $color-white
     display: inline-block
     font-size: 1.8rem
@@ -222,10 +235,10 @@
     text-align: center
     text-decoration: none
     text-transform: uppercase
+    z-index: 1
 
     @include bp('portrait')
       font-size: 2rem
-      margin-top: $common-spacing * 2
       margin-left: auto
       margin-right: auto
 
