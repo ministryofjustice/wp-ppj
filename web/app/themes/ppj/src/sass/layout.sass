@@ -7,12 +7,9 @@
   transition: opacity 1s
   width: 100%
 
-  @include bp('large')
-    margin-left: auto
-    margin-right: auto
-    //width: 120rem
-    width: 144rem
-
+  @include bp('landscape')
+    margin-bottom: $common-spacing * 2
+    margin-top: $common-spacing * 2
 
 .l-half
   margin: $common-spacing 0
@@ -33,4 +30,3 @@
 .l-footer
   margin-bottom: 0
   margin-top: $common-spacing * 2
-
