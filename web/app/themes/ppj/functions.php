@@ -115,6 +115,50 @@ function renderPageBlockData($acf)
     return $output;
 }
 
+function my_acf_admin_head() {
+    ?>
+    <style type="text/css">
+/*        .acf-flexible-content {
+            background-color: black;
+        }*/
+
+        .acf-flexible-content .layout .acf-fc-layout-handle {
+            /*background-color: #00B8E4;*/
+            background-color: #202428;
+            color: #eee;
+        }
+
+        .acf-repeater.-row > table > tbody > tr > td,
+        .acf-repeater.-block > table > tbody > tr > td {
+            border-top: 2px solid #202428;
+        }
+
+        .acf-repeater .acf-row-handle {
+            vertical-align: top !important;
+            padding-top: 16px;
+        }
+
+        .acf-repeater .acf-row-handle span {
+            font-size: 20px;
+            font-weight: bold;
+            color: #202428;
+        }
+
+        .imageUpload img {
+            width: 75px;
+        }
+
+        .acf-repeater .acf-row-handle .acf-icon.-minus {
+            top: 30px;
+        }
+
+    </style>
+    <?php
+}
+
+add_action('acf/input/admin_head', __NAMESPACE__ . '\\my_acf_admin_head');
+
+
 function stopAutoInsertionOfPTags()
 {
     remove_filter('the_content', 'wpautop');
