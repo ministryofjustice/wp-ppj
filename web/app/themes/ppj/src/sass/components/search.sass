@@ -255,26 +255,49 @@
   &__map-marker
     $c: &
     $size: 1.5rem
-    border-color: $color-dark
-    border-style: solid
-    border-width: .4rem
-    border-radius: $size
-    box-shadow: 0 0 3px 3px rgba(0,0,0,.2)
     cursor: pointer
-    height: $size
+    pointer-events: none
     position: absolute
-    width: $size
+
+    &-icon
+      border-color: $color-dark
+      border-style: solid
+      border-width: .4rem
+      border-radius: $size
+      box-shadow: 0 0 3px 3px rgba(0,0,0,.2)
+      height: $size
+      pointer-events: initial
+      width: $size
+
+    &-label
+      background-color: $color-white
+      border: 1px solid $color-light
+      font-weight: $font-weight-bold
+      padding: .5em
+      pointer-events: initial
+      position: relative
+      top: $size / 5
+      display: none
 
     &--job-location-group
-      background-color: $color-white
-      border-color: $color-dark
+      &-icon
+        background-color: $color-white
+        border-color: $color-dark
 
-      &#{$c}--selected // .search__map-marker--job-location-group.search__map-marker--selected
+    &#{$c}--selected
+      z-index: 1
+      #{$c}-icon
         border-color: $color-secondary
         border-width: .6rem
 
+      #{$c}-label
+        display: block
+
     &--datum
       box-shadow: none
+
+
+
 
 
   &__job-post

@@ -41,32 +41,43 @@ CustomMarker.prototype.draw = function() {
     var div = this.div;
 
     if (!div) {
-        div = this.div = document.createElement('div');
-        div.classList.add('search__map-marker');
-        div.classList.add(self.args.class);
-        div.setAttribute('data-group-id', self.args.groupId);
-        styleMarker(div, self.args);
+      console.dir(self.args);
+      div = this.div = document.createElement('div');
 
-        if (typeof(self.args.marker_id) !== 'undefined') {
-            div.dataset.marker_id = self.args.marker_id;
-        }
+      const icon = document.createElement('div');
+      icon.classList.add('search__map-marker-icon');
+      div.appendChild(icon);
 
-        if (typeof self.args.clickCallback !== 'undefined'){
-            google.maps.event.addDomListener(div, "click", function(event) {
-                google.maps.event.trigger(self, "click");
-                self.args.clickCallback(self.args.groupId);
-            });
-        }
+      const label = document.createElement('div');
+      label.innerHTML = self.args.prisonName;
+      label.classList.add('search__map-marker-label');
+      div.appendChild(label);
 
-        var panes = this.getPanes();
-        panes.overlayImage.appendChild(div);
+      div.classList.add('search__map-marker');
+      div.classList.add(self.args.class);
+      div.setAttribute('data-group-id', self.args.groupId);
+      styleMarker(div, self.args);
+
+      if (typeof(self.args.marker_id) !== 'undefined') {
+          div.dataset.marker_id = self.args.marker_id;
+      }
+
+      if (typeof self.args.clickCallback !== 'undefined'){
+          google.maps.event.addDomListener(div, "click", function(event) {
+              google.maps.event.trigger(self, "click");
+              self.args.clickCallback(self.args.groupId);
+          });
+      }
+
+      var panes = this.getPanes();
+      panes.overlayImage.appendChild(div);
     }
 
     var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
 
     if (point) {
-        div.style.left = (point.x - 10) + 'px';
-        div.style.top = (point.y - 20) + 'px';
+        div.style.left = (point.x - 7) + 'px';
+        div.style.top = (point.y - 7) + 'px';
     }
 };
 

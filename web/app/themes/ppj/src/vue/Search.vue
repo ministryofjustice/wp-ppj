@@ -291,7 +291,8 @@
             solid: true,
             amount: jobLocationGroups[group].jobs.length,
             groupId: group,
-            clickCallback: this.handleMapMarkerClick.bind(this, group)
+            clickCallback: this.handleMapMarkerClick.bind(this, group),
+            prisonName: jobLocationGroups[group].prisonName
           });
         }
         for (let i in markerArgs) {
@@ -356,7 +357,10 @@
           const latLngStr = jobs[i].prison_location.lat + ',' + jobs[i].prison_location.lng;
 
           if (typeof jobLocationGroups[latLngStr] == 'undefined') {
-            jobLocationGroups[latLngStr] = {jobs: [jobs[i]]};
+            jobLocationGroups[latLngStr] = {
+              prisonName: jobs[i].prison_name,
+              jobs: [jobs[i]]
+            };
           } else {
             jobLocationGroups[latLngStr].jobs.push(jobs[i]);
           }
