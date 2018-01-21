@@ -255,29 +255,37 @@
   &__map-marker
     $c: &
     $size: 1.5rem
+
     cursor: pointer
     pointer-events: none
     position: absolute
 
     &-icon
+      background-color: $color-white
       border-color: $color-dark
       border-style: solid
       border-width: .4rem
       border-radius: $size
       box-shadow: 0 0 3px 3px rgba(0,0,0,.2)
       height: $size
+      left: $size / -2
       pointer-events: initial
+      position: relative
+      top: $size / -2
       width: $size
 
     &-label
-      background-color: $color-white
+      background-color: $color-white-transparent
       border: 1px solid $color-light
+      border-radius: .25em
+      display: none
       font-weight: $font-weight-bold
+      left: calc(-50%)
+      line-height: 1
       padding: .5em
       pointer-events: initial
       position: relative
-      top: $size / 5
-      display: none
+      white-space: nowrap
 
     &--job-location-group
       &-icon
