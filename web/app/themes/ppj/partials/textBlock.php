@@ -2,18 +2,30 @@
 
 global $ppj_template_data;
 $td = $ppj_template_data;
+$className = 'text-block-container';
 
 // the default format of this new acf select field is different if it hasn't been saved
-if (is_array($td['width'])) {
-    $layout = 'l-' . $td['width'][0];
+if (isset($td['width'])) {
+    if (is_array($td['width'])) {
+        $layout = 'l-' . $td['width'][0];
+    } else {
+        $layout = 'l-' . $td['width'];
+    }
 } else {
-    $layout = 'l-' . $td['width'];
+    $layout = 'l-full';
 }
+
+if (!is_array($td['style']) && isset($td['style'])) {
+    $style = $className . '--' . $td['style'];
+} else {
+    $style = '';
+}
+
 ?>
 <div class="<?= $layout ?>"
      id="<?= urlencode(strtolower($td['title'])) ?>"
 >
-    <div class="text-block-container">
+    <div class="<?= $className ?> <?= $style ?>">
         <div class="text-block">
             <?php if ($td['type'] == 'regular') : ?>
                 <?php if ($td['title']) : ?>
