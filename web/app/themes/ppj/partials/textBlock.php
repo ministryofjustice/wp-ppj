@@ -3,6 +3,7 @@
 global $ppj_template_data;
 $td = $ppj_template_data;
 $className = 'text-block-container';
+$isIconBlocks = false;
 
 // the default format of this new acf select field is different if it hasn't been saved
 if (isset($td['width'])) {
@@ -15,10 +16,24 @@ if (isset($td['width'])) {
     $layout = 'l-full';
 }
 
-if (!is_array($td['style']) && isset($td['style'])) {
-    $style = $className . '--' . $td['style'];
+// compute the 'style' BEM modifier
+if (isset($td['triple_text_blocks'])) {
+    if (is_array( $td['triple_text_blocks'])) {
+        $tripleTextBlockClass = "text-block__triple-text-block-container ";
+        $style = $className . '--triple';
+
+        if (isset($td['triple_text_blocks'][0]['icon']) && $td['triple_text_blocks'][0]['icon']['url']) {
+            $isIconBlocks = true;
+        } else {
+            $tripleTextBlockClass .= ($isIconBlocks) ? '' : 'text-block__triple-text-block-container--text-only';
+        }
+    }
 } else {
-    $style = '';
+    if (!is_array($td['style']) && isset($td['style'])) {
+        $style = $className . '--' . $td['style'];
+    } else {
+        $style = '';
+    }
 }
 
 ?>
@@ -27,24 +42,49 @@ if (!is_array($td['style']) && isset($td['style'])) {
 >
     <div class="<?= $className ?> <?= $style ?>">
         <div class="text-block">
-            <?php if ($td['type'] == 'regular') : ?>
-                <?php if ($td['title']) : ?>
-                    <h2 class="text-block__title">
-                        <?= $td['title'] ?>
-                    </h2>
-                <?php endif; ?>
+            <?php if ($td['title']) : ?>
+                <h2 class="text-block__title">
+                    <?= $td['title'] ?>
+                </h2>
+            <?php endif; ?>
 
-                <?php if ($td['subtitle']) : ?>
-                    <h3 class="text-block__subtitle">
-                        <?= $td['subtitle'] ?>
-                    </h3>
-                <?php endif; ?>
+            <?php if ($td['subtitle']) : ?>
+                <h3 class="text-block__subtitle">
+                    <?= $td['subtitle'] ?>
+                </h3>
+            <?php endif; ?>
 
-                <?php if ($td['content']) : ?>
-                    <div class="text-block__content">
-                        <?= $td['content'] ?>
-                    </div>
-                <?php endif; ?>
+            <?php if ($td['content']) : ?>
+                <div class="text-block__content">
+                    <?= $td['content'] ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($td['type'] == 'triple' && isset($td['triple_text_blocks'])): ?>
+
+                <div class="<?= $tripleTextBlockClass ?>">
+                    <?php foreach ($td['triple_text_blocks'] as $block) : ?>
+                        <div class="text-block__triple-text-block">
+                            <?php if ($isIconBlocks) : ?>
+                                <img class="text-block__triple-text-block-icon" src="<?= $block['icon']['url'] ?>">
+
+                                </img>
+                            <?php endif; ?>
+                            <div class="triple-text-block__text-container">
+                                <?php if ($block['icon_text']) : ?>
+                                    <div class="text-block__triple-text-block-icon-text">
+                                        <?= $block['icon_text'] ?>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if ($block['content']) : ?>
+                                    <div class="text-block__triple-text-block-content">
+                                        <?= $block['content'] ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
 
             <?php endif; ?>
 
