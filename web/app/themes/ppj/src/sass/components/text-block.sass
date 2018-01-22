@@ -32,11 +32,9 @@
 
   .l-full &--triple
     border-bottom: 0
-    
+
     .text-block
       width: 100%
-
-
 
 .text-block
   font-size: $font-size-small
@@ -285,6 +283,25 @@
       @include bp('large')
         font-size: 5.2rem
         line-height: 6rem
+
+    &-content
+      font-size: 1.6rem
+      line-height: 2.2rem
+
+      @include bp('portrait')
+        font-size: 1.8rem
+        line-height: 2.4rem
+
+      @include bp('landscape')
+        font-size: 2.4rem
+        line-height: 3.2rem
+
+      @include bp('large')
+        font-size: 2.8rem
+        line-height: 3.8rem
+
+      & a
+        text-decoration: underline
 
   &__quote
     background-color: $color-tertiary
