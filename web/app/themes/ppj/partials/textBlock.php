@@ -2,7 +2,8 @@
 
 global $ppj_template_data;
 $td = $ppj_template_data;
-$className = 'text-block-container';
+$textBlockBEMModifier = '';
+$textBlockClassName = 'text-block-container';
 $isIconBlocks = false;
 
 // the default format of this new acf select field is different if it hasn't been saved
@@ -20,7 +21,7 @@ if (isset($td['width'])) {
 if (isset($td['triple_text_blocks'])) {
     if (is_array( $td['triple_text_blocks'])) {
         $tripleTextBlockClass = "text-block__triple-text-block-container ";
-        $style = $className . '--triple';
+        $textBlockBEMModifier = $textBlockClassName . '--triple';
 
         if (isset($td['triple_text_blocks'][0]['icon']) && $td['triple_text_blocks'][0]['icon']['url']) {
             $isIconBlocks = true;
@@ -29,10 +30,10 @@ if (isset($td['triple_text_blocks'])) {
         }
     }
 } else {
-    if (!is_array($td['style']) && isset($td['style'])) {
-        $style = $className . '--' . $td['style'];
+    if (isset($td['style']) && !is_array($td['style'])) {
+        $textBlockBEMModifier = $textBlockClassName . '--' . $td['style'];
     } else {
-        $style = '';
+        $textBlockBEMModifier = '';
     }
 }
 
@@ -40,7 +41,7 @@ if (isset($td['triple_text_blocks'])) {
 <div class="<?= $layout ?>"
      id="<?= urlencode(strtolower($td['title'])) ?>"
 >
-    <div class="<?= $className ?> <?= $style ?>">
+    <div class="<?= $textBlockClassName ?> <?= $textBlockBEMModifier ?>">
         <div class="text-block">
             <?php if ($td['title']) : ?>
                 <h2 class="text-block__title">
