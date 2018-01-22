@@ -1,26 +1,48 @@
 .nav-block
   background-color: $color-nav-block
+  font-size: $font-size-small
   margin: 0 $common-spacing
   padding: $common-spacing
   border-top-right-radius: $common-spacing
 
   @include bp('portrait')
-    margin-left: auto
-    margin-right: auto
-    width: 75%
+    border-top-right-radius: $common-spacing * 2
 
   @include bp('landscape')
-
-  @include bp('large')
-    width: 66%
+    padding: $common-spacing * 2
+    margin: 0 $common-spacing * 2
 
   &__title
+    font-size: 2.2rem
     font-weight: $font-weight-bold
     margin-bottom: $common-spacing
+
+    @include bp('portrait')
+      font-size: 2.8rem
+
+    @include bp('landscape')
+      font-size: 3.6
+
+    @include bp('landscape')
+      font-size: 4.4rem
 
   &__link
     margin-bottom: $common-spacing
 
     & > a
       cursor: pointer
+      font-size: 1.8rem
+      line-height: 3.4rem
       text-decoration: underline
+
+      @include bp('portrait')
+        font-size: 2rem
+        line-height: 3.6rem
+
+      @include bp('landscape')
+        font-size: 2.6
+        line-height: 5.2rem
+
+      @include bp('landscape')
+        font-size: 3rem
+        line-height: 6rem
