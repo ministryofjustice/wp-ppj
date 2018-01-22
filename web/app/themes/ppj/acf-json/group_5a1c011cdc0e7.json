@@ -16,100 +16,6 @@
                 "id": ""
             },
             "layouts": {
-                "5a1c51b477c35": {
-                    "key": "5a1c51b477c35",
-                    "name": "call_to_action",
-                    "label": "Call to action",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5a1c51d577c36",
-                            "label": "Call to action links",
-                            "name": "records",
-                            "type": "repeater",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "collapsed": "field_5a1c527577c38",
-                            "min": 0,
-                            "max": 0,
-                            "layout": "table",
-                            "button_label": "Add call to action",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5a1c526077c37",
-                                    "label": "Page link",
-                                    "name": "page_link",
-                                    "type": "page_link",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "post_type": [],
-                                    "taxonomy": [],
-                                    "allow_null": 0,
-                                    "allow_archives": 1,
-                                    "multiple": 0
-                                },
-                                {
-                                    "key": "field_5a1c527577c38",
-                                    "label": "Link text",
-                                    "name": "link_text",
-                                    "type": "text",
-                                    "instructions": "",
-                                    "required": 1,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "default_value": "",
-                                    "placeholder": "",
-                                    "prepend": "",
-                                    "append": "",
-                                    "maxlength": ""
-                                }
-                            ]
-                        },
-                        {
-                            "key": "field_5a1eb620d8b7a",
-                            "label": "Visibility",
-                            "name": "show",
-                            "type": "checkbox",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "true": "Show this block on the page"
-                            },
-                            "allow_custom": 0,
-                            "save_custom": 0,
-                            "default_value": [
-                                "true"
-                            ],
-                            "layout": "vertical",
-                            "toggle": 0,
-                            "return_format": "value"
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
                 "5a1c390477c34": {
                     "key": "5a1c390477c34",
                     "name": "text_block",
@@ -1434,5 +1340,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1516624892
+    "modified": 1516644006
 }
