@@ -37,6 +37,10 @@ if (isset($td['triple_text_blocks'])) {
     }
 }
 
+if (isset($td['link']['title'])) {
+    $textBlockBEMModifier .= ' ' . $textBlockClassName . '--has-cta-link';
+}
+
 ?>
 <div class="<?= $layout ?>"
      id="<?= urlencode(strtolower($td['title'])) ?>"
@@ -111,7 +115,7 @@ if (isset($td['triple_text_blocks'])) {
 
         <?php if (isset($td['link']) && isset($td['link']['url']) && isset($td['link']['title'])) : ?>
             <div class="text-block__link-container">
-                <a href="<?= $td['link']['url'] ?>" class="text-block__link"><?= $td['link']['title'] ?></a>
+                <a href="<?= $td['link']['url'] ?>" class="text-block__cta-link"><?= $td['link']['title'] ?></a>
             </div>
         <?php endif; ?>
 
