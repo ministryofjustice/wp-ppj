@@ -18,17 +18,17 @@ if (isset($td['width'])) {
 }
 
 // compute the 'style' BEM modifier
-if (isset($td['triple_text_blocks'])) {
-    if (is_array( $td['triple_text_blocks'])) {
-        $tripleTextBlockClass = "text-block__triple-text-block-container ";
-        $textBlockBEMModifier = $textBlockClassName . '--triple';
+if (isset($td['triple_text_blocks']) && is_array( $td['triple_text_blocks'])) {
 
-        if (isset($td['triple_text_blocks'][0]['icon']) && $td['triple_text_blocks'][0]['icon']['url']) {
-            $isIconBlocks = true;
-        } else {
-            $tripleTextBlockClass .= ($isIconBlocks) ? '' : 'text-block__triple-text-block-container--text-only';
-        }
+    $tripleTextBlockClass = "text-block__triple-text-block-container ";
+    $textBlockBEMModifier = $textBlockClassName . '--triple';
+
+    if (isset($td['triple_text_blocks'][0]['icon']) && $td['triple_text_blocks'][0]['icon']['url']) {
+        $isIconBlocks = true;
+    } else {
+        $tripleTextBlockClass .= ($isIconBlocks) ? '' : 'text-block__triple-text-block-container--text-only';
     }
+
 } else {
     if (isset($td['style']) && !is_array($td['style'])) {
         $textBlockBEMModifier = $textBlockClassName . '--' . $td['style'];
