@@ -23,25 +23,6 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_5a621b75847f5",
-                            "label": "title",
-                            "name": "title",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
-                        {
                             "key": "field_5a2038941eb03",
                             "label": "Type",
                             "name": "type",
@@ -1228,5 +1209,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1516644074
+    "modified": 1516701505
 }
