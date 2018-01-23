@@ -11,7 +11,7 @@
                     <a href="/cookies">Cookies</a>
                 </li>
             </ul>
-            <div class="footer__copyright">&#xa9; 2017 HM Prison and Probation Service</div>
+            <div class="footer__copyright">&#xa9; <?= date("Y") ?> HM Prison and Probation Service</div>
         </div>
     </div>
 </div>
