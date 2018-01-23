@@ -590,7 +590,8 @@
       axios.get(this.vacanciesDataURL)
         .then( response => {
 
-          self.searchResults.jobs = response.data;
+          //self.searchResults.jobs = response.data;
+          self.searchResults.jobs = dummyJobs
 
           if (self.searchResults.searchTerm) {
             self.search();
