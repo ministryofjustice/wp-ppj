@@ -1,11 +1,11 @@
 .text-block-container
   margin-left: auto
   margin-right: auto
-  padding-bottom: $common-spacing
+  padding: $common-spacing 0
   width: 100%
 
   @include bp('portrait')
-    padding-bottom: $common-spacing * 2
+    padding: $common-spacing * 2 0
     width: calc(100% - 6.4rem)
 
   @include bp('large')
@@ -14,12 +14,12 @@
   .l-full &
     border-bottom: 1px solid $color-light
 
-  .l-full &--highlight
-    background-color: $color-section-highlight
+  .l-full &--highlighted, .l-full &--dark
+
     border-bottom: 0
     margin-left: 0
     margin-right: 0
-    padding-bottom: $common-spacing * 2
+    padding-top: $common-spacing * 2
     width: 100%
 
   .l-full &--has-cta-link
@@ -28,7 +28,6 @@
 
   .page-blocks .l-full:first-child &
     border-top: none
-    padding-top: 0
 
   .l-full &--triple
     border-bottom: 0

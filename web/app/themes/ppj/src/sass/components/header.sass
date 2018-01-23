@@ -47,8 +47,12 @@
       margin-top: 0
       opacity: 1
       padding: $common-spacing
+
       @include bp('portrait')
         align-items: center
+
+      @include bp('landscape')
+        padding: $common-spacing * 2
 
   &__carousel-image
     height: 100%
@@ -205,6 +209,7 @@
     @include bp('landscape')
       display: flex
       margin-top: 0
+      padding-bottom: $common-spacing * 2
 
   &__nav-menu-list-element
     $nmle: &
@@ -213,7 +218,6 @@
     padding: 0 $common-spacing
 
     &--selected
-
       #{$nmle}-text
         @extend .underlined-link
 
@@ -291,7 +295,10 @@
       width: 15rem
 
   &__text-container
-    margin: 0 $common-spacing
+    margin: $common-spacing
+
+    @include bp('landscape')
+      margin: $common-spacing * 2
 
     @include bp('large')
       position: relative
