@@ -175,6 +175,7 @@
         mapSrc: '',
 
         defaultZoomLevel: 7,
+        defaultMobileZoomLevel: 6,
         initialZoom: false,
 
         mapOptions: {
@@ -402,7 +403,12 @@
       },
 
       createMap() {
-        this.mapOptions.zoom = this.defaultZoomLevel;
+        if (this.isDeviceMobile()) {
+          this.mapOptions.zoom = this.defaultMobileZoomLevel;
+        } else {
+          this.mapOptions.zoom = this.defaultZoomLevel;
+        }
+
         this.map = new google.maps.Map(
           document.getElementsByClassName('search__map')[0]
           , this.mapOptions
@@ -574,7 +580,6 @@
     created() {
       if (this.isDeviceMobile()) {
         this.deviceIsMobile = true;
-        this.mapOptions.zoom = 6;
       }
 
       if ("geolocation" in navigator) {
