@@ -87,7 +87,7 @@ if (isset($td['link']['title'])) {
 
                                 </img>
                             <?php endif; ?>
-                            <div class="multi-text-block__text-container">
+                            <div class="text-block__multi-text-block-text-container">
                                 <?php if (isset($block['icon_text']) && $block['icon_text']) : ?>
                                     <div class="text-block__multi-text-block-icon-text">
                                         <?= $block['icon_text'] ?>
