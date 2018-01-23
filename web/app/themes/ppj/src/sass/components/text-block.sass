@@ -305,6 +305,10 @@
 
     &-text-container
       margin-left: $common-spacing
+      text-align: left
+
+      .text-block__multi-text-block-container--text-only &
+        margin-left: initial
 
       @include bp('portrait')
         font-size: $font-size-medium
@@ -341,11 +345,11 @@
     &-content
       font-size: 1.6rem
       line-height: 1.4
-      text-align: center
 
       @include bp('portrait')
         font-size: 1.8rem
         line-height: 2.4rem
+        text-align: center
 
       .text-block__multi-text-block-container--double &
         width: 100%
