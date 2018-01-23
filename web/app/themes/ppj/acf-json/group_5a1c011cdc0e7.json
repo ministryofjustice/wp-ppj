@@ -38,6 +38,7 @@
                             "choices": {
                                 "regular": "regular",
                                 "quote": "quote",
+                                "double": "double",
                                 "triple": "triple"
                             },
                             "default_value": [
@@ -76,15 +77,7 @@
                             "type": "text",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5a2038941eb03",
-                                        "operator": "==",
-                                        "value": "regular"
-                                    }
-                                ]
-                            ],
+                            "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -134,8 +127,8 @@
                                 [
                                     {
                                         "field": "field_5a2038941eb03",
-                                        "operator": "!=",
-                                        "value": "triple"
+                                        "operator": "==",
+                                        "value": "regular"
                                     }
                                 ]
                             ],
@@ -231,6 +224,54 @@
                             "ajax": 0,
                             "return_format": "value",
                             "placeholder": ""
+                        },
+                        {
+                            "key": "field_5a6726d0f3be5",
+                            "label": "Double text blocks",
+                            "name": "double_text_blocks",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5a2038941eb03",
+                                        "operator": "==",
+                                        "value": "double"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "collapsed": "",
+                            "min": 2,
+                            "max": 2,
+                            "layout": "table",
+                            "button_label": "",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5a6726edf3be6",
+                                    "label": "Content",
+                                    "name": "content",
+                                    "type": "wysiwyg",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "tabs": "all",
+                                    "toolbar": "full",
+                                    "media_upload": 1,
+                                    "delay": 0
+                                }
+                            ]
                         },
                         {
                             "key": "field_5a65d6a2fcc4e",
@@ -337,6 +378,35 @@
                                 "id": ""
                             },
                             "return_format": "array"
+                        },
+                        {
+                            "key": "field_5a6747a5c82bf",
+                            "label": "Proportion",
+                            "name": "proportion",
+                            "type": "number",
+                            "instructions": "This is the proportional width of the first block, specified as a percentage.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5a2038941eb03",
+                                        "operator": "==",
+                                        "value": "double"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 50,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": 0,
+                            "max": 100,
+                            "step": ""
                         }
                     ],
                     "min": "",
@@ -1209,5 +1279,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1516701505
+    "modified": 1516718114
 }

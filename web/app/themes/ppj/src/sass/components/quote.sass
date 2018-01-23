@@ -5,7 +5,8 @@
   font-size: $font-size-large
   font-weight: $font-weight-bold
   padding: $common-spacing * 2 $common-spacing $common-spacing*1.5
-  margin-bottom: 1.6rem
+  //margin-bottom: 1.6rem
+  text-align: left
 
   &--left
     align-self: flex-start
@@ -28,7 +29,7 @@
   &--strong
     background-color: $color-tertiary
     color: $color-white
-    border-color: $color-white
+    border-color: $color-tertiary
 
   &--light
     background-color: inherit
@@ -44,7 +45,6 @@
 
   @include bp('portrait')
     padding: $common-spacing * 2
-    width: 60%
 
   @include bp('large')
     font-size: $font-size-almost-huge
@@ -78,11 +78,12 @@
 
 
   &-source
-    color: $color-white
+    //color: $color-white
     font-family: $sans-serif
     font-size: 1.6rem
     line-height: 2.2rem
     margin-top: $common-spacing
+    text-align: right
 
     @include bp('portrait')
       font-size: 1.8rem

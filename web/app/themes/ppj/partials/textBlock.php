@@ -2,9 +2,13 @@
 
 global $ppj_template_data;
 $td = $ppj_template_data;
-$textBlockBEMModifier = '';
 $textBlockClassName = 'text-block-container';
+$textBlockClasses = $textBlockClassName;
+$multiTextBlockClassName = "text-block__multi-text-block-container";
+$multiTextBlockClasses = $multiTextBlockClassName;
 $isIconBlocks = false;
+$multiTextBlocks = false;
+
 
 // the default format of this new acf select field is different if it hasn't been saved
 if (isset($td['width'])) {
@@ -17,35 +21,43 @@ if (isset($td['width'])) {
     $layout = 'l-full';
 }
 
+$isDoubleTextBlock = ($td['type'] == 'double' && isset($td['double_text_blocks']) && is_array( $td['double_text_blocks']));
+$isTripleTextBlock = ($td['type'] == 'triple' && isset($td['triple_text_blocks']) && is_array( $td['triple_text_blocks']));
+$isMultiTextBlock = ($isDoubleTextBlock || $isTripleTextBlock);
+
 // compute the 'style' BEM modifier
-if (isset($td['triple_text_blocks']) && is_array( $td['triple_text_blocks'])) {
+if ($isMultiTextBlock) {
+    $textBlockClasses .= ' ' . $textBlockClassName . '--multi';
 
-    $tripleTextBlockClass = "text-block__triple-text-block-container ";
-    $textBlockBEMModifier = $textBlockClassName . '--triple';
+    if ($isTripleTextBlock) {
+        $multiTextBlocks = $td['triple_text_blocks'];
+        $multiTextBlockClasses .= ' ' . $multiTextBlockClassName .'--triple';
 
-    if (isset($td['triple_text_blocks'][0]['icon']) && $td['triple_text_blocks'][0]['icon']['url']) {
-        $isIconBlocks = true;
+        if (isset($td['triple_text_blocks'][0]['icon']) && $td['triple_text_blocks'][0]['icon']['url']) {
+            $isIconBlocks = true;
+        } else {
+            $multiTextBlockClasses .= ($isIconBlocks) ? '' : ' ' .$multiTextBlockClassName .'--text-only';
+        }
+
     } else {
-        $tripleTextBlockClass .= ($isIconBlocks) ? '' : 'text-block__triple-text-block-container--text-only';
-    }
-
-} else {
-    if (isset($td['style']) && !is_array($td['style'])) {
-        $textBlockBEMModifier = $textBlockClassName . '--' . $td['style'];
-    } else {
-        $textBlockBEMModifier = '';
+        $multiTextBlocks = $td['double_text_blocks'];
+        $multiTextBlockClasses .= ' ' . $multiTextBlockClassName .'--double';
     }
 }
 
+if (isset($td['style']) && !is_array($td['style'])) {
+    $textBlockClasses .= ' ' . $textBlockClassName . '--' . $td['style'];
+}
+
 if (isset($td['link']['title'])) {
-    $textBlockBEMModifier .= ' ' . $textBlockClassName . '--has-cta-link';
+    $textBlockClasses .= ' ' . $textBlockClassName . '--has-cta-link';
 }
 
 ?>
 <div class="<?= $layout ?>"
      id="<?= urlencode(strtolower($td['title'])) ?>"
 >
-    <div class="<?= $textBlockClassName ?> <?= $textBlockBEMModifier ?>">
+    <div class="<?= $textBlockClasses ?>">
         <div class="text-block">
             <?php if ($td['title']) : ?>
                 <h2 class="text-block__title">
@@ -65,25 +77,25 @@ if (isset($td['link']['title'])) {
                 </div>
             <?php endif; ?>
 
-            <?php if ($td['type'] == 'triple' && isset($td['triple_text_blocks'])): ?>
+            <?php if ($multiTextBlocks): ?>
 
-                <div class="<?= $tripleTextBlockClass ?>">
-                    <?php foreach ($td['triple_text_blocks'] as $block) : ?>
-                        <div class="text-block__triple-text-block">
+                <div class="<?= $multiTextBlockClasses ?>">
+                    <?php foreach ($multiTextBlocks as $block) : ?>
+                        <div class="text-block__multi-text-block">
                             <?php if ($isIconBlocks) : ?>
-                                <img class="text-block__triple-text-block-icon" src="<?= $block['icon']['url'] ?>">
+                                <img class="text-block__multi-text-block-icon" src="<?= $block['icon']['url'] ?>">
 
                                 </img>
                             <?php endif; ?>
-                            <div class="triple-text-block__text-container">
-                                <?php if ($block['icon_text']) : ?>
-                                    <div class="text-block__triple-text-block-icon-text">
+                            <div class="multi-text-block__text-container">
+                                <?php if (isset($block['icon_text']) && $block['icon_text']) : ?>
+                                    <div class="text-block__multi-text-block-icon-text">
                                         <?= $block['icon_text'] ?>
                                     </div>
                                 <?php endif; ?>
-                                <?php if ($block['content']) : ?>
-                                    <div class="text-block__triple-text-block-content">
-                                        <?= $block['content'] ?>
+                                <?php if (isset($block['content']) && $block['content']) : ?>
+                                    <div class="text-block__multi-text-block-content">
+                                        <?php echo do_shortcode($block['content']); ?>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -91,24 +103,6 @@ if (isset($td['link']['title'])) {
                     <?php endforeach; ?>
                 </div>
 
-            <?php endif; ?>
-
-            <?php if ($td['type'] == 'quote') : ?>
-                <?php if ($td['quote']) : ?>
-                    <div class="text-block__quote">
-                        <div class="text-block__quote-mark"></div>
-
-                        <div class="text-block__quote-content">
-                            <?= $td['quote'] ?>
-                        </div>
-
-                        <?php if ($td['quote_source']) : ?>
-                            <div class="text-block__quote-source">
-                                <?= $td['quote_source'] ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                <?php endif; ?>
             <?php endif; ?>
 
         </div>
