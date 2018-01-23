@@ -114,7 +114,7 @@ if (isset($td['link']['title'])) {
         </div>
 
         <?php if (isset($td['link']) && isset($td['link']['url']) && isset($td['link']['title'])) : ?>
-            <div class="text-block__link-container">
+            <div class="text-block__cta-link-container">
                 <a href="<?= $td['link']['url'] ?>" class="text-block__cta-link"><?= $td['link']['title'] ?></a>
             </div>
         <?php endif; ?>
