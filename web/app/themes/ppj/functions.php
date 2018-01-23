@@ -201,3 +201,19 @@ function videoPlayer($attrs)
     return partial($a, 'videoPlayer');
 }
 add_shortcode('video-player', __NAMESPACE__ . '\\videoPlayer');
+
+function shortcodeQuote($attrs)
+{
+    $a = shortcode_atts(array(
+        'quote' => '',
+        'quote-source' => '',
+        'origin' => 'top-right',
+        'style' => 'strong',
+        'no-border' => '',
+        'position' => 'left'
+    ), $attrs);
+
+    return partial($a, 'shortcode-quote');
+}
+add_shortcode('ppj-quote', __NAMESPACE__ . '\\shortcodeQuote');
+
