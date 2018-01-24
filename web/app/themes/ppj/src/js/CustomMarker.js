@@ -41,7 +41,6 @@ CustomMarker.prototype.draw = function() {
     var div = this.div;
 
     if (!div) {
-      console.dir(self.args);
       div = this.div = document.createElement('div');
 
       const icon = document.createElement('div');
