@@ -525,6 +525,19 @@
 
       showLastPage() {
         this.showPage(this.numberOfResultPages - 1);
+      },
+
+      handleGotVacanciesData(response) {
+        const self = this;
+        //self.searchResults.jobs = response.data;
+        self.searchResults.jobs = dummyJobs;
+
+        if (self.searchResults.searchTerm) {
+          self.search();
+        } else {
+
+        }
+
       }
     },
 
@@ -592,21 +605,26 @@
       this.createMap();
       this.mounted = true;
 
-      axios.get(this.vacanciesDataURL)
-        .then( response => {
+//      axios.get(this.vacanciesDataURL)
+//        .then(
+///*          response => {
+//
+//          //self.searchResults.jobs = response.data;
+//          self.searchResults.jobs = dummyJobs;
+//
+//          if (self.searchResults.searchTerm) {
+//            self.search();
+//          } else {
+//
+//          }
+//        }*/
+//          self.handleGotVacanciesData
+//        )
+//        .catch(function (error) {
+//          console.log(error);
+//        });
 
-          //self.searchResults.jobs = response.data;
-          self.searchResults.jobs = dummyJobs
-
-          if (self.searchResults.searchTerm) {
-            self.search();
-          } else {
-
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      self.handleGotVacanciesData()
     }
   }
 </script>
