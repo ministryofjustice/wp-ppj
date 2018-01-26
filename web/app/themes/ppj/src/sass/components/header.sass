@@ -7,7 +7,9 @@
     content: ''
     display: block
     height: 0
+    opacity: 0
     position: relative
+    transition: $main-transition-duration
 
 .header
   border-bottom: .4rem solid $color-very-light
@@ -220,12 +222,17 @@
     padding: 0 $common-spacing
 
     &--selected
-      #{$nmle}-text
-        @extend .underlined-link
+      #{$nmle}-text:after
+        opacity: 1
+
 
       &:after
         @include bp('landscape')
           border-bottom-color: $color-light
+
+    &:hover
+      #{$nmle}-text:after
+        opacity: 1
 
     @include bp('landscape')
       border: none
@@ -239,6 +246,7 @@
       font-size: 2.4rem
 
     &-text
+      @extend .underlined-link
       display: inline-block
       text-align: center
 
@@ -259,9 +267,6 @@
 
         &:after
           transition: border-bottom-color $main-transition-duration
-
-        &:hover:after
-          border-bottom-color: $color-white
 
       &[href='']
         color: $color-light
