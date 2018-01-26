@@ -1,4 +1,5 @@
 .text-block-container
+  $border-width: .1rem
   margin-left: auto
   margin-right: auto
   padding: $common-spacing 0
@@ -12,7 +13,9 @@
     width: 120rem
 
   .l-full &
-    border-bottom: 1px solid $color-light
+    border-bottom-width: $border-width
+    border-bottom-style: solid
+    border-bottom-color: $color-light
 
   .l-full &--highlighted, .l-full &--dark
 
@@ -27,6 +30,9 @@
 
   .l-full &--highlighted
     background-color: $color-section-highlighted
+    position: relative
+    top: - $border-width
+
 
   .l-full &--dark
     background-color: $color-dark-section
