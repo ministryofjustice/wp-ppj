@@ -216,3 +216,8 @@ function shortcodeQuote($attrs)
 }
 add_shortcode('ppj-quote', __NAMESPACE__ . '\\shortcodeQuote');
 
+function inlineSVG($svgFileName) {
+    $templateDirectory = get_template_directory();
+    $fullSVGPath = $templateDirectory . '/dest/img/svg/' . $svgFileName . '.svg';
+    include($fullSVGPath);
+}

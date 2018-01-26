@@ -16,20 +16,19 @@ $BEMModifierClasses =
     . ' ' . $noBorderBEMModifier;
 ?>
 <?php if ($td['quote']) : ?>
+
   <div class="<?= $className ?> <?= $BEMModifierClasses ?>">
 
-    <div class="quote-mark">
-        <svg class="svg" width="20px" height="20px">
-            <use xlink:href="<?= get_stylesheet_directory_uri() . '/dest/img/svg/quote_icon.svg' ?>"></use>
-        </svg>
+    <div class="quote__mark">
+        <?php ppj\inlineSVG('quote_icon'); ?>
     </div>
 
-    <div class="quote-content">
+    <div class="quote__content">
         <?= $td['quote'] ?>
     </div>
 
     <?php if ($td['quote-source']) : ?>
-        <div class="quote-source">
+        <div class="quote__source">
             <?= $td['quote-source'] ?>
         </div>
     <?php endif; ?>
