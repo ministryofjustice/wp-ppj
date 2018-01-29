@@ -19,7 +19,14 @@
 
   @include bp('portrait')
     height: initial
+    border-bottom-width: .6rem
+
+  @include bp('landscape')
     border-bottom-width: .8rem
+
+  @include bp('large')
+    border-bottom-width: 1rem
+
 
   .home &
     @include bp('portrait')
