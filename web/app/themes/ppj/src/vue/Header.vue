@@ -17,19 +17,13 @@
         </div>
         <div class="header__hero">
             <div class="header__img-container"
-                 v-if="(backgroundImage == true) && (carouselImageURLs.length > 0)"
             >
                 <img class="header__carousel-image"
-                     v-if="(carouselImageURLs.length ==  1)"
-                     :src="carouselImageURLs[0]"
+                     v-if="processedHeaderImageData"
+                     :src='processedHeaderImageData.url'
+                     :srcset='processedHeaderImageData.srcset'
+                     :alt='processedHeaderImageData.alt'
                 />
-                <slick ref="slick" :options="slickOptions" v-if="(carouselImageURLs.length > 1)">
-
-                    <img class="header__carousel-image"
-                         v-for="(url, index) in carouselImageURLs"
-                         :src="url"
-                    />
-                </slick>
             </div>
             <div class="header__overlay">
                 <div class="l-full">
@@ -55,9 +49,6 @@
     const NavLink = {
         template:
             `<div class="header__nav-link js" @click="openNavMenu">
-                <!--<div></div>
-                <div></div>
-                <div></div>-->
                 MENU
             </div>`,
 
@@ -112,8 +103,8 @@
             'background-image': {
                 default: true
             },
-            'carousel-images': {
-                default: ''
+            'header-image': {
+              default: ''
             },
             'menu-data': {
                 default: {}
@@ -122,32 +113,42 @@
 
         data() {
           return {
-              menuOpen: false,
-              selectedCarouselImg: 0,
-              carouselIntervalId: -1,
-              foo: true,
-              slickOptions: {
-                  arrows: false,
-                  autoplay: true,
-                  autoplaySpeed: 5000,
-                  dots: true,
-                  slidesToShow: 1,
-              }
+              menuOpen: false
           }
         },
 
         computed:  {
-            hasDefaultSlot: function() {
-                return !!this.$slots.default
-            },
-            carouselImageURLs: function() {
-                if (this.carouselImages) {
-                    const urls = this.carouselImages.split(',');
-                    return urls;
-                } else {
-                    return [];
-                }
+          'hasDefaultSlot': function() {
+            return !!this.$slots.default
+          },
+
+          'processedHeaderImageData': function() {
+            if (this.headerImage) {
+              const data = JSON.parse(this.headerImage);
+              const img = {};
+
+              // construct src
+              img.url = data.url;
+
+              const home = (this.headerStyle === 'home') ? '-home' : '';
+
+              // construct srcset
+              let srcset = '';
+              for (const bp of ['mobile', 'portrait', 'landscape', 'large']) {
+                const
+                  url = data.sizes['header-' + bp + home],
+                  width = data.sizes['header-' + bp + home + '-width']
+                ;
+                srcset += url + ' ' + width + 'w, ';
+              }
+              img.srcset = srcset;
+
+              // construct alt
+              img.alt = data.alt;
+
+              return img;
             }
+          }
         },
 
         components: {
@@ -165,42 +166,6 @@
                 this.menuOpen = false;
                 document.getElementsByTagName('body')[0].style.overflow = '';
             },
-            changeCarouselImage(index) {
-                if (this.selectedCarouselImg == index) {
-                    this.startCarouselTransition();
-                } else {
-                    this.selectedCarouselImg = index;
-                    clearInterval(this.carouselIntervalId);
-                }
-            },
-            startCarouselTransition(){
-                if (this.carouselImageURLs.length > 1) {
-                    this.carouselIntervalId = setInterval(()=>{
-                        this.selectedCarouselImg =
-                            (this.selectedCarouselImg + 1) % this.carouselImageURLs.length
-                    }, 5000)
-                }
-            },
-            next() {
-                this.$refs.slick.next();
-            },
-            prev() {
-                this.$refs.slick.prev();
-            },
-            reInit() {
-                // Helpful if you have to deal with v-for to update dynamic lists
-                this.$nextTick(() => {
-                    this.$refs.slick.reSlick();
-                });
-            },
-        },
-
-        mounted() {
-            this.startCarouselTransition();
-        },
-
-        childComponents: {
-
         }
     }
 </script>

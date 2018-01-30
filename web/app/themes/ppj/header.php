@@ -5,15 +5,16 @@ global $post;
 $header_text    = get_field( 'header_text' );
 $header_subtext = get_field( 'header_subtext' );
 
-// carousel data
-if ( $carouselData = get_field( 'carousel' ) ) {
-    foreach ( $carouselData as $slide ) {
-        $carouselImages[] = $slide['image']['url'];
+if ( $headerImageData = get_field( 'header_image' ) ) {
+    if (is_front_page()) {
+        $headerStyle = 'home';
+    } else {
+        $headerStyle = '';
     }
-    $carouselImagesAttr = implode( ',', $carouselImages );
-    $headerStyle        = '';
+    $headerImageAttr = json_encode($headerImageData);
+
 } else {
-    $carouselImagesAttr = '';
+    $headerImageAttr = '';
     $headerStyle        = 'dark';
 }
 
@@ -46,7 +47,7 @@ $mainMenuJSON = json_encode( $filteredNavMenuItems );
 <div id="site-container">
     <page-container>
         <page-header :menu-data='<?= $mainMenuJSON ?>'
-                     carousel-images="<?= $carouselImagesAttr ?>"
+                     header-image='<?= $headerImageAttr ?>'
                      header-style="<?= $headerStyle ?>"
                      header-subtext="<?= $header_subtext; ?>"
         >
