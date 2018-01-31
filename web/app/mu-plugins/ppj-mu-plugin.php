@@ -230,8 +230,36 @@ function shortcodeQuote($attrs)
 }
 add_shortcode('ppj-quote', __NAMESPACE__ . '\\shortcodeQuote');
 
+function shortcodeCurrentYear($attrs)
+{
+    return date("Y");
+}
+add_shortcode('ppj-current-year', __NAMESPACE__ . '\\shortcodeCurrentYear');
+
 function inlineSVG($svgFileName) {
     $templateDirectory = get_template_directory();
     $fullSVGPath = $templateDirectory . '/dest/img/svg/' . $svgFileName . '.svg';
     include($fullSVGPath);
 }
+
+function initializeAcfSettingsPage() {
+    if ( function_exists( 'acf_add_options_page' ) ) {
+
+        acf_add_options_page( array(
+            'page_title' => 'PPJ General Settings',
+            'menu_title' => 'PPJ Settings',
+            'menu_slug'  => 'ppj-general-settings',
+            'capability' => 'edit_posts',
+            'redirect'   => false
+        ) );
+
+        acf_add_options_sub_page( array(
+            'page_title'  => 'PPJ Footer Settings',
+            'menu_title'  => 'Footer',
+            'parent_slug' => 'ppj-general-settings',
+        ) );
+
+    }
+}
+add_action('acf/init', __NAMESPACE__ . '\\initializeAcfSettingsPage', 15);
+

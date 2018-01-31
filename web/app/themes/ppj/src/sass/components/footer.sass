@@ -1,12 +1,26 @@
 .footer
-  background-color: $color-dark
+  background-color: $color-very-dark
   color: $color-white
-  font-size: $font-size-small
+  font-size: 1.6rem
+  line-height: 2.6rem
+  padding: $common-spacing
+
+  @include bp('portrait')
+    font-size: 1.8rem
+    line-height: 2.6rem
+
+  @include bp('landscape')
+    font-size: 2.4rem
+    line-height: 2.6rem
+    padding: $common-spacing * 2
+
+  @include bp('large')
+    font-size: 2.8rem
+    line-height: 2.6rem
 
   &__container
-    padding: $common-spacing
 
-  &__nav-link
+  li
     margin-bottom: $common-spacing
     text-decoration: underline
 
@@ -17,3 +31,50 @@
     margin-top: $common-spacing * 2
     color: $color-white
 
+.facebook-footer
+  background-color: $color-dark-section
+  color: $color-white
+  font-size: 1.6rem
+  line-height: 2.6rem
+  padding: $common-spacing
+
+  @include bp('portrait')
+    font-size: 1.8rem
+    line-height: 2.6rem
+
+  @include bp('landscape')
+    font-size: 2.4rem
+    line-height: 2.6rem
+    padding: $common-spacing * 2
+
+  @include bp('large')
+    font-size: 2.8rem
+    line-height: 2.6rem
+
+  a
+    color: inherit
+    text-decoration: underline
+
+  &__container
+    display: flex
+
+  &__content
+    margin-left: $common-spacing
+
+    @include bp('landscape')
+      margin-left: $common-spacing * 2
+
+  &__icon
+    width: 3.2rem
+
+    @include bp('portrait')
+      width: 5.2rem
+
+    @include bp('landscape')
+      width: 4rem
+
+    @include bp('large')
+      width: 7.2rem
+
+    & path
+      fill: currentColor
