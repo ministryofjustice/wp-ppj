@@ -411,7 +411,7 @@
 
   &__cta-link // https://stackoverflow.com/questions/17268051/sass-combining-parent-using-ampersand-with-base-element
     background-color: $color-main
-    border-bottom: .2rem solid $color-main-shadow
+    border-bottom: .4rem solid $color-main-shadow
     border-radius: 5rem
     box-shadow: 0 0 0 .3rem $color-white;
     color: $color-white
@@ -432,11 +432,13 @@
       margin-right: auto
 
     @include bp('landscape')
+      border-bottom-width: .6rem
       font-size: 2.4rem
       line-height: 2.4rem
       padding: 1.5rem 1.7rem
 
     @include bp('large')
+      border-bottom-width: .8rem
       font-size: 2.8rem
       line-height: 2.8rem
       padding: 2.2rem 4.4rem
