@@ -18,12 +18,23 @@
         <div class="header__hero">
             <div class="header__img-container"
             >
-                <img class="header__carousel-image"
+                <img class="header__image"
                      v-if="processedHeaderImageData"
                      :src='processedHeaderImageData.url'
                      :srcset='processedHeaderImageData.srcset'
                      :alt='processedHeaderImageData.alt'
+                     :sizes='processedHeaderImageData.sizes'
                 />
+              <!--              <picture v-if="processedHeaderImageData">
+                            <source v-for="source in processedHeaderImageData.sources"
+                                     :media="source.media"
+                                     :srcet="source.srcset"
+                             ></source>
+                             <img class="header__image"
+                                  :src="processedHeaderImageData.url"
+                                  :alt="processedHeaderImageData.alt"
+                             >
+                           </picture>-->
             </div>
             <div class="header__overlay">
                 <div class="l-full">
@@ -106,6 +117,9 @@
             'header-image': {
               default: ''
             },
+            'header-image-mobile': {
+              default: ''
+            },
             'menu-data': {
                 default: {}
             }
@@ -124,28 +138,80 @@
 
           'processedHeaderImageData': function() {
             if (this.headerImage) {
-              const data = JSON.parse(this.headerImage);
+
               const img = {};
 
-              // construct src
-              img.url = data.url;
+              const breakpointWidths = {
+                mobile: 320,
+                portrait: 768,
+                landscape: 1024,
+                large: 1440
+              };
+
+              let breakpointNames = Object.keys(breakpointWidths);
 
               const home = (this.headerStyle === 'home') ? '-home' : '';
 
               // construct srcset
               let srcset = '';
-              for (const bp of ['mobile', 'portrait', 'landscape', 'large']) {
-                const
-                  url = data.sizes['header-' + bp + home],
-                  width = data.sizes['header-' + bp + home + '-width']
-                ;
-                srcset += url + ' ' + width + 'w, ';
+              if (this.headerImageMobile) {
+                console.log('headerImageMobile');
+                console.dir(this.headerImageMobile);
+                const imageDataMobile = JSON.parse(this.headerImageMobile);
+
+                for (const bp of breakpointNames.slice(0,2)) {
+                  srcset += this.createSrcsetLine(imageDataMobile, bp, home, true);
+                }
+
+                breakpointNames = breakpointNames.splice(2);
               }
+
+              const imageData = JSON.parse(this.headerImage);
+              for (const bp of breakpointNames) {
+                srcset += this.createSrcsetLine(imageData, bp, home, true);
+              }
+
               img.srcset = srcset;
 
-              // construct alt
-              img.alt = data.alt;
+//              for (const bp of breakpoints) {
+//                //srcset += this.createSrcsetLine(imageData, bp, home);
+//                img.sources.push({
+//                  media: imageData.sizes['header-' + breakpoint + home],
+//                  ,
+//                  srcset: ''
+//                });
+//              }
 
+//              img.sources = [];
+//              let i = 0;
+//
+//              if (this.headerImageMobile) {
+//                const imageDataMobile = JSON.parse(this.headerImageMobile);
+//                do {
+//                  const breakpoint = breakpointNames[i];
+//                  img.sources.push({
+//                      srcset: this.createSrcsetLine(imageDataMobile, breakpoint, home),
+//                      media: "(max-width: " + breakpointWidths[breakpoint] + "px)"
+//                  });
+//                } while( ++i < 2);
+//              }
+//
+//              const imageData = JSON.parse(this.headerImage);
+//              do {
+//                const breakpoint = breakpointNames[i];
+//                img.sources.push({
+//                  srcset: this.createSrcsetLine(imageData, breakpoint, home),
+//                  media: "(max-width: " + breakpointWidths[breakpoint] + "px)"
+//                });
+//              } while( ++i < breakpointNames.length);
+
+              // construct src
+              img.url = imageData.url;
+
+              // construct alt
+              img.alt = imageData.alt;
+
+              //img.sizes = '(max-width: 320px) 320px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, (max-width: 1440px) 1440px';
               return img;
             }
           }
@@ -158,6 +224,14 @@
         },
 
         methods: {
+            createSrcsetLine(imageData, breakpoint, home, width=false) {
+              let srcset = imageData.sizes['header-' + breakpoint + home];
+              if (width) {
+                srcset += ' ' + imageData.sizes['header-' + breakpoint + home + '-width'] + 'w, ';
+              }
+              console.log('srcset line ', srcset);
+              return srcset;
+            },
             openNavMenu() {
                 this.menuOpen = true;
                 document.getElementsByTagName('body')[0].style.overflow = 'hidden';

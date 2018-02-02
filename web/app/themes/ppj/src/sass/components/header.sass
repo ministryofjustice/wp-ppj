@@ -14,7 +14,6 @@
 .header
   border-bottom: .4rem solid $color-very-light
   box-sizing: content-box
-  height: 20rem
   z-index: 3
 
   @include bp('portrait')
@@ -27,10 +26,8 @@
   @include bp('large')
     border-bottom-width: 1rem
 
-
   .home &
     @include bp('portrait')
-
 
   &__hero
     height: 100%
@@ -65,7 +62,7 @@
       @include bp('landscape')
         padding: $common-spacing * 2
 
-  &__carousel-image
+  &__image
     height: 100%
     position: relative
     width: 100%
@@ -103,7 +100,6 @@
 
         & > img
 
-
     .slick-dots
       bottom: 25px
       display: flex
@@ -130,28 +126,6 @@
 
         &:before
           display: none
-
-  &__carousel-controls-container
-    position: absolute
-    bottom: $common-spacing
-    text-align: center
-    width: 100%
-    z-index: 1
-
-  &__carousel-button
-    $size: .8rem
-    border: .2rem solid $color-light
-    border-radius: $size
-    cursor: pointer
-    display: inline-block
-    height: $size
-    margin: $common-spacing/4
-    padding: 0
-    width: $size
-    transition: background-color $main-transition-duration
-
-    &--active
-      background-color: $color-light
 
   &__nav-link
     background-color: $color-main
