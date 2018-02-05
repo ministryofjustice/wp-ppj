@@ -47,7 +47,7 @@ CustomMarker.prototype.draw = function() {
       div.setAttribute('data-group-id', self.args.groupId);
       styleMarker(div, self.args);
 
-      const icon = document.createElement('div');
+      const icon = document.createElement('img');
       icon.classList.add('search__map-marker-icon');
       div.appendChild(icon);
 
