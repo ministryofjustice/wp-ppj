@@ -42,20 +42,27 @@ CustomMarker.prototype.draw = function() {
 
     if (!div) {
       div = this.div = document.createElement('div');
+      div.classList.add('search__map-marker');
+      div.classList.add(self.args.class);
+      div.setAttribute('data-group-id', self.args.groupId);
+      styleMarker(div, self.args);
 
       const icon = document.createElement('div');
       icon.classList.add('search__map-marker-icon');
       div.appendChild(icon);
 
+      icon.addEventListener("mouseover", function() {
+        div.classList.add('search__map-marker--hover');
+      });
+
+      icon.addEventListener("mouseleave", function() {
+        div.classList.remove('search__map-marker--hover');
+      });
+
       const label = document.createElement('div');
       label.innerHTML = self.args.prisonName;
       label.classList.add('search__map-marker-label');
       div.appendChild(label);
-
-      div.classList.add('search__map-marker');
-      div.classList.add(self.args.class);
-      div.setAttribute('data-group-id', self.args.groupId);
-      styleMarker(div, self.args);
 
       if (typeof(self.args.marker_id) !== 'undefined') {
           div.dataset.marker_id = self.args.marker_id;

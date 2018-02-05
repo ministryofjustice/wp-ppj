@@ -280,14 +280,17 @@
       background-color: $color-white-transparent
       border: 1px solid $color-light
       border-radius: .25em
-      display: none
       font-weight: $font-weight-bold
-      left: calc(-50%)
       line-height: 1
+      opacity: 0
       padding: .5em
       pointer-events: initial
-      position: relative
+      position: absolute
+      top: $common-spacing
+      transform: translateX(-50%)
+      transition: opacity $main-transition-duration
       white-space: nowrap
+      z-index: 1
 
     &--job-location-group
       &-icon
@@ -301,7 +304,12 @@
         border-width: .6rem
 
       #{$c}-label
-        display: block
+        opacity: 1
+
+    &#{$c}--hover
+      #{$c}-label
+        opacity: 1
+
 
     &--datum
       box-shadow: none
