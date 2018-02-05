@@ -538,6 +538,14 @@
 
         }
 
+      },
+
+      updateIsDeviceMobile() {
+        this.deviceIsMobile = this.isDeviceMobile();
+      },
+
+      handleScreenResize() {
+        this.updateIsDeviceMobile();
       }
     },
 
@@ -591,9 +599,7 @@
     },
 
     created() {
-      if (this.isDeviceMobile()) {
-        this.deviceIsMobile = true;
-      }
+      this.updateIsDeviceMobile();
 
       if ("geolocation" in navigator) {
         this.geoLocationIsAvailable = true;
@@ -604,6 +610,8 @@
       const self = this;
       this.createMap();
       this.mounted = true;
+
+      window.addEventListener('resize', this.handleScreenResize);
 
 //      axios.get(this.vacanciesDataURL)
 //        .then(
