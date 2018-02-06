@@ -263,12 +263,14 @@
     position: absolute
 
     &-icon
-      content: url('/app/themes/ppj/dest/img/svg/inactive_pin.svg')
-      left: - $size / 2
+      background: url('/app/themes/ppj/dest/img/inactive_pin.png')
+      background-size: 3.2rem 3.8rem
+      left: - 1.55rem
+      height: 3.8rem
       pointer-events: initial
       position: relative
-      top: - $size
-      width: $size
+      top: - 3.5rem
+      width: 3.2rem
 
     &-label
       background-color: $color-white-transparent
@@ -278,9 +280,9 @@
       line-height: 1
       opacity: 0
       padding: .5em
-      pointer-events: initial
+      pointer-events: none
       position: absolute
-      top: $common-spacing
+      top: .8rem
       transform: translateX(-50%)
       transition: opacity $main-transition-duration
       white-space: nowrap
@@ -295,7 +297,8 @@
       z-index: 1
       #{$c}-icon
         border-color: $color-secondary
-        content: url('/app/themes/ppj/dest/img/svg/active_pin.svg')
+        background: url('/app/themes/ppj/dest/img/active_pin.png')
+        background-size: 3.2rem 3.8rem
         border-width: .6rem
 
       #{$c}-label
