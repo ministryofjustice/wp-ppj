@@ -39,6 +39,8 @@ foreach ( $navMenuItems as $item ) {
     ];
 }
 $mainMenuJSON = json_encode( $filteredNavMenuItems );
+
+$googleAnalyticsPropertyId = constant("GOOGLE_ANALYTICS_PROPERTY_ID");
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +53,13 @@ $mainMenuJSON = json_encode( $filteredNavMenuItems );
     <link href="https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA"></script>
     <?php wp_head(); ?>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<?= $googleAnalyticsPropertyId ?>"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '<?= $googleAnalyticsPropertyId ?>');
+    </script>
 </head>
 
 <body  <?php body_class(); ?>>
