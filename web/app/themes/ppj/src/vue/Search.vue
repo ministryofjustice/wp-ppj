@@ -439,16 +439,20 @@
 
       processGeocoderResults(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          console.log('processGeocoderResults status is ok');
-
           this.handleNewSearchLocation(
             results[0].geometry.location.lat(),
             results[0].geometry.location.lng()
           );
-
         } else {
-          // TODO handle no connection to google geocoder api
-          console.error('Geocode was not successful for the following reason: ' + status);
+          // TODO create better error message dialogue
+          let msg = '';
+          if (status === 'ZERO_RESULTS') {
+            msg = 'No results found';
+          } else {
+            msg = 'Problem communicating with Google Geocoder API, ' + status ;
+          }
+          alert(msg);
+          console.error(msg);
         }
       },
 
@@ -486,13 +490,27 @@
       useGeoLocation() {
         this.searchResults.searchTerm = '';
         this.geoLocationIsBusy = true;
-        navigator.geolocation.getCurrentPosition(position => {
-          console.log(position.coords.latitude, position.coords.longitude);
-          this.searchResults.clearSearchAvailable = !!this.searchResults.searchTerm;
-          this.handleNewSearchLocation(position.coords.latitude, position.coords.longitude);
-          this.geoLocationIsBusy = false;
-          this.geoLocationIsActive = true;
-        });
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            this.searchResults.clearSearchAvailable = !!this.searchResults.searchTerm;
+            this.handleNewSearchLocation(position.coords.latitude, position.coords.longitude);
+            this.geoLocationIsBusy = false;
+            this.geoLocationIsActive = true;
+          },
+          error => {
+            // TODO create better error message dialogue
+            console.log('handling geolocation error');
+            let msg = 'Problem using Geolocation: ';
+            if (typeof error.code !== 'undefined' && error.code === 1) {
+              msg += error.message;
+            } else {
+              //msg = 'Problem using Geolocation';
+            }
+
+            alert(msg);
+            console.dir(error);
+          }
+        );
       },
 
       showMapView() {
@@ -568,7 +586,6 @@
       },
 
       visibleSearchResults: function() {
-
         if (this.mounted) {
 
           if (Object.keys(this.searchResults.jobLocationGroups).length === 0) {
