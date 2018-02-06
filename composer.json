@@ -28,7 +28,8 @@
     "oscarotero/env": "^1.1.0",
     "roots/wp-password-bcrypt": "*",
     "ministryofjustice/wp-rewrite-media-to-s3": "*",
-    "acf/advanced-custom-fields-pro": "*"
+    "acf/advanced-custom-fields-pro": "*",
+    "wpackagist-plugin/ga-google-analytics": "20171103"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0.2",
