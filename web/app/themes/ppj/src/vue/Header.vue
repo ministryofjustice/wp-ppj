@@ -155,8 +155,8 @@
               // construct srcset
               let srcset = '';
               if (this.headerImageMobile) {
-                console.log('headerImageMobile');
-                console.dir(this.headerImageMobile);
+                //console.log('headerImageMobile');
+                //console.dir(this.headerImageMobile);
                 const imageDataMobile = JSON.parse(this.headerImageMobile);
 
                 for (const bp of breakpointNames.slice(0,2)) {
@@ -181,7 +181,7 @@
 //                  srcset: ''
 //                });
 //              }
-
+//
 //              img.sources = [];
 //              let i = 0;
 //
@@ -229,7 +229,7 @@
               if (width) {
                 srcset += ' ' + imageData.sizes['header-' + breakpoint + home + '-width'] + 'w, ';
               }
-              console.log('srcset line ', srcset);
+              //console.log('srcset line ', srcset);
               return srcset;
             },
             openNavMenu() {
