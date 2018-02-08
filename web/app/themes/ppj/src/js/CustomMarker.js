@@ -11,26 +11,30 @@ function styleMarker(div, args) {
     }
 }
 
-function changeSelectedMarker(div) {
-    // find all markers
-    const searchMap = div.closest('.search__map');
+CustomMarker.deselectMarker = function() {
+  // find all markers
+  const searchMap = document.querySelector('.search__map');
 
-    // remove any selected marker classes
-    const jobMarkers = searchMap.querySelectorAll('.search__map-marker--job-location-group.search__map-marker--selected');
-    for (let i in jobMarkers) {
-        if (typeof jobMarkers[i].classList !== 'undefined') {
-            const classList = jobMarkers[i].classList;
-            classList.remove('search__map-marker--selected');
-        }
+  const jobMarkers = searchMap.querySelectorAll('.search__map-marker--job-location-group.search__map-marker--selected');
+  for (let i in jobMarkers) {
+    if (typeof jobMarkers[i].classList !== 'undefined') {
+      const classList = jobMarkers[i].classList;
+      classList.remove('search__map-marker--selected');
     }
+  }
+};
+
+CustomMarker.changeSelectedMarker = function(div) {
+    // remove any selected marker classes
+    CustomMarker.deselectMarker();
 
     // add selected marker class to this marker
     div.classList.add('search__map-marker--selected');
-}
+};
 
 CustomMarker.changeSelectedMarkerByGroupId = function(groupId) {
   const marker = document.querySelector('[data-group-id="' + groupId + '"]');
-  changeSelectedMarker(marker);
+  CustomMarker.changeSelectedMarker(marker);
 };
 
 CustomMarker.prototype = new google.maps.OverlayView();
@@ -71,7 +75,7 @@ CustomMarker.prototype.draw = function() {
       if (typeof self.args.clickCallback !== 'undefined'){
           google.maps.event.addDomListener(div, "click", function(event) {
               google.maps.event.trigger(self, "click");
-              self.args.clickCallback(self.args.groupId);
+              self.args.clickCallback(event);
           });
       }
 

@@ -1,31 +1,33 @@
 <template>
   <div class="job-summary"
        :class="{'job-summary--selected': selected}">
-    <div class="job-summary__position"
-         v-if="false">
-      {{formattedRole}}
-    </div>
-    <div class="job-summary__prison-name"
-         v-if="prisonName">{{prisonName}}
-    </div>
-    <div class="job-summary__distance"
-         v-if="formattedDistance">
-      {{formattedDistance}}
-    </div>
-    <div class="job-summary__salary"
-         v-if="formattedSalary">{{formattedSalary}}
-    </div>
-    <div class="job-summary__prison"
-         v-if="prisonName || prisonCity">
-      <div class="job-summary__prison-city">
-        {{prisonCity}}
+    <div class="job-summary__content">
+      <div class="job-summary__position"
+           v-if="false">
+        {{formattedRole}}
       </div>
+      <div class="job-summary__prison-name"
+           v-if="prisonName">{{prisonName}}
+      </div>
+      <div class="job-summary__distance"
+           v-if="formattedDistance">
+        {{formattedDistance}}
+      </div>
+      <div class="job-summary__salary"
+           v-if="formattedSalary">{{formattedSalary}}
+      </div>
+      <div class="job-summary__prison"
+           v-if="prisonName || prisonCity">
+        <div class="job-summary__prison-city">
+          {{prisonCity}}
+        </div>
+      </div>
+      <a class="job-summary__link"
+         v-if="url"
+         :href="url">
+        view job
+      </a>
     </div>
-    <a class="job-summary__link"
-       v-if="url"
-       :href="url">
-      view job
-    </a>
   </div>
 </template>
 <script>

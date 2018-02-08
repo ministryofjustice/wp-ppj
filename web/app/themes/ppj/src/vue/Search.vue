@@ -1,7 +1,9 @@
 <template>
-  <div class="search" v-cloak>
+  <div class="search" v-cloak
+       @click.stop.prevent="handleGlobalSearchClick"
+  >
     <h2 class="search__title">{{ titleText }}</h2>
-    <p class="search_prompt">Enter location (postcode, town or region)</p>
+    <p class="search__prompt">Enter location (postcode, town or region)</p>
     <div class="search__form">
       <input type="text"
              class="search__input"
@@ -10,6 +12,7 @@
              v-model="searchResults.searchTerm"
              @blur.stop.prevent="handleSearchInputBlur"
              @focus.stop.prevent="handleSearchInputFocus"
+             @click.stop.prevent=""
              @keypress="handleSearchInputKeyPress"/>
       <div class="search__button-clear-search-container">
         <button class="search__button-clear-search"
@@ -56,13 +59,23 @@
         </a>
       </div>
 
-    <div class="search__results">
+    <div class="search__results"
+         :class="{'search__results--job-selected': searchResults.selectedJobLocationGroupId}"
+    >
       <div class="search__view-container">
         <div class="search__map-view" v-show="searchResults.activeView == 0">
           <div class="search__map-container">
-            <div class="search__square-box">
-              <div class="search__map"></div>
+            <div class="search__map-zoom-button-container">
+              <div class="search__map-button-zoom search__map-button-zoom--in"
+                   @click.stop.prevent="zoomBy(1)"
+              ></div>
+              <div class="search__map-button-zoom search__map-button-zoom--out"
+                   @click.stop.prevent="zoomBy(-1)"
+              ></div>
             </div>
+            <div class="search__map"
+                 @click.stop.prevent=""
+            ></div>
           </div>
           <div class="search__view-list-container">
             <div class="search__jobs-available"><span>{{searchResults.jobs.length }}</span> prison officer jobs available:</div>
@@ -73,7 +86,7 @@
                     :data-group-id="job.jobLocationGroupId"
                     v-for="(job, index) in visibleSearchResults"
                     :key="index"
-                    @click="handleVacancyClick(job.jobLocationGroupId)">
+                    v-on:click.stop.prevent="handleVacancyClick(job.jobLocationGroupId)">
                   <job-summary :distance="job.distance"
                                :distance-time="job.distanceTime"
                                :position="job.role"
@@ -176,7 +189,8 @@
 
         defaultZoomLevel: 7,
         defaultMobileZoomLevel: 6,
-        initialZoom: false,
+        defaultZoomInAmount: 2,
+        initialZoomFlag: false,
 
         mapOptions: {
           zoom: 7,
@@ -186,8 +200,9 @@
           fullscreenControl: false,
           mapTypeControl: false,
           gestureHandling: 'greedy',
-          zoomControl: true,
+          zoomControl: false,
           zoomControlOptions: {
+
             position: google.maps.ControlPosition.TOP_RIGHT
           },
         },
@@ -250,10 +265,18 @@
         return {lat: array[0], lng: array[1]};
       },
 
-      zoom() {
-        if (!this.initialZoom) {
-          this.initialZoom = true;
-          this.map.setZoom(this.defaultZoomLevel + 2);
+      zoomBy(amount) {
+        this.map.setZoom(this.map.getZoom() + amount);
+      },
+
+      zoomTo(level) {
+        this.map.setZoom(level);
+      },
+
+      initialZoom() {
+        if (!this.initialZoomFlag) {
+          this.initialZoomFlag = true;
+          this.zoomTo(this.defaultZoomLevel + this.defaultZoomInAmount);
         }
       },
 
@@ -263,25 +286,34 @@
 
         const coords = this.convertGroupIdToCoords(groupId);
         this.recenterMap(coords.lat, coords.lng);
-        this.zoom();
+        this.initialZoom();
       },
 
       recenterMap(lat, lng) {
         this.map.panTo(new google.maps.LatLng(lat, lng));
       },
 
-      handleMapMarkerClick(groupId) {
-        if (this.deviceIsMobile) {
-          this.calculateActivePageFromGroupId(groupId);
+      handleMapMarkerClick(self, groupId, event) {
+        if (self.deviceIsMobile) {
+          self.calculateActivePageFromGroupId(groupId);
         } else {
           document.querySelector(`.search__view-list-element[data-group-id='${groupId}']`)
             .scrollIntoView({ behavior: 'smooth' });
         }
-        this.focusOnJobLocationGroup(groupId);
+        self.focusOnJobLocationGroup(groupId);
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
       },
 
       handleVacancyClick(groupId) {
         this.focusOnJobLocationGroup(groupId);
+      },
+
+      handleGlobalSearchClick() {
+        this.updateSelectedJobLocationGroupId('');
+
+        CustomMarker.deselectMarker();
       },
 
       updateMapWithJobLocationGroupMarkers(jobLocationGroups) {
@@ -292,7 +324,7 @@
             solid: true,
             amount: jobLocationGroups[group].jobs.length,
             groupId: group,
-            clickCallback: this.handleMapMarkerClick.bind(this, group),
+            clickCallback: this.handleMapMarkerClick.bind(null, this, group),
             prisonName: jobLocationGroups[group].prisonName
           });
         }
@@ -433,8 +465,8 @@
         this.updateJobsDistance(lat, lng);
         this.updateSearchTermMarker(lat, lng);
         this.recenterMap(lat, lng);
-        this.initialZoom = false;
-        this.zoom();
+        this.initialZoomflag = false;
+        this.initialZoom();
       },
 
       processGeocoderResults(results, status) {

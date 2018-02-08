@@ -22,7 +22,9 @@ $footerCopyright = get_field('footer_copyright', 'option');
         <div class="footer">
             <div class="footer__container">
                 <?= $footerContent; ?>
-                <?= $footerCopyright; ?>
+                <div class="footer__copyright">
+                    <span><?= $footerCopyright; ?></span>
+                </div>
             </div>
         </div>
     <?php endif; ?>

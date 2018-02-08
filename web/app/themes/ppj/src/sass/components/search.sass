@@ -1,26 +1,70 @@
+.page-id-182
+  @include bp('portrait')
+    height: 100vh
+
+    .page-blocks
+      display: flex
+      flex: 1
+
+    .facebook-footer
+      display: none
+
+    .footer
+      font-size: 1.6rem
+      padding: $common-spacing
+
+      &__container
+        display: flex
+        justify-content: center
+
+      &__nav-links
+        display: flex
+
+      &__nav-link, &__copyright
+        margin: 0 0 0 $common-spacing
+
+      &__nav-link > *, &__copyright > *
+        border-left: 1px solid $color-light
+        display: inline-block
+        line-height: 1
+        padding-left: $common-spacing
+
+      &__nav-link:first-child > *
+        border-left: none
+
 .search
+  $s: &
   $border: .1rem solid $color-light
-  margin: 0 $common-spacing
+  $map-shadow: 0px 4px 16px 0px $color-medium-transparent
   margin: $common-spacing
 
   @include bp('portrait')
+    display: flex
+    flex-direction: column
+    height: 100%
+    margin: $common-spacing * 2
+    margin-bottom: 0
+    margin-top: 0
+    padding-bottom: $common-spacing * 2
+    padding-top: $common-spacing * 2
     text-align: center
 
   &__title
     @extend .common-header
     @include bp('portrait')
-      margin: auto
+      align-self: center
       margin-bottom: $common-spacing
 
   &__prompt
     @include bp('portrait')
       font-size: $font-size-medium
+      margin-bottom: $common-spacing * 2
 
   &__form
     position: relative
 
     @include bp('portrait')
-      margin: auto
+      align-self: center
       width: 40rem
 
   &__geolocation
@@ -61,7 +105,6 @@
     display: block
     font-size: $font-size-quite-tiny
     height: 4rem
-    margin: $common-spacing 0
     padding: $common-spacing/2 $common-spacing
     transition: $main-transition-duration
     width: 100%
@@ -70,8 +113,8 @@
       font-size: $font-size-small
 
     @include bp('large')
-      height: 5.2rem
-      padding-left: 2rem
+      //height: 5.2rem
+      //padding-left: 2rem
 
     &:focus
       border-color: $color-main
@@ -136,9 +179,28 @@
     margin: $common-spacing/2 0
 
     @include bp('portrait')
-      text-align: left
+      margin: 0
       position: relative
-      top: -4rem
+      text-align: left
+      top: -3.6rem
+
+  &__results
+    $sr: &
+    @include bp('portrait')
+      flex: 1
+      max-height: 100vh
+
+    &--job-selected
+      .job-summary
+        background-color: $color-extremely-light
+
+        &--selected
+          background-color: $color-white
+
+        @include bp('portrait')
+
+      #{$s}__map-marker
+        opacity: .9
 
   &__view-controls
     display: flex
@@ -146,12 +208,18 @@
     width: 100%
 
   &__view-container
+    height: 100%
     margin: $common-spacing/2 0
+
+    @include bp('portrait')
+      margin-bottom: 0
+      margin-top: 0
 
   &__map-view
     @include bp('portrait')
       display: flex
       flex-direction: row-reverse
+      height: 100%
       justify-content: space-between
 
   &__rectangle
@@ -169,14 +237,68 @@
       right: 0
 
   &__map-container
+    position: relative
+
     @include bp('portrait')
+      flex-basis: 62%
+
+    @include bp('landscape')
       flex-basis: 66%
+
+  &__map-zoom-button-container
+    position: absolute
+    right: $common-spacing / 2
+    top: $common-spacing / 2
+    z-index: 1
+
+    @include bp('portrait')
+      right: $common-spacing
+      top: $common-spacing
+
+  &__map-button-zoom
+    $size: 3rem
+    align-items: center
+    background-color: $color-white
+    border: .4rem solid $color-light
+    box-shadow: $map-shadow
+    border-radius: $size
+    cursor: pointer
+    display: flex
+    height: $size
+    justify-content: center
+    padding: $common-spacing
+    width: $size
+
+    @include bp('portrait')
+      $size: 6rem
+      height: $size
+      width: $size
+
+    &:before
+      display: block
+      color: $color-dark
+      font-size: 3rem
+
+    &--in:before
+      content: '+'
+
+    &--out
+      margin-top: $common-spacing / 2
+
+      @include bp('portrait')
+        margin-top: $common-spacing
+
+      &:before
+        content: '-'
 
   &__view-list-container
     @include bp('portrait')
-      flex-basis: 33%
+      flex-basis: 38%
       margin-right: $common-spacing
       position: relative
+
+    @include bp('landscape')
+      flex-basis: 33%
 
   &__view-list
     @include bp('portrait')
@@ -187,7 +309,7 @@
       background-color: $color-white
       border-top: $border
       cursor: pointer
-      padding: $common-spacing/2 $common-spacing
+
 
       // FADING:
       // https://codepen.io/anon/pen/opBRLp
@@ -232,13 +354,6 @@
         @include bp('portrait')
           cursor: s-resize
 
-  &__square-box
-    @include bp('portrait')
-      height: 0
-      padding-bottom: 100%
-      position: relative
-      width: 100%
-
   &__map
     display: flex
     height: 20rem
@@ -259,8 +374,12 @@
     $size: $common-spacing * 2
 
     cursor: pointer
-    pointer-events: none
     position: absolute
+    transition: opacity $main-transition-duration
+
+    &:hover
+      opacity: 1
+      z-index: 2
 
     &-icon
       background: url('/app/themes/ppj/dest/img/inactive_pin.png')
@@ -273,9 +392,11 @@
       width: 3.2rem
 
     &-label
-      background-color: $color-white-transparent
+      background-color: $color-white
       border: 1px solid $color-light
       border-radius: .25em
+      box-shadow: $map-shadow
+      font-size: 1.6rem
       font-weight: $font-weight-bold
       line-height: 1
       opacity: 0
@@ -288,13 +409,18 @@
       white-space: nowrap
       z-index: 1
 
+      @include bp('large')
+        font-size: 1.8rem
+
     &--job-location-group
       &-icon
         background-color: $color-white
         border-color: $color-dark
 
     &#{$c}--selected
+      opacity: 1
       z-index: 1
+
       #{$c}-icon
         border-color: $color-secondary
         background: url('/app/themes/ppj/dest/img/active_pin.png')
@@ -303,6 +429,7 @@
 
       #{$c}-label
         opacity: 1
+        pointer-events: initial
 
     &#{$c}--hover
       #{$c}-label
@@ -311,10 +438,6 @@
 
     &--datum
       box-shadow: none
-
-
-
-
 
   &__job-post
     font-size: $font-size-small

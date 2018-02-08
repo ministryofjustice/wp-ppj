@@ -1,8 +1,23 @@
 .job-summary
+  $verticalPadding: $common-spacing / 2
   font-size: $font-size-small
   line-height: 1.2
   position: relative
   text-align: left
+
+  &:before
+    background-color: $color-transparent
+    border-radius: $common-spacing
+    content: ' '
+    display: block
+    width: $common-spacing / 2
+    position: absolute
+    top: $verticalPadding
+    bottom: $verticalPadding
+
+  &__content
+    padding: $verticalPadding $common-spacing
+    position: relative
 
   &__distance
     height: 1.3em
@@ -16,13 +31,13 @@
   &__salary
     font-weight: $font-weight-bold
     position: absolute
-    right: 0
-    top: 0
+    right: $common-spacing
+    top: $verticalPadding
 
   &__link
     bottom: 2.1rem
     position: absolute
-    right: 0
+    right: $common-spacing
     text-decoration: underline
     text-transform: capitalize
 
@@ -33,15 +48,8 @@
     text-decoration: underline
 
   &--selected
+    transition: $main-transition-duration
 
     &:before
       background-color: $color-secondary
-      border-radius: $common-spacing
-      content: ' '
-      display: block
-      height: 100%
-      width: $common-spacing / 2
-      position: absolute
-      left: - $common-spacing
-      top: 0
-      bottom: 0
+
