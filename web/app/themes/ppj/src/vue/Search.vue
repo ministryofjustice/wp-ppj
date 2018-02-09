@@ -63,7 +63,7 @@
          :class="{'search__results--job-selected': searchResults.selectedJobLocationGroupId}"
     >
       <div class="search__view-container">
-        <div class="search__map-view" v-show="searchResults.activeView == 0">
+        <div class="search__map-view">
           <div class="search__map-container">
             <div class="search__map-zoom-button-container">
               <div class="search__map-button-zoom search__map-button-zoom--in"
@@ -165,7 +165,6 @@
         vacanciesDataURL: 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/vacancies.json',
 
         searchResults: {
-          activeView: 0,
           clearSearchAvailable: false,
           postCode: this.defaultSearchTerm,//'',//'SW1H 1AJ',
           urlEncodedPostCode: '',
@@ -543,14 +542,6 @@
             console.dir(error);
           }
         );
-      },
-
-      showMapView() {
-        this.searchResults.activeView = 0;
-      },
-
-      showListView() {
-        this.searchResults.activeView = 1;
       },
 
       showPage(i) {
