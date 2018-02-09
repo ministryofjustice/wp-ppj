@@ -406,7 +406,6 @@
       position: absolute
       top: .8rem
       transform: translateX(-50%)
-      transition: opacity $main-transition-duration
       white-space: nowrap
       z-index: 1
 
@@ -420,6 +419,7 @@
 
     &#{$c}--selected
       opacity: 1
+      transition: opacity $main-transition-duration
       z-index: 1
 
       #{$c}-icon
@@ -435,6 +435,7 @@
     &#{$c}--hover
       #{$c}-label
         opacity: 1
+        transition: opacity $main-transition-duration
 
 
     &--datum
