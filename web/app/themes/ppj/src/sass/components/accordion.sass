@@ -141,5 +141,8 @@
       &__list-element-title
         display: list-item
         list-style-type: decimal
-        margin-left: $common-spacing * 2
+        margin-left: $common-spacing
+
+        @include bp('landscape')
+          margin-left: $common-spacing * 2
 
