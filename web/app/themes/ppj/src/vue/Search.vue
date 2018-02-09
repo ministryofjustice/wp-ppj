@@ -10,14 +10,11 @@
              :placeholder="placeHolderText"
              editable="editable"
              v-model="searchResults.searchTerm"
-             @blur.stop.prevent="handleSearchInputBlur"
-             @focus.stop.prevent="handleSearchInputFocus"
              @click.stop.prevent=""
              @keypress="handleSearchInputKeyPress"/>
       <div class="search__button-clear-search-container">
         <button class="search__button-clear-search"
-                :class="{'search__button-clear-search--enabled': searchResults.clearSearchAvailable}"
-                :disabled="!searchResults.clearSearchAvailable"
+                :class="{'search__button-clear-search--enabled': searchResults.searchTerm}"
                 @click.stop.prevent="handleClearSearchClick"
         >&#10005;</button>
       </div>
@@ -165,7 +162,6 @@
         vacanciesDataURL: 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/vacancies.json',
 
         searchResults: {
-          clearSearchAvailable: false,
           postCode: this.defaultSearchTerm,//'',//'SW1H 1AJ',
           urlEncodedPostCode: '',
           googleMapAPIKey: 'AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA',
@@ -487,16 +483,6 @@
         }
       },
 
-      handleSearchInputBlur() {
-        if (this.searchResults.searchTerm) {
-          this.searchResults.clearSearchAvailable = true;
-        }
-      },
-
-      handleSearchInputFocus() {
-        this.searchResults.clearSearchAvailable = false;
-      },
-
       handleSearchInputKeyPress(e) {
         if(e.keyCode === 13){
           e.preventDefault();
@@ -506,7 +492,6 @@
 
       handleClearSearchClick() {
         this.searchResults.searchTerm = '';
-        this.searchResults.clearSearchAvailable = false;
         document.getElementsByClassName('search__input')[0].focus();
       },
 
@@ -523,7 +508,6 @@
         this.geoLocationIsBusy = true;
         navigator.geolocation.getCurrentPosition(
           position => {
-            this.searchResults.clearSearchAvailable = !!this.searchResults.searchTerm;
             this.handleNewSearchLocation(position.coords.latitude, position.coords.longitude);
             this.geoLocationIsBusy = false;
             this.geoLocationIsActive = true;
