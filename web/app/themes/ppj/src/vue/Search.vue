@@ -174,7 +174,7 @@
           jobs: [], //dummyJobs,
           jobLocationGroups: {},
           orderedJobLocationGroups: [],
-          searchTerm: '',
+          searchTerm: this.storeGet('searchResults.searchTerm') || '',
           searchTermMarker: {},
           selectedJobLocationGroupId: '',
           visibleJobLocationGroup: null,
@@ -207,7 +207,7 @@
         placeHolderText: 'e.g. SW1A 2LW, Birmingham or Essex',
 
         mounted: false,
-      }
+      };
     },
 
     methods: {
@@ -571,6 +571,29 @@
 
       handleScreenResize() {
         this.updateIsDeviceMobile();
+      },
+
+      storeSave(key, value) {
+        localStorage.setItem('ppj.find-a-job:' + key, value);
+      },
+
+      storeGet(key) {
+        return localStorage.getItem('ppj.find-a-job:' + key);
+      },
+
+      restorePageData() {
+        if (this.searchResults.searchTerm) {
+          this.search();
+        }
+
+      }
+
+    },
+
+    watch: {
+      'searchResults.searchTerm': function(val) {
+        this.storeSave('searchResults.searchTerm', val);
+      }
       }
     },
 
@@ -631,6 +654,7 @@
     },
 
     mounted() {
+
       const self = this;
       this.createMap();
       this.mounted = true;
@@ -656,7 +680,9 @@
 //          console.log(error);
 //        });
 
-      self.handleGotVacanciesData()
+      self.handleGotVacanciesData();
+
+      this.restorePageData();
     }
   }
 </script>
