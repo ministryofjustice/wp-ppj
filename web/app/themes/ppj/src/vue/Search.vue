@@ -186,6 +186,8 @@
         defaultMobileZoomLevel: 6,
         defaultZoomInAmount: 2,
         initialZoomFlag: false,
+        maxZoom: 25,
+        minZoom: 5,
 
         mapOptions: {
           zoom: 7,
@@ -260,12 +262,14 @@
         return {lat: array[0], lng: array[1]};
       },
 
-      zoomBy(amount) {
-        this.map.setZoom(this.map.getZoom() + amount);
+      zoomTo(level) {
+        if (level >= this.minZoom && level <= this.maxZoom) {
+          this.map.setZoom(level);
+        }
       },
 
-      zoomTo(level) {
-        this.map.setZoom(level);
+      zoomBy(amount) {
+        this.zoomTo(this.map.getZoom() + amount);
       },
 
       initialZoom() {
