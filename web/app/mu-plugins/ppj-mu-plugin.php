@@ -69,7 +69,6 @@ function renderPageBlockData($acf)
             } else {
                 $blockType = $fieldGroup['acf_fc_layout'];
 
-                //error_log('renderPageBlockData ' . $blockType);
                 switch ($blockType) {
                     case 'call_to_action':
                         $output .= partial($fieldGroup, 'callToAction');
@@ -246,18 +245,18 @@ function initializeAcfSettingsPage() {
     if ( function_exists( 'acf_add_options_page' ) ) {
 
         acf_add_options_page( array(
-            'page_title' => 'PPJ General Settings',
+            'page_title' => 'PPJ Settings',
             'menu_title' => 'PPJ Settings',
             'menu_slug'  => 'ppj-general-settings',
             'capability' => 'edit_posts',
             'redirect'   => false
-        ) );
+        ));
 
         acf_add_options_sub_page( array(
             'page_title'  => 'PPJ Footer Settings',
             'menu_title'  => 'Footer',
             'parent_slug' => 'ppj-general-settings',
-        ) );
+        ));
 
     }
 }
