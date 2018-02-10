@@ -67,12 +67,26 @@
     position: relative
     width: 100%
 
+  &__img-ratio
+    height: 0
+    padding-bottom: 56.25%
+
+    @include bp('portrait')
+      padding-bottom: 38.88%
+
+    .home &
+      padding-bottom: 76.25%
+
+      @include bp('portrait')
+        padding-bottom: 43.33%
+
   &__img-container
     background-color: $color-dark
     background-position: center center
     background-size: cover
-    height: 100%
-    width: 100%
+    bottom: 0
+    position: absolute
+    top: 0
 
     &:after
       background: linear-gradient(60deg, $color-transparency-dark-end 10%, $color-transparent 50%)

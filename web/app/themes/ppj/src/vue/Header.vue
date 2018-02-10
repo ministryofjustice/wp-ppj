@@ -16,6 +16,7 @@
             </div>
         </div>
         <div class="header__hero">
+          <div class="header__img-ratio">
             <div class="header__img-container"
             >
                 <img class="header__image"
@@ -49,6 +50,7 @@
                   </div>
                 </div>
             </div>
+          </div>
         </div>
 
     </div>
