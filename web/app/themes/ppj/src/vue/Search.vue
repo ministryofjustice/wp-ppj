@@ -598,7 +598,6 @@
       'searchResults.searchTerm': function(val) {
         this.storeSave('searchResults.searchTerm', val);
       }
-      }
     },
 
     computed: {
