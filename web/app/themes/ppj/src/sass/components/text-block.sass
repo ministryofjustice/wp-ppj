@@ -329,9 +329,11 @@
         padding-right: 0
 
     &-icon
+      margin-right: $common-spacing
       width: 6.4rem
 
       @include bp('portrait')
+        margin-right: 0
         margin-bottom: $common-spacing
         width: 10rem
 
@@ -339,7 +341,6 @@
         width: 12rem
 
     &-text-container
-      margin-left: $common-spacing
       text-align: left
 
       .text-block__multi-text-block-container--text-only &
