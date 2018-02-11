@@ -407,18 +407,28 @@
     display: flex
     position: relative
     text-align: center
+    margin: $common-spacing
 
-    @include bp('portrait')
-      margin-top: $common-spacing
+    @include bp('landscape')
+      margin: $common-spacing * 2
 
-      &:before
-        background: $color-light
-        content: ' '
-        display: inline-block
-        height: .2rem
-        position: absolute
-        top: 50%
-        width: 100%
+    &:before
+      background: $color-light
+      content: ' '
+      display: none
+      height: .2rem
+      left: 0
+      margin: 0 $common-spacing * 2
+      position: absolute
+      right: 0
+      top: 50%
+
+      @include bp('portrait')
+        display: block
+        margin: 0
+        width: initial
+
+      @include bp('large')
 
   &__cta-link // https://stackoverflow.com/questions/17268051/sass-combining-parent-using-ampersand-with-base-element
     background-color: $color-main
@@ -430,7 +440,7 @@
     font-size: 1.6rem
     font-weight: $font-weight-bold
     line-height: 2rem
-    margin: $common-spacing auto
+    margin: 0 auto
     padding: 1rem 2rem
     text-align: center
     text-decoration: none
@@ -453,4 +463,3 @@
       font-size: 2.8rem
       line-height: 2.8rem
       padding: 2.2rem 4.4rem
-
