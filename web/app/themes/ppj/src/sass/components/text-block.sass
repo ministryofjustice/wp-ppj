@@ -2,15 +2,16 @@
   $border-width: .1rem
   margin-left: auto
   margin-right: auto
-  padding: $common-spacing 0
-  width: 100%
+  margin-top: $common-spacing
+  padding-bottom: $common-spacing
 
   @include bp('portrait')
-    padding: $common-spacing * 2 0
-    width: calc(100% - 6.4rem)
+    margin: $common-spacing * 2 $common-spacing * 2 0
+    padding-bottom: $common-spacing * 2
 
-  @include bp('large')
-    width: 120rem
+  @include bp('landscape')
+    margin: $common-spacing * 3 $common-spacing * 3 0
+    padding-bottom: $common-spacing * 3
 
   .l-full &
     border-bottom-width: $border-width
@@ -18,15 +19,16 @@
     border-bottom-color: $color-light
 
   .l-full &--highlighted, .l-full &--dark
-
     border-bottom: 0
-    margin-left: 0
-    margin-right: 0
-    //padding-top: 0
+    margin: 0
+    padding: $common-spacing 0
     width: 100%
 
     @include bp('portrait')
-      padding-top: $common-spacing * 2
+      padding: $common-spacing * 2 0
+
+    @include bp('landscape')
+      padding: $common-spacing * 3 0
 
   .page-id-306 .page-blocks .l-full:first-child & // TODO implement proper fix
     border-bottom: none
@@ -51,6 +53,7 @@
   .l-full &--has-cta-link
     border-bottom: 0
     padding-bottom: 0
+    margin-bottom: 0
 
   .page-blocks .l-full:nth-last-child(2) &
     border-bottom: none
@@ -70,13 +73,15 @@
 .text-block
   font-size: $font-size-small
   //margin: 0 $common-spacing 0
-  margin: 0
+  margin: 0 auto
+  max-width: 48rem
   padding-left: $common-spacing
   padding-right: $common-spacing
 
   @include bp('portrait')
     font-size: $font-size-medium
-    margin: auto
+    margin: 0 auto
+    max-width: none
     width: 75%
 
   @include bp('landscape')
