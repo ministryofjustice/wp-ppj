@@ -558,8 +558,8 @@
 
       handleGotVacanciesData(response) {
         const self = this;
-        //self.searchResults.jobs = response.data;
-        self.searchResults.jobs = dummyJobs;
+        self.searchResults.jobs = response.data;
+        //self.searchResults.jobs = dummyJobs;
 
         if (self.searchResults.searchTerm) {
           self.search();
@@ -664,26 +664,26 @@
 
       window.addEventListener('resize', this.handleScreenResize);
 
-//      axios.get(this.vacanciesDataURL)
-//        .then(
-///*          response => {
-//
-//          //self.searchResults.jobs = response.data;
-//          self.searchResults.jobs = dummyJobs;
-//
-//          if (self.searchResults.searchTerm) {
-//            self.search();
-//          } else {
-//
-//          }
-//        }*/
-//          self.handleGotVacanciesData
-//        )
-//        .catch(function (error) {
-//          console.log(error);
-//        });
+      axios.get(this.vacanciesDataURL,  { responseType: 'json' })
+        .then(
+         /* response => {
 
-      self.handleGotVacanciesData();
+          //self.searchResults.jobs = response.data;
+          self.searchResults.jobs = dummyJobs;
+
+          if (self.searchResults.searchTerm) {
+            self.search();
+          } else {
+
+          }
+        }*/
+          self.handleGotVacanciesData
+        )
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      //self.handleGotVacanciesData();
 
       this.restorePageData();
     }
