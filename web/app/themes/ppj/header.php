@@ -31,7 +31,8 @@ if ( $headerImageMobileData = get_field( 'header_image_mobile' ) ) {
 $navMenuItems         = wp_get_nav_menu_items( 'Main menu' );
 $filteredNavMenuItems = [];
 foreach ( $navMenuItems as $item ) {
-    $same                   = ( $post->ID == $item->object_id );
+    $same = ( isset($post) && $post->ID == $item->object_id );
+
     $filteredNavMenuItems[] = [
         'title'    => $item->title,
         'url'      => $item->url,
