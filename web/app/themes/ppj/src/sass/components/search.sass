@@ -262,6 +262,7 @@
       top: $common-spacing
 
   &__map-button-zoom
+    $mbz: &
     $size: 3rem
     align-items: center
     background-color: $color-white
@@ -272,8 +273,15 @@
     display: flex
     height: $size
     justify-content: center
-    padding: $common-spacing
     width: $size
+
+    &-icon
+      fill: $color-dark
+      height: 100%
+      width: 100%
+
+    .zoom-icon-background
+      fill: blue
 
     @include bp('portrait')
       $size: 6rem
@@ -289,17 +297,11 @@
       color: $color-dark
       font-size: 3rem
 
-    &--in:before
-      content: '+'
-
     &--out
       margin-top: $common-spacing / 2
 
       @include bp('portrait')
         margin-top: $common-spacing
-
-      &:before
-        content: '-'
 
   &__view-list-container
     @include bp('portrait')

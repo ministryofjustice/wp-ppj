@@ -62,10 +62,22 @@
         <div class="search__map-zoom-button-container">
           <div class="search__map-button-zoom search__map-button-zoom--in"
                @click.stop.prevent="zoomBy(1)"
-          ></div>
+          >
+            <svg class="search__map-button-zoom-icon"
+                 viewBox="0 0 32 32"
+                 style="enable-background:new 0 0 32 32;">
+              <polygon points="22,14.9 17.1,14.9 17.1,10 14.9,10 14.9,14.9 10,14.9 10,17.1 14.9,17.1 14.9,22 17.1,22 17.1,17.1 22,17.1 "/>
+            </svg>
+          </div>
           <div class="search__map-button-zoom search__map-button-zoom--out"
                @click.stop.prevent="zoomBy(-1)"
-          ></div>
+          >
+            <div class="search__map-button-zoom-image-container"></div>
+            <svg class="search__map-button-zoom-icon"
+                 viewBox="0 0 32 32">
+              <polygon class="zoom-icon" points="22,14.9 10,14.9 10,17.1 22,17.1 " />
+            </svg>
+          </div>
         </div>
         <div class="search__map"
              @click.stop.prevent=""
