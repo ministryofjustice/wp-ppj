@@ -1,0 +1,69 @@
+.page-404
+  color: $color-white
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  margin: $common-spacing * 1.5
+  max-width: 84rem
+
+  @include bp('portrait')
+    border: .5em solid $color-white
+    border-radius: 5rem
+    border-top-left-radius: 0
+
+  &__container
+    @include bp('portrait')
+      display: flex
+      margin: $common-spacing * 3 $common-spacing * 2
+
+  &__header
+    border: .5em solid $color-white
+    border-left: 0
+    border-right: 0
+    padding-bottom: $common-spacing * 1.5
+
+    @include bp('portrait')
+      width: 32rem
+
+  &__title
+    font-size: 13rem
+    font-weight: $font-weight-bold
+    text-align: center
+
+  &__subtitle
+    font-weight: 400
+    font-size: 3.2rem
+    text-align: center
+
+  &__content
+    font-size: 1.6rem
+    padding: $common-spacing 0
+    text-align: center
+
+    @include bp('portrait')
+      display: flex
+      flex-direction: column
+      font-size: 2.2rem
+      justify-content: space-between
+      margin-left: $common-spacing * 2
+      text-align: left
+
+    a
+      color: $color-white
+
+.error404
+  @include background-img('bg_404.png')
+  background-color: $color-quite-dark
+  display: flex
+  flex-direction: column
+  height: 100vh
+  justify-content: flex-start
+  max-width: initial
+  min-height: 100%
+  width: 100vw
+
+  @include bp('portrait')
+    align-items: center
+    justify-content: center
+
+
