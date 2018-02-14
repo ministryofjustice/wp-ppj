@@ -60,6 +60,8 @@
         align-items: center
 
       @include bp('landscape')
+        margin: 0 auto
+        max-width: 128.4rem
         padding: $common-spacing * 2
 
   &__image
@@ -69,13 +71,13 @@
 
   &__img-ratio
     height: 0
-    padding-bottom: 56.25%
+    padding-bottom: 38.88% // 18rem //56.25%
 
     @include bp('portrait')
       padding-bottom: 38.88%
 
     .home &
-      padding-bottom: 76.25%
+      padding-bottom: 24.4rem //76.25%
 
       @include bp('portrait')
         padding-bottom: 43.33%
@@ -302,7 +304,9 @@
     margin: $common-spacing
 
     @include bp('landscape')
-      margin: $common-spacing * 2
+      max-width: 128.4rem
+      margin: $common-spacing * 2 auto $common-spacing * 4
+      padding: 0 $common-spacing * 2
 
     @include bp('large')
       position: relative
