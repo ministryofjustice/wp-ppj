@@ -44,6 +44,16 @@
     position: relative
     text-align: center
 
+  &--job-selected
+    .job-summary
+      background-color: $color-extremely-light
+
+      &--selected
+        background-color: $color-white
+
+    #{$s}__map-marker
+      opacity: .9
+
   &__header
 
     @include bp('portrait')
@@ -192,18 +202,6 @@
     @include bp('portrait')
       flex: 1
       max-height: 100vh
-
-    &--job-selected
-      .job-summary
-        background-color: $color-extremely-light
-
-        &--selected
-          background-color: $color-white
-
-        @include bp('portrait')
-
-      #{$s}__map-marker
-        opacity: .9
 
   &__view-controls
     display: flex

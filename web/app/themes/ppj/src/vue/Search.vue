@@ -2,6 +2,8 @@
   <div class="search"
        v-cloak
        @click.stop.prevent="handleGlobalSearchClick"
+       :class="{'search--job-selected': searchResults.selectedJobLocationGroupId}"
+
   >
     <div class="search__header">
       <h2 class="search__title">{{ titleText }}</h2>
