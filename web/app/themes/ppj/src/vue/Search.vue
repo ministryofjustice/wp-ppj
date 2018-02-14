@@ -1,32 +1,33 @@
 <template>
-  <div class="search" v-cloak
+  <div class="search"
+       v-cloak
        @click.stop.prevent="handleGlobalSearchClick"
   >
     <div class="search__header">
-    <h2 class="search__title">{{ titleText }}</h2>
-    <p class="search__prompt">Enter location (postcode, town or region)</p>
-    <div class="search__form">
-      <input type="text"
-             class="search__input"
-             :placeholder="placeHolderText"
-             editable="editable"
-             v-model="searchResults.searchTerm"
-             @click.stop.prevent=""
-             @keypress="handleSearchInputKeyPress"/>
-      <div class="search__button-clear-search-container">
-        <button class="search__button-clear-search"
-                :class="{'search__button-clear-search--enabled': searchResults.searchTerm}"
-                @click.stop.prevent="handleClearSearchClick"
-        >&#10005;</button>
-      </div>
+      <h2 class="search__title">{{ titleText }}</h2>
+      <p class="search__prompt">Enter location (postcode, town or region)</p>
+      <div class="search__form">
+        <input type="text"
+               class="search__input"
+               :placeholder="placeHolderText"
+               editable="editable"
+               v-model="searchResults.searchTerm"
+               @click.stop.prevent=""
+               @keypress="handleSearchInputKeyPress"/>
+        <div class="search__button-clear-search-container">
+          <button class="search__button-clear-search"
+                  :class="{'search__button-clear-search--enabled': searchResults.searchTerm}"
+                  @click.stop.prevent="handleClearSearchClick"
+          >&#10005;</button>
+        </div>
 
-      <button class="search__button-search"
-              @click.stop.prevent="search"
-              :disabled="searchResults.searchTerm == ''">
-        <div class="search__button-search-circle"></div>
-        <div class="search__button-search-rectangle"></div>
-      </button>
-    </div>
+        <button class="search__button-search"
+                @click.stop.prevent="search"
+                :disabled="searchResults.searchTerm == ''">
+          <div class="search__button-search-circle"></div>
+          <div class="search__button-search-rectangle"></div>
+        </button>
+      </div>
 
       <div class="search__geolocation"
            :class="{
@@ -58,84 +59,84 @@
       </div>
     </div>
 
-      <div class="search__map-container">
-        <div class="search__map-zoom-button-container">
-          <div class="search__map-button-zoom search__map-button-zoom--in"
-               @click.stop.prevent="zoomBy(1)"
-          >
-            <svg class="search__map-button-zoom-icon"
-                 viewBox="0 0 32 32"
-                 style="enable-background:new 0 0 32 32;">
-              <polygon points="22,14.9 17.1,14.9 17.1,10 14.9,10 14.9,14.9 10,14.9 10,17.1 14.9,17.1 14.9,22 17.1,22 17.1,17.1 22,17.1 "/>
-            </svg>
-          </div>
-          <div class="search__map-button-zoom search__map-button-zoom--out"
-               @click.stop.prevent="zoomBy(-1)"
-          >
-            <div class="search__map-button-zoom-image-container"></div>
-            <svg class="search__map-button-zoom-icon"
-                 viewBox="0 0 32 32">
-              <polygon class="zoom-icon" points="22,14.9 10,14.9 10,17.1 22,17.1 " />
-            </svg>
-          </div>
+    <div class="search__map-container">
+      <div class="search__map-zoom-button-container">
+        <div class="search__map-button-zoom search__map-button-zoom--in"
+             @click.stop.prevent="zoomBy(1)"
+        >
+          <svg class="search__map-button-zoom-icon"
+               viewBox="0 0 32 32"
+               style="enable-background:new 0 0 32 32;">
+            <polygon points="22,14.9 17.1,14.9 17.1,10 14.9,10 14.9,14.9 10,14.9 10,17.1 14.9,17.1 14.9,22 17.1,22 17.1,17.1 22,17.1 "/>
+          </svg>
         </div>
-        <div class="search__map"
-             @click.stop.prevent=""
-        ></div>
-      </div>
-      <div class="search__jobs-available-container">
-        <div class="search__jobs-available"><span>{{searchResults.jobs.length }}</span> prison officer jobs available:</div>
-      </div>
-      <div class="search__view-list-container">
-        <ul class="search__view-list">
-          <li class="search__view-list-element"
-              :data-group-id="job.jobLocationGroupId"
-              v-for="(job, index) in visibleSearchResults"
-              :key="index"
-              v-on:click.stop.prevent="handleVacancyClick(job.jobLocationGroupId)">
-            <job-summary :distance="job.distance"
-                         :distance-time="job.distanceTime"
-                         :position="job.role"
-                         :prison-city="job.prison_location.town"
-                         :prison-name="job.prison_name"
-                         :prison-page-link="job.url"
-                         :salary="job.salary"
-                         :selected="job.jobLocationGroupId == searchResults.selectedJobLocationGroupId"
-                         :title="job.title"
-                         :url="job.url"
-            >
-            </job-summary>
-          </li>
-        </ul>
-        <div class="search__pagination"
-             v-if="deviceIsMobile">
-          <a class="search__pagination-skip-link"
-             :class="{'search__pagination-skip-link--enabled': (backwardEnabled == true)}"
-             @click.stop.prevent="showFirstPage">
-            first</a>
-          <button class="search__pagination-direction"
-                  :class="{'search__pagination-direction--enabled': (backwardEnabled == true)}"
-                  @click.stop.prevent="showPreviousPage"> <
-          </button>
-          <div class="search__pagination-page-numbers-container">
-            <div class="search__pagination-current-page-number">
-              {{searchResults.listView.activePage + 1}}
-            </div>
-            <div class="search__pagination-of">of</div>
-            <div class="search__pagination-total-pages">
-              {{numberOfResultPages}}
-            </div>
-          </div>
-          <button class="search__pagination-direction"
-                  :class="{'search__pagination-direction--enabled': (forwardEnabled == true)}"
-                  @click.stop.prevent="showNextPage"> >
-          </button>
-          <a class="search__pagination-skip-link"
-             :class="{'search__pagination-skip-link--enabled': (forwardEnabled == true)}"
-             @click.stop.prevent="showLastPage"
-          >last</a>
+        <div class="search__map-button-zoom search__map-button-zoom--out"
+             @click.stop.prevent="zoomBy(-1)"
+        >
+          <div class="search__map-button-zoom-image-container"></div>
+          <svg class="search__map-button-zoom-icon"
+               viewBox="0 0 32 32">
+            <polygon class="zoom-icon" points="22,14.9 10,14.9 10,17.1 22,17.1 " />
+          </svg>
         </div>
       </div>
+      <div class="search__map"
+           @click.stop.prevent=""
+      ></div>
+    </div>
+    <div class="search__jobs-available-container">
+      <div class="search__jobs-available"><span>{{searchResults.jobs.length }}</span> prison officer jobs available:</div>
+    </div>
+    <div class="search__view-list-container">
+      <ul class="search__view-list">
+        <li class="search__view-list-element"
+            :data-group-id="job.jobLocationGroupId"
+            v-for="(job, index) in visibleSearchResults"
+            :key="index"
+            v-on:click.stop.prevent="handleVacancyClick(job.jobLocationGroupId)">
+          <job-summary :distance="job.distance"
+                       :distance-time="job.distanceTime"
+                       :position="job.role"
+                       :prison-city="job.prison_location.town"
+                       :prison-name="job.prison_name"
+                       :prison-page-link="job.url"
+                       :salary="job.salary"
+                       :selected="job.jobLocationGroupId == searchResults.selectedJobLocationGroupId"
+                       :title="job.title"
+                       :url="job.url"
+          >
+          </job-summary>
+        </li>
+      </ul>
+      <div class="search__pagination"
+           v-if="deviceIsMobile">
+        <a class="search__pagination-skip-link"
+           :class="{'search__pagination-skip-link--enabled': (backwardEnabled == true)}"
+           @click.stop.prevent="showFirstPage">
+          first</a>
+        <button class="search__pagination-direction"
+                :class="{'search__pagination-direction--enabled': (backwardEnabled == true)}"
+                @click.stop.prevent="showPreviousPage"> <
+        </button>
+        <div class="search__pagination-page-numbers-container">
+          <div class="search__pagination-current-page-number">
+            {{searchResults.listView.activePage + 1}}
+          </div>
+          <div class="search__pagination-of">of</div>
+          <div class="search__pagination-total-pages">
+            {{numberOfResultPages}}
+          </div>
+        </div>
+        <button class="search__pagination-direction"
+                :class="{'search__pagination-direction--enabled': (forwardEnabled == true)}"
+                @click.stop.prevent="showNextPage"> >
+        </button>
+        <a class="search__pagination-skip-link"
+           :class="{'search__pagination-skip-link--enabled': (forwardEnabled == true)}"
+           @click.stop.prevent="showLastPage"
+        >last</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -204,7 +205,6 @@
           gestureHandling: 'greedy',
           zoomControl: false,
           zoomControlOptions: {
-
             position: google.maps.ControlPosition.TOP_RIGHT
           },
         },
@@ -571,7 +571,6 @@
         } else {
 
         }
-
       },
 
       updateIsDeviceMobile() {
