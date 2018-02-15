@@ -7,7 +7,9 @@
             "email": "james.devon@digital.justice.gov.uk"
         }
     ],
-    "require": {},
+    "require": {
+        "viper007bond/regenerate-thumbnails": "^3.0"
+    },
     "require-dev": {
         "heroku/heroku-buildpack-php" : "dev-master"
     }
