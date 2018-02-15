@@ -73,10 +73,13 @@ CustomMarker.prototype.draw = function() {
       }
 
       if (typeof self.args.clickCallback !== 'undefined'){
-          google.maps.event.addDomListener(div, "click", function(event) {
-              google.maps.event.trigger(self, "click");
-              self.args.clickCallback(event);
-          });
+
+        const action = function(str, event) {
+          google.maps.event.trigger(div, "click");
+          self.args.clickCallback(event);
+        };
+        google.maps.event.addDomListener(icon, "click", action.bind(null, 'clicked marker'));
+        google.maps.event.addDomListener(icon, "touchstart", action.bind(null, 'touched marker'));
       }
 
       var panes = this.getPanes();
