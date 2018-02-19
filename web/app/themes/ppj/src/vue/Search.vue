@@ -507,11 +507,13 @@
       },
 
       search() {
-        new google.maps.Geocoder().geocode(
-          {'address': 'UK ' + this.searchResults.searchTerm},
-          this.processGeocoderResults
-        );
-        document.getElementsByClassName('search__input')[0].blur();
+        if (this.searchResults.searchTerm) {
+          new google.maps.Geocoder().geocode(
+            {'address': 'UK ' + this.searchResults.searchTerm},
+            this.processGeocoderResults
+          );
+          document.getElementsByClassName('search__input')[0].blur();
+        }
       },
 
       useGeoLocation() {
