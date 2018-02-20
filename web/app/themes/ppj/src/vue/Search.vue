@@ -1,9 +1,8 @@
 <template>
+
   <div class="search"
        v-cloak
-       @click.stop.prevent="handleGlobalSearchClick"
        :class="{'search--job-selected': searchResults.selectedJobLocationGroupId}"
-
   >
     <div class="search__header">
       <h2 class="search__title">{{ titleText }}</h2>
@@ -95,7 +94,7 @@
             :data-group-id="job.jobLocationGroupId"
             v-for="(job, index) in visibleSearchResults"
             :key="index"
-            v-on:click.stop.prevent="handleVacancyClick(job.jobLocationGroupId)">
+            v-on:click="handleVacancyClick(job.jobLocationGroupId)">
           <job-summary :distance="job.distance"
                        :distance-time="job.distanceTime"
                        :position="job.role"
