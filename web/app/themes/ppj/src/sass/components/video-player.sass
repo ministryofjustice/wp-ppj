@@ -1,5 +1,6 @@
 .video-player
-  position: relative
+  //position: relative
+  width: 100%
 
   &__title
     font-weight: $font-weight-bold
@@ -10,8 +11,15 @@
     display: flex
     height: 0
     justify-content: center
-    padding-bottom: 56.25%
+    //padding-bottom: 56.25%
+    padding-bottom: 78%
     position: relative
+
+    @include bp('portrait')
+      padding-bottom: 68%
+
+    @include bp('large')
+      padding-bottom: 49.5rem
 
     & > iframe
       bottom: 0

@@ -4,7 +4,7 @@ global $ppj_template_data;
 $td = $ppj_template_data;
 
 ?>
-<iframe src="https://cdn1.raptmedia.com/projects/<?= $td['id'] ?>/embed?autoplay=false&controls=overlay"
+<iframe src="https://cdn1.raptmedia.com/projects/<?= $td['id'] ?>/embed?autoplay=false&controls=below"
         webkitallowfullscreen='true'
         mozallowfullscreen='true'
         allowfullscreen='true'

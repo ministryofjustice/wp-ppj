@@ -22,8 +22,8 @@ $td = $ppj_template_data;
                 echo ppj\partial($td, 'videoPlayer', 'wistia');
                 break;
 
-            case 'raptMedia':
-                echo ppj\partial($td, 'videoPlayer', 'raptMedia');
+            case 'raptmedia':
+                echo ppj\partial($td, 'videoPlayer', 'raptmedia');
                 break;
 
             default:
