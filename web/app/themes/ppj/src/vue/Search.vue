@@ -81,6 +81,7 @@
           </svg>
         </div>
       </div>
+
       <div class="search__map"
            @click.stop.prevent=""
       ></div>
