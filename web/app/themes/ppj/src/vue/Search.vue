@@ -221,6 +221,10 @@
 
     methods: {
 
+      alert(title, message){
+        alert(title + "\n" + message);
+      },
+
       isDeviceMobile() {
         return (window.innerWidth < 768);
       },
@@ -526,16 +530,11 @@
             this.geoLocationIsActive = true;
           },
           error => {
-            // TODO create better error message dialogue
-            console.log('handling geolocation error');
-            let msg = 'Problem using Geolocation: ';
             if (typeof error.code !== 'undefined' && error.code === 1) {
-              msg += error.message;
+              this.alert('Sorry, we can’t detect your location.', 'Try searching by postcode, town or region.');
             } else {
-              //msg = 'Problem using Geolocation';
+              this.alert('', 'Problem using Geolocation');
             }
-
-            alert(msg);
             console.dir(error);
           }
         );
