@@ -486,15 +486,16 @@
             results[0].geometry.location.lng()
           );
         } else {
-          // TODO create better error message dialogue
           let msg = '';
           if (status === 'ZERO_RESULTS') {
-            msg = 'No results found';
+            this.alert('No results found for ' + this.searchResults.searchTerm, 'Try searching again');
           } else {
+            // TODO need proper content for this:
             msg = 'Problem communicating with Google Geocoder API, ' + status ;
+            this.alert('', msg);
           }
-          alert(msg);
-          console.error(msg);
+          console.error(status);
+          console.dir(results);
         }
       },
 
