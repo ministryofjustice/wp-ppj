@@ -77,6 +77,24 @@
       & > a
         text-decoration: underline
 
+      & table
+        margin: $common-spacing 0 $common-spacing * 2
+        width: 100%
+
+        tr
+          border: 1px solid $color-light
+          border-left: 0
+          border-right: 0
+
+        th
+          font-weight: $font-weight-bold
+
+        td, th
+          padding: $common-spacing / 2
+
+        td:first-child, th:first-child
+          padding-left: 0
+
     &-button
       $length: 1.8rem
       $thickness: $length/4
