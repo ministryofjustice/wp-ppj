@@ -24,7 +24,8 @@
       </div>
       <a class="job-summary__link"
          v-if="url"
-         :href="url">
+         @click="handleViewJobClick"
+      >
         view job
       </a>
     </div>
@@ -43,6 +44,13 @@
       , 'selected': {default: false}
       , 'title': {default: 'remove me'}
       , 'url': {default: '/job-post.html'}
+    },
+
+    methods: {
+      handleViewJobClick: function() {
+        ga('send', 'event', 'View Job', 'View job',this.prisonName ,5);
+        window.location = this.url;
+      }
     },
 
     computed: {
