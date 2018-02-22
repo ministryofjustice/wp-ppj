@@ -41,7 +41,8 @@
         },
         methods: {
             toggleOpen(el) {
-                this.open = !this.open;
+              this.open = !this.open;
+              ga('send', 'event', 'Accordian', this.title, (this.open) ? 'open' : 'close', 7);
             }
         }
     };
