@@ -39,7 +39,7 @@
       display: flex
       justify-content: space-between
       margin-bottom: 0
-      padding: $common-spacing/2 0
+      padding: $common-spacing/2
       pointer-events: none
       transition: background-color $main-transition-duration
 
@@ -48,6 +48,7 @@
 
       @include bp('portrait')
         cursor: pointer
+        padding: $common-spacing/2 $common-spacing
         pointer-events: initial
 
     &-title
@@ -156,8 +157,8 @@
         display: block
 
       &__list-element-title
-        margin-left: $common-spacing
+        //margin-left: $common-spacing
 
         @include bp('landscape')
-          margin-left: $common-spacing * 2
+          //margin-left: $common-spacing * 2
 
