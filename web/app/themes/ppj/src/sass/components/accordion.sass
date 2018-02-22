@@ -3,7 +3,8 @@
   $border: 1px solid $color-light
   font-size: 1.6rem
   line-height: 2.2rem
-  margin: 0 $common-spacing
+  margin: 0 auto $common-spacing
+  max-width: 85%
 
   @include bp('portrait')
     font-size: 1.8rem
@@ -14,11 +15,12 @@
   @include bp('landscape')
     font-size: 2.4rem
     line-height: 3.2rem
+    width: 91.5rem
 
   @include bp('large')
     font-size: 2.8rem
     line-height: 3.8rem
-    width: 66%
+    width: 79.2rem
 
   &__title
     @extend .common-header
