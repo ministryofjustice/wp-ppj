@@ -30,6 +30,14 @@ function toggleOpenNavMenu(navLink) {
     }
 }
 
+window.ppjNavTo = function(href, callback) {
+  console.log('navTo');
+  if (typeof callback !== 'undefined') {
+    callback()
+  }
+  window.location = href;
+};
+
 window.addEventListener('load', function() {
 
   if (document.querySelectorAll('#site-container').length > 0) {
