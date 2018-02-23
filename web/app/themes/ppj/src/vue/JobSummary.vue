@@ -48,7 +48,7 @@
 
     methods: {
       handleViewJobClick: function() {
-        ga('send', 'event', 'View Job', 'View job',this.prisonName ,5);
+        ga('send', 'event', 'ViewJob', 'ViewJob',this.prisonName ,5);
         window.location = this.url;
       }
     },
