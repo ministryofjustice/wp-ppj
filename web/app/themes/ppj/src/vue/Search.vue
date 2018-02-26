@@ -344,7 +344,7 @@
           }
           const latLngArr = markerArgs[i].groupId.split(',');
           const latLng = new google.maps.LatLng(latLngArr[0], latLngArr[1]);
-          new CustomMarker(
+          const marker = new CustomMarker(
             latLng,
             this.map,
             markerArgs[i]
@@ -457,17 +457,24 @@
         );
       },
 
+      deleteSearchTermMarker() {
+        const element = document.getElementsByClassName('search__map-marker--search-term')[0];
+        if (typeof element !== 'undefined') {
+          element.parentNode.removeChild(element);
+        }
+      },
+
       updateSearchTermMarker(lat, lng) {
         this.geoLocationIsActive = false;
-        if (typeof this.searchResults.searchTermMarker.markerDiv == 'undefined') {
-          this.searchResults.searchTermMarker.markerDiv = new google.maps.Marker({
-            position: {lat, lng},
-            map: this.map,
-            label: this.searchTerm
-          });
-        } else {
-          this.searchResults.searchTermMarker.markerDiv.setPosition(new google.maps.LatLng(lat, lng));
-        }
+
+        this.deleteSearchTermMarker();
+
+        this.searchResults.searchTermMarker.markerDiv = new CustomMarker(
+          new google.maps.LatLng(lat, lng),
+          this.map,
+          {class: 'search__map-marker--search-term'}
+        );
+
       },
 
       handleNewSearchLocation(lat, lng) {
@@ -508,6 +515,7 @@
 
       handleClearSearchClick() {
         this.searchResults.searchTerm = '';
+        this.deleteSearchTermMarker();
         document.getElementsByClassName('search__input')[0].focus();
       },
 

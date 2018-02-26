@@ -48,38 +48,43 @@ CustomMarker.prototype.draw = function() {
       div = this.div = document.createElement('div');
       div.classList.add('search__map-marker');
       div.classList.add(self.args.class);
-      div.setAttribute('data-group-id', self.args.groupId);
-      styleMarker(div, self.args);
 
       const icon = document.createElement('div');
       icon.classList.add('search__map-marker-icon');
       div.appendChild(icon);
 
-      icon.addEventListener("mouseover", function() {
-        div.classList.add('search__map-marker--hover');
-      });
+      if (self.args.class == 'search__map-marker--job-location-group') {
 
-      icon.addEventListener("mouseleave", function() {
-        div.classList.remove('search__map-marker--hover');
-      });
+        div.setAttribute('data-group-id', self.args.groupId);
+        styleMarker(div, self.args);
 
-      const label = document.createElement('div');
-      label.innerHTML = self.args.prisonName;
-      label.classList.add('search__map-marker-label');
-      div.appendChild(label);
+        icon.addEventListener("mouseover", function() {
+          div.classList.add('search__map-marker--hover');
+        });
 
-      if (typeof(self.args.marker_id) !== 'undefined') {
+        icon.addEventListener("mouseleave", function() {
+          div.classList.remove('search__map-marker--hover');
+        });
+
+        const label = document.createElement('div');
+        label.innerHTML = self.args.prisonName;
+        label.classList.add('search__map-marker-label');
+        div.appendChild(label);
+
+        if (typeof(self.args.marker_id) !== 'undefined') {
           div.dataset.marker_id = self.args.marker_id;
-      }
+        }
 
-      if (typeof self.args.clickCallback !== 'undefined'){
+        if (typeof self.args.clickCallback !== 'undefined'){
 
-        const action = function(str, event) {
-          google.maps.event.trigger(div, "click");
-          self.args.clickCallback(event);
-        };
-        google.maps.event.addDomListener(icon, "click", action.bind(null, 'clicked marker'));
-        google.maps.event.addDomListener(icon, "touchstart", action.bind(null, 'touched marker'));
+          const action = function(str, event) {
+            google.maps.event.trigger(div, "click");
+            self.args.clickCallback(event);
+          };
+          google.maps.event.addDomListener(icon, "click", action.bind(null, 'clicked marker'));
+          google.maps.event.addDomListener(icon, "touchstart", action.bind(null, 'touched marker'));
+        }
+
       }
 
       var panes = this.getPanes();
@@ -92,6 +97,7 @@ CustomMarker.prototype.draw = function() {
         div.style.left = point.x + 'px';
         div.style.top  = point.y + 'px';
     }
+
 };
 
 CustomMarker.prototype.remove = function() {

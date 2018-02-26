@@ -401,15 +401,6 @@
       z-index: 2
 
     &-icon
-      background: url('/app/themes/ppj/dest/img/inactive_pin.png')
-      background-size: 3.2rem 3.8rem
-      cursor: pointer
-      left: - 1.55rem
-      height: 3.8rem
-      pointer-events: auto
-      position: relative
-      top: - 3.5rem
-      width: 3.2rem
 
     &-label
       background-color: $color-white
@@ -433,9 +424,33 @@
         font-size: 1.8rem
 
     &--job-location-group
-      &-icon
+      #{$c}-icon
         background-color: $color-white
         border-color: $color-dark
+        background: url('/app/themes/ppj/dest/img/inactive_pin.png')
+        background-size: 3.2rem 3.8rem
+        cursor: pointer
+        left: - 1.55rem
+        height: 3.8rem
+        pointer-events: auto
+        position: relative
+        top: - 3.5rem
+        width: 3.2rem
+
+    &--search-term
+      opacity: 1
+
+      #{$c}-icon
+        $size: 4.8rem
+        background: url('/app/themes/ppj/dest/img/search_pin.png')
+        background-size: $size $size
+        height: $size
+        left: -$size/2
+        position: relative
+        width: $size
+        top: -$size
+        z-index: 1000
+
 
     &#{$c}--selected
       opacity: 1
