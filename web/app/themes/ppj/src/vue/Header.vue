@@ -25,6 +25,8 @@
                      :srcset='processedHeaderImageData.srcset'
                      :alt='processedHeaderImageData.alt'
                      :sizes='processedHeaderImageData.sizes'
+                     @load='handleImageLoaded'
+                     :class="{'header__image--loaded': this.heroImageLoaded}"
                 />
               <!--              <picture v-if="processedHeaderImageData">
                             <source v-for="source in processedHeaderImageData.sources"
@@ -129,7 +131,8 @@
 
         data() {
           return {
-              menuOpen: false
+            heroImageLoaded: false,
+            menuOpen: false
           }
         },
 
@@ -242,6 +245,9 @@
                 this.menuOpen = false;
                 document.getElementsByTagName('body')[0].style.overflow = '';
             },
+          handleImageLoaded() {
+              this.heroImageLoaded = true;
+          }
         }
     }
 </script>
