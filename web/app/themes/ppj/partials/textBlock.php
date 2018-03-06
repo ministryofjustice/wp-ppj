@@ -1,6 +1,7 @@
 <?php
 
 global $ppj_template_data;
+
 $td = $ppj_template_data;
 $textBlockClassName = 'text-block-container';
 $textBlockClasses = $textBlockClassName;
@@ -21,12 +22,16 @@ if (isset($td['width'])) {
     $layout = 'l-full';
 }
 
+$isValidRegularTextBlock = ($td['type'] == 'regular' && $td['content']);
+
 $isDoubleTextBlock = ($td['type'] == 'double' && isset($td['double_text_blocks']) && is_array( $td['double_text_blocks']));
 $isTripleTextBlock = ($td['type'] == 'triple' && isset($td['triple_text_blocks']) && is_array( $td['triple_text_blocks']));
-$isMultiTextBlock = ($isDoubleTextBlock || $isTripleTextBlock);
+$isValidMultiTextBlock = ($isDoubleTextBlock || $isTripleTextBlock);
+
+$isValidAccordionBlock = ($td['type'] == 'accordion' && isset($td['accordion']) && is_array( $td['accordion']));
 
 // compute the 'style' BEM modifier
-if ($isMultiTextBlock) {
+if ($isValidMultiTextBlock) {
     $textBlockClasses .= ' ' . $textBlockClassName . '--multi';
 
     if ($isTripleTextBlock) {
@@ -71,13 +76,13 @@ if (isset($td['link']['title'])) {
                 </h3>
             <?php endif; ?>
 
-            <?php if ($td['content']) : ?>
+            <?php if ($isValidRegularTextBlock) { ?>
+
                 <div class="text-block__content">
                     <?= $td['content'] ?>
                 </div>
-            <?php endif; ?>
 
-            <?php if ($multiTextBlocks): ?>
+            <?php } elseif ($isValidMultiTextBlock) {?>
 
                 <div class="<?= $multiTextBlockClasses ?>">
                     <?php foreach ($multiTextBlocks as $block) : ?>
@@ -103,7 +108,28 @@ if (isset($td['link']['title'])) {
                     <?php endforeach; ?>
                 </div>
 
-            <?php endif; ?>
+            <?php } elseif ($isValidAccordionBlock) { ?>
+
+                <div class="text-block__content">
+                    <accordion numbered="<?= (!empty($td['numbered']) ? 'true' : '') ?>">
+
+                        <?php if (isset($td['accordion']) && is_array($td['accordion'])) : ?>
+                            <?php foreach ($td['accordion'] as $el) : ?>
+                                <accordion-element
+                                    title="<?= $el['title'] ?>"
+                                    subtitle="<?= $el['subtitle'] ?>"
+                                >
+                                    <?= $el['content'] ?>
+                                </accordion-element>
+
+                            <?php endforeach; ?>
+
+                        <?php endif ?>
+
+                    </accordion>
+                </div>
+
+            <?php } ?>
 
         </div>
 

@@ -3,15 +3,12 @@
   margin-left: auto
   margin-right: auto
   margin-top: $common-spacing
-  padding-bottom: $common-spacing
 
   @include bp('portrait')
     margin: $common-spacing * 2 $common-spacing * 2 0
-    padding-bottom: $common-spacing * 2
 
   @include bp('landscape')
     margin: $common-spacing * 3 $common-spacing * 3 0
-    padding-bottom: $common-spacing * 3
 
   .l-full &
     border-bottom-width: $border-width
@@ -30,8 +27,10 @@
     @include bp('landscape')
       padding: $common-spacing * 3 0
 
+    .text-block__content > *:last-child
+      margin-bottom: initial
+
   // TODO implement proper fixes
-  .page-id-306 .page-blocks .l-full:first-child &,
   #pay &
     border-bottom-width: 0
 
@@ -57,11 +56,13 @@
     padding-bottom: 0
     margin-bottom: 0
 
+    .text-block__content > *:last-child
+      margin-bottom: initial
+
   .page-blocks .l-full:nth-last-child(2) &
     border-bottom: none
 
   .l-full &--multi
-    //border-bottom: 0
 
     .text-block
       width: 100%
@@ -74,7 +75,6 @@
 
 .text-block
   font-size: $font-size-small
-  //margin: 0 $common-spacing 0
   margin: 0 auto
   max-width: 85%
 
@@ -152,6 +152,12 @@
     img
       width: 100%
 
+    & > *
+      margin-bottom: $common-spacing
+
+    & > *:last-child
+      margin-bottom: $common-spacing * 2
+
     & > h4
       font-weight: $font-weight-bold
       font-size: 1.8rem
@@ -175,7 +181,7 @@
       font-weight: $font-weight-bold
       margin-bottom: 0
 
-    & li
+    & > li
       margin: $common-spacing/2 0
       margin-left: 1.8rem
 
@@ -189,18 +195,14 @@
         margin-left: 2.6rem
 
 
-    & ul, & ol
-      margin-bottom: $common-spacing
+    & > ul, & > ol
       padding: 0 3.2rem
 
-    & ol li
+    & > ol li
       list-style-type: decimal
 
-    & ul li
+    & > ul li
       list-style-type: disc
-
-    p
-      margin-bottom: $common-spacing
 
     a
       text-decoration: underline
@@ -257,10 +259,6 @@
       @include bp('portrait')
         padding: $common-spacing * 2
         width: 70%
-
-    .video-player
-      margin-bottom: $common-spacing
-
 
   &__multi-text-block-container
     $ttbc: &
@@ -323,7 +321,6 @@
       border-bottom: none
       flex-direction: column
       padding: $common-spacing
-
 
     &:last-child
       @include bp('portrait')
