@@ -1,6 +1,7 @@
 <?php
 namespace ppj;
 
+// TODO remove
 function createPostTypes()
 {
     $name = 'position';
@@ -261,4 +262,26 @@ function initializeAcfSettingsPage() {
     }
 }
 add_action('acf/init', __NAMESPACE__ . '\\initializeAcfSettingsPage', 15);
+
+// https://www.advancedcustomfields.com/resources/local-json/
+function acf_json_save_point( $path )
+{
+    // update path
+    $path = WPMU_PLUGIN_DIR .  '/ppj/acf-json';
+
+    return $path;
+}
+add_filter('acf/settings/save_json', __NAMESPACE__ . '\\acf_json_save_point');
+
+function acf_json_load_point( $paths )
+{
+    // remove original path
+    unset($paths[0]);
+
+    // append path
+    $paths[] = WPMU_PLUGIN_DIR . '/ppj/acf-json';
+
+    return $paths;
+}
+add_filter('acf/settings/load_json', __NAMESPACE__ . '\\acf_json_load_point');
 
