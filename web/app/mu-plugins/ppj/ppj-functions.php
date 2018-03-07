@@ -248,7 +248,13 @@ function initializeAcfSettingsPage() {
 }
 add_action('acf/init', __NAMESPACE__ . '\\initializeAcfSettingsPage', 15);
 
-// https://www.advancedcustomfields.com/resources/local-json/
+/**
+ * This functions ensures that the ACF json file will now be saved
+ * in a theme agnostic location, allowing ACF structures to be shared between
+ * themes which may be beneficial in a multi-site scenario.
+ *
+ * https://www.advancedcustomfields.com/resources/local-json/
+ */
 function acf_json_save_point( $path )
 {
     // update path
@@ -258,6 +264,11 @@ function acf_json_save_point( $path )
 }
 add_filter('acf/settings/save_json', __NAMESPACE__ . '\\acf_json_save_point');
 
+/**
+ * ACF schema now loaded from /mu-plugins/ppj/acf-json
+ *
+ * See acf_json_save_point for rationale.
+ */
 function acf_json_load_point( $paths )
 {
     // remove original path
