@@ -76,10 +76,6 @@ function renderPageBlockData($acf)
                         $output .= partial($fieldGroup, 'orderedList');
                         break;
 
-                    case 'accordion':
-                        $output .= partial($fieldGroup, 'accordion');
-                        break;
-
                     case 'role_intro':
                         $output .= partial($fieldGroup, 'roleIntro');
                         break;
