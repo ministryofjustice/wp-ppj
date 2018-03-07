@@ -20,21 +20,6 @@ function createPostTypes()
 }
 add_action('init', __NAMESPACE__ . '\\createPostTypes');
 
-function registerImagesSizes() {
-    add_image_size( 'header-mobile',      320, 180, true );
-    add_image_size( 'header-mobile-home', 320, 244, true );
-
-    add_image_size( 'header-portrait',      768, 320, true );
-    add_image_size( 'header-portrait-home', 768, 400, true );
-
-    add_image_size( 'header-landscape',      1024, 420, true );
-    add_image_size( 'header-landscape-home', 1024, 444, true );
-
-    add_image_size( 'header-large',      1440, 560, true );
-    add_image_size( 'header-large-home', 1440, 624, true );
-}
-add_action('init', __NAMESPACE__ . '\\registerImagesSizes');
-
 function template($data, $slug, $name = '')
 {
     global $ppj_template_data;
