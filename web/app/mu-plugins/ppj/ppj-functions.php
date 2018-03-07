@@ -56,9 +56,6 @@ function renderPageBlockData($acf)
                 $blockType = $fieldGroup['acf_fc_layout'];
 
                 switch ($blockType) {
-                    case 'call_to_action':
-                        $output .= partial($fieldGroup, 'callToAction');
-                        break;
 
                     case 'text_block':
                         $output .= partial($fieldGroup, 'textBlock');
