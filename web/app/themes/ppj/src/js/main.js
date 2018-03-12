@@ -40,7 +40,6 @@ window.addEventListener('load', function() {
     Vue.component('job-summary', JobSummary);
     Vue.component('ol-element', OrderedList.childComponents.Element);
     Vue.component('ordered-list', OrderedList);
-    Vue.component('organization-search', OrganizationSearch);
     Vue.component('page-container', PageContainer);
     Vue.component('page-header', Header);
     Vue.component('role-intro', RoleIntro);
