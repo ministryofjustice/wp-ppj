@@ -65,10 +65,6 @@ function renderPageBlockData($acf)
                         $output .= partial($fieldGroup, 'search');
                         break;
 
-                    case 'tabs':
-                        $output .= partial($fieldGroup, 'tabs');
-                        break;
-
                     case 'video':
                         $output .= partial($fieldGroup, 'videoPlayer');
                         break;

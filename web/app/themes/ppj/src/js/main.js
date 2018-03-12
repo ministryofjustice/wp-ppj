@@ -11,7 +11,6 @@ import OrganizationSearch from '../vue/OrganizationSearch.vue';
 import OrganizationSummary from '../vue/OrganizationSummary.vue';
 import PageContainer from '../vue/PageContainer.vue';
 import Search from '../vue/Search.vue';
-import Tabs from '../vue/Tabs.vue';
 import TextBlock from '../vue/TextBlock.vue';
 import VideoPlayer from '../vue/VideoPlayer.vue';
 
