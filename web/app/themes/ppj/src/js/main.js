@@ -4,7 +4,6 @@ import scrollpoints from 'scrollpoints';
 import Vue from 'vue';
 
 import Accordion from '../vue/Accordion.vue';
-import Contact from '../vue/Contact.vue';
 import Header from '../vue/Header.vue';
 import JobSummary from '../vue/JobSummary.vue';
 import PageContainer from '../vue/PageContainer.vue';
@@ -38,7 +37,6 @@ window.addEventListener('load', function() {
 
     Vue.component('accordion', Accordion);
     Vue.component('accordion-element', Accordion.childComponents.Element);
-    Vue.component('contact', Contact);
     Vue.component('job-summary', JobSummary);
     Vue.component('ol-element', OrderedList.childComponents.Element);
     Vue.component('ordered-list', OrderedList);
