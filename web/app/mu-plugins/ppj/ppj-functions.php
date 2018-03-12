@@ -77,10 +77,6 @@ function renderPageBlockData($acf)
                         $output .= partial($fieldGroup, 'navigationBlock');
                         break;
 
-                    case 'triple_text_block':
-                        $output .= partial($fieldGroup, 'tripleTextBlock');
-                        break;
-
                     default:
                         error_log('renderPageBlockData unrecognized block type ' . $blockType);
                 }
