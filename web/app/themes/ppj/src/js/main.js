@@ -38,16 +38,10 @@ window.addEventListener('load', function() {
     Vue.component('accordion', Accordion);
     Vue.component('accordion-element', Accordion.childComponents.Element);
     Vue.component('job-summary', JobSummary);
-    Vue.component('ol-element', OrderedList.childComponents.Element);
-    Vue.component('ordered-list', OrderedList);
     Vue.component('page-container', PageContainer);
     Vue.component('page-header', Header);
-    Vue.component('role-intro', RoleIntro);
     Vue.component('search', Search);
-    Vue.component('tabs', Tabs);
-    Vue.component('tab', Tabs.childComponents.Tab);
     Vue.component('text-block', TextBlock);
-    Vue.component('text-image-block', TextImageBlock);
     //Vue.component('video-player', VideoPlayer);
 
     var vm = new Vue({
