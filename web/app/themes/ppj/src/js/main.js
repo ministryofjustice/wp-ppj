@@ -7,7 +7,6 @@ import Accordion from '../vue/Accordion.vue';
 import Contact from '../vue/Contact.vue';
 import Header from '../vue/Header.vue';
 import JobSummary from '../vue/JobSummary.vue';
-import OrderedList from '../vue/OrderedList.vue';
 import OrganizationSearch from '../vue/OrganizationSearch.vue';
 import OrganizationSummary from '../vue/OrganizationSummary.vue';
 import PageContainer from '../vue/PageContainer.vue';
