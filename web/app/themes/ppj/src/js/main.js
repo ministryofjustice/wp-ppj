@@ -15,7 +15,6 @@ import RoleIntro from '../vue/RoleIntro.vue';
 import Search from '../vue/Search.vue';
 import Tabs from '../vue/Tabs.vue';
 import TextBlock from '../vue/TextBlock.vue';
-import TextImageBlock from '../vue/TextImageBlock.vue';
 import VideoPlayer from '../vue/VideoPlayer.vue';
 
 

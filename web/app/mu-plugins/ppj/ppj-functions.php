@@ -61,10 +61,6 @@ function renderPageBlockData($acf)
                         $output .= partial($fieldGroup, 'textBlock');
                         break;
 
-                    case 'text_image_block':
-                        $output .= partial($fieldGroup, 'textImageBlock');
-                        break;
-
                     case 'search':
                         $output .= partial($fieldGroup, 'search');
                         break;
