@@ -7,7 +7,6 @@ import Accordion from '../vue/Accordion.vue';
 import Contact from '../vue/Contact.vue';
 import Header from '../vue/Header.vue';
 import JobSummary from '../vue/JobSummary.vue';
-import OrganizationSummary from '../vue/OrganizationSummary.vue';
 import PageContainer from '../vue/PageContainer.vue';
 import Search from '../vue/Search.vue';
 import TextBlock from '../vue/TextBlock.vue';
@@ -44,7 +43,6 @@ window.addEventListener('load', function() {
     Vue.component('ol-element', OrderedList.childComponents.Element);
     Vue.component('ordered-list', OrderedList);
     Vue.component('organization-search', OrganizationSearch);
-    Vue.component('organization-summary', OrganizationSummary);
     Vue.component('page-container', PageContainer);
     Vue.component('page-header', Header);
     Vue.component('role-intro', RoleIntro);
