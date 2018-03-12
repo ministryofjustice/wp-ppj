@@ -10,7 +10,6 @@ import JobSummary from '../vue/JobSummary.vue';
 import OrganizationSearch from '../vue/OrganizationSearch.vue';
 import OrganizationSummary from '../vue/OrganizationSummary.vue';
 import PageContainer from '../vue/PageContainer.vue';
-import RoleIntro from '../vue/RoleIntro.vue';
 import Search from '../vue/Search.vue';
 import Tabs from '../vue/Tabs.vue';
 import TextBlock from '../vue/TextBlock.vue';

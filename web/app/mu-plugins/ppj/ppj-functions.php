@@ -65,10 +65,6 @@ function renderPageBlockData($acf)
                         $output .= partial($fieldGroup, 'search');
                         break;
 
-                    case 'role_intro':
-                        $output .= partial($fieldGroup, 'roleIntro');
-                        break;
-
                     case 'tabs':
                         $output .= partial($fieldGroup, 'tabs');
                         break;
