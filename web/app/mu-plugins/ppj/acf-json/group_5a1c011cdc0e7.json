@@ -71,33 +71,6 @@
                             "maxlength": ""
                         },
                         {
-                            "key": "field_5a1c533d432d0",
-                            "label": "Subtitle",
-                            "name": "subtitle",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": [
-                                [
-                                    {
-                                        "field": "field_5a2038941eb03",
-                                        "operator": "==",
-                                        "value": "regular"
-                                    }
-                                ]
-                            ],
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
-                        {
                             "key": "field_5a1c5346432d1",
                             "label": "Content",
                             "name": "content",
@@ -561,5 +534,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1520951137
+    "modified": 1520951302
 }

@@ -69,12 +69,7 @@ if (isset($td['link']['title'])) {
                     <?= $td['title'] ?>
                 </h2>
             <?php endif; ?>
-
-            <?php if ($td['subtitle']) : ?>
-                <h3 class="text-block__subtitle">
-                    <?= $td['subtitle'] ?>
-                </h3>
-            <?php endif; ?>
+            
 
             <?php if ($isValidRegularTextBlock) { ?>
 
