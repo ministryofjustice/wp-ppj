@@ -42,7 +42,7 @@ window.addEventListener('load', function() {
     Vue.component('page-header', Header);
     Vue.component('search', Search);
     Vue.component('text-block', TextBlock);
-    //Vue.component('video-player', VideoPlayer);
+    Vue.component('video-player', VideoPlayer);
 
     var vm = new Vue({
       el: '#site-container',

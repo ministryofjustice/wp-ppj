@@ -1,5 +1,5 @@
 .video-player
-  //position: relative
+  position: relative
   width: 100%
 
   &__title
@@ -11,7 +11,7 @@
     display: flex
     height: 0
     justify-content: center
-    //padding-bottom: 56.25%
+    padding-bottom: 56.25%
     padding-bottom: 78%
     position: relative
 
@@ -30,27 +30,44 @@
       top: 0
       width: 100%
 
-  &__play-button
-    &:before
-      $diameter: 3rem
-      align-items: center
-      border: .2rem solid $color-white
-      border-radius: 2rem
-      color: $color-white
-      content: '>'
-      cursor: pointer
-      display: flex
-      font-weight: $font-weight-bold
-      justify-content: center
-      height: $diameter
-      width: $diameter
+  &__cover-image
+    height: 100%
+    width: 100%
 
-    &:hover:before
-      border-color: $color-main
-      color: $color-main
-      transition: all .2s
+  &__play-button-container
+    align-items: center
+    bottom: 0
+    display: flex
+    left: 0
+    justify-content: center
+    position: absolute
+    right: 0
+    top: 0
+
+  &__play-button
+    cursor: pointer
+    fill: $color-white
+    position: absolute
+    transition: $main-transition-duration
+    width: 20%
+
+    &:hover
+      opacity: .85
+      fill: $color-secondary
 
   &--wistia
+    padding-bottom: 55.7%
+    position: relative
+
+    & > *
+      bottom: 0
+      left: 0
+      padding-bottom: 0
+      position: absolute
+      right: 0
+      top: 0
+
     .video-player
       &__video-container
-        padding-bottom: 55%
+        height: 100%
+
