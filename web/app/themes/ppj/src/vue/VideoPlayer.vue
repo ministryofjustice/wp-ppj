@@ -89,6 +89,7 @@
     methods: {
       playVideo: function() {
         this.videoPlaying = true;
+        ga('send', 'event', 'video-played', this.host, this.id);
       }
     }
   }
