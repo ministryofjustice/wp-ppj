@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f7c3c5c49847657c335e569a081bc493",
+    "content-hash": "d680a6361cf34de5122928662ddf1a62",
     "packages": [
         {
             "name": "acf/advanced-custom-fields-pro",
@@ -545,6 +545,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/uk-cookie-consent/"
+        },
+        {
+            "name": "wpackagist-plugin/wp-browser-update",
+            "version": "2.4.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-browser-update/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-browser-update.zip?timestamp=1510268249",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wp-browser-update/"
         }
     ],
     "packages-dev": [
