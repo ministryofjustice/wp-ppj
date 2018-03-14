@@ -69,7 +69,7 @@ if (isset($td['link']['title'])) {
                     <?= $td['title'] ?>
                 </h2>
             <?php endif; ?>
-            
+
 
             <?php if ($isValidRegularTextBlock) { ?>
 

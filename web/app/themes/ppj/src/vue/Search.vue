@@ -118,7 +118,14 @@
           first</a>
         <button class="search__pagination-direction"
                 :class="{'search__pagination-direction--enabled': (backwardEnabled == true)}"
-                @click.stop.prevent="showPreviousPage"> <
+                @click.stop.prevent="showPreviousPage">
+          <svg x="0px" y="0px"
+               viewBox="0 0 32.9 32.9"
+               xml:space="preserve"
+          >
+              <path class="st0" d="M21.2,11.7v0.9c0,0.2-0.1,0.3-0.2,0.3l-7.5,3.4c-0.1,0-0.1,0.1,0,0.1l7.5,3.4c0.1,0.1,0.2,0.2,0.2,0.3v0.9
+                c0,0.2-0.1,0.3-0.3,0.2l-8.9-4.1c-0.1-0.1-0.2-0.2-0.2-0.4V16c0-0.2,0.1-0.3,0.2-0.4l8.9-4.1C21.1,11.4,21.2,11.5,21.2,11.7z"/>
+            </svg>
         </button>
         <div class="search__pagination-page-numbers-container">
           <div class="search__pagination-current-page-number">
@@ -131,7 +138,15 @@
         </div>
         <button class="search__pagination-direction"
                 :class="{'search__pagination-direction--enabled': (forwardEnabled == true)}"
-                @click.stop.prevent="showNextPage"> >
+                @click.stop.prevent="showNextPage">
+          <svg x="0px"
+               y="0px"
+               viewBox="0 0 32.9 32.9"
+          >
+                <path class="st0" d="M11.7,21.2v-0.9c0-0.2,0.1-0.3,0.2-0.3l7.5-3.4c0.1,0,0.1-0.1,0-0.1L11.9,13c-0.1-0.1-0.2-0.2-0.2-0.3v-0.9
+                  c0-0.2,0.1-0.3,0.3-0.2l8.9,4.1c0.1,0.1,0.2,0.2,0.2,0.4v0.9c0,0.2-0.1,0.3-0.2,0.4l-8.9,4.1C11.9,21.5,11.7,21.4,11.7,21.2z"/>
+
+          </svg>
         </button>
         <a class="search__pagination-skip-link"
            :class="{'search__pagination-skip-link--enabled': (forwardEnabled == true)}"
