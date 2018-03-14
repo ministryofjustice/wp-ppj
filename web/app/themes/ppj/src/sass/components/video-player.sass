@@ -56,8 +56,14 @@
       fill: $color-secondary
 
   &--wistia
-    padding-bottom: 55.7%
+    padding-bottom: 0
     position: relative
+
+    // https://stackoverflow.com/questions/35825787/169-padding-bottom-trick-not-working-as-expected-in-firefox
+    &:before
+      display: block
+      content: ''
+      padding-bottom: 55.7%
 
     & > *
       bottom: 0
