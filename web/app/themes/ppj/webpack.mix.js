@@ -1,19 +1,16 @@
-const
-    mix = require('laravel-mix'),
-    dest = 'dest/'
-;
+const mix = require('laravel-mix');
 
-mix.js('src/js/main.js'        , dest + 'js')
-    .sass('src/sass/main.sass' , dest + 'css')
-    .copy('src/img/*'          , dest + 'img/')
-    .copy('src/img/svg/*'      , dest + 'img/svg/')
-    .copy('src/html/*'         , dest + '')
-    .copy('src/fonts/*'        , dest + 'fonts')
-    .sourceMaps()
+mix.setPublicPath('./dest/');
 
+mix.js('src/js/main.js'        , 'dest/js')
+    .sass('src/sass/main.sass' , 'dest/css')
+    .copy('src/img/*'          , 'dest/img/')
+    .copy('src/img/svg/*'      , 'dest/img/svg/')
 ;
 
 if (mix.inProduction()) {
-    //mix.version();
+    mix.version();
 }
-
+else {
+    mix.sourceMaps();
+}

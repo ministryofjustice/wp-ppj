@@ -4,15 +4,15 @@ namespace ppj;
 function enqueue_scripts()
 {
 
-    $root_dir = get_template_directory_uri();
-    wp_enqueue_style('main-css', $root_dir . mix_asset('/dest/css/main.css'), null, false);
-    wp_enqueue_script('main-js', $root_dir . mix_asset('/dest/js/main.js'), null, false, true);
+    $root_dir = get_template_directory_uri() . '/dest';
+    wp_enqueue_style('main-css', $root_dir . mix_asset('/css/main.css'), null, null);
+    wp_enqueue_script('main-js', $root_dir . mix_asset('/js/main.js'), null, null, true);
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts');
 
 function mix_asset($filename)
 {
-    $manifest_path = dirname(__FILE__) . '/mix-manifest.json';
+    $manifest_path = dirname(__FILE__) . '/dest/mix-manifest.json';
     $manifest = json_decode(file_get_contents($manifest_path), true);
     if (!isset($manifest[$filename])) {
         error_log("Mix asset '$filename' does not exist in manifest.");

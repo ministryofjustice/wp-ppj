@@ -22,7 +22,7 @@ web/app/uploads/*
 /web/app/themes/ppj/dest/*.html
 /web/app/themes/ppj/vendor/
 /web/app/themes/ppj/temp-auth/.htpasswd
-/web/app/themes/ppj/mix-manifest.json
+/web/app/themes/ppj/dest/mix-manifest.json
 
 # WordPress
 web/wp
