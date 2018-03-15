@@ -430,6 +430,22 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
+                        },
+                        {
+                            "key": "field_5aaa329f7927c",
+                            "label": "Job feed URL",
+                            "name": "job_feed_url",
+                            "type": "url",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -534,5 +550,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1520951302
+    "modified": 1521103552
 }

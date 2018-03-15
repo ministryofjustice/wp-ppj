@@ -164,11 +164,12 @@
 
   export default {
     props: {
-      'default-search-term': {
+
+      'title': {
         default: '',
         type: String
       },
-      'title': {
+      'jobFeedUrl': {
         default: '',
         type: String
       }
@@ -182,10 +183,9 @@
         geoLocationIsBusy: false,
         geoLocationIsActive: false,
 
-        vacanciesDataURL: 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/vacancies.json',
+        vacanciesDataURL: this.jobFeedUrl,
 
         searchResults: {
-          postCode: this.defaultSearchTerm,//'',//'SW1H 1AJ',
           urlEncodedPostCode: '',
           googleMapAPIKey: 'AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA',
           listView: {

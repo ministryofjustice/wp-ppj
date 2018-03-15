@@ -8,7 +8,7 @@ $title = (isset($td['title'])) ? $td['title'] : '';
 ?>
 
 <div class="l-full">
-    <search default-search-term="<?= $td['default_search_term'] ?>"
-            title="<?= $title ?>"
+    <search title="<?= $title ?>"
+            job-feed-url="<?= $td['job_feed_url'] ?>"
     ></search>
 </div>
