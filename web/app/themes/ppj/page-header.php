@@ -27,17 +27,26 @@ if ( $headerImageMobileData = get_field( 'header_image_mobile' ) ) {
     $headerImageMobileAttr = '';
 }
 
-// menu data
-$navMenuItems         = wp_get_nav_menu_items( 'Main menu' );
-$filteredNavMenuItems = [];
-foreach ( $navMenuItems as $item ) {
-    $same = ( isset($post) && $post->ID == $item->object_id );
+// remove any URL parameters
+$noParametersPath = explode('?', $_SERVER['REQUEST_URI'])[0];
 
-    $filteredNavMenuItems[] = [
-        'title'    => $item->title,
-        'url'      => $item->url,
-        'selected' => $same
-    ];
+// take only the top level directory name
+$relativePath = explode('/',$noParametersPath)[1];
+
+// use the top level directory name or 'Main menu' to retrieve the menu
+$navMenuItems = wp_get_nav_menu_items( ($relativePath) ? $relativePath : 'Main menu' );
+
+$filteredNavMenuItems = [];
+if (isset($navMenuItems) && !!$navMenuItems ) {
+    foreach ( $navMenuItems as $item ) {
+        $same = ( isset( $post ) && $post->ID == $item->object_id );
+
+        $filteredNavMenuItems[] = [
+            'title'    => $item->title,
+            'url'      => $item->url,
+            'selected' => $same
+        ];
+    }
 }
 $mainMenuJSON = json_encode( $filteredNavMenuItems );
 ?>
