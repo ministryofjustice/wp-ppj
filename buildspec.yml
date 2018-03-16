@@ -1,7 +1,7 @@
 version: 0.1
 environment_variables:
   plaintext:
-    APPNAME: "ppj"
+    APPNAME: "ppjleg"
 phases:
   pre_build:
     commands:
