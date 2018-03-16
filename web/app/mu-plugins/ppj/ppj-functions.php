@@ -236,3 +236,19 @@ function acf_json_load_point( $paths )
 }
 add_filter('acf/settings/load_json', __NAMESPACE__ . '\\acf_json_load_point');
 
+/**
+ * The site is being divided into legs.
+ * One leg for each job type.
+ *
+ * This function return the top level directory of the relative path
+ * to derive the name of the leg.
+ */
+function getLegNameFromPath() {
+    // remove any URL parameters
+    $noParametersPath = explode('?', $_SERVER['REQUEST_URI'])[0];
+
+    // take only the top level directory name
+    $relativePath = explode('/',$noParametersPath)[1];
+
+    return $relativePath;
+}

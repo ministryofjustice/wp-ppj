@@ -27,14 +27,10 @@ if ( $headerImageMobileData = get_field( 'header_image_mobile' ) ) {
     $headerImageMobileAttr = '';
 }
 
-// remove any URL parameters
-$noParametersPath = explode('?', $_SERVER['REQUEST_URI'])[0];
-
-// take only the top level directory name
-$relativePath = explode('/',$noParametersPath)[1];
+$legName = ppj\getLegNameFromPath();
 
 // use the top level directory name or 'Main menu' to retrieve the menu
-$navMenuItems = wp_get_nav_menu_items( ($relativePath) ? $relativePath : 'Main menu' );
+$navMenuItems = wp_get_nav_menu_items( ($legName) ? $legName : 'Main menu' );
 
 $filteredNavMenuItems = [];
 if (isset($navMenuItems) && !!$navMenuItems ) {
