@@ -24,7 +24,7 @@ $htmlMetaDescription = get_field('html_meta_description');
     <?php endif; ?>
 </head>
 
-<body  <?php body_class(); ?>>
+<body <?php body_class(ppj\getLegNameFromPath()); ?>>
 
 
 
