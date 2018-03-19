@@ -1,6 +1,7 @@
 <?php
 $htmlTitle = get_field('html_title');
 $htmlMetaDescription = get_field('html_meta_description');
+$legName = ppj\getLegNameFromPath();
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +25,7 @@ $htmlMetaDescription = get_field('html_meta_description');
     <?php endif; ?>
 </head>
 
-<body <?php body_class(ppj\getLegNameFromPath()); ?>>
+<body <?php body_class($legName); ?>>
 
 
 

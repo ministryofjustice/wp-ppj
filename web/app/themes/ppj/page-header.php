@@ -30,7 +30,7 @@ if ( $headerImageMobileData = get_field( 'header_image_mobile' ) ) {
 $legName = ppj\getLegNameFromPath();
 
 // use the top level directory name or 'Main menu' to retrieve the menu
-$navMenuItems = wp_get_nav_menu_items( ($legName) ? $legName : 'Main menu' );
+$navMenuItems = wp_get_nav_menu_items( $legName );
 
 $filteredNavMenuItems = [];
 if (isset($navMenuItems) && !!$navMenuItems ) {

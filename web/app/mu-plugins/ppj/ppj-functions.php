@@ -248,7 +248,7 @@ function getLegNameFromPath() {
     $noParametersPath = explode('?', $_SERVER['REQUEST_URI'])[0];
 
     // take only the top level directory name
-    $relativePath = explode('/',$noParametersPath)[1];
+    $legName = explode('/', $noParametersPath)[1];
 
-    return $relativePath;
+    return ($legName) ? $legName : 'landing-page';
 }

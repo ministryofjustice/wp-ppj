@@ -3,9 +3,9 @@ namespace ppj;
 
 function enqueue_scripts()
 {
-
+    $legName = getLegNameFromPath();
     $root_dir = get_template_directory_uri() . '/dest';
-    wp_enqueue_style('main-css', $root_dir . mix_asset('/css/main.css'), null, null);
+    wp_enqueue_style('main-css', $root_dir . mix_asset("/css/{$legName}.css"), null, null);
     wp_enqueue_script('main-js', $root_dir . mix_asset('/js/main.js'), null, null, true);
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts');
