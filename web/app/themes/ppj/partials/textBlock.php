@@ -7,7 +7,6 @@ $textBlockClassName = 'text-block-container';
 $textBlockClasses = $textBlockClassName;
 $multiTextBlockClassName = "text-block__multi-text-block-container";
 $multiTextBlockClasses = $multiTextBlockClassName;
-$isIconBlocks = false;
 $multiTextBlocks = false;
 
 
@@ -38,7 +37,7 @@ if ($isValidMultiTextBlock) {
         $multiTextBlocks = $td['triple_text_blocks'];
         $multiTextBlockClasses .= ' ' . $multiTextBlockClassName .'--triple';
 
-        if (isset($td['triple_text_blocks'][0]['icon']) && $td['triple_text_blocks'][0]['icon']['url']) {
+        if (isset($td['triple_text_blocks'][0]['icon'])) {
             $isIconBlocks = true;
         } else {
             $multiTextBlockClasses .= ($isIconBlocks) ? '' : ' ' .$multiTextBlockClassName .'--text-only';
@@ -82,10 +81,10 @@ if (isset($td['link']['title'])) {
                 <div class="<?= $multiTextBlockClasses ?>">
                     <?php foreach ($multiTextBlocks as $block) : ?>
                         <div class="text-block__multi-text-block">
-                            <?php if ($isIconBlocks) : ?>
-                                <img class="text-block__multi-text-block-icon" src="<?= $block['icon']['url'] ?>">
-
-                                </img>
+                            <?php if (isset($block['icon']) && $block['icon'] != 'none' ) : ?>
+                                <div class="text-block__multi-text-block-icon">
+                                    <?php include(get_template_directory() . '/dest' . $block['icon']) ?>
+                                </div>
                             <?php endif; ?>
                             <div class="text-block__multi-text-block-text-container">
                                 <?php if (isset($block['icon_text']) && $block['icon_text']) : ?>

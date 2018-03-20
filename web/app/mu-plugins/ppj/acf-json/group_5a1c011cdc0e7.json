@@ -204,7 +204,7 @@
                                     "key": "field_5a65da1e3c021",
                                     "label": "Icon",
                                     "name": "icon",
-                                    "type": "image",
+                                    "type": "select",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -213,16 +213,19 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "return_format": "array",
-                                    "preview_size": "thumbnail",
-                                    "library": "all",
-                                    "min_width": "",
-                                    "min_height": "",
-                                    "min_size": "",
-                                    "max_width": "",
-                                    "max_height": "",
-                                    "max_size": "",
-                                    "mime_types": ""
+                                    "choices": {
+                                        "none": "no icon",
+                                        "\/img\/svg\/icons\/holiday_icon.svg": "Holiday",
+                                        "\/img\/svg\/icons\/salary_icon.svg": "Salary",
+                                        "\/img\/svg\/icons\/training_icon.svg": "Training"
+                                    },
+                                    "default_value": [],
+                                    "allow_null": 0,
+                                    "multiple": 0,
+                                    "ui": 0,
+                                    "ajax": 0,
+                                    "return_format": "value",
+                                    "placeholder": ""
                                 },
                                 {
                                     "key": "field_5a65da2b3c022",
@@ -538,7 +541,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "ppj_position"
+                "value": "post"
             }
         ]
     ],
@@ -550,5 +553,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1521103552
+    "modified": 1521559068
 }
