@@ -1,7 +1,11 @@
 <?php
-$htmlTitle = get_field('html_title');
-$htmlMetaDescription = get_field('html_meta_description');
-$legName = ppj\getLegNameFromPath();
+    $htmlTitle = get_field('html_title');
+    $htmlMetaDescription = get_field('html_meta_description');
+
+    $bodyClasses = [];
+    if ($legName  = ppj\getLegNameFromPath()) $bodyClasses[] = $legName;
+    if ($postSlug = $post->post_name)         $bodyClasses[] = 'post-slug--' . $postSlug;
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +29,7 @@ $legName = ppj\getLegNameFromPath();
     <?php endif; ?>
 </head>
 
-<body <?php body_class($legName); ?>>
+<body <?php body_class($bodyClasses); ?>>
 
 
 
