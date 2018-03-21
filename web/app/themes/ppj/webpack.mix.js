@@ -1,5 +1,7 @@
 const mix = require('laravel-mix');
 
+mix.setPublicPath('./dest/');
+
 mix.js('src/js/main.js'        , 'dest/js')
   .sass('src/sass/landing-page.sass'   , 'dest/css/landing-page.css')
   .sass('src/sass/prison-officer.sass' , 'dest/css/prison-officer.css')
