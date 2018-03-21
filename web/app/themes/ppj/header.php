@@ -8,7 +8,7 @@ $htmlMetaDescription = get_field('html_meta_description');
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <title><?= $htmlTitle ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="<?= $htmlMetaDescription ?>" />
     <link href="https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA"></script>
