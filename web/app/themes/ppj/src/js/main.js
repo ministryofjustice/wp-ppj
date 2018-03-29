@@ -8,18 +8,12 @@ import JobSummary from '../vue/JobSummary.vue';
 import Search from '../vue/Search.vue';
 import VideoPlayer from '../vue/VideoPlayer.vue';
 
-window.ppj = {};
-
 window.ppjNavTo = function(href, callback) {
   console.log('navTo');
   if (typeof callback !== 'undefined') {
     callback()
   }
   window.location = href;
-};
-
-window.ppj.handleImageLoaded = function() {
-  document.getElementsByClassName('header__image')[0].classList.add('header__image--loaded');
 };
 
 window.ppj.openNavMenu = function() {
