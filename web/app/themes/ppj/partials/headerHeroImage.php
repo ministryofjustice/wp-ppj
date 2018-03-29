@@ -58,31 +58,27 @@ function createSrcset($headerStyle, $headerImageData, $headerImageMobileData=nul
     return $srcset;
 }
 
+$headerImageAttr    = '';
+$headerStyle        = 'dark';
+$headerImageAltText = '';
+
 $headerImageData       = $td['imageData'];
 $headerImageMobileData = $td['mobileImageData'];
 
 if ( $headerImageData ) {
-    if (ppj\isLegHome()) {
-        $headerStyle = 'home';
-    } else {
-        $headerStyle = '';
-    }
+    $headerStyle = (ppj\isLegHome()) ? 'home' : '';
     $headerImageAttr = json_encode($headerImageData);
     $headerImageUrl = $headerImageData['url'];
-
     $srcset = createSrcset($headerStyle, $headerImageData, $headerImageMobileData);
-} else {
-    $headerImageAttr = '';
-    $headerStyle     = 'dark';
+    if (isset($headerImageData['alt'])) $headerImageAltText = $headerImageData['alt'];
 }
-
 ?>
 
 <div class="header__img-container">
     <img class="header__image"
          src="<?= $headerImageUrl ?>"
          srcset="<?= $srcset ?>"
-         alt="<?= $header_subtext ?>"
+         alt="<?= $headerImageAltText ?>"
          onload="ppj.handleImageLoaded()"
     />
 </div>
