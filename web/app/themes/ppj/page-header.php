@@ -4,55 +4,57 @@ get_header();
 
 global $post;
 
-// header text
-$header_text    = get_field( 'header_text' );
-$header_subtext = get_field( 'header_subtext' );
+$header_text           = get_field( 'header_text' );
+$header_subtext        = get_field( 'header_subtext' );
+$headerImageData       = get_field( 'header_image' );
+$headerImageMobileData = get_field( 'header_image_mobile' );
 
-if ( $headerImageData = get_field( 'header_image' ) ) {
+if ( $headerImageData ) {
     if (is_front_page()) {
         $headerStyle = 'home';
     } else {
         $headerStyle = '';
     }
-    $headerImageAttr = json_encode($headerImageData);
-
 } else {
-    $headerImageAttr = '';
-    $headerStyle        = 'dark';
+    $headerStyle     = 'dark';
 }
 
-if ( $headerImageMobileData = get_field( 'header_image_mobile' ) ) {
-    $headerImageMobileAttr = json_encode($headerImageMobileData);
-} else {
-    $headerImageMobileAttr = '';
-}
+$headerClass = '';
+$headerClass .= ($headerStyle == 'dark') ?  'header--style-dark' : '';
 
-$legName = ppj\getLegNameFromPath();
-
-// use the top level directory name or 'Main menu' to retrieve the menu
-$navMenuItems = wp_get_nav_menu_items( $legName );
-
-$filteredNavMenuItems = [];
-if (isset($navMenuItems) && !!$navMenuItems ) {
-    foreach ( $navMenuItems as $item ) {
-        $same = ( isset( $post ) && $post->ID == $item->object_id );
-
-        $filteredNavMenuItems[] = [
-            'title'    => $item->title,
-            'url'      => $item->url,
-            'selected' => $same
-        ];
-    }
-}
-$mainMenuJSON = json_encode( $filteredNavMenuItems );
 ?>
 <div id="site-container">
-    <page-container>
-        <page-header :menu-data='<?= $mainMenuJSON ?>'
-                     header-image='<?= $headerImageAttr ?>'
-                     header-image-mobile='<?= $headerImageMobileAttr ?>'
-                     header-style="<?= $headerStyle ?>"
-                     header-subtext="<?= $header_subtext; ?>"
-        >
-            <?= $header_text; ?>
-        </page-header>
+    <div class="page-container">
+        <div class="header <?= $headerClass ?>">
+            <?= ppj\partial(null, 'headerNavigationMenu') ?>
+
+            <div class="header__hero">
+                <div class="header__img-ratio">
+                    <?php if ($headerImageData): ?>
+                        <?= ppj\partial(
+                                [
+                                    'imageData' => $headerImageData,
+                                    'mobileImageData' => $headerImageMobileData
+                                ],
+                            'headerHeroImage') ?>
+                        <div class="header__overlay">
+                            <div class="l-full">
+                                <div class="header__text-container">
+                                    <?php if ($header_text): ?>
+                                        <div class="header__text">
+                                            <?= $header_text ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if ($header_subtext): ?>
+                                        <div class="header__subtext">
+                                            <?= $header_subtext ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+        </div>
