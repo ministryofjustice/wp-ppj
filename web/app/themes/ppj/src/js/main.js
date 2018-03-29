@@ -6,7 +6,6 @@ import Vue from 'vue';
 import Accordion from '../vue/Accordion.vue';
 import JobSummary from '../vue/JobSummary.vue';
 import Search from '../vue/Search.vue';
-import TextBlock from '../vue/TextBlock.vue';
 import VideoPlayer from '../vue/VideoPlayer.vue';
 
 window.ppj = {};
@@ -41,7 +40,6 @@ window.addEventListener('load', function() {
   //   Vue.component('accordion-element', Accordion.childComponents.Element);
   //   Vue.component('job-summary', JobSummary);
   //   Vue.component('search', Search);
-  //   Vue.component('text-block', TextBlock);
   //   Vue.component('video-player', VideoPlayer);
   //
   //   var vm = new Vue({
