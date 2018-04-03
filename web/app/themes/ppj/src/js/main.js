@@ -1,10 +1,7 @@
 //import Waypoint from 'waypoint';
 //Scrollpoints = require('scrollpoints');
 import scrollpoints from 'scrollpoints';
-import Vue from 'vue';
 
-import JobSummary from '../vue/JobSummary.vue';
-import Search from '../vue/Search.vue';
 import VideoPlayer from '../vue/VideoPlayer.vue';
 
 window.ppjNavTo = function(href, callback) {
@@ -37,22 +34,6 @@ window.ppj.toggleAccordion = function(buttonEl) {
 };
 
 window.addEventListener('load', function() {
-
-  if (document.querySelectorAll('.search').length > 0) {
-
-    Vue.component('job-summary', JobSummary);
-    Vue.component('search', Search);
-
-    var vm = new Vue({
-      el: '.search',
-      methods: {
-        pageLoaded: function () {
-          this.$emit('pageLoaded');
-        }
-      }
-    });
-
-  }
 
   const scrollPointConfig = {
     when: 'entering'

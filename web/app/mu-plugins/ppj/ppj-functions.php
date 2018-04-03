@@ -42,10 +42,6 @@ function renderPageBlockData($acf)
                         $output .= partial($fieldGroup, 'textBlock');
                         break;
 
-                    case 'search':
-                        $output .= partial($fieldGroup, 'search');
-                        break;
-
                     case 'video':
                         $output .= partial($fieldGroup, 'videoPlayer');
                         break;

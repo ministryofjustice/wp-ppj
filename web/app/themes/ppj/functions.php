@@ -8,6 +8,10 @@ function enqueue_scripts()
     wp_enqueue_style( 'main-css', $root_dir . mix_asset( "/css/{$legName}.css" ), null, null );
     wp_enqueue_script( 'header-js', $root_dir . '/js/header.js', null, null, false );
     wp_enqueue_script( 'main-js', $root_dir . mix_asset( '/js/main.js' ), null, null, true );
+
+    if (is_page('Find a job')) {
+        wp_enqueue_script( 'find-a-job-js', $root_dir . mix_asset('/js/find-a-job.js'), null, null, true );
+    }
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts');
 
