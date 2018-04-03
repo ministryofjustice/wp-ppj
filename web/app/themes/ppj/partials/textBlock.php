@@ -69,7 +69,6 @@ if (isset($td['link']['title'])) {
                 </h2>
             <?php endif; ?>
 
-
             <?php if ($isValidRegularTextBlock) { ?>
 
                 <div class="text-block__content">
@@ -102,25 +101,32 @@ if (isset($td['link']['title'])) {
                     <?php endforeach; ?>
                 </div>
 
-            <?php } elseif ($isValidAccordionBlock) { ?>
+            <?php } elseif ($isValidAccordionBlock) {
+                //ppj\dump($td);
+                ?>
 
                 <div class="text-block__content">
-                    <accordion numbered="<?= (!empty($td['numbered']) ? 'true' : '') ?>">
 
-                        <?php if (isset($td['accordion']) && is_array($td['accordion'])) : ?>
+                    <div class="accordion">
+                        <ol class="accordion__list">
                             <?php foreach ($td['accordion'] as $el) : ?>
-                                <accordion-element
-                                    title="<?= $el['title'] ?>"
-                                    subtitle="<?= $el['subtitle'] ?>"
-                                >
-                                    <?= $el['content'] ?>
-                                </accordion-element>
-
+                                <li class="accordion__list-element">
+                                    <div class="accordion__list-element-header" onclick="ppj.toggleAccordion(this)">
+                                        <h4 class="accordion__list-element-title"><?= $el['title'] ?><span class="accordion__list-element-subtitle"><?= $el['subtitle'] ?></span></h4>
+                                        <div class="accordion__list-element-button-container">
+                                            <button class="accordion__list-element-button"
+                                                    onclick="ppj.toggleAccordion(this)"
+                                            >
+                                                <div class="accordion__list-element-button-bar accordion__list-element-button-bar--horizontal"></div>
+                                                <div class="accordion__list-element-button-bar accordion__list-element-button-bar--vertical"></div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="accordion__list-element-content"><?= $el['content'] ?></div>
+                                </li>
                             <?php endforeach; ?>
-
-                        <?php endif ?>
-
-                    </accordion>
+                        </ol>
+                    </div>
                 </div>
 
             <?php } ?>

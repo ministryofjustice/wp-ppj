@@ -3,7 +3,6 @@
 import scrollpoints from 'scrollpoints';
 import Vue from 'vue';
 
-import Accordion from '../vue/Accordion.vue';
 import JobSummary from '../vue/JobSummary.vue';
 import Search from '../vue/Search.vue';
 import VideoPlayer from '../vue/VideoPlayer.vue';
@@ -26,12 +25,21 @@ window.ppj.closeNavMenu = function() {
   document.getElementsByClassName('header')[0].classList.remove('header--nav-menu-open');
 };
 
+window.ppj.toggleAccordion = function(buttonEl) {
+  const className = 'accordion__list-element--open';
+  const el = buttonEl.closest('.accordion__list-element');
+  if (el.classList.contains(className)) {
+    el.classList.remove(className);
+  } else {
+    el.classList.add(className);
+    ga('send', 'event', 'Accordian', this.title, (this.open) ? 'open' : 'close', 7);
+  }
+};
+
 window.addEventListener('load', function() {
 
   // if (document.querySelectorAll('#site-container').length > 0) {
   //
-  //   Vue.component('accordion', Accordion);
-  //   Vue.component('accordion-element', Accordion.childComponents.Element);
   //   Vue.component('job-summary', JobSummary);
   //   Vue.component('search', Search);
   //   Vue.component('video-player', VideoPlayer);
