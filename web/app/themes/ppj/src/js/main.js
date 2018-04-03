@@ -38,22 +38,21 @@ window.ppj.toggleAccordion = function(buttonEl) {
 
 window.addEventListener('load', function() {
 
-  // if (document.querySelectorAll('#site-container').length > 0) {
-  //
-  //   Vue.component('job-summary', JobSummary);
-  //   Vue.component('search', Search);
-  //   Vue.component('video-player', VideoPlayer);
-  //
-  //   var vm = new Vue({
-  //     el: '#site-container',
-  //     methods: {
-  //       pageLoaded: function () {
-  //         this.$emit('pageLoaded');
-  //       }
-  //     }
-  //   });
-  //
-  // }
+  if (document.querySelectorAll('.search').length > 0) {
+
+    Vue.component('job-summary', JobSummary);
+    Vue.component('search', Search);
+
+    var vm = new Vue({
+      el: '.search',
+      methods: {
+        pageLoaded: function () {
+          this.$emit('pageLoaded');
+        }
+      }
+    });
+
+  }
 
   const scrollPointConfig = {
     when: 'entering'
