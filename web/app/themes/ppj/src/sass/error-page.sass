@@ -8,32 +8,32 @@
 html
   font-size: 62.5% // 1 rem now equals 10px
 
-html, body
-  height: 100%
-
 body
   font-family: $sans-serif
-  font-size: $font-size-large-medium
+  font-size: $font-size-small
   text-size-adjust: none
   background-color: $color-body
   @include background-img('bg_404.png')
+  background-position: center top
   color: $color-white
-  display: flex
-  align-items: center
-  justify-content: center
+
+  @include bp('portrait')
+    font-size: $font-size-large-medium
+    padding: $common-spacing * 1.5
 
 a
   color: $color-white
 
 article
-  max-width: 84rem
-  margin: $common-spacing * 1.5
-  padding: ($common-spacing * 3) ($common-spacing * 2)
+  padding: ($common-spacing * 2) ($common-spacing * 1)
+  margin: 0 auto
 
   @include bp('portrait')
+    padding: ($common-spacing * 3) ($common-spacing * 2)
     border: .5em solid $color-white
     border-radius: 5rem
     border-top-left-radius: 0
+    max-width: 60rem
 
-h1, p
+h1, p, li
   margin: 0 0 .65em 0
