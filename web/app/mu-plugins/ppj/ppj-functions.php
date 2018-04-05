@@ -20,7 +20,6 @@ function partial($data, $slug, $name = '')
     return template($data, 'partials/' . $slug, $name);
 }
 
-
 function dump($var)
 {
     echo "<pre>" . print_r($var, true) . "</pre>";
@@ -40,10 +39,6 @@ function renderPageBlockData($acf)
 
                     case 'text_block':
                         $output .= partial($fieldGroup, 'textBlock');
-                        break;
-
-                    case 'search':
-                        $output .= partial($fieldGroup, 'search');
                         break;
 
                     case 'video':
@@ -236,19 +231,57 @@ function acf_json_load_point( $paths )
 }
 add_filter('acf/settings/load_json', __NAMESPACE__ . '\\acf_json_load_point');
 
+$legs = [
+    'prison-officer',
+    'youth-custody'
+];
+
+/**
+ * @param $name candidate name
+ *
+ * @return bool if $name is a valid leg name
+ */
+function isLeg($name) {
+    global $legs;
+    return in_array($name, $legs);
+}
+
+/**
+ * return the relative URL path,
+ * minus any parameters
+ * and in array form
+ */
+function noParameterPathArray()
+{
+    $noParametersPath = explode('?', $_SERVER['REQUEST_URI'])[0];
+
+    return array_values(array_filter(explode('/', $noParametersPath)));
+}
+
 /**
  * The site is being divided into legs.
  * One leg for each job type.
  *
- * This function return the top level directory of the relative path
+ * This function returns the top level segment of the relative path
  * to derive the name of the leg.
  */
-function getLegNameFromPath() {
-    // remove any URL parameters
-    $noParametersPath = explode('?', $_SERVER['REQUEST_URI'])[0];
+function getLegNameFromPath()
+{
+    $pathArray = noParameterPathArray();
 
-    // take only the top level directory name
-    $legName = explode('/', $noParametersPath)[1];
+    // if there is no path, this is the landing page
+    if (!$pathArray) return 'landing-page';
 
-    return ($legName) ? $legName : 'landing-page';
+    return (isLeg($pathArray[0])) ? $pathArray[0] : false;
+}
+
+/**
+ * Determines whether the current path is for a leg home page
+ *
+ * @return bool
+ */
+function isLegHome() {
+    $pathArray = noParameterPathArray();
+
+    return ((sizeof($pathArray) == 1) && isLeg($pathArray[0]));
 }

@@ -409,51 +409,6 @@
                     "min": "",
                     "max": ""
                 },
-                "5a1d26d5aeb88": {
-                    "key": "5a1d26d5aeb88",
-                    "name": "search",
-                    "label": "Search",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5a201e78eb908",
-                            "label": "Default search term",
-                            "name": "default_search_term",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
-                        {
-                            "key": "field_5aaa329f7927c",
-                            "label": "Job feed URL",
-                            "name": "job_feed_url",
-                            "type": "url",
-                            "instructions": "",
-                            "required": 1,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": ""
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
                 "5a218cbc4841a": {
                     "key": "5a218cbc4841a",
                     "name": "navigation_block",
@@ -553,5 +508,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1521559068
+    "modified": 1522834704
 }

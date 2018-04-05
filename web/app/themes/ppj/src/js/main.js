@@ -1,27 +1,6 @@
 //import Waypoint from 'waypoint';
 //Scrollpoints = require('scrollpoints');
 import scrollpoints from 'scrollpoints';
-import Vue from 'vue';
-
-import Accordion from '../vue/Accordion.vue';
-import Header from '../vue/Header.vue';
-import JobSummary from '../vue/JobSummary.vue';
-import PageContainer from '../vue/PageContainer.vue';
-import Search from '../vue/Search.vue';
-import TextBlock from '../vue/TextBlock.vue';
-import VideoPlayer from '../vue/VideoPlayer.vue';
-
-
-function toggleOpenNavMenu(navLink) {
-    console.log('toggleOpenNavMenu');
-    const openClassName = 'page-container--nav-menu-open';
-    const pageContainer = navLink.closest('.page-container.js');
-    if (pageContainer.classList.contains(openClassName)) {
-        pageContainer.classList.remove(openClassName);
-    } else {
-        pageContainer.classList.add(openClassName);
-    }
-}
 
 window.ppjNavTo = function(href, callback) {
   console.log('navTo');
@@ -31,29 +10,44 @@ window.ppjNavTo = function(href, callback) {
   window.location = href;
 };
 
-window.addEventListener('load', function() {
+window.ppj.openNavMenu = function() {
+  document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+  document.getElementsByClassName('header')[0].classList.add('header--nav-menu-open');
+};
 
-  if (document.querySelectorAll('#site-container').length > 0) {
+window.ppj.closeNavMenu = function() {
+  document.getElementsByTagName('body')[0].style.overflow = '';
+  document.getElementsByClassName('header')[0].classList.remove('header--nav-menu-open');
+};
 
-    Vue.component('accordion', Accordion);
-    Vue.component('accordion-element', Accordion.childComponents.Element);
-    Vue.component('job-summary', JobSummary);
-    Vue.component('page-container', PageContainer);
-    Vue.component('page-header', Header);
-    Vue.component('search', Search);
-    Vue.component('text-block', TextBlock);
-    Vue.component('video-player', VideoPlayer);
-
-    var vm = new Vue({
-      el: '#site-container',
-      methods: {
-        pageLoaded: function () {
-          this.$emit('pageLoaded');
-        }
-      }
-    });
-
+window.ppj.toggleAccordion = function() {
+  const event = event || window.event;
+  event.preventDefault();
+  event.stopPropagation();
+  const triggerElement = event.target || event.srcElement;
+  const className = 'accordion__list-element--open';
+  const el = triggerElement.closest('.accordion__list-element');
+  if (el.classList.contains(className)) {
+    el.classList.remove(className);
+  } else {
+    el.classList.add(className);
+    ga('send', 'event', 'Accordian', this.title, (this.open) ? 'open' : 'close', 7);
   }
+};
+
+window._wq = window._wq || [];
+
+_wq.push({ id: '_all', onReady: function(video) {
+  const videoPlayer = video.container.closest('.video-player');
+
+  videoPlayer.querySelector('.video-player__play-button')
+    .addEventListener('click', function(){
+      videoPlayer.classList.add('video-player--playing');
+      video.play();
+    });
+}});
+
+window.addEventListener('load', function() {
 
   const scrollPointConfig = {
     when: 'entering'
