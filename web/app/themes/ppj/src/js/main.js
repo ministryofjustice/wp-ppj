@@ -22,9 +22,14 @@ window.ppj.closeNavMenu = function() {
   document.getElementsByClassName('header')[0].classList.remove('header--nav-menu-open');
 };
 
-window.ppj.toggleAccordion = function(buttonEl) {
+window.ppj.toggleAccordion = function() {
+
+  const event = event || window.event;
+  event.preventDefault();
+  event.stopPropagation();
+  const triggerElement = event.target || event.srcElement;
   const className = 'accordion__list-element--open';
-  const el = buttonEl.closest('.accordion__list-element');
+  const el = triggerElement.closest('.accordion__list-element');
   if (el.classList.contains(className)) {
     el.classList.remove(className);
   } else {
