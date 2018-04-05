@@ -20,7 +20,6 @@ function partial($data, $slug, $name = '')
     return template($data, 'partials/' . $slug, $name);
 }
 
-
 function dump($var)
 {
     echo "<pre>" . print_r($var, true) . "</pre>";

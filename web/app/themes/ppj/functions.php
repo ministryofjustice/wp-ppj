@@ -6,8 +6,10 @@ function enqueue_scripts()
     $legName  = getLegNameFromPath();
     $root_dir = get_template_directory_uri() . '/dest';
     wp_enqueue_style( 'main-css', $root_dir . mix_asset( "/css/{$legName}.css" ), null, null );
+
     wp_enqueue_script( 'header-js', $root_dir . '/js/header.js', null, null, false );
     wp_enqueue_script( 'main-js', $root_dir . mix_asset( '/js/main.js' ), null, null, true );
+    wp_enqueue_script( 'wistia', '//fast.wistia.com/assets/external/E-v1.js', null, null, true );
 
     if (is_page('Find a job')) {
         wp_enqueue_script( 'find-a-job-js', $root_dir . mix_asset('/js/find-a-job.js'), null, null, true );

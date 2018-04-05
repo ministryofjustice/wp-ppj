@@ -2,8 +2,6 @@
 //Scrollpoints = require('scrollpoints');
 import scrollpoints from 'scrollpoints';
 
-import VideoPlayer from '../vue/VideoPlayer.vue';
-
 window.ppjNavTo = function(href, callback) {
   console.log('navTo');
   if (typeof callback !== 'undefined') {
@@ -23,7 +21,6 @@ window.ppj.closeNavMenu = function() {
 };
 
 window.ppj.toggleAccordion = function() {
-
   const event = event || window.event;
   event.preventDefault();
   event.stopPropagation();
@@ -37,6 +34,18 @@ window.ppj.toggleAccordion = function() {
     ga('send', 'event', 'Accordian', this.title, (this.open) ? 'open' : 'close', 7);
   }
 };
+
+window._wq = window._wq || [];
+
+_wq.push({ id: '_all', onReady: function(video) {
+  const videoPlayer = video.container.closest('.video-player');
+
+  videoPlayer.querySelector('.video-player__play-button')
+    .addEventListener('click', function(){
+      videoPlayer.classList.add('video-player--playing');
+      video.play();
+    });
+}});
 
 window.addEventListener('load', function() {
 
