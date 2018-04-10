@@ -585,51 +585,6 @@
                     "min": "",
                     "max": ""
                 },
-                "5a1d26d5aeb88": {
-                    "key": "5a1d26d5aeb88",
-                    "name": "search",
-                    "label": "Search",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5a201e78eb908",
-                            "label": "Default search term",
-                            "name": "default_search_term",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
-                        {
-                            "key": "field_5aaa329f7927c",
-                            "label": "Job feed URL",
-                            "name": "job_feed_url",
-                            "type": "url",
-                            "instructions": "",
-                            "required": 1,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": ""
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
                 "5a218cbc4841a": {
                     "key": "5a218cbc4841a",
                     "name": "navigation_block",
@@ -698,6 +653,70 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "5acb88eae6390": {
+                    "key": "5acb88eae6390",
+                    "name": "search",
+                    "label": "Search",
+                    "display": "row",
+                    "sub_fields": [
+                        {
+                            "key": "field_5acb890ce6391",
+                            "label": "Job Feed URL",
+                            "name": "job_feed_url",
+                            "type": "url",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5acb892be6392",
+                            "label": "Job List Message",
+                            "name": "job_list_message",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5acb8b3f61f2a",
+                            "label": "Job List Message URL",
+                            "name": "job_list_message_url",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add page block",
@@ -729,5 +748,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1521559068
+    "modified": 1523353700
 }
