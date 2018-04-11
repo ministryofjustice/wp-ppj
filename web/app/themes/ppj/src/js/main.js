@@ -35,8 +35,10 @@ window.ppj.toggleAccordion = function() {
   }
 };
 
+// _wq needs to be initialized so that Wistia's Video API can be used
 window._wq = window._wq || [];
 
+//add callbacks to video play button for all Wistia videos
 _wq.push({ id: '_all', onReady: function(video) {
   const videoPlayer = video.container.closest('.video-player');
 
