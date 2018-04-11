@@ -248,7 +248,7 @@ function isLeg($name) {
  * minus any parameters
  * and in array form
  */
-function noParameterPathArray()
+function getCleanRelativePathParts()
 {
     $noParametersPath = explode('?', $_SERVER['REQUEST_URI'])[0];
 
@@ -264,7 +264,7 @@ function noParameterPathArray()
  */
 function getLegNameFromPath()
 {
-    $pathArray = noParameterPathArray();
+    $pathArray = getCleanRelativePathParts();
 
     // if there is no path, this is the landing page
     if (!$pathArray) return 'landing-page';
@@ -275,10 +275,13 @@ function getLegNameFromPath()
 /**
  * Determines whether the current path is for a leg home page
  *
+ * eg. if the current relative path is /prison-officer/
+ * this function will return true
+ *
  * @return bool
  */
 function isLegHome() {
-    $pathArray = noParameterPathArray();
+    $pathArray = getCleanRelativePathParts();
 
     return ((sizeof($pathArray) == 1) && isLeg($pathArray[0]));
 }
