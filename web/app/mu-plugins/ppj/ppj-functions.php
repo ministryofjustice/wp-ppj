@@ -231,19 +231,16 @@ function acf_json_load_point( $paths )
 }
 add_filter('acf/settings/load_json', __NAMESPACE__ . '\\acf_json_load_point');
 
-$legs = [
-    'prison-officer',
-    'youth-custody'
-];
-
 /**
  * @param $name candidate name
  *
  * @return bool if $name is a valid leg name
  */
 function isLeg($name) {
-    global $legs;
-    return in_array($name, $legs);
+    return in_array($name, [
+        'prison-officer',
+        'youth-custody'
+    ]);
 }
 
 /**
