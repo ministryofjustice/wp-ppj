@@ -13,7 +13,8 @@ function enqueue_scripts()
     wp_enqueue_script( 'wistia', '//fast.wistia.com/assets/external/E-v1.js', null, null, true );
 
     if (is_page('Find a job')) {
-        wp_enqueue_script( 'find-a-job-js', $root_dir . mix_asset('/js/find-a-job.js'), null, null, true );
+        wp_enqueue_script( 'google-maps-js','https://maps.googleapis.com/maps/api/js?key=AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA', null, null, true );
+        wp_enqueue_script( 'find-a-job-js', $root_dir . mix_asset('/js/find-a-job.js'), ('google-maps.js'), null, true );
     }
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts');

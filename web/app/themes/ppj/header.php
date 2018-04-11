@@ -6,7 +6,6 @@
     if ($legName  = ppj\getLegNameFromPath()) $bodyClasses[] = $legName;
     if ($postSlug = $post->post_name)         $bodyClasses[] = 'post-slug--' . $postSlug;
     if (ppj\isLegHome())                      $bodyClasses[] = 'leg-home';
-
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +15,6 @@
     <title><?= $htmlTitle ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="<?= $htmlMetaDescription ?>" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA"></script>
     <?php wp_head(); ?>
     <?php if (constant('ENVIRONMENT') == 'staging' || constant('ENVIRONMENT') == 'production'): ?>
         <script>
