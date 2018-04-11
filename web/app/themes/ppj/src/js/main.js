@@ -2,6 +2,12 @@
 //Scrollpoints = require('scrollpoints');
 import scrollpoints from 'scrollpoints';
 
+window.ppj = {};
+
+window.ppj.handleImageLoaded = function() {
+  document.getElementsByClassName('header__image')[0].classList.add('header__image--loaded');
+};
+
 window.ppjNavTo = function(href, callback) {
   console.log('navTo');
   if (typeof callback !== 'undefined') {
