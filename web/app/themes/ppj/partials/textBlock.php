@@ -101,9 +101,7 @@ if (isset($td['link']['title'])) {
                     <?php endforeach; ?>
                 </div>
 
-            <?php } elseif ($isValidAccordionBlock) {
-                //ppj\dump($td);
-                ?>
+            <?php } elseif ($isValidAccordionBlock) { ?>
 
                 <div class="text-block__content">
 
