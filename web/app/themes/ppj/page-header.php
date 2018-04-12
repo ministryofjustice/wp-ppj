@@ -36,7 +36,11 @@ $headerClass .= ($headerStyle == 'dark') ?  'header--style-dark' : '';
                                     'imageData' => $headerImageData,
                                     'mobileImageData' => $headerImageMobileData
                                 ],
-                            'headerHeroImage') ?>
+                            'headerHeroImage')
+                        ?>
+                    <?php endif; ?>
+
+                    <?php if ($header_text): ?>
                         <div class="header__overlay">
                             <div class="l-full">
                                 <div class="header__text-container">

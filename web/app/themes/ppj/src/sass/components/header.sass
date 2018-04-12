@@ -412,14 +412,19 @@
   &--style-dark
     height: auto
     border: none
+    background-color: $color-transparency-dark-start
 
     .l-site-header
       position: relative
 
     .header
-      &__site-header
-        background-color: $color-dark
-        background: linear-gradient(60deg, $color-gradient-light, $color-gradient-dark)
 
-      &__hero
-        display: none
+      &__site-header
+        background: inherit
+
+      &__img-ratio
+        padding-bottom: 0
+        height: initial
+
+      &__overlay
+        position: initial
