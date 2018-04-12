@@ -225,26 +225,29 @@
 
   &__nav-menu-close-button
     border: .2rem solid $color-white
-    border-radius: 2rem
+    border-radius: 50%
     display: flex
-    height: $common-spacing * 1.5
+    height: $common-spacing * 2.2
     justify-content: center
+    align-items: center
     position: absolute
     right: $common-spacing
     top: $common-spacing
-    width: $common-spacing * 1.5
+    width: $common-spacing * 2.2
 
     @include bp('landscape')
       display: none
 
     &:before
-      color: $color-white
-      content: "\2715"
-      font-size: $common-spacing
-      font-weight: $font-weight-bold
-      position: relative
-      text-align: center
-      top: -.05rem
+      content: ''
+      @include background-img('svg/close.svg')
+      background-color: $color-transparent
+      background-repeat: no-repeat
+      background-position: center center
+      background-size: contain
+      width: $common-spacing * 0.875
+      height: $common-spacing * 0.875
+      display: inline-block
 
   &__nav-menu-list
     margin-top: 8rem

@@ -13,7 +13,7 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <title><?= $htmlTitle ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="<?= $htmlMetaDescription ?>" />
     <?php wp_head(); ?>
     <?php if (constant('ENVIRONMENT') == 'staging' || constant('ENVIRONMENT') == 'production'): ?>
