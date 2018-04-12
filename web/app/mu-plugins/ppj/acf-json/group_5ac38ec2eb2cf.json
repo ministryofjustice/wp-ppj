@@ -43,7 +43,7 @@
             {
                 "param": "page_template",
                 "operator": "==",
-                "value": "default"
+                "value": "find-a-job.php"
             }
         ]
     ],
