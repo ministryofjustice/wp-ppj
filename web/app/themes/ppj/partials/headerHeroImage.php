@@ -79,6 +79,6 @@ if ( $headerImageData ) {
          src="<?= $headerImageUrl ?>"
          srcset="<?= $srcset ?>"
          alt="<?= $headerImageAltText ?>"
-         onload="ppj.handleImageLoaded()"
+         onload="window.ppj.handleImageLoaded()"
     />
 </div>
