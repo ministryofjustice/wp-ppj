@@ -8,8 +8,6 @@ function enqueue_scripts()
 
     wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700', null, null );
     wp_enqueue_style( 'main', $root_dir . mix_asset( "/css/{$legName}.css" ), null, null );
-
-    wp_enqueue_script( 'header-js', $root_dir . '/js/header.js', null, null, false );
     wp_enqueue_script( 'main-js', $root_dir . mix_asset( '/js/main.js' ), null, null, true );
     wp_enqueue_script( 'wistia', '//fast.wistia.com/assets/external/E-v1.js', null, null, true );
 

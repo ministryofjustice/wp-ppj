@@ -16,6 +16,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="<?= $htmlMetaDescription ?>" />
     <?php wp_head(); ?>
+    <script><?php // code that must be available before the HTML has finished loading. ?>
+        window.ppj = {};
+
+        window.ppj.handleImageLoaded = function() {
+            document.getElementsByClassName('header__image')[0].classList.add('header__image--loaded');
+        };
+    </script>
     <?php if (constant('ENVIRONMENT') == 'staging' || constant('ENVIRONMENT') == 'production'): ?>
         <script>
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -28,6 +35,3 @@
 </head>
 
 <body <?php body_class($bodyClasses); ?>>
-
-
-
