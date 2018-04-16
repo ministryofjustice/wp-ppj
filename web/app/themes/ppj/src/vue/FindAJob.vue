@@ -109,10 +109,10 @@
           >
           </job-summary>
         </li>
-        <li>
+        <li v-if="jobListMessage">
           <div class="find-a-job__job-list-message"
           >
-            <a href="/prison-officer/find-a-job">See other Prison jobs</a>
+            <a :href="jobListMessageUrl">{{ jobListMessage }}</a>
           </div>
         </li>
       </ul>
@@ -184,7 +184,7 @@
         default: '',
         type: String
       },
-      'jobListMessageURL': {
+      'jobListMessageUrl': {
         default: '',
         type: String
       }
