@@ -18,7 +18,6 @@
     margin: 0
     text-align: center
 
-
   &--job-selected
     .job-summary
       background-color: $color-extremely-light
@@ -30,7 +29,6 @@
       opacity: .9
 
   &__header
-
     @include bp('portrait')
       padding: $common-spacing
       width: 38%
@@ -158,6 +156,7 @@
 
   &__jobs-available-container
     margin: $common-spacing/2 0
+    z-index: 2
 
     @include bp('portrait')
       margin: 0
@@ -288,27 +287,19 @@
       bottom: 0
       left: 0
       position: absolute
-      top: 24.9rem
+      top: 24.8rem
       width: 38%
 
     @include bp('landscape')
 
+  // FADING:
+  // https://codepen.io/anon/pen/opBRLp
   &__view-list
-    @include bp('portrait')
-      height: 100%
-      overflow-y: auto
-      padding: 0 $common-spacing
-
-    &-element
-      background-color: $color-white
+    & > li
       border-top: $border
-      cursor: pointer
-
-      // FADING:
-      // https://codepen.io/anon/pen/opBRLp
+      background-color: $color-white
 
       &:first-child
-        border-top: none
         @include bp('portrait')
           position: relative
           z-index: 2
@@ -346,6 +337,14 @@
       &:hover:nth-last-child(2):after
         @include bp('portrait')
           cursor: s-resize
+
+    @include bp('portrait')
+      height: 100%
+      overflow-y: auto
+      padding: 0 $common-spacing
+
+    &-element
+      cursor: pointer
 
   &__job-list-message
     background-color: rgba($color-main, 0.1)

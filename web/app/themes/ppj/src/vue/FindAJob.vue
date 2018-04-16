@@ -90,7 +90,9 @@
       <div class="find-a-job__jobs-available"><span>{{searchResults.jobs.length }}</span> <span class="find-a-job__jobs-available-title"></span> jobs available:</div>
     </div>
     <div class="find-a-job__view-list-container">
+
       <ul class="find-a-job__view-list">
+
         <li class="find-a-job__view-list-element"
             :data-group-id="job.jobLocationGroupId"
             v-for="(job, index) in visibleSearchResults"
@@ -110,8 +112,7 @@
           </job-summary>
         </li>
         <li v-if="jobListMessage">
-          <div class="find-a-job__job-list-message"
-          >
+          <div class="find-a-job__job-list-message">
             <a :href="jobListMessageUrl">{{ jobListMessage }}</a>
           </div>
         </li>
