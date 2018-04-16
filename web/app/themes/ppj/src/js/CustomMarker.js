@@ -7,19 +7,19 @@ function CustomMarker(latlng, map, args) {
 
 function styleMarker(div, args) {
     if (args.selected) {
-        div.classList.add('search__map-marker--selected');
+        div.classList.add('find-a-job__map-marker--selected');
     }
 }
 
 CustomMarker.deselectMarker = function() {
   // find all markers
-  const searchMap = document.querySelector('.search__map');
+  const searchMap = document.querySelector('.find-a-job__map');
 
-  const jobMarkers = searchMap.querySelectorAll('.search__map-marker--job-location-group.search__map-marker--selected');
+  const jobMarkers = searchMap.querySelectorAll('.find-a-job__map-marker--job-location-group.find-a-job__map-marker--selected');
   for (let i in jobMarkers) {
     if (typeof jobMarkers[i].classList !== 'undefined') {
       const classList = jobMarkers[i].classList;
-      classList.remove('search__map-marker--selected');
+      classList.remove('find-a-job__map-marker--selected');
     }
   }
 };
@@ -29,7 +29,7 @@ CustomMarker.changeSelectedMarker = function(div) {
     CustomMarker.deselectMarker();
 
     // add selected marker class to this marker
-    div.classList.add('search__map-marker--selected');
+    div.classList.add('find-a-job__map-marker--selected');
 };
 
 CustomMarker.changeSelectedMarkerByGroupId = function(groupId) {
@@ -46,29 +46,29 @@ CustomMarker.prototype.draw = function() {
 
     if (!div) {
       div = this.div = document.createElement('div');
-      div.classList.add('search__map-marker');
+      div.classList.add('find-a-job__map-marker');
       div.classList.add(self.args.class);
 
       const icon = document.createElement('div');
-      icon.classList.add('search__map-marker-icon');
+      icon.classList.add('find-a-job__map-marker-icon');
       div.appendChild(icon);
 
-      if (self.args.class == 'search__map-marker--job-location-group') {
+      if (self.args.class == 'find-a-job__map-marker--job-location-group') {
 
         div.setAttribute('data-group-id', self.args.groupId);
         styleMarker(div, self.args);
 
         icon.addEventListener("mouseover", function() {
-          div.classList.add('search__map-marker--hover');
+          div.classList.add('find-a-job__map-marker--hover');
         });
 
         icon.addEventListener("mouseleave", function() {
-          div.classList.remove('search__map-marker--hover');
+          div.classList.remove('find-a-job__map-marker--hover');
         });
 
         const label = document.createElement('div');
         label.innerHTML = self.args.prisonName;
-        label.classList.add('search__map-marker-label');
+        label.classList.add('find-a-job__map-marker-label');
         div.appendChild(label);
 
         if (typeof(self.args.marker_id) !== 'undefined') {

@@ -1,16 +1,16 @@
 import Vue from 'vue';
 import JobSummary from '../vue/JobSummary.vue';
-import Search from '../vue/Search.vue';
+import FindAJob from '../vue/FindAJob.vue';
 
 window.addEventListener('load', function() {
 
-  if (document.querySelectorAll('.search').length > 0) {
+  if (document.querySelectorAll('.find-a-job-container').length > 0) {
 
     Vue.component('job-summary', JobSummary);
-    Vue.component('search', Search);
+    Vue.component('find-a-job', FindAJob);
 
     var vm = new Vue({
-      el: '.search',
+      el: '.find-a-job-container',
       methods: {
         pageLoaded: function () {
           this.$emit('pageLoaded');

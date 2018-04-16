@@ -1,41 +1,41 @@
 <template>
 
-  <div class="search"
+  <div class="find-a-job"
        v-cloak
-       :class="{'search--job-selected': searchResults.selectedJobLocationGroupId}"
+       :class="{'find-a-job--job-selected': searchResults.selectedJobLocationGroupId}"
   >
-    <div class="search__header">
-      <h2 class="search__title">{{ titleText }}</h2>
-      <p class="search__prompt">Enter location (postcode, town or region)</p>
-      <div class="search__form">
+    <div class="find-a-job__header">
+      <h2 class="find-a-job__title">{{ titleText }}</h2>
+      <p class="find-a-job__prompt">Enter location (postcode, town or region)</p>
+      <div class="find-a-job__form">
         <input type="text"
-               class="search__input"
+               class="find-a-job__input"
                :placeholder="placeHolderText"
                editable="editable"
                v-model="searchResults.searchTerm"
                @click.stop.prevent=""
                @keypress="handleSearchInputKeyPress"/>
-        <div class="search__button-clear-search-container">
-          <button class="search__button-clear-search"
-                  :class="{'search__button-clear-search--enabled': searchResults.searchTerm}"
+        <div class="find-a-job__button-clear-search-container">
+          <button class="find-a-job__button-clear-search"
+                  :class="{'find-a-job__button-clear-search--enabled': searchResults.searchTerm}"
                   @click.stop.prevent="handleClearSearchClick"
           >&#10005;</button>
         </div>
 
-        <button class="search__button-search"
+        <button class="find-a-job__button-search"
                 @click.stop.prevent="search"
                 :disabled="searchResults.searchTerm == ''">
-          <div class="search__button-search-circle"></div>
-          <div class="search__button-search-rectangle"></div>
+          <div class="find-a-job__button-search-circle"></div>
+          <div class="find-a-job__button-search-rectangle"></div>
         </button>
       </div>
 
-      <div class="search__geolocation"
+      <div class="find-a-job__geolocation"
            :class="{
-                'search__geolocation--is-busy': (geoLocationIsBusy == true),
-                'search__geolocation--is-active': geoLocationIsActive
+                'find-a-job__geolocation--is-busy': (geoLocationIsBusy == true),
+                'find-a-job__geolocation--is-active': geoLocationIsActive
             }">
-        <a class="search__geolocation-button"
+        <a class="find-a-job__geolocation-button"
            v-if="geoLocationIsAvailable"
            @click.stop.prevent="useGeoLocation">
           <svg version="1.1"
@@ -46,7 +46,7 @@
                y="0px"
                viewBox="0 0 20 20"
                xml:space="preserve"
-               class="search__geolocation-icon"
+               class="find-a-job__geolocation-icon"
           ><path class="st0" d="M17.5,9.3c-0.3-3.6-3.2-6.5-6.8-6.8V0H9.3v2.5C5.7,2.9,2.9,5.7,2.5,9.3H0v1.4h2.5c0.3,3.6,3.2,6.5,6.8,6.8V20
               h1.4v-2.5c3.6-0.3,6.5-3.2,6.8-6.8H20V9.3H17.5z M16.1,10c0,0.2,0,0.5,0,0.7c-0.3,2.8-2.6,5.1-5.4,5.4c-0.2,0-0.5,0-0.7,0
               s-0.5,0-0.7,0c-2.8-0.3-5.1-2.6-5.4-5.4c0-0.2,0-0.5,0-0.7s0-0.5,0-0.7c0.3-2.8,2.6-5.1,5.4-5.4c0.2,0,0.5,0,0.7,0s0.5,0,0.7,0
@@ -60,38 +60,38 @@
       </div>
     </div>
 
-    <div class="search__map-container">
-      <div class="search__map-zoom-button-container">
-        <div class="search__map-button-zoom search__map-button-zoom--in"
+    <div class="find-a-job__map-container">
+      <div class="find-a-job__map-zoom-button-container">
+        <div class="find-a-job__map-button-zoom find-a-job__map-button-zoom--in"
              @click.stop.prevent="zoomBy(1)"
         >
-          <svg class="search__map-button-zoom-icon"
+          <svg class="find-a-job__map-button-zoom-icon"
                viewBox="0 0 32 32"
                style="enable-background:new 0 0 32 32;">
             <polygon points="22,14.9 17.1,14.9 17.1,10 14.9,10 14.9,14.9 10,14.9 10,17.1 14.9,17.1 14.9,22 17.1,22 17.1,17.1 22,17.1 "/>
           </svg>
         </div>
-        <div class="search__map-button-zoom search__map-button-zoom--out"
+        <div class="find-a-job__map-button-zoom find-a-job__map-button-zoom--out"
              @click.stop.prevent="zoomBy(-1)"
         >
-          <div class="search__map-button-zoom-image-container"></div>
-          <svg class="search__map-button-zoom-icon"
+          <div class="find-a-job__map-button-zoom-image-container"></div>
+          <svg class="find-a-job__map-button-zoom-icon"
                viewBox="0 0 32 32">
             <polygon class="zoom-icon" points="22,14.9 10,14.9 10,17.1 22,17.1 " />
           </svg>
         </div>
       </div>
 
-      <div class="search__map"
+      <div class="find-a-job__map"
            @click.stop.prevent=""
       ></div>
     </div>
-    <div class="search__jobs-available-container">
-      <div class="search__jobs-available"><span>{{searchResults.jobs.length }}</span> <span class="search__jobs-available-title"></span> jobs available:</div>
+    <div class="find-a-job__jobs-available-container">
+      <div class="find-a-job__jobs-available"><span>{{searchResults.jobs.length }}</span> <span class="find-a-job__jobs-available-title"></span> jobs available:</div>
     </div>
-    <div class="search__view-list-container">
-      <ul class="search__view-list">
-        <li class="search__view-list-element"
+    <div class="find-a-job__view-list-container">
+      <ul class="find-a-job__view-list">
+        <li class="find-a-job__view-list-element"
             :data-group-id="job.jobLocationGroupId"
             v-for="(job, index) in visibleSearchResults"
             :key="index"
@@ -110,20 +110,20 @@
           </job-summary>
         </li>
         <li>
-          <div class="search__job-list-message"
+          <div class="find-a-job__job-list-message"
           >
             <a href="/prison-officer/find-a-job">See other Prison jobs</a>
           </div>
         </li>
       </ul>
-      <div class="search__pagination"
+      <div class="find-a-job__pagination"
            v-if="deviceIsMobile && (numberOfResultPages > 1)">
-        <a class="search__pagination-skip-link"
-           :class="{'search__pagination-skip-link--enabled': (backwardEnabled == true)}"
+        <a class="find-a-job__pagination-skip-link"
+           :class="{'find-a-job__pagination-skip-link--enabled': (backwardEnabled == true)}"
            @click.stop.prevent="showFirstPage">
           first</a>
-        <button class="search__pagination-direction"
-                :class="{'search__pagination-direction--enabled': (backwardEnabled == true)}"
+        <button class="find-a-job__pagination-direction"
+                :class="{'find-a-job__pagination-direction--enabled': (backwardEnabled == true)}"
                 @click.stop.prevent="showPreviousPage">
           <svg x="0px" y="0px"
                viewBox="0 0 32.9 32.9"
@@ -133,17 +133,17 @@
                 c0,0.2-0.1,0.3-0.3,0.2l-8.9-4.1c-0.1-0.1-0.2-0.2-0.2-0.4V16c0-0.2,0.1-0.3,0.2-0.4l8.9-4.1C21.1,11.4,21.2,11.5,21.2,11.7z"/>
             </svg>
         </button>
-        <div class="search__pagination-page-numbers-container">
-          <div class="search__pagination-current-page-number">
+        <div class="find-a-job__pagination-page-numbers-container">
+          <div class="find-a-job__pagination-current-page-number">
             {{searchResults.listView.activePage + 1}}
           </div>
-          <div class="search__pagination-of">of</div>
-          <div class="search__pagination-total-pages">
+          <div class="find-a-job__pagination-of">of</div>
+          <div class="find-a-job__pagination-total-pages">
             {{numberOfResultPages}}
           </div>
         </div>
-        <button class="search__pagination-direction"
-                :class="{'search__pagination-direction--enabled': (forwardEnabled == true)}"
+        <button class="find-a-job__pagination-direction"
+                :class="{'find-a-job__pagination-direction--enabled': (forwardEnabled == true)}"
                 @click.stop.prevent="showNextPage">
           <svg x="0px"
                y="0px"
@@ -154,8 +154,8 @@
 
           </svg>
         </button>
-        <a class="search__pagination-skip-link"
-           :class="{'search__pagination-skip-link--enabled': (forwardEnabled == true)}"
+        <a class="find-a-job__pagination-skip-link"
+           :class="{'find-a-job__pagination-skip-link--enabled': (forwardEnabled == true)}"
            @click.stop.prevent="showLastPage"
         >last</a>
       </div>
@@ -337,7 +337,7 @@
         if (self.deviceIsMobile) {
           self.calculateActivePageFromGroupId(groupId);
         } else {
-          document.querySelector(`.search__view-list-element[data-group-id='${groupId}']`)
+          document.querySelector(`.find-a-job__view-list-element[data-group-id='${groupId}']`)
             .scrollIntoView({ behavior: 'smooth' });
         }
         self.focusOnJobLocationGroup(groupId);
@@ -360,7 +360,7 @@
         const markerArgs = [];
         for (let group in jobLocationGroups) {
           markerArgs.push({
-            class: 'search__map-marker--job-location-group',
+            class: 'find-a-job__map-marker--job-location-group',
             solid: true,
             amount: jobLocationGroups[group].jobs.length,
             groupId: group,
@@ -482,13 +482,13 @@
         }
 
         this.map = new google.maps.Map(
-          document.getElementsByClassName('search__map')[0]
+          document.getElementsByClassName('find-a-job__map')[0]
           , this.mapOptions
         );
       },
 
       deleteSearchTermMarker() {
-        const element = document.getElementsByClassName('search__map-marker--search-term')[0];
+        const element = document.getElementsByClassName('find-a-job__map-marker--search-term')[0];
         if (typeof element !== 'undefined') {
           element.parentNode.removeChild(element);
         }
@@ -502,7 +502,7 @@
         this.searchResults.searchTermMarker.markerDiv = new CustomMarker(
           new google.maps.LatLng(lat, lng),
           this.map,
-          {class: 'search__map-marker--search-term'}
+          {class: 'find-a-job__map-marker--search-term'}
         );
 
       },
@@ -546,7 +546,7 @@
       handleClearSearchClick() {
         this.searchResults.searchTerm = '';
         this.deleteSearchTermMarker();
-        document.getElementsByClassName('search__input')[0].focus();
+        document.getElementsByClassName('find-a-job__input')[0].focus();
       },
 
       search() {
@@ -555,7 +555,7 @@
             {'address': 'UK ' + this.searchResults.searchTerm},
             this.processGeocoderResults
           );
-          document.getElementsByClassName('search__input')[0].blur();
+          document.getElementsByClassName('find-a-job__input')[0].blur();
         }
       },
 
