@@ -1,42 +1,8 @@
-.post-slug--find-a-job
-  @include bp('portrait')
-    .page-container
-      height: 0
-
-    .page-blocks
-      height: 0
-      display: flex
-      flex-basis: auto
-      flex-grow: 1
-      flex-shrink: 1
-
-    .facebook-footer
-      display: none
-
-    .footer
-      font-size: 1.6rem
-      padding: $common-spacing
-
-      &__container
-        display: flex
-        justify-content: center
-
-      &__nav-links
-        display: flex
-
-      &__nav-link, &__copyright
-        margin: 0 0 0 $common-spacing
-
-      &__nav-link > *, &__copyright > *
-        border-left: 1px solid $color-light
-        display: block
-        height: 100%
-        line-height: 1
-        padding-left: $common-spacing
-        text-align: center
-
-      &__nav-link:first-child > *
-        border-left: none
+.find-a-job-container
+  display: flex
+  flex-basis: auto
+  flex-grow: 1
+  flex-shrink: 1
 
 .find-a-job
   $s: &
@@ -45,11 +11,13 @@
 
   background: $color-white
   margin: $common-spacing
+  width: 100%
 
   @include bp('portrait')
     height: 100%
     margin: 0
     text-align: center
+
 
   &--job-selected
     .job-summary

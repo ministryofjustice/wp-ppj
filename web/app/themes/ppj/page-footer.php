@@ -7,7 +7,7 @@ $footerCopyright = get_field('footer_copyright', 'option');
 ?>
 
         <div class="l-full l-full--footer">
-            <?php if ($facebookContent): ?>
+            <?php if (is_page_template('page.php') && $facebookContent): ?>
                 <div class="facebook-footer">
                     <div class="facebook-footer__container">
                         <div class="facebook-footer__icon">
