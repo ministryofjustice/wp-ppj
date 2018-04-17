@@ -183,6 +183,35 @@
                                             "max_height": "",
                                             "max_size": "",
                                             "mime_types": ""
+                                        },
+                                        {
+                                            "key": "field_5ad62373648ed",
+                                            "label": "Color",
+                                            "name": "color",
+                                            "type": "select",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "choices": {
+                                                "one": "Blue",
+                                                "two": "Purple",
+                                                "three": "Turquoise",
+                                                "four": "Orange"
+                                            },
+                                            "default_value": [
+                                                "one"
+                                            ],
+                                            "allow_null": 0,
+                                            "multiple": 0,
+                                            "ui": 0,
+                                            "ajax": 0,
+                                            "return_format": "value",
+                                            "placeholder": ""
                                         }
                                     ]
                                 }
@@ -741,5 +770,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1523866837
+    "modified": 1523984192
 }

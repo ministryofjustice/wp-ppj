@@ -14,9 +14,9 @@ $td = $ppj_template_data;
                     </div>
 
                     <?php $numberOfCardsInRow = sizeof($group['cards']); ?>
-                    <div class="landing-page-groups__card-row landing-page-groups__card-row--number-of-cards-<?= $numberOfCardsInRow ?>">
+                    <div class="landing-page-groups__card-row">
                         <?php foreach($group['cards'] as $card): ?>
-                            <div class="landing-page-groups__card">
+                            <div class="landing-page-groups__card <?= ($card['color']) ? 'landing-page-groups__card--color-' . $card['color'] : ''?>">
                                 <?php if(isset($card['image']['url'])): ?>
                                     <div class="landing-page-groups__card-image-container">
                                         <div class="landing-page-groups__card-image-ratio">
