@@ -1,8 +1,12 @@
+.page-template-find-a-job .page-container
+  height: 100vh
+
 .find-a-job-container
-  display: flex
-  flex-basis: auto
   flex-grow: 1
-  flex-shrink: 1
+
+  @include bp('portrait')
+    display: block
+    position: relative
 
 .find-a-job
   $s: &
@@ -10,12 +14,19 @@
   $map-shadow: 0px 4px 16px 0px $color-medium-transparent
 
   background: $color-white
-  margin: $common-spacing
+  padding: $common-spacing
   width: 100%
 
   @include bp('portrait')
+    $height1: 200px
+    $height2: 52px
+
+    display: grid
+    grid-template-columns: 40% 60%
+    grid-template-rows: $height1 auto calc(100% - #{$height1} - #{$height2})
     height: 100%
-    margin: 0
+    padding: 0
+    position: absolute
     text-align: center
 
   &--job-selected
@@ -30,8 +41,8 @@
 
   &__header
     @include bp('portrait')
+      grid-rows: 1/2
       padding: $common-spacing
-      width: 38%
 
   &__title
     @extend .common-header
@@ -155,14 +166,11 @@
       top: 0
 
   &__jobs-available-container
-    margin: $common-spacing/2 0
     z-index: 2
 
     @include bp('portrait')
       margin: 0
       padding: 0 $common-spacing
-      position: relative
-      width: 38%
 
   &__jobs-available
     border-bottom: $border
@@ -222,11 +230,8 @@
     position: relative
 
     @include bp('portrait')
-      bottom: 0
-      position: absolute
-      right: 0
-      top: 0
-      width: 62%
+      grid-column: 2/3
+      grid-row: 1/4
 
     @include bp('landscape')
 
@@ -284,11 +289,9 @@
 
   &__view-list-container
     @include bp('portrait')
-      bottom: 0
-      left: 0
-      position: absolute
-      top: 24.8rem
-      width: 38%
+      grid-column: 1/2
+      grid-row: 3/4
+      position: relative
 
     @include bp('landscape')
 
@@ -300,6 +303,8 @@
       background-color: $color-white
 
       &:first-child
+        border-top: none
+
         @include bp('portrait')
           position: relative
           z-index: 2
@@ -359,18 +364,13 @@
 
   &__map
     display: flex
-    height: 20rem
+    height: 24rem
     justify-content: center
     position: relative
     width: 100%
 
     @include bp('portrait')
-      bottom: 0
       height: 100%
-      left: 0
-      position: absolute
-      right: 0
-      top: 0
 
   &__map-marker
     $c: &
