@@ -1,0 +1,39 @@
+/**
+ * This stylesheet is intended for use on error pages
+ */
+
+@import 'variables'
+@import 'breakpoints'
+
+html
+  font-size: 62.5% // 1 rem now equals 10px
+
+body
+  font-family: $sans-serif
+  font-size: $font-size-small
+  text-size-adjust: none
+  background-color: $color-body
+  @include background-img('bg_404.png')
+  background-position: center top
+  color: $color-white
+
+  @include bp('portrait')
+    font-size: $font-size-large-medium
+    padding: $common-spacing * 1.5
+
+a
+  color: $color-white
+
+article
+  padding: ($common-spacing * 2) ($common-spacing * 1)
+  margin: 0 auto
+
+  @include bp('portrait')
+    padding: ($common-spacing * 3) ($common-spacing * 2)
+    border: .5em solid $color-white
+    border-radius: 5rem
+    border-top-left-radius: 0
+    max-width: 60rem
+
+h1, p, li
+  margin: 0 0 .65em 0
