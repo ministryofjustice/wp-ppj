@@ -1,6 +1,8 @@
 <?php
 $navMenuItems = wp_get_nav_menu_items( ppj\getLegNameFromPath() );
 
+$logoTargetUrl = ppj\getLogoTargetURL();
+
 $filteredNavMenuItems = [];
 if (isset($navMenuItems) && !!$navMenuItems ) {
     foreach ( $navMenuItems as $item ) {
@@ -18,7 +20,7 @@ if (isset($navMenuItems) && !!$navMenuItems ) {
 <div class="l-site-header">
     <div class="header__site-header">
         <div class="header__site-header-content">
-            <a href="/" class="header__logo"></a>
+            <a href="<?= $logoTargetUrl ?>" class="header__logo"></a>
             <div class="header__nav-link js" onclick="ppj.openNavMenu()">menu</div>
 
             <div class="header__nav-menu">

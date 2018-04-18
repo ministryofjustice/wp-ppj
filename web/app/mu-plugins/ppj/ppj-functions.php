@@ -337,3 +337,21 @@ function isLegHome() {
 
     return ((sizeof($pathArray) == 1) && isLeg($pathArray[0]));
 }
+
+/**
+ * @return string the logo target url specific to that leg
+ */
+function getLogoTargetUrl() {
+
+    switch(getLegNameFromPath()) {
+        case 'landing-page':
+            return '/';
+
+        case 'prison-officer':
+            return '/prison-officer/';
+
+        case 'youth-custody':
+            return '/youth-custody/';
+    }
+
+}
