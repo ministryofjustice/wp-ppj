@@ -316,12 +316,13 @@ function getCleanRelativePathParts()
  */
 function getLegNameFromPath()
 {
-    $pathArray = getCleanRelativePathParts();
+    if ($pathArray = getCleanRelativePathParts()) {
+        if (isLeg($pathArray[0])) {
+            return $pathArray[0];
+        }
+    }
 
-    // if there is no path, this is the landing page
-    if (!$pathArray) return 'landing-page';
-
-    return (isLeg($pathArray[0])) ? $pathArray[0] : false;
+    return 'landing-page';
 }
 
 /**
