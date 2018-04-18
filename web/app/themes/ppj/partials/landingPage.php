@@ -15,12 +15,24 @@ $td = $ppj_template_data;
 
                     <?php $numberOfCardsInRow = sizeof($group['cards']); ?>
                     <div class="landing-page-groups__card-row">
-                        <?php foreach($group['cards'] as $card): ?>
-                            <div class="landing-page-groups__card <?= ($card['color']) ? 'landing-page-groups__card--color-' . $card['color'] : ''?>">
-                                <?php if(isset($card['image']['url'])): ?>
+                        <?php foreach($group['cards'] as $card):
+                            $cardHasImage = isset($card['image']['url']);
+                            $cardClass = 'landing-page-groups__card';
+
+                            $cardClasses  = $cardClass;
+                            $cardClasses .= ($card['color']) ? ' ' . $cardClass . '--color-' . $card['color'] : '';
+                            $cardClasses .= ($cardHasImage)  ? ' ' . $cardClass . '--has-image'               : '';
+
+                            ?>
+                            <div class="<?= $cardClasses ?>">
+                                <?php if($cardHasImage): ?>
                                     <div class="landing-page-groups__card-image-container">
                                         <div class="landing-page-groups__card-image-ratio">
-                                            <?php echo wp_get_attachment_image( $card['image']['id'], 'header-portrait-home',false, array( "class" => "landing-page-groups__card-image" ) ); ?>
+                                            <?php echo wp_get_attachment_image(
+                                                $card['image']['id'],
+                                                'header-portrait-home',
+                                                false,
+                                                array( "class" => "landing-page-groups__card-image" ) ); ?>
                                         </div>
                                     </div>
                                 <?php endif; ?>
