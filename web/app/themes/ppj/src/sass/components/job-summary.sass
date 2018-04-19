@@ -1,5 +1,7 @@
 .job-summary
   $verticalPadding: $common-spacing / 2
+  $salaryWidth: 8.5rem
+
   background-color: inherit
   font-size: $font-size-small
   line-height: 1.2
@@ -42,7 +44,7 @@
     right: 0
     text-align: right
     top: 0
-    width: 8.5rem
+    width: $salaryWidth
 
   &__link
     bottom: .7rem
@@ -53,6 +55,10 @@
 
   &__prison-name
     font-weight: $font-weight-bold
+    margin-right: $salaryWidth
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
   &__prison-name > a
     text-decoration: underline
