@@ -1,6 +1,9 @@
 //import Waypoint from 'waypoint';
 //Scrollpoints = require('scrollpoints');
 import scrollpoints from 'scrollpoints';
+import closestPolyfill from './polyfills/Element.closest';
+
+closestPolyfill();
 
 window.ppjNavTo = function(href, callback) {
   console.log('navTo');
@@ -20,13 +23,11 @@ window.ppj.closeNavMenu = function() {
   document.getElementsByClassName('header')[0].classList.remove('header--nav-menu-open');
 };
 
-window.ppj.toggleAccordion = function() {
-  const event = event || window.event;
+window.ppj.toggleAccordion = function(event) {
   event.preventDefault();
   event.stopPropagation();
-  const triggerElement = event.target || event.srcElement;
   const className = 'accordion__list-element--open';
-  const el = triggerElement.closest('.accordion__list-element');
+  const el = event.target.closest('.accordion__list-element');
   if (el.classList.contains(className)) {
     el.classList.remove(className);
   } else {
