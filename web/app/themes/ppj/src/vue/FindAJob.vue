@@ -86,81 +86,85 @@
            @click.stop.prevent=""
       ></div>
     </div>
-    <div class="find-a-job__jobs-available-container">
-      <div class="find-a-job__jobs-available"><span>{{searchResults.jobs.length }}</span> <span class="find-a-job__jobs-available-title"></span> jobs available:</div>
-    </div>
-    <div class="find-a-job__view-list-container">
 
-      <ul class="find-a-job__view-list">
-
-        <li class="find-a-job__view-list-element"
-            :data-group-id="job.jobLocationGroupId"
-            v-for="(job, index) in visibleSearchResults"
-            :key="index"
-            v-on:click="handleVacancyClick(job.jobLocationGroupId)">
-          <job-summary :distance="job.distance"
-                       :distance-time="job.distanceTime"
-                       :position="job.role"
-                       :prison-city="job.prison_location.town"
-                       :prison-name="job.prison_name"
-                       :prison-page-link="job.url"
-                       :salary="job.salary"
-                       :selected="job.jobLocationGroupId == searchResults.selectedJobLocationGroupId"
-                       :title="job.title"
-                       :url="job.url"
-          >
-          </job-summary>
-        </li>
-        <li v-if="jobListMessage">
-          <div class="find-a-job__job-list-message">
-            <a :href="jobListMessageUrl">{{ jobListMessage }}</a>
-          </div>
-        </li>
-      </ul>
-      <div class="find-a-job__pagination"
-           v-if="deviceIsMobile && (numberOfResultPages > 1)">
-        <a class="find-a-job__pagination-skip-link"
-           :class="{'find-a-job__pagination-skip-link--enabled': (backwardEnabled == true)}"
-           @click.stop.prevent="showFirstPage">
-          first</a>
-        <button class="find-a-job__pagination-direction"
-                :class="{'find-a-job__pagination-direction--enabled': (backwardEnabled == true)}"
-                @click.stop.prevent="showPreviousPage">
-          <svg x="0px" y="0px"
-               viewBox="0 0 32.9 32.9"
-               xml:space="preserve"
-          >
-              <path class="st0" d="M21.2,11.7v0.9c0,0.2-0.1,0.3-0.2,0.3l-7.5,3.4c-0.1,0-0.1,0.1,0,0.1l7.5,3.4c0.1,0.1,0.2,0.2,0.2,0.3v0.9
-                c0,0.2-0.1,0.3-0.3,0.2l-8.9-4.1c-0.1-0.1-0.2-0.2-0.2-0.4V16c0-0.2,0.1-0.3,0.2-0.4l8.9-4.1C21.1,11.4,21.2,11.5,21.2,11.7z"/>
-            </svg>
-        </button>
-        <div class="find-a-job__pagination-page-numbers-container">
-          <div class="find-a-job__pagination-current-page-number">
-            {{searchResults.listView.activePage + 1}}
-          </div>
-          <div class="find-a-job__pagination-of">of</div>
-          <div class="find-a-job__pagination-total-pages">
-            {{numberOfResultPages}}
-          </div>
-        </div>
-        <button class="find-a-job__pagination-direction"
-                :class="{'find-a-job__pagination-direction--enabled': (forwardEnabled == true)}"
-                @click.stop.prevent="showNextPage">
-          <svg x="0px"
-               y="0px"
-               viewBox="0 0 32.9 32.9"
-          >
-                <path class="st0" d="M11.7,21.2v-0.9c0-0.2,0.1-0.3,0.2-0.3l7.5-3.4c0.1,0,0.1-0.1,0-0.1L11.9,13c-0.1-0.1-0.2-0.2-0.2-0.3v-0.9
-                  c0-0.2,0.1-0.3,0.3-0.2l8.9,4.1c0.1,0.1,0.2,0.2,0.2,0.4v0.9c0,0.2-0.1,0.3-0.2,0.4l-8.9,4.1C11.9,21.5,11.7,21.4,11.7,21.2z"/>
-
-          </svg>
-        </button>
-        <a class="find-a-job__pagination-skip-link"
-           :class="{'find-a-job__pagination-skip-link--enabled': (forwardEnabled == true)}"
-           @click.stop.prevent="showLastPage"
-        >last</a>
+    <div class="find-a-job__jobs">
+      <div class="find-a-job__jobs-available-container">
+        <div class="find-a-job__jobs-available">{{ jobsAvailable }}</div>
       </div>
 
+      <div class="find-a-job__view-list-container">
+
+        <ul class="find-a-job__view-list">
+
+          <li class="find-a-job__view-list-element"
+              :data-group-id="job.jobLocationGroupId"
+              v-for="(job, index) in visibleSearchResults"
+              :key="index"
+              v-on:click="handleVacancyClick(job.jobLocationGroupId)">
+            <job-summary :distance="job.distance"
+                         :distance-time="job.distanceTime"
+                         :position="job.role"
+                         :prison-city="job.prison_location.town"
+                         :prison-name="job.prison_name"
+                         :prison-page-link="job.url"
+                         :salary="job.salary"
+                         :selected="job.jobLocationGroupId == searchResults.selectedJobLocationGroupId"
+                         :title="job.title"
+                         :url="job.url"
+            >
+            </job-summary>
+          </li>
+          <li v-if="jobListMessage">
+            <div class="find-a-job__job-list-message">
+              <a :href="jobListMessageUrl">{{ jobListMessage }}</a>
+            </div>
+          </li>
+        </ul>
+        <div class="find-a-job__pagination"
+             v-if="deviceIsMobile && (numberOfResultPages > 1)">
+          <a class="find-a-job__pagination-skip-link"
+             :class="{'find-a-job__pagination-skip-link--enabled': (backwardEnabled == true)}"
+             @click.stop.prevent="showFirstPage">
+            first</a>
+          <button class="find-a-job__pagination-direction"
+                  :class="{'find-a-job__pagination-direction--enabled': (backwardEnabled == true)}"
+                  @click.stop.prevent="showPreviousPage">
+            <svg x="0px" y="0px"
+                 viewBox="0 0 32.9 32.9"
+                 xml:space="preserve"
+            >
+                <path class="st0" d="M21.2,11.7v0.9c0,0.2-0.1,0.3-0.2,0.3l-7.5,3.4c-0.1,0-0.1,0.1,0,0.1l7.5,3.4c0.1,0.1,0.2,0.2,0.2,0.3v0.9
+                  c0,0.2-0.1,0.3-0.3,0.2l-8.9-4.1c-0.1-0.1-0.2-0.2-0.2-0.4V16c0-0.2,0.1-0.3,0.2-0.4l8.9-4.1C21.1,11.4,21.2,11.5,21.2,11.7z"/>
+              </svg>
+          </button>
+          <div class="find-a-job__pagination-page-numbers-container">
+            <div class="find-a-job__pagination-current-page-number">
+              {{searchResults.listView.activePage + 1}}
+            </div>
+            <div class="find-a-job__pagination-of">of</div>
+            <div class="find-a-job__pagination-total-pages">
+              {{numberOfResultPages}}
+            </div>
+          </div>
+          <button class="find-a-job__pagination-direction"
+                  :class="{'find-a-job__pagination-direction--enabled': (forwardEnabled == true)}"
+                  @click.stop.prevent="showNextPage">
+            <svg x="0px"
+                 y="0px"
+                 viewBox="0 0 32.9 32.9"
+            >
+                  <path class="st0" d="M11.7,21.2v-0.9c0-0.2,0.1-0.3,0.2-0.3l7.5-3.4c0.1,0,0.1-0.1,0-0.1L11.9,13c-0.1-0.1-0.2-0.2-0.2-0.3v-0.9
+                    c0-0.2,0.1-0.3,0.3-0.2l8.9,4.1c0.1,0.1,0.2,0.2,0.2,0.4v0.9c0,0.2-0.1,0.3-0.2,0.4l-8.9,4.1C11.9,21.5,11.7,21.4,11.7,21.2z"/>
+
+            </svg>
+          </button>
+          <a class="find-a-job__pagination-skip-link"
+             :class="{'find-a-job__pagination-skip-link--enabled': (forwardEnabled == true)}"
+             @click.stop.prevent="showLastPage"
+          >last</a>
+        </div>
+
+      </div>
     </div>
   </div>
 </template>
@@ -186,6 +190,10 @@
         type: String
       },
       'jobListMessageUrl': {
+        default: '',
+        type: String
+      },
+      'jobTitle': {
         default: '',
         type: String
       }
@@ -692,6 +700,10 @@
           return results;
         }
 
+      },
+
+      jobsAvailable: function() {
+        return this.searchResults.jobs.length + ' ' + this.jobTitle + ' jobs available: ';
       }
     },
 

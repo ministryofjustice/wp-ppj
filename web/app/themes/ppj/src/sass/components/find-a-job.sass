@@ -12,6 +12,7 @@
   $s: &
   $border: .1rem solid $color-light
   $map-shadow: 0px 4px 16px 0px $color-medium-transparent
+  $jobs-available-height: 7rem
 
   background: $color-white
   padding: $common-spacing
@@ -21,9 +22,6 @@
     $height1: 200px
     $height2: 52px
 
-    display: grid
-    grid-template-columns: 40% 60%
-    grid-template-rows: $height1 auto calc(100% - #{$height1} - #{$height2})
     height: 100%
     padding: 0
     position: absolute
@@ -41,8 +39,11 @@
 
   &__header
     @include bp('portrait')
-      grid-rows: 1/2
       padding: $common-spacing
+      position: absolute
+      left: 0
+      top: 0
+      width: 40%
 
   &__title
     @extend .common-header
@@ -169,22 +170,20 @@
     z-index: 2
 
     @include bp('portrait')
+      height: $jobs-available-height
       margin: 0
       padding: 0 $common-spacing
 
+
   &__jobs-available
+    align-items: center
     border-bottom: $border
     border-top: $border
+    display: flex
     font-weight: $font-weight-bold
+    height: 100%
     padding: $common-spacing
     text-align: left
-
-  &__jobs-available-title
-    .youth-custody &:before
-      content: 'youth custody prison officer'
-
-    .prison-officer &:before
-      content: 'prison officer'
 
   &__results
     $sr: &
@@ -230,8 +229,11 @@
     position: relative
 
     @include bp('portrait')
-      grid-column: 2/3
-      grid-row: 1/4
+      bottom: 0
+      position: absolute
+      right: 0
+      top: 0
+      width: 60%
 
     @include bp('landscape')
 
@@ -287,17 +289,28 @@
       @include bp('portrait')
         margin-top: $common-spacing
 
+  &__jobs
+    @include bp('portrait')
+      bottom: 0
+      left: 0
+      position: absolute
+      top: 20rem
+      width: 40%
+
   &__view-list-container
     @include bp('portrait')
-      grid-column: 1/2
-      grid-row: 3/4
-      position: relative
+      bottom: 0
+      left: 0
+      position: absolute
+      right: 0
+      top: $jobs-available-height
 
     @include bp('landscape')
 
   // FADING:
   // https://codepen.io/anon/pen/opBRLp
   &__view-list
+
     & > li
       border-top: $border
       background-color: $color-white

@@ -12,6 +12,7 @@ include 'page-header.php';
             job-feed-url="<?= get_field('job_feed_url')?>"
             job-list-message="<?= get_field('job_list_message') ?>"
             job-list-message-url="<?= get_field('job_list_message_url') ?>"
+            job-title="<?= get_field('job_title') ?>"
     ></find-a-job>
 </div>
 
