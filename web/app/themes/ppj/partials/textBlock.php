@@ -109,11 +109,14 @@ if (isset($td['link']['title'])) {
                             <?php foreach ($td['accordion'] as $el) : ?>
                                 <li class="accordion__list-element">
                                     <div class="accordion__list-element-header" onclick="ppj.toggleAccordion(event)">
-                                        <h4 class="accordion__list-element-title"><?= $el['title'] ?><span class="accordion__list-element-subtitle"><?= $el['subtitle'] ?></span></h4>
+                                        <h4 class="accordion__list-element-title">
+                                            <?= $el['title'] ?>
+                                            <?php if (!empty($el['subtitle'])): ?>
+                                                <span class="accordion__list-element-subtitle"><?= $el['subtitle'] ?></span>
+                                            <?php endif; ?>
+                                        </h4>
                                         <div class="accordion__list-element-button-container">
-                                            <button class="accordion__list-element-button"
-                                                    onclick="ppj.toggleAccordion()"
-                                            >
+                                            <button class="accordion__list-element-button">
                                                 <div class="accordion__list-element-button-bar accordion__list-element-button-bar--horizontal"></div>
                                                 <div class="accordion__list-element-button-bar accordion__list-element-button-bar--vertical"></div>
                                             </button>

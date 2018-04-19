@@ -26,14 +26,22 @@ window.ppj.closeNavMenu = function() {
 window.ppj.toggleAccordion = function(event) {
   event.preventDefault();
   event.stopPropagation();
+
+  const listElement = event.target.closest('.accordion__list-element');
+  const title = listElement.querySelector('.accordion__list-element-title')
+    .textContent.replace(/\s+/g, ' ').trim(); // Squash multiple spaces & trim
   const className = 'accordion__list-element--open';
-  const el = event.target.closest('.accordion__list-element');
-  if (el.classList.contains(className)) {
-    el.classList.remove(className);
+
+  var action;
+  if (listElement.classList.contains(className)) {
+    listElement.classList.remove(className);
+    action = 'close';
   } else {
-    el.classList.add(className);
-    ga('send', 'event', 'Accordian', this.title, (this.open) ? 'open' : 'close', 7);
+    listElement.classList.add(className);
+    action = 'open';
   }
+
+  ga('send', 'event', 'Accordian', title, action);
 };
 
 // _wq needs to be initialized so that Wistia's Video API can be used
