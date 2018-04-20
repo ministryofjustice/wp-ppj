@@ -356,3 +356,8 @@ function getLogoTargetUrl() {
     }
 
 }
+
+function renderSurveyMonkeySnippet() {
+    echo partial([], 'surveyMonkeySnippet');
+}
+add_action('wp_footer', __NAMESPACE__ . '\\renderSurveyMonkeySnippet');
