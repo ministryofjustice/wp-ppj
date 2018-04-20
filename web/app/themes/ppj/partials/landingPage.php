@@ -14,6 +14,7 @@ $td = $ppj_template_data;
                     </div>
 
                     <?php $numberOfCardsInRow = sizeof($group['cards']); ?>
+
                     <div class="landing-page-groups__card-row">
                         <?php foreach($group['cards'] as $card):
                             $cardHasImage = isset($card['image']['url']);
@@ -23,16 +24,23 @@ $td = $ppj_template_data;
                             $cardClasses .= ($card['color']) ? ' ' . $cardClass . '--color-' . $card['color'] : '';
                             $cardClasses .= ($cardHasImage)  ? ' ' . $cardClass . '--has-image'               : '';
 
+                            $cardLinkUrl = (isset($card['link']['url'])) ? $card['link']['url'] : '';
                             ?>
                             <div class="<?= $cardClasses ?>">
                                 <?php if($cardHasImage): ?>
                                     <div class="landing-page-groups__card-image-container">
-                                        <div class="landing-page-groups__card-image-ratio">
-                                            <?php echo wp_get_attachment_image(
-                                                $card['image']['id'],
-                                                'header-portrait-home',
-                                                false,
-                                                array( "class" => "landing-page-groups__card-image" ) ); ?>
+                                        <div class="landing-page-groups__card-image-ratio-container">
+                                            <div class="landing-page-groups__card-image-ratio">
+
+                                                <a href="<?= $cardLinkUrl ?>">
+
+                                                    <?php echo wp_get_attachment_image(
+                                                        $card['image']['id'],
+                                                        'header-portrait-home',
+                                                        false,
+                                                        array( "class" => "landing-page-groups__card-image" ) ); ?>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 <?php endif; ?>
@@ -41,9 +49,9 @@ $td = $ppj_template_data;
 
                                 <p class="landing-page-groups__card-content"><?= $card['content'] ?></p>
 
-                                <?php if (isset($card['link']['url'])): ?>
+                                <?php if ($cardLinkUrl): ?>
                                     <a class="landing-page-groups__card-cta-link"
-                                       href="<?= $card['link']['url'] ?>"><?= $card['link']['title'] ?></a>
+                                       href="<?= $cardLinkUrl ?>"><?= $card['link']['title'] ?></a>
                                 <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
