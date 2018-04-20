@@ -47,7 +47,7 @@ $td = $ppj_template_data;
 
                                 <h4 class="landing-page-groups__card-title"><?= $card['title'] ?></h4>
 
-                                <p class="landing-page-groups__card-content"><?= $card['content'] ?></p>
+                                <div class="landing-page-groups__card-content"><?= $card['content'] ?></div>
 
                                 <?php if ($cardLinkUrl): ?>
                                     <a class="landing-page-groups__card-cta-link"
