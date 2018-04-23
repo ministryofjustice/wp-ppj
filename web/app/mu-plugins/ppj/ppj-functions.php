@@ -361,3 +361,8 @@ function renderSurveyMonkeySnippet() {
     echo partial([], 'surveyMonkeySnippet');
 }
 add_action('wp_footer', __NAMESPACE__ . '\\renderSurveyMonkeySnippet');
+
+/**
+ * Disable WordPress' visual editor until we know it's safe to use
+ */
+add_filter('user_can_richedit', '__return_false');
