@@ -1,6 +1,6 @@
 .underlined-link
   &:after
-    border-bottom-color: $color-white
+    border-bottom-color: $color-main
     border-bottom-style: solid
     border-bottom-width: .3rem
     bottom: -.4rem
@@ -42,27 +42,88 @@
     top: 0
     width: 100%
 
-  &__site-header
-    background: linear-gradient(to bottom, $color-transparency-dark-start, $color-transparent)
+  &__nav
     box-sizing: border-box
     z-index: 1
 
-    &-content
-      @extend .l-full
-      display: flex
-      justify-content: space-between
-      margin-bottom: 0
-      margin-top: 0
-      opacity: 1
-      padding: $common-spacing
+  &__site-wide-nav
+    background: $color-dark
 
-      @include bp('portrait')
-        align-items: center
+    @include bp('landscape')
+      border-bottom: .2rem solid $color-white
 
-      @include bp('landscape')
+    &-menu
+
+      &-list
+        display: flex
         margin: 0 auto
-        max-width: 128.4rem
-        padding: $common-spacing * 2
+        max-width: 128rem
+
+        @include bp('landscape')
+          padding: 0 $common-spacing * 2
+
+        &-element
+          $le: &
+          display: none
+          width: 100%
+
+          @include bp('landscape')
+            display: block
+            flex-grow: 1
+            width: initial
+
+          &-link
+            display: block
+            padding: $common-spacing
+            text-align: center
+
+          &-text
+            color: $color-light
+            font-weight: $font-weight-bold
+            text-transform: uppercase
+            transition: all $main-transition-duration
+
+            &:hover
+              color: $color-white
+
+          &--selected
+            align-items: center
+            background-color: $color-main
+            display: flex
+            justify-content: flex-end
+            padding: 0 $common-spacing
+
+            @include bp('landscape')
+              display: block
+
+            #{$le}-text
+              color: $color-dark
+
+  &__leg-nav
+    @extend .l-full
+    display: flex
+    justify-content: space-between
+    margin-bottom: 0
+    margin-top: 0
+    opacity: 1
+    padding: $common-spacing
+
+    @include bp('portrait')
+      align-items: center
+
+    .leg &
+      left: 0
+      position: absolute
+      right: 0
+      z-index: 3
+
+    .page-template-find-a-job &
+      position: relative
+
+    @include bp('landscape')
+      margin: 0 auto
+      max-width: 128.4rem
+      padding: $common-spacing * 2
 
     &-title // TODO change after merge with de-vue branch
       @extend .common-header
@@ -127,6 +188,17 @@
     right: 0
     top: 0
 
+    &:before
+      background: linear-gradient(to bottom, $color-transparency-dark-start, $color-transparent)
+      display: block
+      content: ''
+      height: 10rem
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      z-index: 2
+
     &:after
       background: linear-gradient(60deg, $color-transparency-dark-end 10%, $color-transparent 50%)
       display: block
@@ -188,7 +260,7 @@
     cursor: pointer
     font-weight: $font-weight-bold
     height: 3.6rem
-    margin-left: auto
+    line-height: 2.1rem
     padding: .3em .7em .3em
     pointer-events: auto
     text-align: center
@@ -196,6 +268,8 @@
 
     .landing-page &
       background-color: $color-transparent
+      border-color: $color-dark
+      color: $color-dark
 
     @include bp('portrait')
       width: 11.3rem
@@ -212,7 +286,7 @@
       &:first-child
         margin-top: 0
 
-  &__nav-menu
+  &__nav-leg-menu
     background: $color-dark-transparent
     color: $color-white
     display: none
@@ -223,33 +297,7 @@
       margin-left: auto
       width: 86%
 
-  &__nav-menu-close-button
-    border: .2rem solid $color-white
-    border-radius: 50%
-    display: flex
-    height: $common-spacing * 2.2
-    justify-content: center
-    align-items: center
-    position: absolute
-    right: $common-spacing
-    top: $common-spacing
-    width: $common-spacing * 2.2
-
-    @include bp('landscape')
-      display: none
-
-    &:before
-      content: ''
-      @include background-img('svg/close.svg')
-      background-color: $color-transparent
-      background-repeat: no-repeat
-      background-position: center center
-      background-size: contain
-      width: $common-spacing * 0.875
-      height: $common-spacing * 0.875
-      display: inline-block
-
-  &__nav-menu-list
+  &__nav-leg-menu-list
     margin-top: 8rem
 
     @include bp('landscape')
@@ -258,13 +306,14 @@
       margin-top: 0
       padding-bottom: $common-spacing * 2
 
-  &__nav-menu-list-element
+  &__nav-leg-menu-list-element
     $nmle: &
     font-size: 1.8rem
     font-weight: $font-weight-bold
     padding: 0 $common-spacing
 
     &--selected
+
       #{$nmle}-text:after
         opacity: 1
 
@@ -364,7 +413,7 @@
       position: relative
 
   &__text
-    @include u-top-border('large', 'light')
+    @include u-top-border('large', 'color-main')
     color: $color-white
     font-size: 2.6rem
     line-height: 3rem
@@ -402,23 +451,6 @@
       font-size: 5.4rem
       line-height: 6.6rem
 
-  &--nav-menu-open
-    .header
-      &__nav-menu
-        display: block
-        position: fixed
-        top: 0
-        bottom: 0
-        left: 0
-        right: 0
-        z-index: 10
-
-        .admin-bar &
-          top: 4.6rem
-
-          @include bp('portrait')
-            top: 3.2rem
-
   &--style-dark
     height: auto
     border: none
@@ -429,7 +461,7 @@
 
     .header
 
-      &__site-header
+      &__nav
         background: inherit
 
       &__img-ratio
@@ -438,3 +470,4 @@
 
       &__overlay
         position: relative
+

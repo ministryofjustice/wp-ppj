@@ -2,8 +2,6 @@
 
 get_header();
 
-global $post;
-
 $header_text           = get_field( 'header_text' );
 $header_subtext        = get_field( 'header_subtext' );
 $headerImageData       = get_field( 'header_image' );
@@ -62,5 +60,5 @@ $headerClass .= ($headerStyle == 'dark') ?  'header--style-dark' : '';
                     </div>
                 </div>
             <?php endif; ?>
-
         </div>
+        <?php include 'partials/mobileNavigation.php'; ?>

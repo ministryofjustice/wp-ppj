@@ -326,6 +326,16 @@ function getLegNameFromPath()
 }
 
 /**
+ * Simple function to determine if the currently viewed page
+ * is a leg specific page
+ *
+ * @return bool
+ */
+function onLeg() {
+    return (getLegNameFromPath() !== 'landing-page');
+}
+
+/**
  * Determines whether the current path is for a leg home page
  *
  * eg. if the current relative path is /prison-officer/
@@ -333,16 +343,16 @@ function getLegNameFromPath()
  *
  * @return bool
  */
-function isLegHome() {
+function onLegHome() {
     $pathArray = getCleanRelativePathParts();
 
     return ((sizeof($pathArray) == 1) && isLeg($pathArray[0]));
 }
 
 /**
- * @return string the logo target url specific to that leg
+ * @return string the relative path for the current leg home page
  */
-function getLogoTargetUrl() {
+function getLegHomeRelativePath() {
 
     switch(getLegNameFromPath()) {
         case 'landing-page':
@@ -366,3 +376,70 @@ add_action('wp_footer', __NAMESPACE__ . '\\renderSurveyMonkeySnippet');
  * Disable WordPress' visual editor until we know it's safe to use
  */
 add_filter('user_can_richedit', '__return_false');
+
+/**
+ * function to determine if the supplied url
+ * links to an internal destination or not
+ *
+ * @param $url
+ *
+ * @return bool
+ */
+function isInternalLink($url) {
+    $components = parse_url($url);
+    $siteComponents = parse_url(get_site_url(null, null, null));
+
+    return ($components['host'] == $siteComponents['host']);
+}
+
+/**
+ * Utility function to mark the menu item corresponding
+ * to the current post/page
+ *
+ * @param $menuItems array of WP Menu items
+ *
+ * @return array of modified WP Menu items
+ */
+function markCurrentlySelectedMenuItem($menuItems) {
+    global $post;
+
+    $modifiedMenuItems = [];
+    if ( isset($menuItems) && !!$menuItems ) {
+        foreach ( $menuItems as $item ) {
+            $same = ( isset( $post ) && $post->ID == $item->object_id );
+
+            $modifiedMenuItems[] = [
+                'title'    => $item->title,
+                'url'      => $item->url,
+                'selected' => $same
+            ];
+        }
+    }
+    return $modifiedMenuItems;
+}
+
+/**
+ * Utility function to mark the menu item corresponding
+ * to an ancestor of the currently viewed page/post
+ *
+ * @param $menuItems of WP Menu items
+ *
+ * @return array of modfied Menu items
+ */
+function markCurrentlySelectedAncestorMenuItem($menuItems) {
+    $modifiedMenuItems = [];
+    $homePath = getLegHomeRelativePath();
+
+    if ( isset($menuItems) && !!$menuItems ) {
+        foreach ( $menuItems as $item ) {
+            $selected = (isInternalLink($item->url) && wp_make_link_relative($item->url) == $homePath);
+
+            $modifiedMenuItems[] = [
+                'title'    => $item->title,
+                'url'      => $item->url,
+                'selected' => $selected
+            ];
+        }
+    }
+    return $modifiedMenuItems;
+}

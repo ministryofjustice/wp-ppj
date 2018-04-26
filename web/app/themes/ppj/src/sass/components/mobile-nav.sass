@@ -1,0 +1,136 @@
+$mobileNavWidth: 32rem
+
+@include bp('portrait')
+  $mobileNavWidth: 48rem
+
+.mobile-nav
+  $mn: &
+  $border: .1rem solid $color-light
+  background: $color-dark
+  border-left: $border
+  color: $color-white
+  height: 100vh
+  left: 100%
+  position: fixed
+  width: $mobileNavWidth
+
+  &:after
+    background-color: $color-dark
+    bottom: 0
+    content: ' '
+    left: -.1rem
+    opacity: 1
+    position: absolute
+    right: 0
+    top: 0
+    transition: opacity $main-transition-duration ease
+    z-index: 3
+
+  .nav-menu-is-open &:after
+    opacity: 0
+    transition: opacity $main-transition-duration ease 0s, z-index 0s $main-transition-duration
+    z-index: -1
+
+  @include bp('large')
+    display: none
+
+  &__current-leg-element
+    background-color: $color-main
+    display: flex
+    padding: 1.6rem 1.6rem
+    position: relative
+    text-transform: uppercase
+
+    &-text
+      color: $color-dark
+      font-size: 16px
+      font-weight: bold
+      text-transform: uppercase
+
+  &__close-button
+    margin-left: auto
+    position: absolute
+    right: .8rem
+    top: 1.6rem
+    z-index: 1
+
+    &:before
+      content: ''
+      @include background-img('svg/close.svg')
+      background-color: $color-transparent
+      background-repeat: no-repeat
+      background-position: center center
+      background-size: contain
+      width: $common-spacing * 0.875
+      height: $common-spacing * 0.875
+      display: inline-block
+
+  &__menu
+    $m: &
+
+  &__menu-list
+    $l: &
+    display: flex
+    flex-direction: column
+
+    &--site-wide
+      border-top: $border
+      margin-top: 5.1rem
+
+  &__menu-list-element
+    $e: &
+    border-bottom: $border
+    flex: 1
+    font-size: 1.8rem
+    font-weight: $font-weight-bold
+
+    &--selected
+      .mobile-nav__menu-list-element-link:before
+        background-color: $color-main
+        bottom: $common-spacing / 2
+        content: ''
+        display: block
+        left: $common-spacing
+        position: absolute
+        top: $common-spacing / 2
+        width: $common-spacing / 4
+
+  &__menu-list-element-link
+    display: block
+    position: relative
+
+  &__menu-list-element-text
+    color: $color-white
+    display: block
+    padding: $common-spacing $common-spacing * 2
+    text-transform: uppercase
+
+    .mobile-nav__menu-list--site-wide &
+      color: $color-light
+      padding-left: $common-spacing * 2
+
+    .mobile-nav__menu-list--site-wide .mobile-nav__menu-list-element:first-child &
+      padding-left: $common-spacing
+
+.page-container
+  transition: transform $main-transition-duration
+
+  &:after
+    background-color: $color-dark-transparent
+    bottom: 0
+    content: ''
+    left: 0
+    opacity: 0
+    position: absolute
+    right: 0
+    top: 0
+    transition: opacity $main-transition-duration ease 0s, z-index 0s $main-transition-duration
+    z-index: -1
+
+.nav-menu-is-open .page-container
+  transform: translate3D(-$mobileNavWidth,0,0)
+
+  &:after
+    opacity: 1
+    transition: opacity $main-transition-duration ease
+    z-index: 4
