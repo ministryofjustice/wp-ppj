@@ -19,6 +19,9 @@
       @include bp('portrait')
         border-top-color: $color-white
 
+    @if $style == "color-main"
+      border-top-color: $color-main
+
     @if $size == "small"
       border-top-width: .2rem
       height: .2rem
