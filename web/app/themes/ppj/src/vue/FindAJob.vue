@@ -218,27 +218,26 @@
             forwardEnabled: true,
             backwardEnabled: false
           },
-          jobs: [], //dummyJobs,
+          jobs: [],
           jobLocationGroups: {},
           orderedJobLocationGroups: [],
           searchTerm: this.storeGet('searchResults.searchTerm') || '',
           searchTermMarker: {},
+          searchTermLatLng: null,
           selectedJobLocationGroupId: '',
           visibleJobLocationGroup: null,
         },
 
         mapSrc: '',
 
-        defaultZoomLevel: 7,
-        defaultMobileZoomLevel: 6,
-        defaultZoomInAmount: 2,
-        initialZoomFlag: false,
+//        defaultZoomLevel: 7,
+//        defaultMobileZoomLevel: 6,
+//        defaultZoomInAmount: 2,
+//        initialZoomFlag: false,
         maxZoom: 25,
         minZoom: 5,
 
         mapOptions: {
-          zoom: 7,
-          center: new google.maps.LatLng(52.4832138, -1.5947146),
           disableDefaultUI: false,
           streetViewControl: false,
           fullscreenControl: false,
@@ -322,12 +321,12 @@
         this.zoomTo(this.map.getZoom() + amount);
       },
 
-      initialZoom() {
+      /*initialZoom() {
         if (!this.initialZoomFlag) {
           this.initialZoomFlag = true;
           this.zoomTo(this.defaultZoomLevel + this.defaultZoomInAmount);
         }
-      },
+      },*/
 
       focusOnJobLocationGroup(groupId) {
         this.updateSelectedJobLocationGroupId(groupId);
@@ -335,7 +334,7 @@
 
         const coords = this.convertGroupIdToCoords(groupId);
         this.recenterMap(coords.lat, coords.lng);
-        this.initialZoom();
+//        this.initialZoom();
       },
 
       recenterMap(lat, lng) {
@@ -484,16 +483,19 @@
       },
 
       createMap() {
-        if (this.isDeviceMobile()) {
-          this.mapOptions.zoom = this.defaultMobileZoomLevel;
-        } else {
-          this.mapOptions.zoom = this.defaultZoomLevel;
-        }
-
         this.map = new google.maps.Map(
-          document.getElementsByClassName('find-a-job__map')[0]
-          , this.mapOptions
+          document.getElementsByClassName('find-a-job__map')[0],
+          this.mapOptions
         );
+        this.zoomToEngland();
+      },
+
+      zoomToEngland() {
+        const england = new google.maps.LatLngBounds(
+          new google.maps.LatLng(49.8647411, -6.418545799999947),
+          new google.maps.LatLng(55.81165979999999, 1.7629159000000527)
+        );
+        this.map.fitBounds(england, 0);
       },
 
       deleteSearchTermMarker() {
@@ -516,13 +518,36 @@
 
       },
 
+      zoomToNearbyResults(lat, lng) {
+        var bounds = new google.maps.LatLngBounds();
+
+        // Add user's search location to the bounds
+        bounds.extend({lat: lat, lng: lng});
+
+        // Add closest tenth of search results to the bounds
+        const locations = this.searchResults.orderedJobLocationGroups;
+        const minVisible = Math.ceil(locations.length / 10);
+        const boundLocations = locations.slice(0, minVisible);
+        boundLocations.forEach((location) => {
+          let ll = {
+            lat: location[0].prison_location.lat,
+            lng: location[0].prison_location.lng
+          };
+          bounds.extend(ll);
+        });
+
+        // Fit the map to the bounds
+        this.map.fitBounds(bounds);
+      },
+
       handleNewSearchLocation(lat, lng) {
         this.searchResults.listView.activePage = 0;
         this.updateJobsDistance(lat, lng);
         this.updateSearchTermMarker(lat, lng);
-        this.recenterMap(lat, lng);
-        this.initialZoomflag = false;
-        this.initialZoom();
+//        this.recenterMap(lat, lng);
+//        this.initialZoomflag = false;
+//        this.initialZoom();
+        this.zoomToNearbyResults(lat, lng);
       },
 
       processGeocoderResults(results, status) {
