@@ -66,7 +66,7 @@ $headerImageData       = $td['imageData'];
 $headerImageMobileData = $td['mobileImageData'];
 
 if ( $headerImageData ) {
-    $headerStyle = (ppj\isLegHome()) ? 'home' : '';
+    $headerStyle = (ppj\onLegHome()) ? 'home' : '';
     $headerImageAttr = json_encode($headerImageData);
     $headerImageUrl = $headerImageData['url'];
     $srcset = createSrcset($headerStyle, $headerImageData, $headerImageMobileData);

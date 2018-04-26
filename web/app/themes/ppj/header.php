@@ -5,7 +5,8 @@
     $bodyClasses = [];
     if ($legName  = ppj\getLegNameFromPath()) $bodyClasses[] = $legName;
     if ($postSlug = $post->post_name)         $bodyClasses[] = 'post-slug--' . $postSlug;
-    if (ppj\isLegHome())                      $bodyClasses[] = 'leg-home';
+    if (ppj\onLegHome())                      $bodyClasses[] = 'leg-home';
+    if (ppj\onLeg())                          $bodyClasses[] = 'leg';
 ?>
 
 <!DOCTYPE html>

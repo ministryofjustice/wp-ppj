@@ -14,13 +14,15 @@ window.ppjNavTo = function(href, callback) {
 };
 
 window.ppj.openNavMenu = function() {
-  document.getElementsByTagName('body')[0].style.overflow = 'hidden';
-  document.getElementsByClassName('header')[0].classList.add('header--nav-menu-open');
+  const body = document.getElementsByTagName('body')[0];
+  body.style.overflow = 'hidden';
+  body.classList.add('nav-menu-is-open');
 };
 
 window.ppj.closeNavMenu = function() {
-  document.getElementsByTagName('body')[0].style.overflow = '';
-  document.getElementsByClassName('header')[0].classList.remove('header--nav-menu-open');
+  const body = document.getElementsByTagName('body')[0];
+  body.style.overflow = '';
+  body.classList.remove('nav-menu-is-open');
 };
 
 window.ppj.toggleAccordion = function(event) {
