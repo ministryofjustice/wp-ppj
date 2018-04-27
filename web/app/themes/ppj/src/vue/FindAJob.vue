@@ -305,9 +305,9 @@
       },
 
       zoomTo(level) {
-        if (level >= this.minZoom && level <= this.maxZoom) {
-          this.map.setZoom(level);
-        }
+        if (level < this.minZoom) level = this.minZoom;
+        if (level > this.maxZoom) level = this.maxZoom;
+        this.map.setZoom(level);
       },
 
       zoomBy(amount) {
