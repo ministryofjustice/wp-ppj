@@ -7,33 +7,31 @@
     <div class="find-a-job__header">
       <h2 class="find-a-job__title">{{ titleText }}</h2>
       <p class="find-a-job__prompt">Enter location (postcode, town or region)</p>
-      <div class="find-a-job__form">
+      <form class="find-a-job__form" @submit.prevent="search" @reset.prevent="resetSearch">
         <input type="text"
                class="find-a-job__input"
                :placeholder="placeHolderText"
-               editable="editable"
-               v-model="searchResults.searchTerm"
-               @click.stop.prevent=""
-               @keypress="handleSearchInputKeyPress"/>
+               v-model="searchTerm.input"
+               ref="searchInput" />
         <div class="find-a-job__button-clear-search-container">
           <button class="find-a-job__button-clear-search"
-                  :class="{'find-a-job__button-clear-search--enabled': searchResults.searchTerm}"
-                  @click.stop.prevent="handleClearSearchClick"
+                  type="reset"
+                  :class="{'find-a-job__button-clear-search--enabled': searchTerm.input}"
           >&#10005;</button>
         </div>
 
         <button class="find-a-job__button-search"
-                @click.stop.prevent="search"
-                :disabled="searchResults.searchTerm == ''">
+                type="submit"
+                :disabled="searchTerm.input == ''">
           <div class="find-a-job__button-search-circle"></div>
           <div class="find-a-job__button-search-rectangle"></div>
         </button>
-      </div>
+      </form>
 
       <div class="find-a-job__geolocation"
            :class="{
                 'find-a-job__geolocation--is-busy': (geoLocationIsBusy == true),
-                'find-a-job__geolocation--is-active': geoLocationIsActive
+                'find-a-job__geolocation--is-active': searchTerm.isGeolocationSearch
             }">
         <a class="find-a-job__geolocation-button"
            v-if="geoLocationIsAvailable"
@@ -221,11 +219,16 @@
           jobs: [],
           jobLocationGroups: {},
           orderedJobLocationGroups: [],
-          searchTerm: this.storeGet('searchResults.searchTerm') || '',
-          searchTermMarker: {},
-          searchTermLatLng: null,
           selectedJobLocationGroupId: '',
           visibleJobLocationGroup: null,
+        },
+
+        searchTerm: {
+          input: this.storeGet('searchTerm.query') || '',
+          query: null,
+          latlng: null,
+          marker: null,
+          isGeolocation: false
         },
 
         mapSrc: '',
@@ -341,12 +344,6 @@
 
       handleVacancyClick(groupId) {
         this.focusOnJobLocationGroup(groupId);
-      },
-
-      handleGlobalSearchClick() {
-        this.updateSelectedJobLocationGroupId('');
-
-        CustomMarker.deselectMarker();
       },
 
       updateMapWithJobLocationGroupMarkers(jobLocationGroups) {
@@ -483,24 +480,20 @@
         this.map.fitBounds(england, 0);
       },
 
-      deleteSearchTermMarker() {
-        const element = document.getElementsByClassName('find-a-job__map-marker--search-term')[0];
-        if (typeof element !== 'undefined') {
-          element.parentNode.removeChild(element);
+      removeSearchTermMarker() {
+        if (this.searchTerm.marker) {
+          this.searchTerm.marker.remove();
         }
       },
 
       updateSearchTermMarker(lat, lng) {
-        this.geoLocationIsActive = false;
+        this.removeSearchTermMarker();
 
-        this.deleteSearchTermMarker();
-
-        this.searchResults.searchTermMarker.markerDiv = new CustomMarker(
+        this.searchTerm.marker = new CustomMarker(
           new google.maps.LatLng(lat, lng),
           this.map,
           {class: 'find-a-job__map-marker--search-term'}
         );
-
       },
 
       zoomToNearbyResults(lat, lng) {
@@ -525,23 +518,30 @@
         this.map.fitBounds(bounds);
       },
 
-      handleNewSearchLocation(lat, lng) {
+      handleNewSearchLocation(latlng) {
         this.searchResults.listView.activePage = 0;
-        this.updateJobsDistance(lat, lng);
-        this.updateSearchTermMarker(lat, lng);
-        this.zoomToNearbyResults(lat, lng);
+
+        if (latlng == null) {
+          this.removeSearchTermMarker();
+          this.zoomToEngland();
+        }
+        else {
+          this.updateSearchTermMarker(latlng.lat, latlng.lng);
+          this.updateJobsDistance(latlng.lat, latlng.lng);
+          this.zoomToNearbyResults(latlng.lat, latlng.lng);
+        }
       },
 
       processGeocoderResults(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          this.handleNewSearchLocation(
-            results[0].geometry.location.lat(),
-            results[0].geometry.location.lng()
-          );
+          this.searchTerm.latlng = {
+            lat: results[0].geometry.location.lat(),
+            lng: results[0].geometry.location.lng()
+          };
         } else {
           let msg = '';
           if (status === 'ZERO_RESULTS') {
-            this.alert('No results found for ' + this.searchResults.searchTerm, 'Try searching again');
+            this.alert('No results found for ' + this.searchTerm.query, 'Try searching again');
           } else {
             // TODO need proper content for this:
             msg = 'Problem communicating with Google Geocoder API, ' + status ;
@@ -552,35 +552,40 @@
         }
       },
 
-      handleSearchInputKeyPress(e) {
-        if(e.keyCode === 13){
-          e.preventDefault();
-          this.search();
-        }
-      },
+      resetSearch() {
+        this.searchTerm.input = '';
+        this.searchTerm.query = '';
+        this.searchTerm.latlng = null;
+        this.searchTerm.isGeolocationSearch = false;
+        this.$refs.searchInput.focus();
 
-      handleClearSearchClick() {
-        this.searchResults.searchTerm = '';
-        this.deleteSearchTermMarker();
-        document.getElementsByClassName('find-a-job__input')[0].focus();
+        this.removeSearchTermMarker();
       },
 
       search() {
-        if (this.searchResults.searchTerm) {
+        this.searchTerm.query = this.searchTerm.input;
+        this.searchTerm.isGeolocationSearch = false;
+
+        if (this.searchTerm.query) {
           new google.maps.Geocoder().geocode(
-            {'address': 'UK ' + this.searchResults.searchTerm},
+            {'address': this.searchTerm.query + ', UK'},
             this.processGeocoderResults
           );
-          document.getElementsByClassName('find-a-job__input')[0].blur();
+          this.$refs.searchInput.blur();
         }
       },
 
       useGeoLocation() {
-        this.searchResults.searchTerm = '';
         this.geoLocationIsBusy = true;
         navigator.geolocation.getCurrentPosition(
           position => {
-            this.handleNewSearchLocation(position.coords.latitude, position.coords.longitude);
+            this.searchTerm.latlng = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            this.searchTerm.query = '';
+            this.searchTerm.input = '';
+            this.searchTerm.isGeolocationSearch = true;
             this.geoLocationIsBusy = false;
             this.geoLocationIsActive = true;
           },
@@ -620,15 +625,7 @@
       },
 
       handleGotVacanciesData(response) {
-        const self = this;
-        self.searchResults.jobs = response.data;
-        //self.searchResults.jobs = dummyJobs;
-
-        if (self.searchResults.searchTerm) {
-          self.search();
-        } else {
-
-        }
+        this.searchResults.jobs = response.data;
       },
 
       updateIsDeviceMobile() {
@@ -648,17 +645,19 @@
       },
 
       restorePageData() {
-        if (this.searchResults.searchTerm) {
+        if (this.searchTerm.input) {
           this.search();
         }
-
       }
 
     },
 
     watch: {
-      'searchResults.searchTerm': function(val) {
-        this.storeSave('searchResults.searchTerm', val);
+      'searchTerm.query': function(val) {
+        this.storeSave('searchTerm.query', val);
+      },
+      'searchTerm.latlng': function(val) {
+        this.handleNewSearchLocation(val);
       }
     },
 
