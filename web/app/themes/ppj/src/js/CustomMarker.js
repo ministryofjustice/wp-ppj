@@ -100,11 +100,12 @@ CustomMarker.prototype.draw = function() {
 
 };
 
+CustomMarker.prototype.onRemove = function() {
+  this.div.parentNode.removeChild(this.div);
+};
+
 CustomMarker.prototype.remove = function() {
-    if (this.div) {
-        this.div.parentNode.removeChild(this.div);
-        this.div = null;
-    }
+  this.setMap(null);
 };
 
 CustomMarker.prototype.getPosition = function() {
