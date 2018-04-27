@@ -20,7 +20,6 @@ window.ppjNavTo = function(href, callback) {
 window.ppj.openNavMenu = function() {
   const body = document.getElementsByTagName('body')[0];
   body.classList.add('nav-menu-is-open');
-
 };
 
 window.ppj.closeNavMenu = function() {

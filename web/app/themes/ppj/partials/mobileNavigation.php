@@ -1,4 +1,5 @@
 <div class="mobile-nav">
+    <div class="mobile-nav__overlay"></div>
     <?php
     $legNavMenuItems = wp_get_nav_menu_items( ppj\getLegNameFromPath() );
     $modifiedLegNavMenuItems = ppj\markCurrentlySelectedMenuItem($legNavMenuItems);

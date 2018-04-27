@@ -16,10 +16,9 @@ $mobileNavWidthPortrait: 48rem
   @include bp('portrait')
     width: $mobileNavWidthPortrait
 
-  &:after
+  &__overlay
     background-color: $color-dark
     bottom: 0
-    content: ' '
     left: -.1rem
     opacity: 1
     position: absolute
@@ -32,7 +31,7 @@ $mobileNavWidthPortrait: 48rem
     height: 100vh
     overflow-y: auto
 
-    &:after
+    &__overlay
       opacity: 0
       transition: opacity $main-transition-duration ease 0s, z-index 0s $main-transition-duration
       z-index: -1
@@ -129,10 +128,11 @@ $mobileNavWidthPortrait: 48rem
 
 .page-container
 
-  &:after
+  &__overlay
     background-color: $color-dark-transparent
     bottom: 0
     content: ''
+    cursor: pointer
     left: 0
     opacity: 0
     position: absolute
@@ -145,7 +145,7 @@ $mobileNavWidthPortrait: 48rem
     height: 100vh
     overflow-y: hidden
 
-    &:after
+    &__overlay
       opacity: 1
       transition: opacity $main-transition-duration ease
       z-index: 4
