@@ -63,7 +63,7 @@
           padding: 0 $common-spacing * 2
 
         &-element
-          $le: &
+          $list-element: &
           display: none
           width: 100%
 
@@ -74,14 +74,20 @@
 
           &-link
             display: block
-            padding: $common-spacing
+            padding: $common-spacing $common-spacing / 2
             text-align: center
+
+            @include bp('landscape')
+              padding: $common-spacing
 
           &-text
             color: $color-light
             font-weight: $font-weight-bold
+            font-size: 1.6rem
             text-transform: uppercase
-            transition: all $main-transition-duration
+
+            @include bp('large')
+              font-size: 1.8rem
 
             &:hover
               color: $color-white
@@ -95,9 +101,17 @@
 
             @include bp('landscape')
               display: block
+              padding: 0 $common-spacing / 2
 
-            #{$le}-text
+            #{$list-element}-text
               color: $color-dark
+              font-size: 1.8rem
+
+              @include bp('landscape')
+                font-size: 1.6rem
+
+              @include bp('large')
+                font-size: 1.8rem
 
   &__leg-nav
     @extend .l-full
