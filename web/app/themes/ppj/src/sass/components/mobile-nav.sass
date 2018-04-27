@@ -7,9 +7,10 @@ $mobileNavWidthPortrait: 48rem
   background: $color-dark
   border-left: $border
   color: $color-white
-  height: 100vh
+  min-height: 100vh
   left: 100%
-  position: fixed
+  position: absolute
+  top: 0
   width: $mobileNavWidth
 
   @include bp('portrait')
@@ -27,10 +28,14 @@ $mobileNavWidthPortrait: 48rem
     transition: opacity $main-transition-duration ease
     z-index: 3
 
-  .nav-menu-is-open &:after
-    opacity: 0
-    transition: opacity $main-transition-duration ease 0s, z-index 0s $main-transition-duration
-    z-index: -1
+  .nav-menu-is-open &
+    height: 100vh
+    overflow-y: auto
+
+    &:after
+      opacity: 0
+      transition: opacity $main-transition-duration ease 0s, z-index 0s $main-transition-duration
+      z-index: -1
 
   @include bp('large')
     display: none
@@ -113,8 +118,16 @@ $mobileNavWidthPortrait: 48rem
     .mobile-nav__menu-list--site-wide .mobile-nav__menu-list-element:first-child &
       padding-left: $common-spacing
 
-.page-container
+#site-container
   transition: transform $main-transition-duration
+
+  .nav-menu-is-open &
+    transform: translate3D(-$mobileNavWidth,0,0)
+
+    @include bp('portrait')
+      transform: translate3D(-$mobileNavWidthPortrait,0,0)
+
+.page-container
 
   &:after
     background-color: $color-dark-transparent
@@ -128,13 +141,11 @@ $mobileNavWidthPortrait: 48rem
     transition: opacity $main-transition-duration ease 0s, z-index 0s $main-transition-duration
     z-index: -1
 
-.nav-menu-is-open .page-container
-  transform: translate3D(-$mobileNavWidth,0,0)
+  .nav-menu-is-open &
+    height: 100vh
+    overflow-y: hidden
 
-  @include bp('portrait')
-    transform: translate3D(-$mobileNavWidthPortrait,0,0)
-
-  &:after
-    opacity: 1
-    transition: opacity $main-transition-duration ease
-    z-index: 4
+    &:after
+      opacity: 1
+      transition: opacity $main-transition-duration ease
+      z-index: 4

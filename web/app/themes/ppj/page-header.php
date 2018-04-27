@@ -21,6 +21,7 @@ $headerClass = '';
 $headerClass .= ($headerStyle == 'dark') ?  'header--style-dark' : '';
 
 ?>
+
 <div id="site-container">
     <div class="page-container">
         <div class="header <?= $headerClass ?>">
@@ -61,4 +62,4 @@ $headerClass .= ($headerStyle == 'dark') ?  'header--style-dark' : '';
                 </div>
             <?php endif; ?>
         </div>
-        <?php include 'partials/mobileNavigation.php'; ?>
+
