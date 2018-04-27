@@ -19,13 +19,12 @@ window.ppjNavTo = function(href, callback) {
 
 window.ppj.openNavMenu = function() {
   const body = document.getElementsByTagName('body')[0];
-  body.style.overflow = 'hidden';
   body.classList.add('nav-menu-is-open');
+
 };
 
 window.ppj.closeNavMenu = function() {
   const body = document.getElementsByTagName('body')[0];
-  body.style.overflow = '';
   body.classList.remove('nav-menu-is-open');
 };
 
