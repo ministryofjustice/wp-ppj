@@ -230,12 +230,8 @@
 
         mapSrc: '',
 
-//        defaultZoomLevel: 7,
-//        defaultMobileZoomLevel: 6,
-//        defaultZoomInAmount: 2,
-//        initialZoomFlag: false,
-        maxZoom: 25,
-        minZoom: 5,
+        maxZoom: 18,
+        minZoom: 4,
 
         mapOptions: {
           disableDefaultUI: false,
@@ -243,10 +239,7 @@
           fullscreenControl: false,
           mapTypeControl: false,
           gestureHandling: 'greedy',
-          zoomControl: false,
-          zoomControlOptions: {
-            position: google.maps.ControlPosition.TOP_RIGHT
-          },
+          zoomControl: false
         },
 
         titleText: this.title,
@@ -321,20 +314,12 @@
         this.zoomTo(this.map.getZoom() + amount);
       },
 
-      /*initialZoom() {
-        if (!this.initialZoomFlag) {
-          this.initialZoomFlag = true;
-          this.zoomTo(this.defaultZoomLevel + this.defaultZoomInAmount);
-        }
-      },*/
-
       focusOnJobLocationGroup(groupId) {
         this.updateSelectedJobLocationGroupId(groupId);
         CustomMarker.changeSelectedMarkerByGroupId(groupId);
 
         const coords = this.convertGroupIdToCoords(groupId);
         this.recenterMap(coords.lat, coords.lng);
-//        this.initialZoom();
       },
 
       recenterMap(lat, lng) {
@@ -544,9 +529,6 @@
         this.searchResults.listView.activePage = 0;
         this.updateJobsDistance(lat, lng);
         this.updateSearchTermMarker(lat, lng);
-//        this.recenterMap(lat, lng);
-//        this.initialZoomflag = false;
-//        this.initialZoom();
         this.zoomToNearbyResults(lat, lng);
       },
 
@@ -752,25 +734,10 @@
       console.log('job list message URL: ' , this.jobListMessageURL);
 
       axios.get(this.vacanciesDataURL,  { responseType: 'json' })
-        .then(
-         /* response => {
-
-          //self.searchResults.jobs = response.data;
-          self.searchResults.jobs = dummyJobs;
-
-          if (self.searchResults.searchTerm) {
-            self.search();
-          } else {
-
-          }
-        }*/
-          self.handleGotVacanciesData
-        )
+        .then(self.handleGotVacanciesData)
         .catch(function (error) {
           console.log(error);
         });
-
-      //self.handleGotVacanciesData();
 
       this.restorePageData();
     }
