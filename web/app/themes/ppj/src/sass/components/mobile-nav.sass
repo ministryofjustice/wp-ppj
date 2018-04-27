@@ -1,7 +1,5 @@
 $mobileNavWidth: 32rem
-
-@include bp('portrait')
-  $mobileNavWidth: 48rem
+$mobileNavWidthPortrait: 48rem
 
 .mobile-nav
   $mn: &
@@ -13,6 +11,9 @@ $mobileNavWidth: 32rem
   left: 100%
   position: fixed
   width: $mobileNavWidth
+
+  @include bp('portrait')
+    width: $mobileNavWidthPortrait
 
   &:after
     background-color: $color-dark
@@ -129,6 +130,9 @@ $mobileNavWidth: 32rem
 
 .nav-menu-is-open .page-container
   transform: translate3D(-$mobileNavWidth,0,0)
+
+  @include bp('portrait')
+    transform: translate3D(-$mobileNavWidthPortrait,0,0)
 
   &:after
     opacity: 1
