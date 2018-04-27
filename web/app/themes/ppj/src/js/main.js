@@ -5,6 +5,10 @@ import closestPolyfill from './polyfills/Element.closest';
 
 closestPolyfill();
 
+window.ppj.getScreenWidth = function() {
+  return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+};
+
 window.ppjNavTo = function(href, callback) {
   console.log('navTo');
   if (typeof callback !== 'undefined') {
@@ -84,3 +88,17 @@ window.addEventListener('load', function() {
 
 
 }, false);
+
+/**
+ * function to close mobile nav menu if the screen
+ * is resized such that the desktop nav is now visible.
+ */
+window.addEventListener('resize', function() {
+  const screenWidth = window.ppj.getScreenWidth();
+
+  if (screenWidth >= 1024) {
+    window.ppj.closeNavMenu();
+  }
+
+  return true;
+});
