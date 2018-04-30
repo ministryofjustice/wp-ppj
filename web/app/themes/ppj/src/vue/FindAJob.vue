@@ -31,7 +31,7 @@
       <div class="find-a-job__geolocation"
            :class="{
                 'find-a-job__geolocation--is-busy': (geoLocationIsBusy == true),
-                'find-a-job__geolocation--is-active': searchTerm.isGeolocationSearch
+                'find-a-job__geolocation--is-active': searchTerm.isGeolocation
             }">
         <a class="find-a-job__geolocation-button"
            v-if="geoLocationIsAvailable"
@@ -225,10 +225,11 @@
 
         searchTerm: {
           input: this.storeGet('searchTerm.query') || '',
-          query: null,
+          query: '',
           latlng: null,
           marker: null,
-          isGeolocation: false
+          isGeolocation: false,
+          doneInitialZoom: false
         },
 
         mapSrc: '',
@@ -323,6 +324,15 @@
 
         const coords = this.convertGroupIdToCoords(groupId);
         this.recenterMap(coords.lat, coords.lng);
+
+        if (
+          !this.searchTerm.isGeolocation &&
+          !this.searchTerm.query &&
+          !this.searchTerm.doneInitialZoom
+        ) {
+          this.zoomBy(2);
+          this.searchTerm.doneInitialZoom = true;
+        }
       },
 
       recenterMap(lat, lng) {
@@ -520,6 +530,7 @@
 
       handleNewSearchLocation(latlng) {
         this.searchResults.listView.activePage = 0;
+        this.searchTerm.doneInitialZoom = false;
 
         if (latlng == null) {
           this.removeSearchTermMarker();
@@ -556,7 +567,7 @@
         this.searchTerm.input = '';
         this.searchTerm.query = '';
         this.searchTerm.latlng = null;
-        this.searchTerm.isGeolocationSearch = false;
+        this.searchTerm.isGeolocation = false;
         this.$refs.searchInput.focus();
 
         this.removeSearchTermMarker();
@@ -564,7 +575,7 @@
 
       search() {
         this.searchTerm.query = this.searchTerm.input;
-        this.searchTerm.isGeolocationSearch = false;
+        this.searchTerm.isGeolocation = false;
 
         if (this.searchTerm.query) {
           new google.maps.Geocoder().geocode(
@@ -585,7 +596,7 @@
             };
             this.searchTerm.query = '';
             this.searchTerm.input = '';
-            this.searchTerm.isGeolocationSearch = true;
+            this.searchTerm.isGeolocation = true;
             this.geoLocationIsBusy = false;
             this.geoLocationIsActive = true;
           },
