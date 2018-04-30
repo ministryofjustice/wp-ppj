@@ -646,9 +646,9 @@
                                         "id": ""
                                     },
                                     "choices": {
-                                        "\/img\/icons\/speech-bubbles.png": "Speech bubbles",
-                                        "\/img\/icons\/dumbbell.png": "Dumbbell",
-                                        "\/img\/icons\/eye.png": "Eye"
+                                        "\/img\/svg\/icons\/role_play.svg": "Role play",
+                                        "\/img\/svg\/icons\/training_icon.svg": "Fitness",
+                                        "\/img\/svg\/icons\/eyesight.svg": "Eyesight"
                                     },
                                     "default_value": [],
                                     "allow_null": 0,

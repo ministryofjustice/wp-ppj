@@ -148,7 +148,7 @@ if (isset($td['link']['title'])) {
 
                                 <?php if (isset($row['icon']) && $row['icon'] != 'none' ) : ?>
                                     <div class="text-block__icon-rows-icon">
-                                        <img src="<?= get_template_directory_uri() . '/dest' . $row['icon'] ?>" />
+                                        <?php include(get_template_directory() . '/dest' . $row['icon']) ?>
                                     </div>
                                 <?php endif; ?>
 
