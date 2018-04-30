@@ -9,6 +9,7 @@ mix.js('src/js/main.js'                , 'dest/js')
   .sass('src/sass/youth-custody.sass'  , 'dest/css/youth-custody.css')
   .sass('src/sass/error-page.sass'     , 'dest/css/error-page.css')
   .copy('src/img/*'                    , 'dest/img/')
+  .copy('src/img/icons/*'              , 'dest/img/icons/')
   .copy('src/img/svg/*'                , 'dest/img/svg/')
   .copy('src/img/svg/icons/*'          , 'dest/img/svg/icons/')
 ;
