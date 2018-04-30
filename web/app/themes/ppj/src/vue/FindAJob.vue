@@ -7,8 +7,8 @@
     <div class="find-a-job__header">
       <h2 class="find-a-job__title">{{ titleText }}</h2>
       <p class="find-a-job__prompt">Enter location (postcode, town or region)</p>
-      <form class="find-a-job__form" @submit.prevent="search" @reset.prevent="resetSearch">
-        <input type="text"
+      <form class="find-a-job__form" @submit.prevent="" @reset.prevent="resetSearch">
+        <input type="search"
                class="find-a-job__input"
                :placeholder="placeHolderText"
                v-model="searchTerm.input"
@@ -232,6 +232,8 @@
           doneInitialZoom: false
         },
 
+        autocomplete: null,
+
         mapSrc: '',
 
         maxZoom: 18,
@@ -251,6 +253,7 @@
         placeHolderText: 'e.g. SW1A 2LW, Birmingham or Essex',
 
         mounted: false,
+
       };
     },
 
@@ -480,6 +483,40 @@
           this.mapOptions
         );
         this.zoomToEngland();
+
+      },
+
+      initAutocomplete() {
+        this.autocomplete = new google.maps.places.Autocomplete(this.$refs.searchInput, {
+          componentRestrictions: {country: 'uk'}
+        });
+
+        // Bind the map's bounds (viewport) property to the autocomplete object,
+        // so that the autocomplete requests use the current map bounds for the
+        // bounds option in the request.
+        this.autocomplete.bindTo('bounds', this.map);
+
+        this.autocomplete.addListener('place_changed', this.autocompletePlaceChanged);
+      },
+
+      autocompletePlaceChanged() {
+        const place = this.autocomplete.getPlace();
+
+        if (!place.geometry) {
+          // User entered the name of a Place that was not suggested and
+          // pressed the Enter key, or the Place Details request failed.
+          // Revert to a regular geolocation search
+          this.searchTerm.input = place.name;
+          return this.search();
+        }
+
+        const placeName = place.formatted_address.replace(/, UK$/, '');
+        this.searchTerm.input = this.searchTerm.query = placeName;
+        this.searchTerm.isGeolocation = false;
+        this.searchTerm.latlng = {
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng()
+        };
       },
 
       zoomToEngland() {
@@ -736,6 +773,7 @@
 
       const self = this;
       this.createMap();
+      this.initAutocomplete();
       this.mounted = true;
 
       window.addEventListener('resize', this.handleScreenResize);
