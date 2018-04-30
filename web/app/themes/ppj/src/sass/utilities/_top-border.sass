@@ -2,20 +2,16 @@
   position: relative
 
   &:before
-    border-top-color: $color-grey-medium
+    border-top-color: $color-tertiary-light
     border-top-style: solid
-    border-top-width: .15em
+    border-top-width: .2em
     content: ''
     display: block
-    height: .2rem
     position: relative
     margin-bottom: .25em
     margin-left: inherit
     margin-right: inherit
-    width: 2.5em
-
-    @include bp('landscape')
-      width: 5em
+    width: 2em
 
     @if $style == "light"
       border-top-color: $color-white
@@ -31,6 +27,3 @@
 
   @if $size == "small"
     padding-top: .8rem
-
-
-
