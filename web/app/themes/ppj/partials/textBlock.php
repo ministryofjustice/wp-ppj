@@ -28,6 +28,8 @@ $isValidMultiTextBlock = ($isDoubleTextBlock || $isTripleTextBlock);
 
 $isValidAccordionBlock = ($td['type'] == 'accordion' && isset($td['accordion']) && is_array( $td['accordion']));
 
+$isValidIconRowsBlock = ($td['type'] == 'icon rows' && isset($td['icon_rows']) && is_array( $td['icon_rows']));
+
 // compute the 'style' BEM modifier
 if ($isValidMultiTextBlock) {
     $textBlockClasses .= ' ' . $textBlockClassName . '--multi';
@@ -66,6 +68,12 @@ if (isset($td['link']['title'])) {
                 <h2 class="text-block__title">
                     <?= $td['title'] ?>
                 </h2>
+            <?php endif; ?>
+
+            <?php if ($td['lead_paragraph']) : ?>
+                <p class="text-block__lead-paragraph">
+                    <?= $td['lead_paragraph'] ?>
+                </p>
             <?php endif; ?>
 
             <?php if ($isValidRegularTextBlock) { ?>
@@ -126,6 +134,43 @@ if (isset($td['link']['title'])) {
                                 </li>
                             <?php endforeach; ?>
                         </ol>
+                    </div>
+
+                </div>
+
+            <?php } elseif ($isValidIconRowsBlock) { ?>
+
+                <div class="text-block__content">
+                    <div class="text-block__icon-rows">
+                        <?php foreach ($td['icon_rows'] as $row) : ?>
+
+                            <div class="text-block__icon-rows-row">
+
+                                <?php if (isset($row['icon']) && $row['icon'] != 'none' ) : ?>
+                                    <div class="text-block__icon-rows-icon">
+                                        <img src="<?= get_template_directory_uri() . '/dest' . $row['icon'] ?>" />
+                                    </div>
+                                <?php endif; ?>
+
+                                <div class="text-block__icon-rows-content-container">
+
+                                    <?php if (isset($row['title']) && $row['title'] != '' ) : ?>
+                                        <div class="text-block__icon-rows-title">
+                                            <?= $row['title'] ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (isset($row['content']) && $row['content'] != '' ) : ?>
+                                        <div class="text-block__icon-rows-content">
+                                            <?= $row['content'] ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                </div>
+
+                            </div>
+
+                        <?php endforeach; ?>
                     </div>
                 </div>
 

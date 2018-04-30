@@ -219,7 +219,8 @@
                                 "regular": "regular",
                                 "double": "double",
                                 "triple": "triple",
-                                "accordion": "accordion"
+                                "accordion": "accordion",
+                                "icon rows": "icon rows"
                             },
                             "default_value": [
                                 "regular"
@@ -235,6 +236,25 @@
                             "key": "field_5a1c532a432cf",
                             "label": "Title",
                             "name": "title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5ae6e8fc26f9e",
+                            "label": "Lead paragraph",
+                            "name": "lead_paragraph",
                             "type": "text",
                             "instructions": "",
                             "required": 0,
@@ -566,6 +586,99 @@
                                 },
                                 {
                                     "key": "field_5a7871ec5db6d",
+                                    "label": "Content",
+                                    "name": "content",
+                                    "type": "wysiwyg",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "tabs": "all",
+                                    "toolbar": "full",
+                                    "media_upload": 1,
+                                    "delay": 0
+                                }
+                            ]
+                        },
+                        {
+                            "key": "field_5ae6c1557e526",
+                            "label": "Icon rows",
+                            "name": "icon_rows",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5a2038941eb03",
+                                        "operator": "==",
+                                        "value": "icon rows"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "collapsed": "",
+                            "min": 0,
+                            "max": 0,
+                            "layout": "table",
+                            "button_label": "",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5ae6c1f57e527",
+                                    "label": "Icon",
+                                    "name": "icon",
+                                    "type": "select",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "choices": {
+                                        "\/img\/icons\/speech-bubbles.png": "Speech bubbles",
+                                        "\/img\/icons\/dumbbell.png": "Dumbbell",
+                                        "\/img\/icons\/eye.png": "Eye"
+                                    },
+                                    "default_value": [],
+                                    "allow_null": 0,
+                                    "multiple": 0,
+                                    "ui": 0,
+                                    "ajax": 0,
+                                    "return_format": "value",
+                                    "placeholder": ""
+                                },
+                                {
+                                    "key": "field_5ae6c2167e528",
+                                    "label": "Title",
+                                    "name": "title",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_5ae6c2287e529",
                                     "label": "Content",
                                     "name": "content",
                                     "type": "wysiwyg",
