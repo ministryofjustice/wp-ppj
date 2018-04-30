@@ -12,7 +12,8 @@
                class="find-a-job__input"
                :placeholder="placeHolderText"
                v-model="searchTerm.input"
-               ref="searchInput" />
+               ref="searchInput"
+               tabindex="1" />
         <div class="find-a-job__button-clear-search-container">
           <button class="find-a-job__button-clear-search"
                   type="reset"
