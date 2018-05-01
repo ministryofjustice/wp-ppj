@@ -80,19 +80,22 @@ $color-tertiary: $color-2
       padding: 0 11rem
 
   &__card
-    $c: &
+    $card: &
     display: flex
     flex-direction: column
     font-size: 1.6rem
     line-height: 2.2rem
-    padding: 0 $common-spacing $common-spacing * 2
+    padding-bottom: $common-spacing * 4
 
     @include bp('portrait')
+      padding-left: $common-spacing
+      padding-right: $common-spacing
       width: 50%
 
     @include bp('landscape')
       font-size: 1.8rem
       line-height: 2.4rem
+      padding-bottom: $common-spacing * 4
 
     @include bp('large')
       font-size: 2.4rem
@@ -109,22 +112,55 @@ $color-tertiary: $color-2
         border-top: none
         padding-top: 0
 
+      & #{$card}-cta-link
+        @extend .cta-link
+
+        background-color: $color-white
+        border: .2rem solid $color-dark
+        color: $color-dark
+        font-size: 2rem
+        margin-top: auto
+        padding-bottom: $common-spacing / 2
+        padding-top: $common-spacing / 2
+        width: 100%
+
+        @include bp('portrait')
+
+        @include bp('landscape')
+          font-size: 2.4rem
+          padding-bottom: 1rem
+          padding-top: 1rem
+
+        @include bp('large')
+          font-size: 2.8rem
+          padding-bottom: $common-spacing
+          padding-top: $common-spacing
+
     &-image-container
       margin: 0 0 $common-spacing
       position: relative
       width: 100%
 
-      #{$c}--color-one &
+      #{$card}--color-one &
         border-bottom: solid $common-spacing $color-1
 
-      #{$c}--color-two &
+      #{$card}--color-two &
         border-bottom: solid $common-spacing $color-2
 
-      #{$c}--color-three &
+      #{$card}--color-three &
         border-bottom: solid $common-spacing $color-3
 
-      #{$c}--color-four &
+      #{$card}--color-four &
         border-bottom: solid $common-spacing $color-4
+
+      #{$card}--color-five &
+        border-bottom: solid $common-spacing $color-5
+
+      #{$card}--color-six &
+        border-bottom: solid $common-spacing $color-6
+
+      #{$card}--color-seven &
+        border-bottom: solid $common-spacing $color-7
 
     &-image-ratio-container
       padding-bottom: percentage(9/16)
@@ -142,31 +178,18 @@ $color-tertiary: $color-2
       width: 100%
 
   &__card-title
-    border-top: solid $common-spacing $color-dark
+    border-top: solid .6rem $color-dark
     font-size: 2.2rem
+    margin-bottom: 1.6rem
     padding-top: 1.6rem
 
     @include bp('large')
+      border-top-width: .8rem
       font-size: 3.2rem
 
   &__card-content
-    padding-bottom: $common-spacing
+    padding-bottom: $common-spacing * 1.5
 
   &__card-cta-link
-    @extend .cta-link
-
-    background-color: $color-white
-    border: .2rem solid $color-dark
-    color: $color-dark
-    font-size: 2rem
-    margin-top: auto
-    width: 100%
-
-    @include bp('portrait')
-
-    @include bp('landscape')
-      font-size: 2.4rem
-
-    @include bp('large')
-      font-size: 2.8rem
+    text-decoration: underline
 
