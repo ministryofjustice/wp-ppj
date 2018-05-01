@@ -23,7 +23,8 @@
 
         <button class="find-a-job__button-search"
                 type="submit"
-                :disabled="searchTerm.input == ''">
+                :disabled="searchTerm.input == ''"
+                @click="search">
           <div class="find-a-job__button-search-circle"></div>
           <div class="find-a-job__button-search-rectangle"></div>
         </button>
