@@ -221,6 +221,7 @@
       background-color: $color-transparent
       display: block
       margin-left: auto
+      width: 86%
 
   &__nav-menu-close-button
     border: .2rem solid $color-white
@@ -253,6 +254,7 @@
 
     @include bp('landscape')
       display: flex
+      justify-content: flex-end
       margin-top: 0
       padding-bottom: $common-spacing * 2
 
@@ -336,16 +338,19 @@
     background-position: center center
     background-size: contain
     display: block
-    height: 4rem // 2.35 ratio
-    width: 9.4rem
+    flex: 0 0 9.4rem
+    width: 9.4rem // 2.35 ratio
     pointer-events: auto
 
     .youth-custody &
-      @include background-img('ycs_white_small.png')
+      @include background-img('svg/ycs_logo.svg')
 
     @include bp('portrait')
+      flex: 0 0 15rem
       height: 6.4rem
-      width: 15rem
+
+    @include bp('landscape')
+      width: 14%
 
   &__text-container
     margin: $common-spacing
