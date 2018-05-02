@@ -1,20 +1,37 @@
 <?php
 
-$facebookContent = get_field('facebook_content', 'option');
 $footerContent   = get_field('footer_content', 'option');
 $footerCopyright = get_field('footer_copyright', 'option');
+
+$facebookFooterContent = false;
+
+switch (ppj\getLegNameFromPath()) {
+    case 'prison-officer':
+        $facebookFooterContent = get_field('facebook_content_prison_officer', 'option');
+        break;
+
+    case 'youth-custody':
+        $facebookFooterContent = get_field('facebook_content_youth_custody', 'option');
+        break;
+
+    default:
+        break;
+}
+
+// is_page_template('page.php') doesn't work as expected if the page uses the 'default' template
+$isPage = (basename(get_page_template()) === 'page.php');
 
 ?>
 
         <div class="l-full l-full--footer">
-            <?php if (is_page_template('page.php') && $facebookContent): ?>
+            <?php if ( $isPage && $facebookFooterContent): ?>
                 <div class="facebook-footer">
                     <div class="facebook-footer__container">
                         <div class="facebook-footer__icon">
                             <?php ppj\inlineSVG('facebook'); ?>
                         </div>
                         <div class="facebook-footer__content">
-                            <?= $facebookContent ?>
+                            <?= $facebookFooterContent ?>
                         </div>
                     </div>
                 </div>
