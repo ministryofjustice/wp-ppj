@@ -51,7 +51,7 @@ $isPage = (basename(get_page_template()) === 'page.php');
             <?php endif; ?>
         </div>
     </div> <?php // page-container ?>
-    <?php include 'partials/mobileNavigation.php'; ?>
+    <?= ppj\partial(null,'mobileNavigation') ?>
 </div><?php // site-container ?>
 
 <?php get_footer();
