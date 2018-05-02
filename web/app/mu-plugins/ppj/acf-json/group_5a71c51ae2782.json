@@ -4,8 +4,27 @@
     "fields": [
         {
             "key": "field_5a71cb37d36cc",
-            "label": "Facebook",
-            "name": "facebook_content",
+            "label": "Prison Officer Facebook footer",
+            "name": "facebook_content_prison_officer",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_5ae968b603290",
+            "label": "Youth Custody Facebook footer",
+            "name": "facebook_content_youth_custody",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -77,5 +96,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1517407348
+    "modified": 1525246198
 }
