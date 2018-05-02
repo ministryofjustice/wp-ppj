@@ -91,12 +91,9 @@ window.addEventListener('load', function() {
  * function to close mobile nav menu if the screen
  * is resized such that the desktop nav is now visible.
  */
-window.addEventListener('resize', function() {
-  const screenWidth = window.ppj.getScreenWidth();
-
-  if (screenWidth >= 1024) {
+window.matchMedia('(min-width: 1024px)').addListener(function(data) {
+  if (data.matches) {
     window.ppj.closeNavMenu();
   }
-
-  return true;
 });
+
