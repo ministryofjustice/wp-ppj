@@ -5,10 +5,6 @@ import closestPolyfill from './polyfills/Element.closest';
 
 closestPolyfill();
 
-window.ppj.getScreenWidth = function() {
-  return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-};
-
 window.ppjNavTo = function(href, callback) {
   console.log('navTo');
   if (typeof callback !== 'undefined') {
