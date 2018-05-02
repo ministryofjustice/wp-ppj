@@ -9,12 +9,11 @@ $mobileNavWidthPortrait: 48rem
   color: $color-white
   min-height: 100vh
   left: 100%
+  overflow-x: hidden
   position: absolute
   top: 0
-  width: $mobileNavWidth
-
-  @include bp('portrait')
-    width: $mobileNavWidthPortrait
+  transition: width 0s $main-transition-duration
+  width: 0
 
   &__overlay
     background-color: $color-dark
@@ -30,13 +29,18 @@ $mobileNavWidthPortrait: 48rem
   .nav-menu-is-open &
     height: 100vh
     overflow-y: auto
+    transition: width 0s 0s
+    width: $mobileNavWidth
+
+    @include bp('portrait')
+      width: $mobileNavWidthPortrait
 
     &__overlay
       opacity: 0
       transition: opacity $main-transition-duration ease 0s, z-index 0s $main-transition-duration
       z-index: -1
 
-  @include bp('large')
+  @include bp('landscape')
     display: none
 
   &__current-leg-element
