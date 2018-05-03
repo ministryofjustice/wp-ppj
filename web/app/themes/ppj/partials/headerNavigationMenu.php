@@ -1,8 +1,9 @@
 <?php
 global $post;
 
-$siteWideNavMenuItems = wp_get_nav_menu_items('site-wide-nav');
-$modifiedSiteWideNavItems = ppj\markCurrentlySelectedAncestorMenuItem($siteWideNavMenuItems);
+$modifiedSiteWideNavItems = ppj\markCurrentlySelectedAncestorMenuItem(wp_get_nav_menu_items('site-wide-nav'));
+$logoTargetUrl = ppj\getLegHomeRelativePath();
+
 ?>
 
 <div class="l-site-header">
@@ -24,29 +25,28 @@ $modifiedSiteWideNavItems = ppj\markCurrentlySelectedAncestorMenuItem($siteWideN
             </ul>
         </div>
 
-        <?php if (ppj\onLeg()):
-            $logoTargetUrl = ppj\getLegHomeRelativePath();
-            $legNavMenuItems = wp_get_nav_menu_items( ppj\getLegNameFromPath() );
-            $modifiedLegNavMenuItems = ppj\markCurrentlySelectedMenuItem($legNavMenuItems);
+        <div class="header__leg-nav">
+            <a href="<?= $logoTargetUrl ?>" class="header__logo"></a>
+
+            <?php if (ppj\onLeg()):
+                $legNavMenuItems = wp_get_nav_menu_items( ppj\getLegNameFromPath() );
+                $modifiedLegNavMenuItems = ppj\markCurrentlySelectedMenuItem($legNavMenuItems);
             ?>
 
-            <div class="header__leg-nav">
-                <a href="<?= $logoTargetUrl ?>" class="header__logo"></a>
+            <div class="header__nav-leg-menu">
+                <button class="header__nav-menu-close-button js" onclick="ppj.closeNavMenu()"></button>
+                <ul class="header__nav-leg-menu-list">
 
-                <div class="header__nav-leg-menu">
-                    <button class="header__nav-menu-close-button js" onclick="ppj.closeNavMenu()"></button>
-                    <ul class="header__nav-leg-menu-list">
-
-                        <?php foreach ($modifiedLegNavMenuItems as $item): ?>
-                            <li class="header__nav-leg-menu-list-element <?= ($item['selected']) ? 'header__nav-leg-menu-list-element--selected' : ''?>">
-                                <a href="<?= $item['url'] ?>">
-                                    <span class="header__nav-leg-menu-list-element-text"><?= $item['title'] ?></span>
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
+                    <?php foreach ($modifiedLegNavMenuItems as $item): ?>
+                        <li class="header__nav-leg-menu-list-element <?= ($item['selected']) ? 'header__nav-leg-menu-list-element--selected' : ''?>">
+                            <a href="<?= $item['url'] ?>">
+                                <span class="header__nav-leg-menu-list-element-text"><?= $item['title'] ?></span>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
-        <?php endif; ?>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
