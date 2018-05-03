@@ -3,7 +3,6 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 133.2 133.2" style="enable-background:new 0 0 133.2 133.2;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#4D42DF;}
 	.st1{fill:#FFFFFF;}
 </style>
 <g id="Base">
@@ -29,7 +28,7 @@
 		</g>
 		<g>
 			<g>
-				
+
 					<ellipse transform="matrix(0.9871 -0.1602 0.1602 0.9871 -9.7148 11.5197)" class="st1" cx="66.6" cy="66" rx="13.4" ry="13.4"/>
 				<path class="st1" d="M102.1,57.9c-8.1-7.5-21-17.3-35.6-17.3S39.1,50.4,31,57.9c-5.5,5.1-5.4,13.9,0.3,18.7
 					c8.1,6.9,20.9,14.8,35.2,14.8s27.1-7.9,35.2-14.8C107.5,71.8,107.6,63,102.1,57.9z M97.6,71.6c-5.8,4.9-17.5,13.2-31,13.2
