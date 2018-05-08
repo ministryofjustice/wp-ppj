@@ -13,14 +13,27 @@
 
 .header
   background-color: $color-quite-dark
-  border-bottom: .4rem solid $color-very-light
+  border-bottom: none
   box-sizing: content-box
+  margin-bottom: 1rem
+  position: relative
   z-index: 3
+
+  &:after
+    $size: 1rem
+    content: ' '
+    background-color: $color-tertiary-light
+    bottom: -$size
+    height: $size
+    left: 0
+    position: absolute
+    right: 0
 
   @include bp('portrait')
     border-bottom-width: .6rem
 
   @include bp('landscape')
+    margin-bottom: 0
     border-bottom-width: .8rem
 
   @include bp('large')
