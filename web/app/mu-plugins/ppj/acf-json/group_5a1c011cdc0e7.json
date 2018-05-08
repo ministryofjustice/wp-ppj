@@ -647,7 +647,7 @@
                                     },
                                     "choices": {
                                         "\/img\/svg\/icons\/role_play.svg": "Role play",
-                                        "\/img\/svg\/icons\/training_icon.svg": "Fitness",
+                                        "\/img\/svg\/icons\/fitness_icon.svg": "Fitness",
                                         "\/img\/svg\/icons\/eyesight.svg": "Eyesight"
                                     },
                                     "default_value": [],
@@ -858,5 +858,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1525186774
+    "modified": 1525767898
 }
