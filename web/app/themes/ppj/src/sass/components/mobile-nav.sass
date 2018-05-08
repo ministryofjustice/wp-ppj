@@ -5,7 +5,9 @@ $mobileNavWidthPortrait: 48rem
   $mn: &
   $border: .1rem solid $color-light
   background: $color-dark
-  border-left: $border
+  border-left-width: 0
+  border-left-style: solid
+  border-left-color: $color-light
   color: $color-white
   min-height: 100vh
   left: 100%
@@ -27,6 +29,7 @@ $mobileNavWidthPortrait: 48rem
     z-index: 3
 
   .nav-menu-is-open &
+    border-left-width: .1rem
     height: 100vh
     overflow-y: auto
     transition: width 0s 0s
@@ -146,10 +149,12 @@ $mobileNavWidthPortrait: 48rem
     z-index: -1
 
   .nav-menu-is-open &
-    height: 100vh
-    overflow-y: hidden
 
     &__overlay
       opacity: 1
       transition: opacity $main-transition-duration ease
       z-index: 4
+
+.nav-menu-is-open
+  height: 100vh
+  overflow-y: hidden
