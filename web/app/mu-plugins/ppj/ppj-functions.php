@@ -109,13 +109,7 @@ function my_acf_admin_head() {
 
 add_action('acf/input/admin_head', __NAMESPACE__ . '\\my_acf_admin_head');
 
-
-function stopAutoInsertionOfPTags()
-{
-    remove_filter('the_content', 'wpautop');
-    remove_filter('acf_the_content', 'wpautop');
-}
-add_action('acf/init', __NAMESPACE__ . '\\stopAutoInsertionOfPTags', 15);
+add_filter( 'wp_default_editor', create_function('', 'return "tinymce";') );
 
 function disable_emojicons_tinymce( $plugins ) {
     if ( is_array( $plugins ) ) {
