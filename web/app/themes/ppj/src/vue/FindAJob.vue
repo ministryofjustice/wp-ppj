@@ -93,8 +93,7 @@
         <div class="find-a-job__jobs-available">{{ jobsAvailable }}</div>
       </div>
 
-      <div class="find-a-job__view-list-container"
-       >
+      <div class="find-a-job__view-list-container">
         <div v-if="jobFeedError"
              class="find-a-job__job-feed-message find-a-job__job-feed-message--feed-error">
           <div class="find-a-job__job-feed-text-container">
