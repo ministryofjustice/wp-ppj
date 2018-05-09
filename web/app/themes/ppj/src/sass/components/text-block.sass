@@ -239,23 +239,17 @@
       & > th
         width: 33%
 
-    p.portrait
-      font-weight: $font-weight-bold
-      margin-bottom: $common-spacing
-      margin-top: $common-spacing
-      text-align: center
+    img.portrait
+      border-radius: 50%
+      border: solid .5rem $color-white
+      height: 50vw
+      margin: auto
+      width: 50vw
 
-      & > img
-        border-radius: 50%
-        border: solid .5rem $color-main
-        height: 50vw
-        margin: auto
-        width: 50vw
-
-        @include bp('portrait')
-          $size: 20rem
-          height: $size
-          width: $size
+      @include bp('portrait')
+        $size: 20rem
+        height: $size
+        width: $size
 
     .quote
       @include bp('portrait')
