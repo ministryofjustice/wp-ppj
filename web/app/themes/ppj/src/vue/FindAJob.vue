@@ -234,7 +234,6 @@
 
         searchResults: {
           urlEncodedPostCode: '',
-          googleMapAPIKey: 'AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA',
           listView: {
             activePage: 0,
             resultsPerPage: 5,
