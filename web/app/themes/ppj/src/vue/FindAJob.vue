@@ -258,7 +258,6 @@
 
         autocomplete: null,
 
-        mapSrc: '',
 
         maxZoom: 18,
         minZoom: 4,
