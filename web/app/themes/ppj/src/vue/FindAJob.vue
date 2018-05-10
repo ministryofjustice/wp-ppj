@@ -217,6 +217,8 @@
     },
 
     data() {
+      const previousState = this.getUrlParamsAsJson();
+
       return {
         deviceIsMobile: false,
 
@@ -245,7 +247,7 @@
         },
 
         searchTerm: {
-          input: this.storeGet('searchTerm.query') || '',
+          input: previousState['search'] || '',
           query: '',
           latlng: null,
           marker: null,
@@ -533,6 +535,7 @@
 
         const placeName = place.formatted_address.replace(/, UK$/, '');
         this.searchTerm.input = this.searchTerm.query = placeName;
+        this.modifyPersistedStateParam('search', this.searchTerm.input);
         this.searchTerm.isGeolocation = false;
         this.searchTerm.latlng = {
           lat: place.geometry.location.lat(),
@@ -626,8 +629,54 @@
         }
       },
 
+      getUrlParamsAsJson() {
+        const search = location.search.substring(1);
+        let result = null;
+        if (search) {
+          result = JSON.parse(
+            '{"'
+            + decodeURI(search)
+              .replace(/"/g, '\\"')
+              .replace(/&/g, '","')
+              .replace(/=/g, '":"')
+            + '"}'
+          );
+        } else {
+          result = {};
+        }
+        return result;
+      },
+
+      convertJsonToUrlParameterString(json) {
+        const paramsString = Object.keys(json).map(k => {
+          return encodeURIComponent(k)
+            + '='
+            + encodeURIComponent(json[k])
+        }).join('&');
+        return (paramsString) ? '?' + paramsString : '';
+      },
+
+      setWindowHistory(json) {
+        const paramString = this.convertJsonToUrlParameterString(json);
+
+        // replaceState does nothing if passed an empty string as its 3rd argument
+        // passing window.location.pathname will remove all url parameters
+        window.history.replaceState(null, null, (paramString) ? paramString : window.location.pathname);
+      },
+
+      modifyPersistedStateParam(paramName, val) {
+        const state = this.getUrlParamsAsJson();
+        if (val) {
+          state[paramName] = val;
+        } else {
+          delete state[paramName];
+        }
+        this.setWindowHistory(state);
+      },
+
       resetSearch() {
         this.searchTerm.input = '';
+        this.modifyPersistedStateParam('search', '');
         this.searchTerm.query = '';
         this.searchTerm.latlng = null;
         this.searchTerm.isGeolocation = false;
@@ -641,6 +690,7 @@
         this.searchTerm.isGeolocation = false;
 
         if (this.searchTerm.query) {
+          this.modifyPersistedStateParam('search', this.searchTerm.query);
           new google.maps.Geocoder().geocode(
             {'address': this.searchTerm.query + ', UK'},
             this.processGeocoderResults
@@ -711,26 +761,15 @@
         this.updateIsDeviceMobile();
       },
 
-      storeSave(key, value) {
-        localStorage.setItem('ppj.find-a-job:' + key, value);
-      },
-
-      storeGet(key) {
-        return localStorage.getItem('ppj.find-a-job:' + key);
-      },
-
-      restorePageData() {
-        if (this.searchTerm.input) {
+      restorePageState() {
+        if (this.searchTerm.input) { // TODO perhaps replace with restore map state
           this.search();
         }
+        console.dir(this.getUrlParamsAsJson());
       }
-
     },
 
     watch: {
-      'searchTerm.query': function(val) {
-        this.storeSave('searchTerm.query', val);
-      },
       'searchTerm.latlng': function(val) {
         this.handleNewSearchLocation(val);
       }
@@ -817,7 +856,7 @@
           });
         });
 
-      this.restorePageData();
+      this.restorePageState();
     }
   }
 </script>
