@@ -258,17 +258,19 @@
 
         autocomplete: null,
 
-
-        maxZoom: 18,
-        minZoom: 4,
-
-        mapOptions: {
-          disableDefaultUI: false,
-          streetViewControl: false,
-          fullscreenControl: false,
-          mapTypeControl: false,
-          gestureHandling: 'greedy',
-          zoomControl: false
+        map: {
+          maxZoom: 18,
+          minZoom: 4,
+          googleMaps: {
+            options: {
+              disableDefaultUI: false,
+              streetViewControl: false,
+              fullscreenControl: false,
+              mapTypeControl: false,
+              gestureHandling: 'greedy',
+              zoomControl: false
+            }
+          }
         },
 
         titleText: this.title,
@@ -335,13 +337,13 @@
       },
 
       zoomTo(level) {
-        if (level < this.minZoom) level = this.minZoom;
-        if (level > this.maxZoom) level = this.maxZoom;
-        this.map.setZoom(level);
+        if (level < this.map.minZoom) level = this.map.minZoom;
+        if (level > this.map.maxZoom) level = this.map.maxZoom;
+        this.map.object.setZoom(level);
       },
 
       zoomBy(amount) {
-        this.zoomTo(this.map.getZoom() + amount);
+        this.zoomTo(this.map.object.getZoom() + amount);
       },
 
       focusOnJobLocationGroup(groupId) {
@@ -362,7 +364,7 @@
       },
 
       recenterMap(lat, lng) {
-        this.map.panTo(new google.maps.LatLng(lat, lng));
+        this.map.object.panTo(new google.maps.LatLng(lat, lng));
       },
 
       handleMapMarkerClick(self, groupId, event) {
@@ -402,7 +404,7 @@
           const latLng = new google.maps.LatLng(latLngArr[0], latLngArr[1]);
           const marker = new CustomMarker(
             latLng,
-            this.map,
+            this.map.object,
             markerArgs[i]
           );
         }
@@ -501,9 +503,9 @@
       },
 
       createMap() {
-        this.map = new google.maps.Map(
+        this.map.object = new google.maps.Map(
           document.getElementsByClassName('find-a-job__map')[0],
-          this.mapOptions
+          this.map.googleMaps.options
         );
         this.zoomToEngland();
 
@@ -517,7 +519,7 @@
         // Bind the map's bounds (viewport) property to the autocomplete object,
         // so that the autocomplete requests use the current map bounds for the
         // bounds option in the request.
-        this.autocomplete.bindTo('bounds', this.map);
+        this.autocomplete.bindTo('bounds', this.map.object);
 
         this.autocomplete.addListener('place_changed', this.autocompletePlaceChanged);
       },
@@ -548,7 +550,7 @@
           new google.maps.LatLng(49.8647411, -6.418545799999947),
           new google.maps.LatLng(55.81165979999999, 1.7629159000000527)
         );
-        this.map.fitBounds(england, 0);
+        this.map.object.fitBounds(england, 0);
       },
 
       removeSearchTermMarker() {
@@ -562,7 +564,7 @@
 
         this.searchTerm.marker = new CustomMarker(
           new google.maps.LatLng(lat, lng),
-          this.map,
+          this.map.object,
           {class: 'find-a-job__map-marker--search-term'}
         );
       },
@@ -586,7 +588,7 @@
         });
 
         // Fit the map to the bounds
-        this.map.fitBounds(bounds);
+        this.map.object.fitBounds(bounds);
       },
 
       handleNewSearchLocation(latlng) {
