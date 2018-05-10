@@ -233,7 +233,6 @@
         jobFeedError: false,
 
         searchResults: {
-          urlEncodedPostCode: '',
           listView: {
             activePage: 0,
             resultsPerPage: 5,
