@@ -32,11 +32,11 @@
 
       <div class="find-a-job__geolocation"
            :class="{
-                'find-a-job__geolocation--is-busy': (geoLocationIsBusy == true),
+                'find-a-job__geolocation--is-busy': (geoLocation.isBusy == true),
                 'find-a-job__geolocation--is-active': searchTerm.isGeolocation
             }">
         <a class="find-a-job__geolocation-button"
-           v-if="geoLocationIsAvailable"
+           v-if="geoLocation.isAvailable"
            @click.stop.prevent="useGeoLocation">
           <svg version="1.1"
                id="Layer_1"
@@ -222,9 +222,11 @@
       return {
         deviceIsMobile: false,
 
-        geoLocationIsAvailable: false,
-        geoLocationIsBusy: false,
-        geoLocationIsActive: false,
+        geoLocation: {
+          isAvailable: false,
+          isBusy: false,
+          isActive: false,
+        },
 
         vacanciesDataURL: this.jobFeedUrl,
         jobFeedLoaded: false,
@@ -700,7 +702,7 @@
       },
 
       useGeoLocation() {
-        this.geoLocationIsBusy = true;
+        this.geoLocation.isBusy = true;
         navigator.geolocation.getCurrentPosition(
           position => {
             this.searchTerm.latlng = {
@@ -710,8 +712,8 @@
             this.searchTerm.query = '';
             this.searchTerm.input = '';
             this.searchTerm.isGeolocation = true;
-            this.geoLocationIsBusy = false;
-            this.geoLocationIsActive = true;
+            this.geoLocation.isBusy = false;
+            this.geoLocation.isActive = true;
           },
           error => {
             if (typeof error.code !== 'undefined' && error.code === 1) {
@@ -831,7 +833,7 @@
       this.updateIsDeviceMobile();
 
       if ("geolocation" in navigator) {
-        this.geoLocationIsAvailable = true;
+        this.geoLocation.isAvailable = true;
       }
     },
 
