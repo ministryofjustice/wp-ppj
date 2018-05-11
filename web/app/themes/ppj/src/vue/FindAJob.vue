@@ -32,11 +32,11 @@
 
       <div class="find-a-job__geolocation"
            :class="{
-                'find-a-job__geolocation--is-busy': (geoLocation.isBusy == true),
-                'find-a-job__geolocation--is-active': searchTerm.isGeolocation
+                'find-a-job__geolocation--is-busy': (geolocation.isBusy == true),
+                'find-a-job__geolocation--is-active': (geolocation.isActive == true)
             }">
         <a class="find-a-job__geolocation-button"
-           v-if="geoLocation.isAvailable"
+           v-if="geolocation.isAvailable"
            @click.stop.prevent="useGeoLocation">
           <svg version="1.1"
                id="Layer_1"
@@ -220,12 +220,14 @@
       const previousState = this.getUrlParamsAsJson();
 
       return {
+        previousState : previousState,
+
         deviceIsMobile: false,
 
-        geoLocation: {
+        geolocation: {
           isAvailable: false,
           isBusy: false,
-          isActive: false,
+          isActive: (previousState.geolocation == 'true') || false,
         },
 
         vacanciesDataURL: this.jobFeedUrl,
@@ -277,8 +279,7 @@
         placeHolderText: 'e.g. SW1A 2LW, Birmingham or Essex',
 
         mounted: false,
-
-      };
+      }
     },
 
     methods: {
@@ -353,7 +354,7 @@
         this.recenterMap(coords.lat, coords.lng);
 
         if (
-          !this.searchTerm.isGeolocation &&
+          !this.geolocation.isActive &&
           !this.searchTerm.query &&
           !this.searchTerm.doneInitialZoom
         ) {
@@ -506,8 +507,29 @@
           document.getElementsByClassName('find-a-job__map')[0],
           this.map.googleMaps.options
         );
-        this.zoomToEngland();
 
+        // Use the bounds_changed event listener to persist the state after the map has fully loaded.
+        // Only persist the state 100 milliseconds after last bounds_changed event has fired.
+        let previousTimeoutId = 0;
+        google.maps.event.addListenerOnce(this.map.object, 'idle', () => {
+
+          if(this.previousState.lat0 && this.previousState.lng0 && this.previousState.lat1 && this.previousState.lng1) {
+            const bounds = new google.maps.LatLngBounds(
+              new google.maps.LatLng(this.previousState.lat0, this.previousState.lng0),
+              new google.maps.LatLng(this.previousState.lat1, this.previousState.lng1)
+            );
+            this.fitMapToBounds(bounds, 0);
+          } else {
+            this.zoomToEngland();
+          }
+
+          this.map.object.addListener('bounds_changed', () => {
+            clearTimeout(previousTimeoutId);
+            previousTimeoutId = setTimeout(()=>{
+              this.persistStateToHistory();
+            }, 100)
+          })
+        });
       },
 
       initAutocomplete() {
@@ -536,12 +558,15 @@
 
         const placeName = place.formatted_address.replace(/, UK$/, '');
         this.searchTerm.input = this.searchTerm.query = placeName;
-        this.modifyPersistedStateParam('search', this.searchTerm.input);
-        this.searchTerm.isGeolocation = false;
+        this.geolocation.isActive = false;
         this.searchTerm.latlng = {
           lat: place.geometry.location.lat(),
           lng: place.geometry.location.lng()
         };
+      },
+
+      fitMapToBounds(latLngBounds, padding=null) {
+        this.map.object.fitBounds(latLngBounds, padding);
       },
 
       zoomToEngland() {
@@ -549,7 +574,7 @@
           new google.maps.LatLng(49.8647411, -6.418545799999947),
           new google.maps.LatLng(55.81165979999999, 1.7629159000000527)
         );
-        this.map.object.fitBounds(england, 0);
+        this.fitMapToBounds(england, 0);
       },
 
       removeSearchTermMarker() {
@@ -569,6 +594,7 @@
       },
 
       zoomToNearbyResults(lat, lng) {
+
         var bounds = new google.maps.LatLngBounds();
 
         // Add user's search location to the bounds
@@ -586,8 +612,38 @@
           bounds.extend(ll);
         });
 
-        // Fit the map to the bounds
-        this.map.object.fitBounds(bounds);
+        this.fitMapToBounds(bounds);
+      },
+
+      setWindowHistory(json) {
+        const paramString = this.convertJsonToUrlParameterString(json);
+
+        // replaceState does nothing if passed an empty string as its 3rd argument
+        // passing window.location.pathname will remove all url parameters
+        window.history.replaceState(null, null, (paramString) ? paramString : window.location.pathname);
+      },
+
+      modifyPersistedStateParam(paramName, val) {
+        const state = this.getUrlParamsAsJson();
+        if (val) {
+          state[paramName] = val;
+        } else {
+          delete state[paramName];
+        }
+        this.setWindowHistory(state);
+      },
+
+      persistStateToHistory() {
+        const bounds = this.map.object.getBounds();
+        const currentState = {
+          'search': this.searchTerm.input,
+          'geolocation': this.geolocation.isActive,
+          'lat0': bounds.getSouthWest().lat(),
+          'lng0': bounds.getSouthWest().lng(),
+          'lat1': bounds.getNorthEast().lat(),
+          'lng1': bounds.getNorthEast().lng(),
+        };
+        this.setWindowHistory(currentState);
       },
 
       handleNewSearchLocation(latlng) {
@@ -657,41 +713,21 @@
         return (paramsString) ? '?' + paramsString : '';
       },
 
-      setWindowHistory(json) {
-        const paramString = this.convertJsonToUrlParameterString(json);
-
-        // replaceState does nothing if passed an empty string as its 3rd argument
-        // passing window.location.pathname will remove all url parameters
-        window.history.replaceState(null, null, (paramString) ? paramString : window.location.pathname);
-      },
-
-      modifyPersistedStateParam(paramName, val) {
-        const state = this.getUrlParamsAsJson();
-        if (val) {
-          state[paramName] = val;
-        } else {
-          delete state[paramName];
-        }
-        this.setWindowHistory(state);
-      },
-
       resetSearch() {
         this.searchTerm.input = '';
         this.modifyPersistedStateParam('search', '');
         this.searchTerm.query = '';
         this.searchTerm.latlng = null;
-        this.searchTerm.isGeolocation = false;
+        this.geolocation.isActive = false;
         this.$refs.searchInput.focus();
-
         this.removeSearchTermMarker();
       },
 
       search() {
         this.searchTerm.query = this.searchTerm.input;
-        this.searchTerm.isGeolocation = false;
+        this.geolocation.isActive = false;
 
         if (this.searchTerm.query) {
-          this.modifyPersistedStateParam('search', this.searchTerm.query);
           new google.maps.Geocoder().geocode(
             {'address': this.searchTerm.query + ', UK'},
             this.processGeocoderResults
@@ -701,7 +737,7 @@
       },
 
       useGeoLocation() {
-        this.geoLocation.isBusy = true;
+        this.geolocation.isBusy = true;
         navigator.geolocation.getCurrentPosition(
           position => {
             this.searchTerm.latlng = {
@@ -710,9 +746,8 @@
             };
             this.searchTerm.query = '';
             this.searchTerm.input = '';
-            this.searchTerm.isGeolocation = true;
-            this.geoLocation.isBusy = false;
-            this.geoLocation.isActive = true;
+            this.geolocation.isActive = true;
+            this.geolocation.isBusy = false;
           },
           error => {
             if (typeof error.code !== 'undefined' && error.code === 1) {
@@ -761,13 +796,6 @@
       handleScreenResize() {
         this.updateIsDeviceMobile();
       },
-
-      restorePageState() {
-        if (this.searchTerm.input) { // TODO perhaps replace with restore map state
-          this.search();
-        }
-        console.dir(this.getUrlParamsAsJson());
-      }
     },
 
     watch: {
@@ -832,12 +860,11 @@
       this.updateIsDeviceMobile();
 
       if ("geolocation" in navigator) {
-        this.geoLocation.isAvailable = true;
+        this.geolocation.isAvailable = true;
       }
     },
 
     mounted() {
-
       const self = this;
       this.createMap();
       this.initAutocomplete();
@@ -856,8 +883,6 @@
             error_message: error.toString()
           });
         });
-
-      this.restorePageState();
     }
   }
 </script>
