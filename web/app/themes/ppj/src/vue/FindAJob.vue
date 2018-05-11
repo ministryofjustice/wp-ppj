@@ -508,11 +508,10 @@
           this.map.googleMaps.options
         );
 
-        // Use the bounds_changed event listener to persist the state after the map has fully loaded.
-        // Only persist the state 100 milliseconds after last bounds_changed event has fired.
-        let previousTimeoutId = 0;
+        // add one time function to be fired after the map has loaded
         google.maps.event.addListenerOnce(this.map.object, 'idle', () => {
 
+          // decide what the initial bounds for the map should be
           if(this.previousState.lat0 && this.previousState.lng0 && this.previousState.lat1 && this.previousState.lng1) {
             const bounds = new google.maps.LatLngBounds(
               new google.maps.LatLng(this.previousState.lat0, this.previousState.lng0),
@@ -523,12 +522,21 @@
             this.zoomToEngland();
           }
 
+          // Use the bounds_changed event listener to persist the state after the map has fully loaded.
+          // Only persist the state 100 milliseconds after last bounds_changed event has fired.
+          let previousTimeoutId = 0;
           this.map.object.addListener('bounds_changed', () => {
             clearTimeout(previousTimeoutId);
             previousTimeoutId = setTimeout(()=>{
               this.persistStateToHistory();
             }, 100)
-          })
+          });
+
+          // if available recreate the searchTerm marker from the previous state
+          if (this.previousState['marker-lat'] && this.previousState['marker-lng']) {
+            this.updateSearchTermMarker(this.previousState['marker-lat'], this.previousState['marker-lng']);
+          }
+
         });
       },
 
@@ -643,6 +651,10 @@
           'lat1': bounds.getNorthEast().lat(),
           'lng1': bounds.getNorthEast().lng(),
         };
+        if (this.searchTerm.marker) {
+          currentState['marker-lat'] = this.searchTerm.marker.latlng.lat();
+          currentState['marker-lng'] = this.searchTerm.marker.latlng.lng();
+        }
         this.setWindowHistory(currentState);
       },
 
@@ -728,6 +740,7 @@
         this.geolocation.isActive = false;
 
         if (this.searchTerm.query) {
+          console.log('geocoder search');
           new google.maps.Geocoder().geocode(
             {'address': this.searchTerm.query + ', UK'},
             this.processGeocoderResults
