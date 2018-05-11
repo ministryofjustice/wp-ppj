@@ -2,7 +2,7 @@
 
   <div class="find-a-job"
        v-cloak
-       :class="{'find-a-job--job-selected': searchResults.selectedJobLocationGroupId}"
+       :class="{'find-a-job--job-selected': searchResults.selectedLocationId}"
   >
     <div class="find-a-job__header">
       <h2 class="find-a-job__title">{{ titleText }}</h2>
@@ -114,10 +114,10 @@
 
           <li class="find-a-job__view-list-element"
               v-if="!jobFeedError && searchResults.jobs.length > 0"
-              :data-group-id="job.jobLocationGroupId"
+              :data-location-id="job.locationId"
               v-for="(job, index) in visibleSearchResults"
               :key="index"
-              v-on:click="handleVacancyClick(job.jobLocationGroupId)">
+              v-on:click="handleVacancyClick(job.locationId)">
             <job-summary :distance="job.distance"
                          :distance-time="job.distanceTime"
                          :position="job.role"
@@ -125,7 +125,7 @@
                          :prison-name="job.prison_name"
                          :prison-page-link="job.url"
                          :salary="job.salary"
-                         :selected="job.jobLocationGroupId == searchResults.selectedJobLocationGroupId"
+                         :selected="job.locationId == searchResults.selectedLocationId"
                          :title="job.title"
                          :url="job.url"
             >
@@ -243,9 +243,9 @@
           },
           jobs: [],
           jobLocationGroups: {},
-          orderedJobLocationGroups: [],
-          selectedJobLocationGroupId: '',
-          visibleJobLocationGroup: null,
+          orderedLocations: [],
+          selectedLocationId: '',
+          visibleLocation: null,
         },
 
         searchTerm: {
@@ -316,23 +316,23 @@
         return d;
       },
 
-      updateSelectedJobLocationGroupId(groupId) {
-        this.searchResults.selectedJobLocationGroupId = groupId;
+      updateSelectedLocationId(locationId) {
+        this.searchResults.selectedLocationId = locationId;
       },
 
-      calculateActivePageFromGroupId(groupId) {
-        const groups = this.searchResults.orderedJobLocationGroups;
+      calculateActivePageFromLocationId(locationId) {
+        const groups = this.searchResults.orderedLocations;
         for (let i in groups) {
           i = parseInt(i);
-          if (groups[i][0].jobLocationGroupId == groupId) {
+          if (groups[i][0].locationId == locationId) {
             this.searchResults.listView.activePage = Math.floor(i / this.searchResults.listView.resultsPerPage);
             return;
           }
         }
       },
 
-      convertGroupIdToCoords(groupId) {
-        const array = groupId.split(',');
+      convertLocationIdToCoords(locationId) {
+        const array = locationId.split(',');
         return {lat: array[0], lng: array[1]};
       },
 
@@ -346,11 +346,11 @@
         this.zoomTo(this.map.object.getZoom() + amount);
       },
 
-      focusOnJobLocationGroup(groupId) {
-        this.updateSelectedJobLocationGroupId(groupId);
-        CustomMarker.changeSelectedMarkerByGroupId(groupId);
+      focusOnLocation(locationId) {
+        this.updateSelectedLocationId(locationId);
+        CustomMarker.changeSelectedMarkerByLocationId(locationId);
 
-        const coords = this.convertGroupIdToCoords(groupId);
+        const coords = this.convertLocationIdToCoords(locationId);
         this.recenterMap(coords.lat, coords.lng);
 
         if (
@@ -367,40 +367,41 @@
         this.map.object.panTo(new google.maps.LatLng(lat, lng));
       },
 
-      handleMapMarkerClick(self, groupId, event) {
+      handleMapMarkerClick(self, locationId, event) {
         if (self.deviceIsMobile) {
-          self.calculateActivePageFromGroupId(groupId);
+          self.calculateActivePageFromLocationId(locationId);
         } else {
-          document.querySelector(`.find-a-job__view-list-element[data-group-id='${groupId}']`)
+          document.querySelector(`.find-a-job__view-list-element[data-location-id='${locationId}']`)
             .scrollIntoView({ behavior: 'smooth' });
         }
-        self.focusOnJobLocationGroup(groupId);
+        self.focusOnLocation(locationId);
         event.preventDefault();
         event.stopPropagation();
         return false;
       },
 
-      handleVacancyClick(groupId) {
-        this.focusOnJobLocationGroup(groupId);
+      handleVacancyClick(locationId) {
+        this.focusOnLocation(locationId);
       },
 
-      updateMapWithJobLocationGroupMarkers(jobLocationGroups) {
+      updateMapWithLocationMarkers(jobLocationGroups) {
+        console.log('updateMapWithLocationMarkers');
         const markerArgs = [];
         for (let group in jobLocationGroups) {
           markerArgs.push({
-            class: 'find-a-job__map-marker--job-location-group',
+            class: 'find-a-job__map-marker--location',
             solid: true,
             amount: jobLocationGroups[group].jobs.length,
-            groupId: group,
+            locationId: group,
             clickCallback: this.handleMapMarkerClick.bind(null, this, group),
             prisonName: jobLocationGroups[group].prisonName
           });
         }
         for (let i in markerArgs) {
-          if (markerArgs[i].groupId == this.searchResults.selectedJobLocationGroupId) {
+          if (markerArgs[i].locationId == this.searchResults.selectedLocationId) {
             markerArgs[i].selected = true;
           }
-          const latLngArr = markerArgs[i].groupId.split(',');
+          const latLngArr = markerArgs[i].locationId.split(',');
           const latLng = new google.maps.LatLng(latLngArr[0], latLngArr[1]);
           const marker = new CustomMarker(
             latLng,
@@ -429,7 +430,7 @@
           return a.distance - b.distance;
         });
 
-        this.searchResults.orderedJobLocationGroups = [];
+        this.searchResults.orderedLocations = [];
         for (const group in this.searchResults.jobLocationGroups) {
           const newDistance = this.calculateDistanceBetweenTwoLatLngPoints(
             lat,
@@ -438,22 +439,23 @@
             this.searchResults.jobLocationGroups[group].jobs[0].prison_location.lng
           );
           this.searchResults.jobLocationGroups[group].distance = newDistance;
-          this.searchResults.orderedJobLocationGroups.push(this.searchResults.jobLocationGroups[group].jobs);
+          this.searchResults.orderedLocations.push(this.searchResults.jobLocationGroups[group].jobs);
         }
 
-        this.searchResults.orderedJobLocationGroups.sort(function (a, b) {
+        this.searchResults.orderedLocations.sort(function (a, b) {
           return a[0].distance - b[0].distance;
         });
       },
 
-      createJobLocationGroups() {
+      createLocations() {
 
         // iterate over the jobs and put them in the correct jobLocationGroup
         const jobs = this.searchResults.jobs;
         const jobLocationGroups = {};
-        let closestJobLocationGroupDistance = Number.MAX_SAFE_INTEGER;
-        let closestJobLocationGroupId = null;
+        let closestLocationDistance = Number.MAX_SAFE_INTEGER;
+        let closestLocationId = null;
 
+        // iterate over the jobs and put them in the correct jobLocationGroup
         for (let i = 0; i < jobs.length; i++) {
           const latLngStr = jobs[i].prison_location.lat + ',' + jobs[i].prison_location.lng;
 
@@ -466,24 +468,24 @@
             jobLocationGroups[latLngStr].jobs.push(jobs[i]);
           }
 
-          jobs[i].jobLocationGroupId = latLngStr;
+          jobs[i].locationId = latLngStr;
 
-          if (jobs[i].distance < closestJobLocationGroupDistance) {
-            closestJobLocationGroupDistance = jobs[i].distance;
-            closestJobLocationGroupId = latLngStr;
+          if (jobs[i].distance < closestLocationDistance) {
+            closestLocationDistance = jobs[i].distance;
+            closestLocationId = latLngStr;
           }
         }
         this.searchResults.jobLocationGroups = jobLocationGroups;
-        this.searchResults.selectedJobLocationGroupId = closestJobLocationGroupId;
+        this.searchResults.selectedLocationId = closestLocationId;
 
-        // initialize orderedJobLocationGroups array
-        this.searchResults.orderedJobLocationGroups = [];
+        // initialize orderedLocations array
+        this.searchResults.orderedLocations = [];
         for (const id in this.searchResults.jobLocationGroups) {
-          this.searchResults.orderedJobLocationGroups.push(this.searchResults.jobLocationGroups[id].jobs);
+          this.searchResults.orderedLocations.push(this.searchResults.jobLocationGroups[id].jobs);
         }
 
         // initially sort the job location groups by town name
-        this.searchResults.orderedJobLocationGroups.sort(function (a, b) {
+        this.searchResults.orderedLocations.sort(function (a, b) {
           const
             aTown = a[0].prison_location.town,
             bTown = b[0].prison_location.town
@@ -499,7 +501,7 @@
           }
         });
 
-        this.updateMapWithJobLocationGroupMarkers(this.searchResults.jobLocationGroups);
+        this.updateMapWithLocationMarkers(this.searchResults.jobLocationGroups);
       },
 
       createMap() {
@@ -617,7 +619,7 @@
         bounds.extend({lat: lat, lng: lng});
 
         // Add closest tenth of search results to the bounds
-        const locations = this.searchResults.orderedJobLocationGroups;
+        const locations = this.searchResults.orderedLocations;
         const minVisible = Math.ceil(locations.length / 10);
         const boundLocations = locations.slice(0, minVisible);
         boundLocations.forEach((location) => {
@@ -827,7 +829,7 @@
 
     computed: {
       numberOfResultPages: function () {
-        const num = Math.ceil(this.searchResults.orderedJobLocationGroups.length / this.searchResults.listView.resultsPerPage);
+        const num = Math.ceil(this.searchResults.orderedLocations.length / this.searchResults.listView.resultsPerPage);
         return num;
       },
 
@@ -847,23 +849,23 @@
         if (this.mounted) {
 
           if (Object.keys(this.searchResults.jobLocationGroups).length === 0) {
-            this.createJobLocationGroups();
+            this.createLocations();
           }
 
-          let selectedJobLocationGroups = null;
+          let selectedLocations = null;
           if (this.deviceIsMobile) {
-            selectedJobLocationGroups = this.searchResults.orderedJobLocationGroups.slice().splice(
+            selectedLocations = this.searchResults.orderedLocations.slice().splice(
               this.searchResults.listView.resultsPerPage * this.searchResults.listView.activePage,
               this.searchResults.listView.resultsPerPage
             );
           } else {
-            selectedJobLocationGroups = this.searchResults.orderedJobLocationGroups;
+            selectedLocations = this.searchResults.orderedLocations;
           }
 
           const results = [];
-          for (const i in selectedJobLocationGroups) {
-            for (const j in selectedJobLocationGroups[i]) {
-              results.push(selectedJobLocationGroups[i][j]);
+          for (const i in selectedLocations) {
+            for (const j in selectedLocations[i]) {
+              results.push(selectedLocations[i][j]);
             }
           }
 
