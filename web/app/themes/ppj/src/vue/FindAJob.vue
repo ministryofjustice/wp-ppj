@@ -524,12 +524,20 @@
 
           // Use the bounds_changed event listener to persist the state after the map has fully loaded.
           // Only persist the state 100 milliseconds after last bounds_changed event has fired.
-          let previousTimeoutId = 0;
+          // The first bounds_changed event will be ignore as it is always fired on map creation
+          // and we don't want to persist the default state
+          let previousTimeoutId = 0,
+              ignoreBoundsChanged = true;
+
           this.map.object.addListener('bounds_changed', () => {
-            clearTimeout(previousTimeoutId);
-            previousTimeoutId = setTimeout(()=>{
-              this.persistStateToHistory();
-            }, 100)
+            if (ignoreBoundsChanged) {
+              ignoreBoundsChanged = false;
+            } else {
+              clearTimeout(previousTimeoutId);
+              previousTimeoutId = setTimeout(()=>{
+                this.persistStateToHistory();
+              }, 100)
+            }
           });
 
           // if available recreate the searchTerm marker from the previous state
