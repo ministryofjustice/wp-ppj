@@ -242,16 +242,19 @@
             backwardEnabled: false
           },
           jobs: [],
-          jobLocationGroups: {},
+          locations: {},
           orderedLocations: [],
-          selectedLocationId: '',
+          selectedLocationId: previousState['selected-location'] || '',
           visibleLocation: null,
         },
 
         searchTerm: {
           input: previousState['search'] || '',
           query: '',
-          latlng: null,
+          latlng: {
+            lat: previousState['marker-lat'] || '',
+            lng: previousState['marker-lng'] || ''
+          },
           marker: null,
           isGeolocation: false,
           doneInitialZoom: false
@@ -279,7 +282,7 @@
         placeHolderText: 'e.g. SW1A 2LW, Birmingham or Essex',
 
         mounted: false,
-      }
+      };
     },
 
     methods: {
@@ -331,11 +334,6 @@
         }
       },
 
-      convertLocationIdToCoords(locationId) {
-        const array = locationId.split(',');
-        return {lat: array[0], lng: array[1]};
-      },
-
       zoomTo(level) {
         if (level < this.map.minZoom) level = this.map.minZoom;
         if (level > this.map.maxZoom) level = this.map.maxZoom;
@@ -350,7 +348,7 @@
         this.updateSelectedLocationId(locationId);
         CustomMarker.changeSelectedMarkerByLocationId(locationId);
 
-        const coords = this.convertLocationIdToCoords(locationId);
+        const coords = this.getLocationLatLng(locationId);
         this.recenterMap(coords.lat, coords.lng);
 
         if (
@@ -384,30 +382,42 @@
         this.focusOnLocation(locationId);
       },
 
-      updateMapWithLocationMarkers(jobLocationGroups) {
-        console.log('updateMapWithLocationMarkers');
+      updateMapWithLocationMarkers(locations) {
+
+        // create an arguments object for each marker
         const markerArgs = [];
-        for (let group in jobLocationGroups) {
+        for (let locationId in locations) {
           markerArgs.push({
             class: 'find-a-job__map-marker--location',
             solid: true,
-            amount: jobLocationGroups[group].jobs.length,
-            locationId: group,
-            clickCallback: this.handleMapMarkerClick.bind(null, this, group),
-            prisonName: jobLocationGroups[group].prisonName
+            amount: locations[locationId].jobs.length,
+            locationId: locationId,
+            clickCallback: this.handleMapMarkerClick.bind(null, this, locationId),
+            prisonName: locations[locationId].prisonName
           });
         }
+
+        // iterate over the markerArgs elements and create a map marker for each one
         for (let i in markerArgs) {
           if (markerArgs[i].locationId == this.searchResults.selectedLocationId) {
             markerArgs[i].selected = true;
           }
-          const latLngArr = markerArgs[i].locationId.split(',');
-          const latLng = new google.maps.LatLng(latLngArr[0], latLngArr[1]);
-          const marker = new CustomMarker(
-            latLng,
+
+          const latlng = this.getLocationLatLng(markerArgs[i].locationId);
+          const googleMapLatLng = new google.maps.LatLng(latlng.lat, latlng.lng);
+
+          new CustomMarker(
+            googleMapLatLng,
             this.map.object,
             markerArgs[i]
           );
+        }
+      },
+
+      getLocationLatLng(locationId) {
+        return {
+          lat: this.searchResults.locations[locationId].jobs[0].prison_location.lat,
+          lng: this.searchResults.locations[locationId].jobs[0].prison_location.lng
         }
       },
 
@@ -431,15 +441,16 @@
         });
 
         this.searchResults.orderedLocations = [];
-        for (const group in this.searchResults.jobLocationGroups) {
+        for (const id in this.searchResults.locations) {
+          const locationLatLng = this.getLocationLatLng(id);
           const newDistance = this.calculateDistanceBetweenTwoLatLngPoints(
             lat,
             lng,
-            this.searchResults.jobLocationGroups[group].jobs[0].prison_location.lat,
-            this.searchResults.jobLocationGroups[group].jobs[0].prison_location.lng
+            locationLatLng.lat,
+            locationLatLng.lng
           );
-          this.searchResults.jobLocationGroups[group].distance = newDistance;
-          this.searchResults.orderedLocations.push(this.searchResults.jobLocationGroups[group].jobs);
+          this.searchResults.locations[id].distance = newDistance;
+          this.searchResults.orderedLocations.push(this.searchResults.locations[id].jobs);
         }
 
         this.searchResults.orderedLocations.sort(function (a, b) {
@@ -449,59 +460,66 @@
 
       createLocations() {
 
-        // iterate over the jobs and put them in the correct jobLocationGroup
         const jobs = this.searchResults.jobs;
-        const jobLocationGroups = {};
+        const locations = {};
+        const previousSearchTermMakerFound = this.searchTerm.latlng.lat && this.searchTerm.latlng.lng;
         let closestLocationDistance = Number.MAX_SAFE_INTEGER;
         let closestLocationId = null;
 
-        // iterate over the jobs and put them in the correct jobLocationGroup
-        for (let i = 0; i < jobs.length; i++) {
-          const latLngStr = jobs[i].prison_location.lat + ',' + jobs[i].prison_location.lng;
+        // update the jobs distance if we already have a search term marker
+        if (previousSearchTermMakerFound) {
+          this.updateJobsDistance(this.searchTerm.latlng.lat, this.searchTerm.latlng.lng);
+        }
 
-          if (typeof jobLocationGroups[latLngStr] == 'undefined') {
-            jobLocationGroups[latLngStr] = {
+        // iterate over the jobs and put them in the correct location
+        for (let i = 0; i < jobs.length; i++) {
+          const locationId = jobs[i].prison_name.replace(/ /g, '-').toLowerCase();
+
+          if (typeof locations[locationId] == 'undefined') {
+            locations[locationId] = {
               prisonName: jobs[i].prison_name,
               jobs: [jobs[i]]
             };
           } else {
-            jobLocationGroups[latLngStr].jobs.push(jobs[i]);
+            locations[locationId].jobs.push(jobs[i]);
           }
 
-          jobs[i].locationId = latLngStr;
+          jobs[i].locationId = locationId;
 
           if (jobs[i].distance < closestLocationDistance) {
             closestLocationDistance = jobs[i].distance;
-            closestLocationId = latLngStr;
+            closestLocationId = locationId;
           }
         }
-        this.searchResults.jobLocationGroups = jobLocationGroups;
+        this.searchResults.locations = locations;
         this.searchResults.selectedLocationId = closestLocationId;
 
         // initialize orderedLocations array
         this.searchResults.orderedLocations = [];
-        for (const id in this.searchResults.jobLocationGroups) {
-          this.searchResults.orderedLocations.push(this.searchResults.jobLocationGroups[id].jobs);
+        for (const id in this.searchResults.locations) {
+          this.searchResults.orderedLocations.push(this.searchResults.locations[id].jobs);
         }
 
         // initially sort the job location groups by town name
-        this.searchResults.orderedLocations.sort(function (a, b) {
-          const
-            aTown = a[0].prison_location.town,
-            bTown = b[0].prison_location.town
-          ;
-          if (aTown < bTown) {
-            return -1;
-          } else {
-            if (aTown > bTown) {
-              return 1;
+        if (previousSearchTermMakerFound) {
+          this.searchResults.orderedLocations.sort(function (a, b) {
+            const
+              aTown = a[0].prison_location.town,
+              bTown = b[0].prison_location.town
+            ;
+            if (aTown < bTown) {
+              return -1;
             } else {
-              return 0;
+              if (aTown > bTown) {
+                return 1;
+              } else {
+                return 0;
+              }
             }
-          }
-        });
+          });
+        }
 
-        this.updateMapWithLocationMarkers(this.searchResults.jobLocationGroups);
+        this.updateMapWithLocationMarkers(this.searchResults.locations);
       },
 
       createMap() {
@@ -660,6 +678,7 @@
           'lng0': bounds.getSouthWest().lng(),
           'lat1': bounds.getNorthEast().lat(),
           'lng1': bounds.getNorthEast().lng(),
+          'selected-location': this.searchResults.selectedLocationId
         };
         if (this.searchTerm.marker) {
           currentState['marker-lat'] = this.searchTerm.marker.latlng.lat();
@@ -750,7 +769,6 @@
         this.geolocation.isActive = false;
 
         if (this.searchTerm.query) {
-          console.log('geocoder search');
           new google.maps.Geocoder().geocode(
             {'address': this.searchTerm.query + ', UK'},
             this.processGeocoderResults
@@ -848,7 +866,7 @@
       visibleSearchResults: function() {
         if (this.mounted) {
 
-          if (Object.keys(this.searchResults.jobLocationGroups).length === 0) {
+          if (Object.keys(this.searchResults.locations).length === 0) {
             this.createLocations();
           }
 
