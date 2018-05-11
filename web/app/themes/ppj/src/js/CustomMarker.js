@@ -15,7 +15,7 @@ CustomMarker.deselectMarker = function() {
   // find all markers
   const searchMap = document.querySelector('.find-a-job__map');
 
-  const jobMarkers = searchMap.querySelectorAll('.find-a-job__map-marker--job-location-group.find-a-job__map-marker--selected');
+  const jobMarkers = searchMap.querySelectorAll('.find-a-job__map-marker--location.find-a-job__map-marker--selected');
   for (let i in jobMarkers) {
     if (typeof jobMarkers[i].classList !== 'undefined') {
       const classList = jobMarkers[i].classList;
@@ -32,8 +32,8 @@ CustomMarker.changeSelectedMarker = function(div) {
     div.classList.add('find-a-job__map-marker--selected');
 };
 
-CustomMarker.changeSelectedMarkerByGroupId = function(groupId) {
-  const marker = document.querySelector('[data-group-id="' + groupId + '"]');
+CustomMarker.changeSelectedMarkerByLocationId = function(locationId) {
+  const marker = document.querySelector('[data-location-id="' + locationId + '"]');
   CustomMarker.changeSelectedMarker(marker);
 };
 
@@ -53,9 +53,9 @@ CustomMarker.prototype.draw = function() {
       icon.classList.add('find-a-job__map-marker-icon');
       div.appendChild(icon);
 
-      if (self.args.class == 'find-a-job__map-marker--job-location-group') {
+      if (self.args.class == 'find-a-job__map-marker--location') {
 
-        div.setAttribute('data-group-id', self.args.groupId);
+        div.setAttribute('data-location-id', self.args.locationId);
         styleMarker(div, self.args);
 
         icon.addEventListener("mouseover", function() {
