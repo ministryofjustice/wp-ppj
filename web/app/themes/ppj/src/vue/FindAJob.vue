@@ -234,6 +234,8 @@
         jobFeedLoaded: false,
         jobFeedError: false,
 
+        jobs: [],
+
         list: {
           activePage: 0,
           resultsPerPage: 5,
@@ -242,7 +244,6 @@
         },
 
         searchResults: {
-          jobs: [],
           locations: {},
           orderedLocations: [],
           selectedLocationId: previousState['selected-location'] || '',
@@ -432,19 +433,19 @@
       updateJobsDistance(lat, lng) {
 
         // calculate distance
-        for (let i = 0; i < this.searchResults.jobs.length; i++) {
+        for (let i = 0; i < this.jobs.length; i++) {
 
           const newDistance = this.calculateDistanceBetweenTwoLatLngPoints(
             lat,
             lng,
-            this.searchResults.jobs[i].prison_location.lat,
-            this.searchResults.jobs[i].prison_location.lng
+            this.jobs[i].prison_location.lat,
+            this.jobs[i].prison_location.lng
           );
 
-          this.searchResults.jobs[i].distance = newDistance;
+          this.jobs[i].distance = newDistance;
         }
 
-        this.searchResults.jobs.sort(function (a, b) {
+        this.jobs.sort(function (a, b) {
           return a.distance - b.distance;
         });
 
@@ -468,7 +469,7 @@
 
       createLocations() {
 
-        const jobs = this.searchResults.jobs;
+        const jobs = this.jobs;
         const locations = {};
         const previousSearchTermMakerFound = this.searchTerm.latlng.lat && this.searchTerm.latlng.lng;
         let closestLocationDistance = Number.MAX_SAFE_INTEGER;
@@ -840,7 +841,7 @@
 
       handleGotVacanciesData(response) {
         this.jobFeedLoaded = true;
-        this.searchResults.jobs = response.data;
+        this.jobs = response.data;
       },
 
       updateIsDeviceMobile() {
@@ -865,7 +866,7 @@
       },
 
       defaultSearchResults: function () {
-        return this.searchResults.jobs;
+        return this.jobs;
       },
 
       backwardEnabled: function () {
@@ -907,7 +908,7 @@
       },
 
       jobsAvailable: function() {
-        return this.searchResults.jobs.length + ' ' + this.jobTitle + ' jobs available: ';
+        return this.jobs.length + ' ' + this.jobTitle + ' jobs available: ';
       }
     },
 
