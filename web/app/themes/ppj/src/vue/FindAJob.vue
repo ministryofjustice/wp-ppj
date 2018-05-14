@@ -365,13 +365,20 @@
         this.map.object.panTo(new google.maps.LatLng(lat, lng));
       },
 
-      handleMapMarkerClick(self, locationId, event) {
+      focusOnSelectedJob(self, locationId) {
+        console.log('focusOnSelectedJob', locationId);
         if (self.deviceIsMobile) {
           self.calculateActivePageFromLocationId(locationId);
         } else {
-          document.querySelector(`.find-a-job__view-list-element[data-location-id='${locationId}']`)
-            .scrollIntoView({ behavior: 'smooth' });
+          const selectedJobs = document.querySelector(`.find-a-job__view-list-element[data-location-id='${locationId}']`);
+          if (selectedJobs) {
+            selectedJobs.scrollIntoView({ behavior: 'smooth' });
+          }
         }
+      },
+
+      handleMapMarkerClick(self, locationId, event) {
+        self.focusOnSelectedJob(self, locationId);
         self.focusOnLocation(locationId);
         event.preventDefault();
         event.stopPropagation();
@@ -492,7 +499,10 @@
           }
         }
         this.searchResults.locations = locations;
-        this.searchResults.selectedLocationId = closestLocationId;
+
+        if (!previousSearchTermMakerFound) {
+          this.searchResults.selectedLocationId = closestLocationId;
+        }
 
         // initialize orderedLocations array
         this.searchResults.orderedLocations = [];
@@ -766,6 +776,8 @@
 
       search() {
         this.searchTerm.query = this.searchTerm.input;
+        this.searchTerm.latlng = null;
+        this.searchTerm.selectedLocationId = null;
         this.geolocation.isActive = false;
 
         if (this.searchTerm.query) {
@@ -870,6 +882,7 @@
             this.createLocations();
           }
 
+          this.focusOnSelectedJob(this, this.searchResults.selectedLocationId);
           let selectedLocations = null;
           if (this.deviceIsMobile) {
             selectedLocations = this.searchResults.orderedLocations.slice().splice(
