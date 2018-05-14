@@ -156,7 +156,7 @@
           </button>
           <div class="find-a-job__pagination-page-numbers-container">
             <div class="find-a-job__pagination-current-page-number">
-              {{searchResults.listView.activePage + 1}}
+              {{list.activePage + 1}}
             </div>
             <div class="find-a-job__pagination-of">of</div>
             <div class="find-a-job__pagination-total-pages">
@@ -234,13 +234,14 @@
         jobFeedLoaded: false,
         jobFeedError: false,
 
+        list: {
+          activePage: 0,
+          resultsPerPage: 5,
+          forwardEnabled: true,
+          backwardEnabled: false
+        },
+
         searchResults: {
-          listView: {
-            activePage: 0,
-            resultsPerPage: 5,
-            forwardEnabled: true,
-            backwardEnabled: false
-          },
           jobs: [],
           locations: {},
           orderedLocations: [],
@@ -328,7 +329,7 @@
         for (let i in groups) {
           i = parseInt(i);
           if (groups[i][0].locationId == locationId) {
-            this.searchResults.listView.activePage = Math.floor(i / this.searchResults.listView.resultsPerPage);
+            this.list.activePage = Math.floor(i / this.list.resultsPerPage);
             return;
           }
         }
@@ -698,7 +699,7 @@
       },
 
       handleNewSearchLocation(latlng) {
-        this.searchResults.listView.activePage = 0;
+        this.list.activePage = 0;
         this.searchTerm.doneInitialZoom = false;
 
         if (latlng == null) {
@@ -814,18 +815,18 @@
       },
 
       showPage(i) {
-        this.searchResults.listView.activePage = i
+        this.list.activePage = i
       },
 
       showNextPage() {
-        if (this.searchResults.listView.activePage < (this.numberOfResultPages - 1)) {
-          this.searchResults.listView.activePage++
+        if (this.list.activePage < (this.numberOfResultPages - 1)) {
+          this.list.activePage++
         }
       },
 
       showPreviousPage() {
-        if (this.searchResults.listView.activePage > 0) {
-          this.searchResults.listView.activePage--
+        if (this.list.activePage > 0) {
+          this.list.activePage--
         }
       },
 
@@ -859,7 +860,7 @@
 
     computed: {
       numberOfResultPages: function () {
-        const num = Math.ceil(this.searchResults.orderedLocations.length / this.searchResults.listView.resultsPerPage);
+        const num = Math.ceil(this.searchResults.orderedLocations.length / this.list.resultsPerPage);
         return num;
       },
 
@@ -868,11 +869,11 @@
       },
 
       backwardEnabled: function () {
-        return (this.searchResults.listView.activePage > 0);
+        return (this.list.activePage > 0);
       },
 
       forwardEnabled: function () {
-        return (this.searchResults.listView.activePage < (this.numberOfResultPages - 1));
+        return (this.list.activePage < (this.numberOfResultPages - 1));
       },
 
       visibleSearchResults: function() {
@@ -882,12 +883,12 @@
             this.createLocations();
           }
 
-          this.focusOnSelectedJob(this, this.searchResults.selectedLocationId);
+          //this.focusOnSelectedJob(this, this.searchResults.selectedLocationId);
           let selectedLocations = null;
           if (this.deviceIsMobile) {
             selectedLocations = this.searchResults.orderedLocations.slice().splice(
-              this.searchResults.listView.resultsPerPage * this.searchResults.listView.activePage,
-              this.searchResults.listView.resultsPerPage
+              this.list.resultsPerPage * this.list.activePage,
+              this.list.resultsPerPage
             );
           } else {
             selectedLocations = this.searchResults.orderedLocations;
