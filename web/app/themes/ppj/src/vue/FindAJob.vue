@@ -2,7 +2,7 @@
 
   <div class="find-a-job"
        v-cloak
-       :class="{'find-a-job--job-selected': searchResults.selectedLocationId}"
+       :class="{'find-a-job--job-selected': selectedLocationId}"
   >
     <div class="find-a-job__header">
       <h2 class="find-a-job__title">{{ titleText }}</h2>
@@ -125,7 +125,7 @@
                          :prison-name="job.prison_name"
                          :prison-page-link="job.url"
                          :salary="job.salary"
-                         :selected="job.locationId == searchResults.selectedLocationId"
+                         :selected="job.locationId == selectedLocationId"
                          :title="job.title"
                          :url="job.url"
             >
@@ -246,8 +246,9 @@
         searchResults: {
           locations: {},
           orderedLocations: [],
-          selectedLocationId: previousState['selected-location'] || '',
         },
+
+        selectedLocationId: previousState['selected-location'] || '',
 
         searchTerm: {
           input: previousState['search'] || '',
@@ -323,7 +324,7 @@
       },
 
       updateSelectedLocationId(locationId) {
-        this.searchResults.selectedLocationId = locationId;
+        this.selectedLocationId = locationId;
       },
 
       calculateActivePageFromLocationId(locationId) {
@@ -409,7 +410,7 @@
 
         // iterate over the markerArgs elements and create a map marker for each one
         for (let i in markerArgs) {
-          if (markerArgs[i].locationId == this.searchResults.selectedLocationId) {
+          if (markerArgs[i].locationId == this.selectedLocationId) {
             markerArgs[i].selected = true;
           }
 
@@ -498,10 +499,6 @@
           }
         }
         this.searchResults.locations = locations;
-
-        if (!previousSearchTermMarkerFound) {
-          this.searchResults.selectedLocationId = closestLocationId;
-        }
 
         // initialize orderedLocations array
         this.searchResults.orderedLocations = [];
@@ -687,7 +684,7 @@
           'lng0': bounds.getSouthWest().lng(),
           'lat1': bounds.getNorthEast().lat(),
           'lng1': bounds.getNorthEast().lng(),
-          'selected-location': this.searchResults.selectedLocationId
+          'selected-location': this.selectedLocationId
         };
         if (this.searchTerm.marker) {
           currentState['marker-lat'] = this.searchTerm.marker.latlng.lat();
@@ -776,7 +773,7 @@
       search() {
         this.searchTerm.query = this.searchTerm.input;
         this.searchTerm.latlng = null;
-        this.searchTerm.selectedLocationId = '';
+        this.updateSelectedLocationId('');
         this.geolocation.isActive = false;
 
         if (this.searchTerm.query) {
