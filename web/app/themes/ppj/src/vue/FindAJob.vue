@@ -192,8 +192,8 @@
   import dummyJobs from '../js/dummyJobs';
 
   export default {
-    props: {
 
+    props: {
       'title': {
         default: '',
         type: String
@@ -219,7 +219,7 @@
     data() {
       const previousState = this.getUrlParamsAsJson();
 
-      return {
+      const data = {
         previousState : previousState,
 
         deviceIsMobile: false,
@@ -284,6 +284,8 @@
 
         mounted: false,
       };
+
+      return data;
     },
 
     methods: {
@@ -443,7 +445,7 @@
 
           this.jobs[i].distance = newDistance;
         }
-        
+
         this.searchResults.orderedLocations = [];
         for (const id in this.searchResults.locations) {
           const locationLatLng = this.getLocationLatLng(id);
@@ -466,12 +468,12 @@
 
         const jobs = this.jobs;
         const locations = {};
-        const previousSearchTermMakerFound = this.searchTerm.latlng.lat && this.searchTerm.latlng.lng;
+        const previousSearchTermMarkerFound = (this.searchTerm.latlng.lat && this.searchTerm.latlng.lng);
         let closestLocationDistance = Number.MAX_SAFE_INTEGER;
         let closestLocationId = null;
 
         // update the jobs distance if we already have a search term marker
-        if (previousSearchTermMakerFound) {
+        if (previousSearchTermMarkerFound) {
           this.updateJobsDistance(this.searchTerm.latlng.lat, this.searchTerm.latlng.lng);
         }
 
@@ -497,7 +499,7 @@
         }
         this.searchResults.locations = locations;
 
-        if (!previousSearchTermMakerFound) {
+        if (!previousSearchTermMarkerFound) {
           this.searchResults.selectedLocationId = closestLocationId;
         }
 
@@ -508,7 +510,7 @@
         }
 
         // initially sort the job location groups by town name
-        if (previousSearchTermMakerFound) {
+        if (!previousSearchTermMarkerFound) {
           this.searchResults.orderedLocations.sort(function (a, b) {
             const
               aTown = a[0].prison_location.town,
