@@ -115,7 +115,7 @@
           <li class="find-a-job__view-list-element"
               v-if="!jobFeedError && searchResults.jobs.length > 0"
               :data-location-id="job.locationId"
-              v-for="(job, index) in visibleSearchResults"
+              v-for="(job, index) in visibleJobs"
               :key="index"
               v-on:click="handleVacancyClick(job.locationId)">
             <job-summary :distance="job.distance"
@@ -876,7 +876,7 @@
         return (this.list.activePage < (this.numberOfResultPages - 1));
       },
 
-      visibleSearchResults: function() {
+      visibleJobs: function() {
         if (this.mounted) {
 
           if (Object.keys(this.searchResults.locations).length === 0) {
