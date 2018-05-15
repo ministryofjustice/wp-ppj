@@ -776,7 +776,7 @@
       search() {
         this.searchTerm.query = this.searchTerm.input;
         this.searchTerm.latlng = null;
-        this.searchTerm.selectedLocationId = null;
+        this.searchTerm.selectedLocationId = '';
         this.geolocation.isActive = false;
 
         if (this.searchTerm.query) {
