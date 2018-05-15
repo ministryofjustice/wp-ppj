@@ -237,7 +237,7 @@
         jobs: [],
 
         list: {
-          activePage: 0,
+          activePage: parseInt(previousState['active-page']) || 0,
           resultsPerPage: 5,
           forwardEnabled: true,
           backwardEnabled: false
@@ -689,7 +689,8 @@
           'lng0': bounds.getSouthWest().lng(),
           'lat1': bounds.getNorthEast().lat(),
           'lng1': bounds.getNorthEast().lng(),
-          'selected-location': this.selectedLocationId
+          'selected-location': this.selectedLocationId,
+          'active-page': this.list.activePage
         };
         if (this.searchTerm.marker) {
           currentState['marker-lat'] = this.searchTerm.marker.latlng.lat();
@@ -816,17 +817,20 @@
 
       showPage(i) {
         this.list.activePage = i
+        this.persistStateToHistory();
       },
 
       showNextPage() {
+        console.log('showNextPage');
         if (this.list.activePage < (this.numberOfResultPages - 1)) {
-          this.list.activePage++
+          this.showPage(this.list.activePage + 1);
         }
       },
 
       showPreviousPage() {
+        console.log('showPreviousPage');
         if (this.list.activePage > 0) {
-          this.list.activePage--
+          this.showPage(this.list.activePage - 1);
         }
       },
 
