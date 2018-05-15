@@ -758,9 +758,9 @@
 
       convertJsonToUrlParameterString(json) {
         const paramsString = Object.keys(json).map(k => {
-          return encodeURIComponent(k)
+          return encodeURI(k)
             + '='
-            + encodeURIComponent(json[k])
+            + encodeURI(json[k])
         }).join('&');
         return (paramsString) ? '?' + paramsString : '';
       },
