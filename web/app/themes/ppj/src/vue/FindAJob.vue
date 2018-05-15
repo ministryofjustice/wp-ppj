@@ -465,6 +465,25 @@
         });
       },
 
+      sortLocationsByPrisonTown(locations) {
+        locations.sort(function (a, b) {
+          const
+            aTown = a[0].prison_location.town,
+            bTown = b[0].prison_location.town
+          ;
+          if (aTown < bTown) {
+            return -1;
+          } else {
+            if (aTown > bTown) {
+              return 1;
+            } else {
+              return 0;
+            }
+          }
+        });
+        return locations;
+      },
+
       createLocations() {
 
         const jobs = this.jobs;
@@ -501,28 +520,14 @@
         this.searchResults.locations = locations;
 
         // initialize orderedLocations array
-        this.searchResults.orderedLocations = [];
+        const orderedLocations = [];
         for (const id in this.searchResults.locations) {
-          this.searchResults.orderedLocations.push(this.searchResults.locations[id].jobs);
+          orderedLocations.push(this.searchResults.locations[id].jobs);
         }
 
         // initially sort the job location groups by town name
         if (!previousSearchTermMarkerFound) {
-          this.searchResults.orderedLocations.sort(function (a, b) {
-            const
-              aTown = a[0].prison_location.town,
-              bTown = b[0].prison_location.town
-            ;
-            if (aTown < bTown) {
-              return -1;
-            } else {
-              if (aTown > bTown) {
-                return 1;
-              } else {
-                return 0;
-              }
-            }
-          });
+          this.searchResults.orderedLocations = this.sortLocationsByPrisonTown(orderedLocations);
         }
 
         this.updateMapWithLocationMarkers(this.searchResults.locations);
