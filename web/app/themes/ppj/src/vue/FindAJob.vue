@@ -247,7 +247,6 @@
           locations: {},
           orderedLocations: [],
           selectedLocationId: previousState['selected-location'] || '',
-          visibleLocation: null,
         },
 
         searchTerm: {
