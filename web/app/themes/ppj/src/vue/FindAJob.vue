@@ -443,11 +443,7 @@
 
           this.jobs[i].distance = newDistance;
         }
-
-        this.jobs.sort(function (a, b) {
-          return a.distance - b.distance;
-        });
-
+        
         this.searchResults.orderedLocations = [];
         for (const id in this.searchResults.locations) {
           const locationLatLng = this.getLocationLatLng(id);
