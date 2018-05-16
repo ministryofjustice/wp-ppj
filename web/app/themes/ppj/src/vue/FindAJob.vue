@@ -371,7 +371,6 @@
       },
 
       focusOnSelectedJob(self, locationId) {
-        console.log('focusOnSelectedJob', locationId);
         if (self.deviceIsMobile) {
           self.calculateActivePageFromLocationId(locationId);
         } else {
@@ -830,14 +829,12 @@
       },
 
       showNextPage() {
-        console.log('showNextPage');
         if (this.list.activePage < (this.numberOfResultPages - 1)) {
           this.showPage(this.list.activePage + 1);
         }
       },
 
       showPreviousPage() {
-        console.log('showPreviousPage');
         if (this.list.activePage > 0) {
           this.showPage(this.list.activePage - 1);
         }
