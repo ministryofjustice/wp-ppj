@@ -88,7 +88,7 @@
     </div>
 
     <div class="find-a-job__jobs">
-      <div v-if="!jobFeedError && searchResults.jobs.length > 0"
+      <div v-if="!jobFeedError && jobs.length > 0"
            class="find-a-job__jobs-available-container">
         <div class="find-a-job__jobs-available">{{ jobsAvailable }}</div>
       </div>
@@ -102,7 +102,7 @@
           </div>
         </div>
 
-        <div v-if="!jobFeedError && jobFeedLoaded && searchResults.jobs.length == 0"
+        <div v-if="!jobFeedError && jobFeedLoaded && jobs.length == 0"
              class="find-a-job__job-feed-message find-a-job__job-feed-message--no-jobs">
           <div class="find-a-job__job-feed-text-container">
             <p>There are no jobs currently available.</p>
@@ -110,10 +110,10 @@
           </div>
         </div>
 
-        <ul class="find-a-job__view-list">
+        <ul class="find-a-job__view-list" v-on:scroll="handleListScroll" ref="list">
 
           <li class="find-a-job__view-list-element"
-              v-if="!jobFeedError && searchResults.jobs.length > 0"
+              v-if="!jobFeedError && jobs.length > 0"
               :data-location-id="job.locationId"
               v-for="(job, index) in visibleJobs"
               :key="index"
@@ -182,7 +182,7 @@
         </div>
 
       </div>
-   </div>
+    </div>
   </div>
 </template>
 
@@ -240,7 +240,8 @@
           activePage: parseInt(previousState['active-page']) || 0,
           resultsPerPage: 5,
           forwardEnabled: true,
-          backwardEnabled: false
+          backwardEnabled: false,
+          scrollTop: parseInt(previousState['scroll']) || 0,
         },
 
         searchResults: {
@@ -391,6 +392,13 @@
 
       handleVacancyClick(locationId) {
         this.focusOnLocation(locationId);
+      },
+
+      handleListScroll() {
+        clearTimeout(this.handleListScrollTimeoutId);
+        this.handleListScrollTimeoutId = setTimeout(()=> {
+          this.persistStateToHistory();
+        }, 100)
       },
 
       updateMapWithLocationMarkers(locations) {
@@ -690,7 +698,8 @@
           'lat1': bounds.getNorthEast().lat(),
           'lng1': bounds.getNorthEast().lng(),
           'selected-location': this.selectedLocationId,
-          'active-page': this.list.activePage
+          'active-page': this.list.activePage,
+          'scroll': document.getElementsByClassName('find-a-job__view-list')[0].scrollTop,
         };
         if (this.searchTerm.marker) {
           currentState['marker-lat'] = this.searchTerm.marker.latlng.lat();
