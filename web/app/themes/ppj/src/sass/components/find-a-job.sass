@@ -169,17 +169,28 @@
       margin: 0
       padding: 0 $common-spacing
 
-  &__job-feed-error-container
-    background-color: $color-notification
+  &__job-feed-message
     border-bottom: $border
     border-top: $border
     padding: $common-spacing $common-spacing * 2
     pointer-events: auto
 
-  &__job-feed-error
+    &--feed-error
+      background-color: $color-notification
+
+      #{$s}__job-feed-text-container
+        max-width: 32rem
+
+    &--no-jobs
+      background-color: $color-notification
+
+      #{$s}__job-feed-text-container
+        max-width: 40rem
+
+
+  &__job-feed-text-container
     line-height: 2.6rem
     margin: auto
-    max-width: 32rem
     text-align: left
 
     & a
