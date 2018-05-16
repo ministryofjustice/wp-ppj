@@ -169,6 +169,24 @@
       margin: 0
       padding: 0 $common-spacing
 
+  &__job-feed-error-container
+    background-color: $color-notification
+    border-bottom: $border
+    border-top: $border
+    padding: $common-spacing $common-spacing * 2
+    pointer-events: auto
+
+  &__job-feed-error
+    line-height: 2.6rem
+    margin: auto
+    max-width: 32rem
+    text-align: left
+
+    & a
+      text-decoration: underline
+
+      &:hover
+        cursor: pointer
 
   &__jobs-available
     align-items: center

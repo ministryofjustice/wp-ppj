@@ -88,11 +88,19 @@
     </div>
 
     <div class="find-a-job__jobs">
-      <div class="find-a-job__jobs-available-container">
+      <div v-if="!jobFeedError && this.searchResults.jobs.length > 0" class="find-a-job__jobs-available-container">
         <div class="find-a-job__jobs-available">{{ jobsAvailable }}</div>
       </div>
 
-      <div class="find-a-job__view-list-container">
+      <div v-if="jobFeedError" class="find-a-job__job-feed-error-container">
+        <div class="find-a-job__job-feed-error">
+          We can’t currently display job vacancies.
+          Try refreshing the screen or searching on <a href="https://justicejobs.tal.net/candidate/jobboard/vacancy/3/adv/?ftq=prison+officer">Justice Jobs</a>
+        </div>
+      </div>
+
+      <div class="find-a-job__view-list-container"
+           v-if="!jobFeedError && this.searchResults.jobs.length > 0">
 
         <ul class="find-a-job__view-list">
 
@@ -208,6 +216,7 @@
         geoLocationIsActive: false,
 
         vacanciesDataURL: this.jobFeedUrl,
+        jobFeedError: false,
 
         searchResults: {
           urlEncodedPostCode: '',
@@ -785,7 +794,8 @@
 
       axios.get(this.vacanciesDataURL,  { responseType: 'json' })
         .then(self.handleGotVacanciesData)
-        .catch(function (error) {
+        .catch((error) => {
+          this.jobFeedError = true;
           console.log(error);
         });
 
