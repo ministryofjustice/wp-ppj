@@ -88,14 +88,24 @@
     </div>
 
     <div class="find-a-job__jobs">
-      <div v-if="!jobFeedError && this.searchResults.jobs.length > 0" class="find-a-job__jobs-available-container">
+      <div v-if="!jobFeedError && this.searchResults.jobs.length > 0"
+           class="find-a-job__jobs-available-container">
         <div class="find-a-job__jobs-available">{{ jobsAvailable }}</div>
       </div>
 
-      <div v-if="jobFeedError" class="find-a-job__job-feed-error-container">
-        <div class="find-a-job__job-feed-error">
+      <div v-if="jobFeedError"
+           class="find-a-job__job-feed-message find-a-job__job-feed-message--feed-error">
+        <div class="find-a-job__job-feed-text-container">
           We can’t currently display job vacancies.
           Try refreshing the screen or searching on <a href="https://justicejobs.tal.net/candidate/jobboard/vacancy/3/adv/?ftq=prison+officer">Justice Jobs</a>
+        </div>
+      </div>
+
+      <div v-if="!jobFeedError && this.searchResults.jobs.length == 0"
+           class="find-a-job__job-feed-message find-a-job__job-feed-message--no-jobs">
+        <div class="find-a-job__job-feed-text-container">
+          There are no prison officer jobs currently available.<br/>
+          Please check back again soon.
         </div>
       </div>
 
@@ -792,7 +802,7 @@
       console.log('job list message: ' , this.jobListMessage);
       console.log('job list message URL: ' , this.jobListMessageURL);
 
-      axios.get(this.vacanciesDataURL,  { responseType: 'json' })
+      axios.get(this.vacanciesDataURL, { responseType: 'json' })
         .then(self.handleGotVacanciesData)
         .catch((error) => {
           this.jobFeedError = true;
