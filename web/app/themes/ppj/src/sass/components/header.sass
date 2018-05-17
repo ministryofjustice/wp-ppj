@@ -70,9 +70,10 @@
       &-list
         display: flex
         margin: 0 auto
-        max-width: 128rem
+        max-width: 100%
 
         @include bp('landscape')
+          max-width: 84rem
           padding: 0 $common-spacing * 2
 
         &-element
