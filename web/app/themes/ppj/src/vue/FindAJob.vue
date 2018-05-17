@@ -93,8 +93,6 @@
         <div class="find-a-job__jobs-available">{{ jobsAvailable }}</div>
       </div>
 
-
-
       <div class="find-a-job__view-list-container"
        >
         <div v-if="jobFeedError"
@@ -105,7 +103,7 @@
           </div>
         </div>
 
-        <div v-if="!jobFeedError && searchResults.jobs.length == 0"
+        <div v-if="!jobFeedError && jobFeedLoaded && searchResults.jobs.length == 0"
              class="find-a-job__job-feed-message find-a-job__job-feed-message--no-jobs">
           <div class="find-a-job__job-feed-text-container">
             There are no jobs currently available.<br/>
@@ -228,6 +226,7 @@
         geoLocationIsActive: false,
 
         vacanciesDataURL: this.jobFeedUrl,
+        jobFeedLoaded: false,
         jobFeedError: false,
 
         searchResults: {
@@ -696,6 +695,7 @@
       },
 
       handleGotVacanciesData(response) {
+        this.jobFeedLoaded = true;
         this.searchResults.jobs = response.data;
       },
 
