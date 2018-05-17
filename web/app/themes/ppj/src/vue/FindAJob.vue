@@ -88,33 +88,35 @@
     </div>
 
     <div class="find-a-job__jobs">
-      <div v-if="!jobFeedError && this.searchResults.jobs.length > 0"
+      <div v-if="!jobFeedError && searchResults.jobs.length > 0"
            class="find-a-job__jobs-available-container">
         <div class="find-a-job__jobs-available">{{ jobsAvailable }}</div>
       </div>
 
-      <div v-if="jobFeedError"
-           class="find-a-job__job-feed-message find-a-job__job-feed-message--feed-error">
-        <div class="find-a-job__job-feed-text-container">
-          We can’t currently display job vacancies.
-          Try refreshing the screen or searching on <a href="https://justicejobs.tal.net/candidate/jobboard/vacancy/3/adv/?ftq=prison+officer">Justice Jobs</a>
-        </div>
-      </div>
 
-      <div v-if="!jobFeedError && this.searchResults.jobs.length == 0"
-           class="find-a-job__job-feed-message find-a-job__job-feed-message--no-jobs">
-        <div class="find-a-job__job-feed-text-container">
-          There are no prison officer jobs currently available.<br/>
-          Please check back again soon.
-        </div>
-      </div>
 
       <div class="find-a-job__view-list-container"
-           v-if="!jobFeedError && this.searchResults.jobs.length > 0">
+       >
+        <div v-if="jobFeedError"
+             class="find-a-job__job-feed-message find-a-job__job-feed-message--feed-error">
+          <div class="find-a-job__job-feed-text-container">
+            We can’t currently display job vacancies.
+            Try refreshing the screen or searching on <a href="https://justicejobs.tal.net/candidate/jobboard/vacancy/3/adv/?ftq=prison+officer">Justice Jobs</a>
+          </div>
+        </div>
+
+        <div v-if="!jobFeedError && searchResults.jobs.length == 0"
+             class="find-a-job__job-feed-message find-a-job__job-feed-message--no-jobs">
+          <div class="find-a-job__job-feed-text-container">
+            There are no jobs currently available.<br/>
+            Please check back again soon.
+          </div>
+        </div>
 
         <ul class="find-a-job__view-list">
 
           <li class="find-a-job__view-list-element"
+              v-if="!jobFeedError && searchResults.jobs.length > 0"
               :data-group-id="job.jobLocationGroupId"
               v-for="(job, index) in visibleSearchResults"
               :key="index"
@@ -183,7 +185,7 @@
         </div>
 
       </div>
-    </div>
+   </div>
   </div>
 </template>
 
