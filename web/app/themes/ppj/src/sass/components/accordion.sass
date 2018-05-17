@@ -1,10 +1,9 @@
 .accordion
-  $c: &
   $border: 1px solid $color-light
   font-size: 1.6rem
   line-height: 2.2rem
   margin: 0 auto $common-spacing
-  max-width: 100%
+  width: 100%
 
   @include bp('portrait')
     font-size: 1.8rem
@@ -19,147 +18,75 @@
     font-size: 2.8rem
     line-height: 3.8rem
 
-  &__title
-    @extend .common-header
-
-  &__subtitle
-    font-weight: $font-weight-bold
-    margin-bottom: $common-spacing
-
-  &__list-element
-    position: relative
-
+  > details
     &:first-child
       border-top: $border
 
-    &-header
+    &[open]
+      border-bottom: $border
+
+    > summary
+      list-style: none;
       align-items: center
       border-bottom: $border
-      display: flex
-      justify-content: space-between
       margin-bottom: 0
       padding: $common-spacing/2
-      pointer-events: none
-      transition: background-color $main-transition-duration
+      cursor: pointer
 
-      &:hover
+      // ::before pseudo element is created by details-element-polyfill
+      &::before
+        display: none
+
+      &::-webkit-details-marker
+        display: none
+
+      &:hover,
+      &:focus
         background-color: $color-extremely-light
 
       @include bp('portrait')
-        cursor: pointer
         padding: $common-spacing/2 $common-spacing
-        pointer-events: initial
 
-    &-title
-      margin-bottom: 0
+  &__title
+    margin: 0
 
-    &-subtitle
-      font-family: $sans-serif
-      font-weight: $font-weight-normal
-      margin-left: .2em
+  &__subtitle
+    font-family: $sans-serif
+    font-weight: $font-weight-normal
+    margin-left: .2em
 
-    &-content
-      border-left: .4rem solid $color-light
-      font-weight: $font-weight-light
-      height: 0
-      overflow: hidden
-      padding: 0 1.6rem
-      transition: all $main-transition-duration
+  &__content
+    border-left: .4rem solid $color-light
+    font-weight: $font-weight-light
+    padding: 0 1.6rem
+    margin: $common-spacing/2 0
 
-      & > p
-        margin-top: $common-spacing/2
+    & > p
+      margin-top: $common-spacing/2
 
-        &:first-child
-          margin-top: 0
+      &:first-child
+        margin-top: 0
 
-        &:last-child
-          margin-bottom: 0
+      &:last-child
+        margin-bottom: 0
 
-      & > a
-        text-decoration: underline
+    & > a
+      text-decoration: underline
 
-      & table
-        margin: $common-spacing 0 $common-spacing * 2
-        width: 100%
+    & table
+      margin: $common-spacing 0 $common-spacing * 2
+      width: 100%
 
-        tr
-          border: 1px solid $color-light
-          border-left: 0
-          border-right: 0
+      tr
+        border: 1px solid $color-light
+        border-left: 0
+        border-right: 0
 
-        th
-          font-weight: $font-weight-bold
+      th
+        font-weight: $font-weight-bold
 
-        td, th
-          padding: $common-spacing / 2
+      td, th
+        padding: $common-spacing / 2
 
-        td:first-child, th:first-child
-          padding-left: 0
-
-    &-button
-      $length: 1.8rem
-      $thickness: $length/4
-      //color: $color-main // https://stackoverflow.com/questions/32413731/color-for-unicode-emoji/39776303#39776303
-      color: transparent
-      cursor: pointer
-      display: block
-      float: right
-      font-size: $font-size-small
-      height: $length
-      line-height: 1
-      padding: 0
-      pointer-events: initial
-      position: relative
-      text-shadow: 0 0 0 $color-main
-      transform: rotate(0deg)
-      transition: all $main-transition-duration
-      width: $length
-      margin-left: 0.7em
-
-      &-container
-        display: flex
-        height: $length
-        width: $length
-
-      &-bar
-        background-color: $color-main
-        height: $thickness
-        width: $length
-        position: absolute
-        top: $length/2 - $thickness/2
-        transition: opacity $main-transition-duration
-
-        &--horizontal
-
-        &--vertical
-          transform: rotate(90deg)
-
-    &--open
-      border-bottom: $border
-
-      .accordion
-        &__list-element
-
-          &-content
-            height: initial
-            margin: $common-spacing/2 0
-
-          &-button
-            //transform: rotate(90deg)
-
-          &-button
-            &-bar
-              &--vertical
-                opacity: 0
-
-  &--numbered
-    .accordion
-      &__list-element
-        display: block
-
-      &__list-element-title
-        //margin-left: $common-spacing
-
-        @include bp('landscape')
-          //margin-left: $common-spacing * 2
-
+      td:first-child, th:first-child
+        padding-left: 0
