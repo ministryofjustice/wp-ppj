@@ -5,6 +5,10 @@ import closestPolyfill from './polyfills/Element.closest';
 
 closestPolyfill();
 
+if ('dataLayer' in window == false) {
+  window.dataLayer = [];
+}
+
 window.ppjNavTo = function(href, callback) {
   console.log('navTo');
   if (typeof callback !== 'undefined') {
@@ -23,26 +27,20 @@ window.ppj.closeNavMenu = function() {
   body.classList.remove('mobile-nav-is-open');
 };
 
-window.ppj.toggleAccordion = function(event) {
-  event.preventDefault();
-  event.stopPropagation();
-
-  const listElement = event.target.closest('.accordion__list-element');
-  const title = listElement.querySelector('.accordion__list-element-title')
-    .textContent.replace(/\s+/g, ' ').trim(); // Squash multiple spaces & trim
-  const className = 'accordion__list-element--open';
-
-  var action;
-  if (listElement.classList.contains(className)) {
-    listElement.classList.remove(className);
-    action = 'close';
-  } else {
-    listElement.classList.add(className);
-    action = 'open';
-  }
-
-  ga('send', 'event', 'Accordian', title, action);
+window.ppj.toggleAccordion = (event) => {
+  const element = event.target;
+  const gtmEvent = {
+    event: 'accordion_toggle',
+    title: element.getAttribute('data-title'),
+    open: element.open
+  };
+  window.dataLayer.push(gtmEvent);
 };
+
+document.querySelectorAll('.accordion details').forEach((details) => {
+  details.addEventListener('toggle', window.ppj.toggleAccordion);
+});
+
 
 // _wq needs to be initialized so that Wistia's Video API can be used
 window._wq = window._wq || [];

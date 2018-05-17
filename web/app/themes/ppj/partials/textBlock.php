@@ -111,31 +111,25 @@ if (isset($td['link']['title'])) {
             <?php } elseif ($isValidAccordionBlock) { ?>
 
                 <div class="text-block__content">
-
                     <div class="accordion">
-                        <ol class="accordion__list">
-                            <?php foreach ($td['accordion'] as $el) : ?>
-                                <li class="accordion__list-element">
-                                    <div class="accordion__list-element-header" onclick="ppj.toggleAccordion(event)">
-                                        <h4 class="accordion__list-element-title">
-                                            <?= $el['title'] ?>
-                                            <?php if (!empty($el['subtitle'])): ?>
-                                                <span class="accordion__list-element-subtitle"><?= $el['subtitle'] ?></span>
-                                            <?php endif; ?>
-                                        </h4>
-                                        <div class="accordion__list-element-button-container">
-                                            <button class="accordion__list-element-button">
-                                                <div class="accordion__list-element-button-bar accordion__list-element-button-bar--horizontal"></div>
-                                                <div class="accordion__list-element-button-bar accordion__list-element-button-bar--vertical"></div>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="accordion__list-element-content"><?= $el['content'] ?></div>
-                                </li>
-                            <?php endforeach; ?>
-                        </ol>
+                        <?php foreach ($td['accordion'] as $el) : ?>
+                            <details data-title="<?= esc_attr(trim($el['title'] . ' ' . $el['subtitle'])) ?>">
+                                <summary>
+                                    <h4 class="accordion__title">
+                                        <?= $el['title'] ?>
+                                        <?php if (!empty($el['subtitle'])): ?>
+                                            <span class="accordion__subtitle">
+                                                <?= $el['subtitle'] ?>
+                                            </span>
+                                        <?php endif; ?>
+                                    </h4>
+                                </summary>
+                                <div class="accordion__content">
+                                    <?= $el['content'] ?>
+                                </div>
+                            </details>
+                        <?php endforeach; ?>
                     </div>
-
                 </div>
 
             <?php } elseif ($isValidIconRowsBlock) { ?>
