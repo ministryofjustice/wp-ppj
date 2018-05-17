@@ -191,12 +191,15 @@
       background: linear-gradient(to bottom, $color-transparency-dark-start, $color-transparent)
       display: block
       content: ''
-      height: 10rem
+      height: 6rem
       position: absolute
       top: 0
       left: 0
       right: 0
       z-index: 2
+
+      @include bp('portrait')
+        height: 14rem
 
     &:after
       background: linear-gradient(60deg, $color-transparency-dark-end 10%, $color-transparent 50%)
