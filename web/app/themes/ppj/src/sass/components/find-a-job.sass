@@ -317,6 +317,8 @@
   &__jobs
     @include bp('portrait')
       bottom: 0
+      display: flex
+      flex-direction: column
       left: 0
       position: absolute
       top: 20rem
@@ -324,7 +326,7 @@
 
   &__view-list-container
     @include bp('portrait')
-      position: relative
+      overflow-y: scroll
 
     @include bp('landscape')
 
