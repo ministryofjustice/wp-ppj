@@ -801,9 +801,6 @@
 
       window.addEventListener('resize', this.handleScreenResize);
 
-      console.log('job list message: ' , this.jobListMessage);
-      console.log('job list message URL: ' , this.jobListMessageURL);
-
       axios.get(this.vacanciesDataURL, { responseType: 'json' })
         .then(self.handleGotVacanciesData)
         .catch((error) => {
