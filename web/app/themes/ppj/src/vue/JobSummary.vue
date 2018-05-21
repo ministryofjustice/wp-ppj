@@ -48,8 +48,15 @@
 
     methods: {
       handleViewJobClick: function() {
-        ga('send', 'event', 'ViewJob', 'ViewJob',this.prisonName ,5);
-        window.location = this.url;
+
+        const gtmEvent = {
+          event: 'view_job_click',
+          prisonName: this.prisonName,
+          jobLink: this.url
+        };
+        window.dataLayer.push(gtmEvent);
+
+        window.location.href = this.url;
       }
     },
 
