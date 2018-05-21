@@ -2,6 +2,7 @@
 //Scrollpoints = require('scrollpoints');
 import scrollpoints from 'scrollpoints';
 import closestPolyfill from './polyfills/Element.closest';
+import 'nodelist-foreach-polyfill';
 
 closestPolyfill();
 
