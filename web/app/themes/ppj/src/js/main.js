@@ -1,8 +1,10 @@
 //import Waypoint from 'waypoint';
 //Scrollpoints = require('scrollpoints');
+import 'nodelist-foreach-polyfill';
+import 'details-element-polyfill';
+
 import scrollpoints from 'scrollpoints';
 import closestPolyfill from './polyfills/Element.closest';
-import 'nodelist-foreach-polyfill';
 
 closestPolyfill();
 

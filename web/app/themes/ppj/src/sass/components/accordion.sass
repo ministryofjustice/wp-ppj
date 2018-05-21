@@ -25,13 +25,19 @@
     &[open]
       border-bottom: $border
 
+      .accordion__title
+        &:after
+          content: '-'
+          padding-right: .2rem
+
     > summary
-      list-style: none;
       align-items: center
       border-bottom: $border
+      cursor: pointer
+      list-style: none
       margin-bottom: 0
       padding: $common-spacing/2
-      cursor: pointer
+      transition: background-color $main-transition-duration
 
       // ::before pseudo element is created by details-element-polyfill
       &::before
@@ -44,11 +50,27 @@
       &:focus
         background-color: $color-extremely-light
 
+
       @include bp('portrait')
         padding: $common-spacing/2 $common-spacing
 
   &__title
+    display: flex
     margin: 0
+
+    &:after
+      color: $color-main
+      content: '+'
+      font-size: 4rem
+      line-height: 1.6rem
+      margin-left: auto
+
+      @include bp('landscape')
+        font-size: 5rem
+        line-height: 2.4rem
+
+      @include bp('large')
+        line-height: 3.2rem
 
   &__subtitle
     font-family: $sans-serif
