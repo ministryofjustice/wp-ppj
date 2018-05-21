@@ -1,8 +1,4 @@
-//import Waypoint from 'waypoint';
-//Scrollpoints = require('scrollpoints');
-import 'nodelist-foreach-polyfill';
 import 'details-element-polyfill';
-
 import scrollpoints from 'scrollpoints';
 import closestPolyfill from './polyfills/Element.closest';
 
@@ -40,10 +36,10 @@ window.ppj.toggleAccordion = (event) => {
   window.dataLayer.push(gtmEvent);
 };
 
-document.querySelectorAll('.accordion details').forEach((details) => {
-  details.addEventListener('toggle', window.ppj.toggleAccordion);
-});
-
+const details = document.querySelectorAll('.accordion details');
+for (var i = 0; i < details.length; i++) {
+  details[i].addEventListener('toggle', window.ppj.toggleAccordion);
+}
 
 // _wq needs to be initialized so that Wistia's Video API can be used
 window._wq = window._wq || [];
