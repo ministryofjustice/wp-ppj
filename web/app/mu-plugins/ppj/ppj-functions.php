@@ -354,3 +354,34 @@ function markCurrentlySelectedAncestorMenuItem($menuItems) {
     }
     return $modifiedMenuItems;
 }
+
+/**
+ * @param $str
+ *
+ * Simple helper function to remove unicode characters using regex matching.
+ *
+ * @return mixed
+ */
+function removeUnicodeCharacters($str) {
+    return preg_replace('/[^\x{00}-\x{7F}]/u', '', $str);
+}
+
+/**
+ * @param $value
+ * @param $post_id
+ * @param $field
+ *
+ * Perform modifications on ACF values upon save
+ *
+ * @return mixed
+ */
+function processAcfValues( $value, $post_id, $field  ) {
+
+    if (gettype($value) == 'string') {
+        $value = removeUnicodeCharacters($value);
+    }
+
+    return $value;
+}
+
+add_filter('acf/update_value',  __NAMESPACE__ . '\\processAcfValues', 10, 3);
