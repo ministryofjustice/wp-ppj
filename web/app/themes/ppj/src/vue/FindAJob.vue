@@ -98,16 +98,16 @@
         <div v-if="jobFeedError"
              class="find-a-job__job-feed-message find-a-job__job-feed-message--feed-error">
           <div class="find-a-job__job-feed-text-container">
-            We can’t currently display job vacancies.
-            Try refreshing the screen or searching on <a href="https://justicejobs.tal.net/candidate/jobboard/vacancy/3/adv/?ftq=prison+officer">Justice Jobs</a>
+            <p>We can’t currently display job vacancies.</p>
+            <p>Try refreshing the screen or searching on <a href="https://justicejobs.tal.net/candidate/jobboard/vacancy/3/adv/?ftq=prison+officer">Justice&nbsp;Jobs</a></p>
           </div>
         </div>
 
         <div v-if="!jobFeedError && jobFeedLoaded && searchResults.jobs.length == 0"
              class="find-a-job__job-feed-message find-a-job__job-feed-message--no-jobs">
           <div class="find-a-job__job-feed-text-container">
-            There are no jobs currently available.<br/>
-            Please check back again soon.
+            <p>There are no jobs currently available.</p>
+            <p>Please check back again soon.</p>
           </div>
         </div>
 
@@ -118,7 +118,8 @@
               :data-group-id="job.jobLocationGroupId"
               v-for="(job, index) in visibleSearchResults"
               :key="index"
-              v-on:click="handleVacancyClick(job.jobLocationGroupId)">
+              v-on:click="handleVacancyClick
+              (job.jobLocationGroupId)">
             <job-summary :distance="job.distance"
                          :distance-time="job.distanceTime"
                          :position="job.role"

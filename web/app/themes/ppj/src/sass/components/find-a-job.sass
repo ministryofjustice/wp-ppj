@@ -180,20 +180,17 @@
     &--feed-error
       background-color: $color-warning
 
-      #{$s}__job-feed-text-container
-        max-width: 32rem
-
     &--no-jobs
       background-color: $color-notification
-
-      #{$s}__job-feed-text-container
-        max-width: 40rem
 
 
   &__job-feed-text-container
     line-height: 2.6rem
     margin: auto
     text-align: left
+
+    & p
+      margin: 0
 
     & a
       text-decoration: underline
