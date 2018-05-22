@@ -109,8 +109,6 @@ function my_acf_admin_head() {
 
 add_action('acf/input/admin_head', __NAMESPACE__ . '\\my_acf_admin_head');
 
-add_filter( 'wp_default_editor', create_function('', 'return "tinymce";') );
-
 function disable_emojicons_tinymce( $plugins ) {
     if ( is_array( $plugins ) ) {
         return array_diff( $plugins, array( 'wpemoji' ) );
