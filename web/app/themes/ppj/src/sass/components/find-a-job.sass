@@ -172,9 +172,12 @@
   &__job-feed-message
     border-bottom: $border
     border-top: $border
-    margin: 0 $common-spacing $common-spacing
+    margin: $common-spacing 0
     padding: $common-spacing $common-spacing * 2
     pointer-events: auto
+
+    @include bp('portrait')
+      margin: 0 $common-spacing $common-spacing
 
     &--feed-error
       background-color: $color-warning
