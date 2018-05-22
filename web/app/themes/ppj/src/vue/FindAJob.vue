@@ -118,8 +118,7 @@
               :data-group-id="job.jobLocationGroupId"
               v-for="(job, index) in visibleSearchResults"
               :key="index"
-              v-on:click="handleVacancyClick
-              (job.jobLocationGroupId)">
+              v-on:click="handleVacancyClick(job.jobLocationGroupId)">
             <job-summary :distance="job.distance"
                          :distance-time="job.distanceTime"
                          :position="job.role"
