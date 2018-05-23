@@ -556,7 +556,7 @@
 
           // Use the bounds_changed event listener to persist the state after the map has fully loaded.
           // Only persist the state 100 milliseconds after last bounds_changed event has fired.
-          // The first bounds_changed event will be ignore as it is always fired on map creation
+          // The first bounds_changed event will be ignored as it is always fired on map creation
           // and we don't want to persist the default state
           let previousTimeoutId = 0,
               ignoreBoundsChanged = true;
@@ -568,7 +568,7 @@
               clearTimeout(previousTimeoutId);
               previousTimeoutId = setTimeout(()=>{
                 this.persistStateToHistory();
-              }, 100)
+              }, 100);
             }
           });
 
@@ -818,7 +818,7 @@
       },
 
       showPage(i) {
-        this.list.activePage = i
+        this.list.activePage = i;
         this.persistStateToHistory();
       },
 
