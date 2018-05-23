@@ -33,7 +33,7 @@
       <div class="find-a-job__geolocation"
            :class="{
                 'find-a-job__geolocation--is-busy': (geolocation.isBusy == true),
-                'find-a-job__geolocation--is-active': (geolocation.isActive == true)
+                'find-a-job__geolocation--is-active': (searchTerm.isGeolocation == true)
             }">
         <a class="find-a-job__geolocation-button"
            v-if="geolocation.isAvailable"
@@ -227,7 +227,6 @@
         geolocation: {
           isAvailable: false,
           isBusy: false,
-          isActive: (previousState.geolocation == 'true') || false,
         },
 
         vacanciesDataURL: this.jobFeedUrl,
@@ -259,7 +258,7 @@
             lng: previousState['marker-lng'] || ''
           },
           marker: null,
-          isGeolocation: false,
+          isGeolocation: (previousState.geolocation == 'true') || false,
           doneInitialZoom: false
         },
 
@@ -357,7 +356,7 @@
         this.recenterMap(coords.lat, coords.lng);
 
         if (
-          !this.geolocation.isActive &&
+          !this.searchTerm.isGeolocation &&
           !this.searchTerm.query &&
           !this.searchTerm.doneInitialZoom
         ) {
@@ -607,7 +606,7 @@
 
         const placeName = place.formatted_address.replace(/, UK$/, '');
         this.searchTerm.input = this.searchTerm.query = placeName;
-        this.geolocation.isActive = false;
+        this.searchTerm.isGeolocation = false;
         this.searchTerm.latlng = {
           lat: place.geometry.location.lat(),
           lng: place.geometry.location.lng()
@@ -686,7 +685,7 @@
         const bounds = this.map.object.getBounds();
         const currentState = {
           'search': this.searchTerm.input,
-          'geolocation': this.geolocation.isActive,
+          'geolocation': this.searchTerm.isGeolocation,
           'lat0': bounds.getSouthWest().lat(),
           'lng0': bounds.getSouthWest().lng(),
           'lat1': bounds.getNorthEast().lat(),
@@ -774,7 +773,7 @@
         this.modifyPersistedStateParam('search', '');
         this.searchTerm.query = '';
         this.searchTerm.latlng = null;
-        this.geolocation.isActive = false;
+        this.searchTerm.isGeolocation = false;
         this.$refs.searchInput.focus();
         this.removeSearchTermMarker();
       },
@@ -783,7 +782,7 @@
         this.searchTerm.query = this.searchTerm.input;
         this.searchTerm.latlng = null;
         this.updateSelectedLocationId('');
-        this.geolocation.isActive = false;
+        this.searchTerm.isGeolocation = false;
 
         if (this.searchTerm.query) {
           new google.maps.Geocoder().geocode(
@@ -804,7 +803,7 @@
             };
             this.searchTerm.query = '';
             this.searchTerm.input = '';
-            this.geolocation.isActive = true;
+            this.searchTerm.isGeolocation = true;
             this.geolocation.isBusy = false;
           },
           error => {
