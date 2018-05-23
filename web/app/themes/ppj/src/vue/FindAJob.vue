@@ -859,6 +859,9 @@
     watch: {
       'searchTerm.latlng': function(val) {
         this.handleNewSearchLocation(val);
+      },
+      'visibleJobs': function() {
+        this.$refs.list.scrollTo(0,0);
       }
     },
 
