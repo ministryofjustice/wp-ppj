@@ -252,7 +252,7 @@
 
         searchTerm: {
           input: previousState['search'] || '',
-          query: '',
+          query: previousState['search'] || '',
           latlng: {
             lat: previousState['marker-lat'] || '',
             lng: previousState['marker-lng'] || ''
@@ -684,7 +684,7 @@
       persistStateToHistory() {
         const bounds = this.map.object.getBounds();
         const currentState = {
-          'search': this.searchTerm.input,
+          'search': this.searchTerm.query,
           'geolocation': this.searchTerm.isGeolocation,
           'lat0': bounds.getSouthWest().lat(),
           'lng0': bounds.getSouthWest().lng(),
