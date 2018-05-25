@@ -18,10 +18,10 @@ $logoTargetUrl = ppj\getLegHomeRelativePath();
                        class="site-wide-nav__menu-list-element-link">
                         <span class="site-wide-nav__menu-list-element-text"><?= $item['title'] ?></span>
                     </a>
-                    <span class="site-wide-nav__open-mobile-nav" onclick="ppj.openNavMenu()">menu</span>
                 </li>
             <?php endforeach; ?>
         </ul>
+        <button class="site-wide-nav__open-mobile-nav" onclick="ppj.openNavMenu()">menu</button>
     </div>
 
     <div class="leg-specific-nav">
