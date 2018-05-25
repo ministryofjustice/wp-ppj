@@ -84,9 +84,12 @@ function legName() {
 }
 
 /**
- * @return string the relative path for the current leg home page
+ * Get the homepage URL for the current leg
+ * Note: the top-level landing page URL will be returned if we're not on a leg
+ *
+ * @return string Homepage URL
  */
-function getLegHomeRelativePath() {
+function legHomeUrl() {
     try {
         $pageId = getLegHomepageId();
         return get_permalink($pageId);
