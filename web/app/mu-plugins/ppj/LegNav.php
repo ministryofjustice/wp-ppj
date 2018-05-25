@@ -2,27 +2,69 @@
 namespace ppj\LegNav;
 
 /**
- * @param $name candidate name
- *
- * @return bool if $name is a valid leg name
+ * NotOnLegException is thrown when performing an action that requires
+ * the current page to belong to a leg, but it doesn't.
  */
-function isLeg($name) {
-    return in_array($name, [
-        'prison-officer',
-        'youth-custody'
-    ]);
+class NotOnLegException extends \Exception { }
+
+/**
+ * Determine if the specified page is a leg homepage
+ *
+ * @param int $pageId The page ID
+ * @return bool
+ */
+function isLegHomepage($pageId) {
+    return (bool) get_field('is_leg_homepage', $pageId);
 }
 
 /**
- * return the relative URL path,
- * minus any parameters
- * and in array form
+ * Determine if we're currently on a leg homepage
+ *
+ * @return bool
  */
-function getCleanRelativePathParts()
-{
-    $noParametersPath = explode('?', $_SERVER['REQUEST_URI'])[0];
+function onLegHome() {
+    return isLegHomepage(get_the_ID());
+}
 
-    return array_values(array_filter(explode('/', $noParametersPath)));
+/**
+ * Determine if we're currently on a leg page
+ *
+ * @return bool
+ */
+function onLeg() {
+    if (onLegHome()) {
+        return true;
+    }
+
+    $ancestors = get_post_ancestors(get_the_ID());
+    foreach ($ancestors as $ancestor) {
+        if (isLegHomepage($ancestor)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Get the ID of the homepage for this leg.
+ *
+ * @return int
+ * @throws NotOnLegException when used on a non-leg page
+ */
+function getLegHomepageId() {
+    if (onLegHome()) {
+        return get_the_ID();
+    }
+
+    $ancestors = get_post_ancestors(get_the_ID());
+    foreach ($ancestors as $ancestor) {
+        if (isLegHomepage($ancestor)) {
+            return $ancestor;
+        }
+    }
+
+    throw new NotOnLegException();
 }
 
 /**
@@ -32,55 +74,25 @@ function getCleanRelativePathParts()
  * This function returns the top level segment of the relative path
  * to derive the name of the leg.
  */
-function getLegNameFromPath()
-{
-    if ($pathArray = getCleanRelativePathParts()) {
-        if (isLeg($pathArray[0])) {
-            return $pathArray[0];
-        }
+function getLegNameFromPath() {
+    try {
+        $pageId = getLegHomepageId();
+        return get_field('leg_name', $pageId);
     }
-
-    return 'landing-page';
-}
-
-/**
- * Simple function to determine if the currently viewed page
- * is a leg specific page
- *
- * @return bool
- */
-function onLeg() {
-    return (getLegNameFromPath() !== 'landing-page');
-}
-
-/**
- * Determines whether the current path is for a leg home page
- *
- * eg. if the current relative path is /prison-officer/
- * this function will return true
- *
- * @return bool
- */
-function onLegHome() {
-    $pathArray = getCleanRelativePathParts();
-
-    return ((sizeof($pathArray) == 1) && isLeg($pathArray[0]));
+    catch (NotOnLegException $e) {
+        return 'landing-page';
+    }
 }
 
 /**
  * @return string the relative path for the current leg home page
  */
 function getLegHomeRelativePath() {
-
-    switch(getLegNameFromPath()) {
-        case 'landing-page':
-            return '/';
-
-        case 'prison-officer':
-            return '/prison-officer/';
-
-        case 'youth-custody':
-            return '/youth-custody/';
+    try {
+        $pageId = getLegHomepageId();
+        return get_permalink($pageId);
     }
-
+    catch (NotOnLegException $e) {
+        return home_url('/');
+    }
 }
