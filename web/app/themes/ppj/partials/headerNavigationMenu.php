@@ -1,8 +1,9 @@
 <?php
+use ppj\LegNav;
 global $post;
 
 $modifiedSiteWideNavItems = ppj\markCurrentlySelectedAncestorMenuItem(wp_get_nav_menu_items('site-wide-nav'));
-$logoTargetUrl = ppj\getLegHomeRelativePath();
+$logoTargetUrl = LegNav\getLegHomeRelativePath();
 
 ?>
 
@@ -27,8 +28,8 @@ $logoTargetUrl = ppj\getLegHomeRelativePath();
     <div class="leg-specific-nav">
         <a href="<?= $logoTargetUrl ?>" class="leg-specific-nav__logo"></a>
 
-        <?php if (ppj\onLeg()):
-            $legNavMenuItems = wp_get_nav_menu_items( ppj\getLegNameFromPath() );
+        <?php if (LegNav\onLeg()):
+            $legNavMenuItems = wp_get_nav_menu_items( LegNav\getLegNameFromPath() );
             $modifiedLegNavMenuItems = ppj\markCurrentlySelectedMenuItem($legNavMenuItems);
         ?>
 
@@ -50,4 +51,3 @@ $logoTargetUrl = ppj\getLegHomeRelativePath();
         <?php endif; ?>
     </div>
 </div>
-

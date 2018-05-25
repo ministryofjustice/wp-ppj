@@ -1,9 +1,10 @@
 <?php
-namespace ppj;
+
+use ppj\LegNav;
 
 function enqueue_scripts()
 {
-    $legName  = getLegNameFromPath();
+    $legName  = LegNav\getLegNameFromPath();
     $root_dir = get_template_directory_uri() . '/dest';
 
     wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700', null, null );
