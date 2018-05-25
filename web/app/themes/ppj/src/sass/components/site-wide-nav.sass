@@ -65,3 +65,37 @@
 
         @include bp('large')
           font-size: 1.8rem
+
+  &__open-mobile-nav
+    background-color: $color-main
+    border: solid .2rem $color-white
+    border-radius: $common-spacing * 2
+    color: $color-white
+    cursor: pointer
+    font-weight: $font-weight-bold
+    height: 3.6rem
+    line-height: 2.1rem
+    padding: .3em .7em .3em
+    pointer-events: auto
+    text-align: center
+    text-transform: uppercase
+
+    .landing-page &
+      background-color: $color-transparent
+      border-color: $color-dark
+      color: $color-dark
+
+    @include bp('portrait')
+      width: 11.3rem
+
+    @include bp('landscape')
+      display: none
+
+    & > div
+      background: $color-white
+      height: .5rem
+      margin-top: .4rem
+      width: $common-spacing * 1.5
+
+      &:first-child
+        margin-top: 0

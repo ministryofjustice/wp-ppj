@@ -19,28 +19,30 @@ $logoTargetUrl = ppj\getLegHomeRelativePath();
                            class="site-wide-nav__menu-list-element-link">
                             <span class="site-wide-nav__menu-list-element-text"><?= $item['title'] ?></span>
                         </a>
-                        <span class="header__nav-link js" onclick="ppj.openNavMenu()">menu</span>
+                        <span class="site-wide-nav__open-mobile-nav" onclick="ppj.openNavMenu()">menu</span>
                     </li>
                 <?php endforeach; ?>
             </ul>
         </div>
 
-        <div class="header__leg-nav">
-            <a href="<?= $logoTargetUrl ?>" class="header__logo"></a>
+        <div class="leg-specific-nav">
+            <a href="<?= $logoTargetUrl ?>" class="leg-specific-nav__logo"></a>
 
             <?php if (ppj\onLeg()):
                 $legNavMenuItems = wp_get_nav_menu_items( ppj\getLegNameFromPath() );
                 $modifiedLegNavMenuItems = ppj\markCurrentlySelectedMenuItem($legNavMenuItems);
             ?>
 
-            <div class="header__nav-leg-menu">
-                <button class="header__nav-menu-close-button js" onclick="ppj.closeNavMenu()"></button>
-                <ul class="header__nav-leg-menu-list">
-
+            <div class="leg-specific-nav__menu">
+                <ul class="leg-specific-nav__menu-list">
                     <?php foreach ($modifiedLegNavMenuItems as $item): ?>
-                        <li class="header__nav-leg-menu-list-element <?= ($item['selected']) ? 'header__nav-leg-menu-list-element--selected' : ''?>">
+                        <li class="leg-specific-nav__menu-list-element
+                                   <?= ($item['selected']) ?
+                                         'leg-specific-nav__menu-list-element--selected' :
+                                         ''
+                                   ?>">
                             <a href="<?= $item['url'] ?>">
-                                <span class="header__nav-leg-menu-list-element-text"><?= $item['title'] ?></span>
+                                <span class="leg-specific-nav__menu-list-element-text"><?= $item['title'] ?></span>
                             </a>
                         </li>
                     <?php endforeach; ?>
