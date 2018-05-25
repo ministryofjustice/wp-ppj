@@ -84,12 +84,60 @@ window.addEventListener('load', function() {
 }, false);
 
 /**
+ *
+ * @type {MediaQueryList} to match nonMobile devices like phones and tablets
+ */
+const nonMobiles = window.matchMedia('(min-width: 1024px)');
+
+/**
  * Close mobile nav if screen becomes >= 1024px wide
  * The desktop nav will become visible, so mobile nav must be closed
  */
-window.matchMedia('(min-width: 1024px)').addListener(function(data) {
+nonMobiles.addListener(function(data) {
   if (data.matches) {
     window.ppj.closeNavMenu();
   }
 });
+
+/**
+ * Set the ARIA hidden attribute value for matching elements
+ *
+ * @param cssSelector string valid CSS selector
+ * @param hidden boolean
+ */
+window.ppj.setAriaHiddenAttribute = function(cssSelector, hidden) {
+  const inactiveLinks = document.querySelectorAll(cssSelector);
+  for(let link of inactiveLinks) {
+    link.setAttribute('aria-hidden', hidden);
+  }
+};
+
+/**
+ *
+ * On mobile devices only the selected nav link is visible.
+ * This function ensures that the other links are
+ * 'invisible' to screen readers also
+ *
+ * On non mobile devices, all the nav links should be 'visible'
+ * to screen readers.
+ *
+ * @param mobileDevicesMediaQuery
+ */
+function setAriaHiddenForNonVisibleSiteWideNavLinks(mobileDevicesMediaQuery) {
+  console.log('setAria');
+  const cssSelector = '.site-wide-nav__menu-list-element:not(.site-wide-nav__menu-list-element--selected)';
+  if (mobileDevicesMediaQuery.matches) {
+    window.ppj.setAriaHiddenAttribute(cssSelector, false);
+  } else {
+    window.ppj.setAriaHiddenAttribute(cssSelector, true);
+  }
+}
+
+// Set ARIA hidden attributes for site-wide-nav links on transition between mobile and non-mobile viewport sizes
+nonMobiles.addListener(setAriaHiddenForNonVisibleSiteWideNavLinks);
+
+// Set ARIA hidden attributes for site-wide-nav links on page load
+setAriaHiddenForNonVisibleSiteWideNavLinks(nonMobiles);
+
+
 
