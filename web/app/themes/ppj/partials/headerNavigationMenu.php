@@ -2,7 +2,7 @@
 use ppj\LegNav;
 global $post;
 
-$modifiedSiteWideNavItems = ppj\markCurrentlySelectedAncestorMenuItem(wp_get_nav_menu_items('site-wide-nav'));
+$modifiedSiteWideNavItems = ppj\markCurrentlySelectedAncestorMenuItem(ppj\navMenuItems('site-wide'));
 $logoTargetUrl = LegNav\legHomeUrl();
 
 ?>
@@ -29,7 +29,7 @@ $logoTargetUrl = LegNav\legHomeUrl();
         <a href="<?= $logoTargetUrl ?>" class="leg-specific-nav__logo"></a>
 
         <?php if (LegNav\onLeg()):
-            $legNavMenuItems = wp_get_nav_menu_items( LegNav\legName() );
+            $legNavMenuItems = ppj\navMenuItems( LegNav\legName() );
             $modifiedLegNavMenuItems = ppj\markCurrentlySelectedMenuItem($legNavMenuItems);
         ?>
 
