@@ -68,13 +68,12 @@ function getLegHomepageId() {
 }
 
 /**
- * The site is being divided into legs.
- * One leg for each job type.
+ * Get the name of the current leg
+ * Note: 'landing-page' will be returned if we're not on a leg
  *
- * This function returns the top level segment of the relative path
- * to derive the name of the leg.
+ * @return string Name of the current leg, or 'landing-page'
  */
-function getLegNameFromPath() {
+function legName() {
     try {
         $pageId = getLegHomepageId();
         return get_field('leg_name', $pageId);

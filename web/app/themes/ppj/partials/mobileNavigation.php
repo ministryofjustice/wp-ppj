@@ -5,7 +5,7 @@ use ppj\LegNav;
 <div class="mobile-nav">
     <div class="mobile-nav__overlay"></div>
     <?php
-    $legNavMenuItems = wp_get_nav_menu_items( LegNav\getLegNameFromPath() );
+    $legNavMenuItems = wp_get_nav_menu_items( LegNav\legName() );
     $modifiedLegNavMenuItems = ppj\markCurrentlySelectedMenuItem($legNavMenuItems);
     $currentLegItem = false;
     $isOnLeg = LegNav\onLeg();
