@@ -1,0 +1,67 @@
+.site-wide-nav
+  background: $color-dark
+
+  @include bp('landscape')
+    border-bottom: .2rem solid $color-white
+
+  &__menu-list
+    display: flex
+    margin: 0 auto
+    max-width: 100%
+
+    @include bp('landscape')
+      max-width: 84rem
+      padding: 0 $common-spacing * 2
+
+  &__menu-list-element
+    $list-element: &
+    display: none
+    width: 100%
+
+    @include bp('landscape')
+      display: block
+      flex-grow: 1
+      width: initial
+
+    &-link
+      display: block
+      padding: $common-spacing $common-spacing / 2
+      text-align: center
+
+      @include bp('landscape')
+        padding: $common-spacing
+
+    &-text
+      color: $color-light
+      font-size: 1.6rem
+      font-weight: $font-weight-semi-bold
+      text-transform: uppercase
+      transition: color $main-transition-duration
+
+
+      @include bp('large')
+        font-size: 1.8rem
+
+      &:hover
+        color: $color-white
+
+    &--selected
+      align-items: center
+      background-color: $color-main
+      display: flex
+      justify-content: flex-end
+      padding: 0 $common-spacing
+
+      @include bp('landscape')
+        display: block
+        padding: 0 $common-spacing / 2
+
+      #{$list-element}-text
+        color: $color-dark
+        font-size: 1.8rem
+
+        @include bp('landscape')
+          font-size: 1.6rem
+
+        @include bp('large')
+          font-size: 1.8rem

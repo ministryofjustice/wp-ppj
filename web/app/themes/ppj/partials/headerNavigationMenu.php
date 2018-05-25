@@ -8,16 +8,16 @@ $logoTargetUrl = ppj\getLegHomeRelativePath();
 
 <div class="l-site-header">
     <div class="header__site-header">
-        <div class="header__site-wide-nav">
-            <ul class="header__site-wide-nav-menu-list">
+        <div class="site-wide-nav">
+            <ul class="site-wide-nav__menu-list">
                 <?php foreach ($modifiedSiteWideNavItems as $item):
-                    $listElementClass = 'header__site-wide-nav-menu-list-element';
-                    $listElementClass .= ($item['selected']) ? ' header__site-wide-nav-menu-list-element--selected' : '';
+                    $listElementClass = 'site-wide-nav__menu-list-element';
+                    $listElementClass .= ($item['selected']) ? ' site-wide-nav__menu-list-element--selected' : '';
                     ?>
                     <li class="<?= $listElementClass ?>">
                         <a href="<?= $item['url'] ?>"
-                           class="header__site-wide-nav-menu-list-element-link">
-                            <span class="header__site-wide-nav-menu-list-element-text"><?= $item['title'] ?></span>
+                           class="site-wide-nav__menu-list-element-link">
+                            <span class="site-wide-nav__menu-list-element-text"><?= $item['title'] ?></span>
                         </a>
                         <span class="header__nav-link js" onclick="ppj.openNavMenu()">menu</span>
                     </li>
