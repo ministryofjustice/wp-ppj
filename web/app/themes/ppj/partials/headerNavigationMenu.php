@@ -3,7 +3,7 @@ use ppj\LegNav;
 global $post;
 
 $modifiedSiteWideNavItems = ppj\markCurrentlySelectedAncestorMenuItem(wp_get_nav_menu_items('site-wide-nav'));
-$logoTargetUrl = LegNav\getLegHomeRelativePath();
+$logoTargetUrl = LegNav\legHomeUrl();
 
 ?>
 

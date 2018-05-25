@@ -345,7 +345,7 @@ function markCurrentlySelectedMenuItem($menuItems) {
  */
 function markCurrentlySelectedAncestorMenuItem($menuItems) {
     $modifiedMenuItems = [];
-    $homePath = LegNav\getLegHomeRelativePath();
+    $homePath = LegNav\legHomeUrl();
 
     if ( isset($menuItems) && !!$menuItems ) {
         foreach ( $menuItems as $item ) {
