@@ -1,5 +1,33 @@
 <?php
 namespace ppj\LegNav;
+/**
+ * PPJ Leg Navigation
+ *
+ * This website consists of multiple 'legs', which is a term used to describe a
+ * collection of pages related to a particular job role.
+ *
+ * For example, the 'Prison Officer' leg of the site consists of multiple pages:
+ *   - Home
+ *   - Rewards and Benefits
+ *   - Find A Job
+ *   - ...and so on...
+ *
+ * Non-leg pages are referred to as belonging to a 'landing-page' pseudo-leg.
+ * For example, legName() would return 'landing-page' on the following pages:
+ *   - Landing page (i.e. website homepage at URL '/')
+ *   - Terms & Conditions
+ *   - Cookie Policy
+ *   - ...and so on...
+ *
+ * The functions in this namespace support the 'leg' concept and help with
+ * navigating throughout the site.
+ *
+ * The most useful functions to be aware of are:
+ *   - onLegHome()
+ *   - onLeg()
+ *   - legName()
+ *   - legHomeUrl()
+ */
 
 /**
  * NotOnLegException is thrown when performing an action that requires
@@ -8,17 +36,7 @@ namespace ppj\LegNav;
 class NotOnLegException extends \Exception { }
 
 /**
- * Determine if the specified page is a leg homepage
- *
- * @param int $pageId The page ID
- * @return bool
- */
-function isLegHomepage($pageId) {
-    return (bool) get_field('is_leg_homepage', $pageId);
-}
-
-/**
- * Determine if we're currently on a leg homepage
+ * Determine if the current page is a leg homepage
  *
  * @return bool
  */
@@ -27,7 +45,7 @@ function onLegHome() {
 }
 
 /**
- * Determine if we're currently on a leg page
+ * Determine if the current page belongs to a leg
  *
  * @return bool
  */
@@ -47,12 +65,22 @@ function onLeg() {
 }
 
 /**
- * Get the ID of the homepage for this leg.
+ * Determine if the specified page is a leg homepage
+ *
+ * @param int $pageId The page ID
+ * @return bool
+ */
+function isLegHomepage($pageId) {
+    return (bool) get_field('is_leg_homepage', $pageId);
+}
+
+/**
+ * Get the page ID of the current leg's homepage
  *
  * @return int
- * @throws NotOnLegException when used on a non-leg page
+ * @throws NotOnLegException when called on a non-leg page
  */
-function getLegHomepageId() {
+function legHomepageId() {
     if (onLegHome()) {
         return get_the_ID();
     }
@@ -75,7 +103,7 @@ function getLegHomepageId() {
  */
 function legName() {
     try {
-        $pageId = getLegHomepageId();
+        $pageId = legHomepageId();
         return get_field('leg_name', $pageId);
     }
     catch (NotOnLegException $e) {
@@ -91,7 +119,7 @@ function legName() {
  */
 function legHomeUrl() {
     try {
-        $pageId = getLegHomepageId();
+        $pageId = legHomepageId();
         return get_permalink($pageId);
     }
     catch (NotOnLegException $e) {
