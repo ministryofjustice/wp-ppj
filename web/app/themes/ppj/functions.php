@@ -4,7 +4,7 @@ use ppj\LegNav;
 
 function enqueue_scripts()
 {
-    $legName  = LegNav\getLegNameFromPath();
+    $legName  = LegNav\legName();
     $root_dir = get_template_directory_uri() . '/dest';
 
     wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700', null, null );

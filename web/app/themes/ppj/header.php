@@ -6,7 +6,7 @@ $htmlTitle = get_field('html_title');
 $htmlMetaDescription = get_field('html_meta_description');
 
 $bodyClasses = [];
-if ($legName  = LegNav\getLegNameFromPath()) $bodyClasses[] = $legName;
+if ($legName  = LegNav\legName()) $bodyClasses[] = $legName;
 if ($postSlug = $post->post_name)            $bodyClasses[] = 'post-slug--' . $postSlug;
 if (LegNav\onLegHome())                      $bodyClasses[] = 'leg-home';
 if (LegNav\onLeg())                          $bodyClasses[] = 'leg';
