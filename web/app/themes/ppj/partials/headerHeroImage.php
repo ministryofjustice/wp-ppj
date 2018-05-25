@@ -1,5 +1,6 @@
 <?php
 
+use ppj\LegNav;
 global $ppj_template_data;
 $td = $ppj_template_data;
 
@@ -66,7 +67,7 @@ $headerImageData       = $td['imageData'];
 $headerImageMobileData = $td['mobileImageData'];
 
 if ( $headerImageData ) {
-    $headerStyle = (ppj\onLegHome()) ? 'home' : '';
+    $headerStyle = (LegNav\onLegHome()) ? 'home' : '';
     $headerImageAttr = json_encode($headerImageData);
     $headerImageUrl = $headerImageData['url'];
     $srcset = createSrcset($headerStyle, $headerImageData, $headerImageMobileData);

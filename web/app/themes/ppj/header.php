@@ -1,12 +1,16 @@
 <?php
-    $htmlTitle = get_field('html_title');
-    $htmlMetaDescription = get_field('html_meta_description');
 
-    $bodyClasses = [];
-    if ($legName  = ppj\getLegNameFromPath()) $bodyClasses[] = $legName;
-    if ($postSlug = $post->post_name)         $bodyClasses[] = 'post-slug--' . $postSlug;
-    if (ppj\onLegHome())                      $bodyClasses[] = 'leg-home';
-    if (ppj\onLeg())                          $bodyClasses[] = 'leg';
+use ppj\LegNav;
+
+$htmlTitle = get_field('html_title');
+$htmlMetaDescription = get_field('html_meta_description');
+
+$bodyClasses = [];
+if ($legName  = LegNav\getLegNameFromPath()) $bodyClasses[] = $legName;
+if ($postSlug = $post->post_name)            $bodyClasses[] = 'post-slug--' . $postSlug;
+if (LegNav\onLegHome())                      $bodyClasses[] = 'leg-home';
+if (LegNav\onLeg())                          $bodyClasses[] = 'leg';
+
 ?>
 
 <!DOCTYPE html>

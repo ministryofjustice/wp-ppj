@@ -1,10 +1,14 @@
+<?php
+use ppj\LegNav;
+?>
+
 <div class="mobile-nav">
     <div class="mobile-nav__overlay"></div>
     <?php
-    $legNavMenuItems = wp_get_nav_menu_items( ppj\getLegNameFromPath() );
+    $legNavMenuItems = wp_get_nav_menu_items( LegNav\getLegNameFromPath() );
     $modifiedLegNavMenuItems = ppj\markCurrentlySelectedMenuItem($legNavMenuItems);
     $currentLegItem = false;
-    $isOnLeg = ppj\onLeg();
+    $isOnLeg = LegNav\onLeg();
 
     if ($isOnLeg) {
         $siteWideNavMenuItems = wp_get_nav_menu_items('site-wide-nav');
