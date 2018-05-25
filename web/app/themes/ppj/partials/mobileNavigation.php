@@ -5,13 +5,13 @@ use ppj\LegNav;
 <div class="mobile-nav">
     <div class="mobile-nav__overlay"></div>
     <?php
-    $legNavMenuItems = wp_get_nav_menu_items( LegNav\legName() );
+    $legNavMenuItems = ppj\navMenuItems( LegNav\legName() );
     $modifiedLegNavMenuItems = ppj\markCurrentlySelectedMenuItem($legNavMenuItems);
     $currentLegItem = false;
     $isOnLeg = LegNav\onLeg();
 
     if ($isOnLeg) {
-        $siteWideNavMenuItems = wp_get_nav_menu_items('site-wide-nav');
+        $siteWideNavMenuItems = ppj\navMenuItems('site-wide');
         $modifiedSiteWideNavItems = ppj\markCurrentlySelectedAncestorMenuItem($siteWideNavMenuItems);
 
         foreach ($modifiedSiteWideNavItems as $item) {
