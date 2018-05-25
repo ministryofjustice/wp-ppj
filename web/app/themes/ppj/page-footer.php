@@ -1,11 +1,13 @@
 <?php
 
+use ppj\LegNav;
+
 $footerContent   = get_field('footer_content', 'option');
 $footerCopyright = get_field('footer_copyright', 'option');
 
 $facebookFooterContent = false;
 
-switch (ppj\getLegNameFromPath()) {
+switch (LegNav\getLegNameFromPath()) {
     case 'prison-officer':
         $facebookFooterContent = get_field('facebook_content_prison_officer', 'option');
         break;
