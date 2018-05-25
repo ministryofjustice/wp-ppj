@@ -44,3 +44,35 @@ function registerImagesSizes()
     add_image_size( 'header-large-home', 1440, 624, true );
 }
 add_action('init', __NAMESPACE__ . '\\registerImagesSizes');
+
+/**
+ * Register the navigation menu locations that this theme supports
+ */
+function registerNavLocations() {
+    register_nav_menus([
+        'site-wide' => 'Site-wide menu',
+        'prison-officer' => 'Prison Officer menu',
+        'youth-custody' => 'Youth Custody menu',
+    ]);
+}
+add_action('init', __NAMESPACE__ . '\\registerNavLocations');
+
+/**
+ * Get nav menu items for the given theme location
+ *
+ * This is a convenience wrapper around wp_get_nav_menu_items(),
+ * so expect the same output
+ *
+ * @param string $location
+ * @return array
+ */
+function navMenuItems($location) {
+    $menus = get_nav_menu_locations();
+    if (!isset($menus[$location])) {
+        // There's no menu set for this location. Gracefully fail.
+        return [];
+    }
+    else {
+        return wp_get_nav_menu_items($menus[$location]);
+    }
+}
