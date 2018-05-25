@@ -7,7 +7,7 @@ $footerCopyright = get_field('footer_copyright', 'option');
 
 $facebookFooterContent = false;
 
-switch (LegNav\getLegNameFromPath()) {
+switch (LegNav\legName()) {
     case 'prison-officer':
         $facebookFooterContent = get_field('facebook_content_prison_officer', 'option');
         break;

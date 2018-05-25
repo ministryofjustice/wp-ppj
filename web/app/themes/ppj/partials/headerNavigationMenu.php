@@ -29,7 +29,7 @@ $logoTargetUrl = LegNav\getLegHomeRelativePath();
         <a href="<?= $logoTargetUrl ?>" class="leg-specific-nav__logo"></a>
 
         <?php if (LegNav\onLeg()):
-            $legNavMenuItems = wp_get_nav_menu_items( LegNav\getLegNameFromPath() );
+            $legNavMenuItems = wp_get_nav_menu_items( LegNav\legName() );
             $modifiedLegNavMenuItems = ppj\markCurrentlySelectedMenuItem($legNavMenuItems);
         ?>
 
