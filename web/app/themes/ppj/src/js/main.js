@@ -84,8 +84,8 @@ window.addEventListener('load', function() {
 }, false);
 
 /**
- * function to close mobile nav menu if the screen
- * is resized such that the desktop nav is now visible.
+ * Close mobile nav if screen becomes >= 1024px wide
+ * The desktop nav will become visible, so mobile nav must be closed
  */
 window.matchMedia('(min-width: 1024px)').addListener(function(data) {
   if (data.matches) {
