@@ -349,7 +349,7 @@ function markCurrentlySelectedAncestorMenuItem($menuItems) {
 
     if ( isset($menuItems) && !!$menuItems ) {
         foreach ( $menuItems as $item ) {
-            $selected = (isInternalLink($item->url) && wp_make_link_relative($item->url) == $homePath);
+            $selected = ( $item->url == $homePath );
 
             $modifiedMenuItems[] = [
                 'title'    => $item->title,
