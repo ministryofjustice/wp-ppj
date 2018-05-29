@@ -1,6 +1,5 @@
 <?php
-
-use ppj\LegNav;
+namespace ppj;
 
 function enqueue_scripts()
 {
