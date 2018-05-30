@@ -811,6 +811,11 @@
         .catch((error) => {
           this.jobFeedError = true;
           console.log(error);
+
+          window.dataLayer.push({
+            event: 'job_feed_load_error',
+            error_message: error.toString()
+          });
         });
 
       this.restorePageData();
