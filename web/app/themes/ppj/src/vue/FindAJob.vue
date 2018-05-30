@@ -599,6 +599,11 @@
           this.updateSearchTermMarker(latlng.lat, latlng.lng);
           this.updateJobsDistance(latlng.lat, latlng.lng);
           this.zoomToNearbyResults(latlng.lat, latlng.lng);
+
+          window.dataLayer.push({
+            event: 'search_location_change',
+            search_is_geolocation: this.searchTerm.isGeolocation
+          });
         }
       },
 
