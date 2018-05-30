@@ -8,14 +8,6 @@ if ('dataLayer' in window == false) {
   window.dataLayer = [];
 }
 
-window.ppjNavTo = function(href, callback) {
-  console.log('navTo');
-  if (typeof callback !== 'undefined') {
-    callback()
-  }
-  window.location = href;
-};
-
 window.ppj.openNavMenu = function() {
   const body = document.getElementsByTagName('body')[0];
   body.classList.add('mobile-nav-is-open');
