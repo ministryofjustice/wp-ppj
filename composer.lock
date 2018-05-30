@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "705d84da6680621d12997daf81b6861c",
+    "content-hash": "7c4abe0a0c4bd0761d3d0b6440afca3f",
     "packages": [
         {
             "name": "acf/advanced-custom-fields-pro",
@@ -508,26 +508,6 @@
                 "environment"
             ],
             "time": "2016-09-01T10:05:43+00:00"
-        },
-        {
-            "name": "wpackagist-plugin/ga-google-analytics",
-            "version": 20180303,
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/ga-google-analytics/",
-                "reference": "tags/20180303"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/ga-google-analytics.20180303.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/ga-google-analytics/"
         },
         {
             "name": "wpackagist-plugin/safe-redirect-manager",
