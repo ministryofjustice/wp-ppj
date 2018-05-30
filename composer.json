@@ -29,7 +29,6 @@
     "roots/wp-password-bcrypt": "*",
     "ministryofjustice/wp-rewrite-media-to-s3": "*",
     "acf/advanced-custom-fields-pro": "*",
-    "wpackagist-plugin/ga-google-analytics": "*",
     "wpackagist-plugin/uk-cookie-consent": "*",
     "wpackagist-plugin/wp-browser-update": "*",
     "wpackagist-plugin/safe-redirect-manager": "*"
