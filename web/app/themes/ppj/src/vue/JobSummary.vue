@@ -23,8 +23,9 @@
         </div>
       </div>
       <a class="job-summary__link"
+         :href="url"
          v-if="url"
-         @click="handleViewJobClick"
+         @click="pushEventToGtm"
       >
         view job
       </a>
@@ -47,16 +48,12 @@
     },
 
     methods: {
-      handleViewJobClick: function() {
-
+      pushEventToGtm: function() {
         const gtmEvent = {
           event: 'view_job_click',
-          prisonName: this.prisonName,
-          jobLink: this.url
+          prisonName: this.prisonName
         };
         window.dataLayer.push(gtmEvent);
-
-        window.location.href = this.url;
       }
     },
 
