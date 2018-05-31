@@ -93,7 +93,7 @@
         <div class="find-a-job__jobs-available">{{ jobsAvailable }}</div>
       </div>
 
-      <div class="find-a-job__view-list-container">
+      <div class="find-a-job__view-list-container" v-on:scroll="handleListScroll" ref="list">
         <div v-if="jobFeedError"
              class="find-a-job__job-feed-message find-a-job__job-feed-message--feed-error">
           <div class="find-a-job__job-feed-text-container">
@@ -110,7 +110,7 @@
           </div>
         </div>
 
-        <ul class="find-a-job__view-list" v-on:scroll="handleListScroll" ref="list">
+        <ul class="find-a-job__view-list"ref="list">
 
           <li class="find-a-job__view-list-element"
               v-if="!jobFeedError && jobs.length > 0"
@@ -709,7 +709,7 @@
           'lng1': bounds.getNorthEast().lng(),
           'selected-location': this.selectedLocationId,
           'active-page': this.list.activePage,
-          'scroll': document.getElementsByClassName('find-a-job__view-list')[0].scrollTop,
+          'scroll': document.getElementsByClassName('find-a-job__view-list-container')[0].scrollTop,
         };
         if (this.searchTerm.marker) {
           currentState['marker-lat'] = this.searchTerm.marker.latlng.lat();
@@ -948,6 +948,10 @@
       this.mounted = true;
 
       window.addEventListener('resize', this.handleScreenResize);
+
+      setTimeout(()=>{
+        this.$refs.list.scrollTo(0,this.list.scrollTop);
+      }, 50);
 
       axios.get(this.vacanciesDataURL, { responseType: 'json' })
         .then(self.handleGotVacanciesData)
