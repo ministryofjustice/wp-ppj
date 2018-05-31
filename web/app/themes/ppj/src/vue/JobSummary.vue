@@ -25,7 +25,7 @@
       <a class="job-summary__link"
          :href="url"
          v-if="url"
-         @click="pushEventToGtm"
+         @click="pushViewJobClickEventToGtm"
       >
         view job
       </a>
@@ -48,7 +48,7 @@
     },
 
     methods: {
-      pushEventToGtm: function() {
+      pushViewJobClickEventToGtm: function() {
         const gtmEvent = {
           event: 'view_job_click',
           prisonName: this.prisonName
