@@ -369,14 +369,22 @@
         this.map.object.panTo(new google.maps.LatLng(lat, lng));
       },
 
+      scrollListToTop() {
+        this.$refs.list.scrollTo(0,this.list.scrollTop);
+      },
+
+      scrollListToJob(locationId) {
+        const selectedJobs = document.querySelector(`.find-a-job__view-list-element[data-location-id='${locationId}']`);
+        if (selectedJobs) {
+          selectedJobs.scrollIntoView({ behavior: 'smooth' });
+        }
+      },
+
       focusOnSelectedJob(self, locationId) {
         if (self.deviceIsMobile) {
           self.calculateActivePageFromLocationId(locationId);
         } else {
-          const selectedJobs = document.querySelector(`.find-a-job__view-list-element[data-location-id='${locationId}']`);
-          if (selectedJobs) {
-            selectedJobs.scrollIntoView({ behavior: 'smooth' });
-          }
+          self.scrollListToJob(locationId);
         }
       },
 
@@ -438,6 +446,30 @@
         }
       },
 
+      sortLocationsByDistance() {
+        this.searchResults.orderedLocations.sort(function (a, b) {
+          return a[0].distance - b[0].distance;
+        });
+      },
+
+      sortLocationsByTownName() {
+        this.searchResults.orderedLocations.sort(function (a, b) {
+          const
+            aTown = a[0].prison_location.town,
+            bTown = b[0].prison_location.town
+          ;
+          if (aTown < bTown) {
+            return -1;
+          } else {
+            if (aTown > bTown) {
+              return 1;
+            } else {
+              return 0;
+            }
+          }
+        });
+      },
+
       updateJobsDistance(lat, lng) {
 
         // calculate distance
@@ -466,9 +498,7 @@
           this.searchResults.orderedLocations.push(this.searchResults.locations[id].jobs);
         }
 
-        this.searchResults.orderedLocations.sort(function (a, b) {
-          return a[0].distance - b[0].distance;
-        });
+        this.sortLocationsByDistance();
       },
 
       createLocations() {
@@ -513,22 +543,10 @@
         }
 
         // initially sort the job location groups by town name
-        if (!previousSearchTermMarkerFound) {
-          this.searchResults.orderedLocations.sort(function (a, b) {
-            const
-              aTown = a[0].prison_location.town,
-              bTown = b[0].prison_location.town
-            ;
-            if (aTown < bTown) {
-              return -1;
-            } else {
-              if (aTown > bTown) {
-                return 1;
-              } else {
-                return 0;
-              }
-            }
-          });
+        if (previousSearchTermMarkerFound) {
+          this.sortLocationsByDistance();
+        } else {
+          this.sortLocationsByTownName();
         }
 
         this.updateMapWithLocationMarkers(this.searchResults.locations);
@@ -860,9 +878,6 @@
       'searchTerm.latlng': function(val) {
         this.handleNewSearchLocation(val);
       },
-      'visibleJobs': function() {
-        this.$refs.list.scrollTo(0,0);
-      }
     },
 
     computed: {
@@ -910,7 +925,6 @@
 
           return results;
         }
-
       },
 
       jobsAvailable: function() {
