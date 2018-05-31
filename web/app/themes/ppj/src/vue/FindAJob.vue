@@ -360,7 +360,6 @@
           !this.searchTerm.query &&
           !this.searchTerm.doneInitialZoom
         ) {
-          this.zoomBy(2);
           this.searchTerm.doneInitialZoom = true;
         }
       },
