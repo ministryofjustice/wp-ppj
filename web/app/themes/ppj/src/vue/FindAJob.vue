@@ -726,6 +726,7 @@
         if (latlng == null) {
           this.removeSearchTermMarker();
           this.zoomToEngland();
+          // TODO remove distances from list and reorder to default
         }
         else {
           this.updateSearchTermMarker(latlng.lat, latlng.lng);
@@ -737,6 +738,7 @@
             search_is_geolocation: this.searchTerm.isGeolocation
           });
         }
+        this.scrollListToTop();
       },
 
       processGeocoderResults(results, status) {
