@@ -3,60 +3,6 @@
     "title": "Find a job map settings",
     "fields": [
         {
-            "key": "field_5ac38eafd935e",
-            "label": "Job feed URL",
-            "name": "job_feed_url",
-            "type": "url",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": ""
-        },
-        {
-            "key": "field_5acb7f3292fcb",
-            "label": "Job list message",
-            "name": "job_list_message",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_5ad47f5c13b5d",
-            "label": "Job list message URL",
-            "name": "job_list_message_url",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
             "key": "field_5ad89b70149c8",
             "label": "Job title",
             "name": "job_title",
@@ -93,5 +39,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1524145043
+    "modified": 1527857487
 }

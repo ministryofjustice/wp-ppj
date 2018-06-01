@@ -133,7 +133,7 @@
           </li>
           <li v-if="jobListMessage">
             <div class="find-a-job__job-list-message">
-              <a :href="jobListMessageUrl">{{ jobListMessage }}</a>
+              <a :href="jobListMessageUrlWithSearchTerm">{{ jobListMessage }}</a>
             </div>
           </li>
         </ul>
@@ -198,19 +198,11 @@
         default: '',
         type: String
       },
-      'jobFeedUrl': {
-        default: '',
-        type: String
-      },
-      'jobListMessage': {
-        default: '',
-        type: String
-      },
-      'jobListMessageUrl': {
-        default: '',
-        type: String
-      },
       'jobTitle': {
+        default: '',
+        type: String
+      },
+      'leg': {
         default: '',
         type: String
       }
@@ -229,7 +221,6 @@
           isBusy: false,
         },
 
-        vacanciesDataURL: this.jobFeedUrl,
         jobFeedLoaded: false,
         jobFeedError: false,
 
@@ -285,6 +276,21 @@
 
         mounted: false,
       };
+
+      data.jobListMessage = false;
+      data.jobListMessageUrl = '';
+
+      switch(this.leg) {
+        case 'prison-officer':
+          data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/staging/vacancies.json';
+          break;
+
+        case 'youth-custody':
+          data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/youth-custody-vacancies.json';
+          data.jobListMessage = 'See prison officer jobs working with adult offenders';
+          data.jobListMessageUrl = '/prison-officer/find-a-job';
+          break;
+      }
 
       return data;
     },
@@ -930,6 +936,23 @@
 
       jobsAvailable: function() {
         return this.jobs.length + ' ' + this.jobTitle + ' jobs available: ';
+      },
+
+      jobListMessageUrlWithSearchTerm: function() {
+        let params = '';
+        if (
+          this.searchTerm.query
+          && this.searchTerm.latlng.lat
+          && this.searchTerm.latlng.lng
+        ) {
+          params = this.convertJsonToUrlParameterString({
+            'search': this.searchTerm.query,
+            'marker-lat': this.searchTerm.latlng.lat,
+            'marker-lng': this.searchTerm.latlng.lng,
+          });
+        }
+
+        return this.jobListMessageUrl + params;
       }
     },
 
