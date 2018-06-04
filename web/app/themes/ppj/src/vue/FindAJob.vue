@@ -282,7 +282,7 @@
 
       switch(this.leg) {
         case 'prison-officer':
-          data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/staging/vacancies.json';
+          data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/vacancies.json';
           break;
 
         case 'youth-custody':
