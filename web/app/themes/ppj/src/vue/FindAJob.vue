@@ -927,18 +927,14 @@
 
       jobListMessageUrlWithSearchTerm: function() {
         let params = '';
-        if (
-          this.searchTerm.query
-          && this.searchTerm.latlng.lat
-          && this.searchTerm.latlng.lng
-        ) {
+        if ( this.searchTerm.latlng.lat && this.searchTerm.latlng.lng ) {
           params = this.convertJsonToUrlParameterString({
             'search': this.searchTerm.query,
             'marker-lat': this.searchTerm.latlng.lat,
             'marker-lng': this.searchTerm.latlng.lng,
+            'geolocation': this.searchTerm.isGeolocation,
           });
         }
-
         return this.jobListMessageUrl + params;
       }
     },
