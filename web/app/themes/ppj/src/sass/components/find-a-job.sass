@@ -58,8 +58,14 @@
       margin-bottom: $common-spacing
 
       &:before
-        margin-left: auto
-        margin-right: auto
+        display: none
+
+      @include vbp('regular')
+        &:before
+          display: block
+          margin-left: auto
+          margin-right: auto
+
 
   &__prompt
     @include bp('portrait')
@@ -328,8 +334,11 @@
       flex-direction: column
       left: 0
       position: absolute
-      top: 20rem
+      top: 19rem
       width: 40%
+
+      @include vbp('regular')
+        top: 20rem
 
   &__view-list-container
     @include bp('portrait')
