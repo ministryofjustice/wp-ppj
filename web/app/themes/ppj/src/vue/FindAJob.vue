@@ -413,33 +413,20 @@
       },
 
       updateMapWithLocationMarkers(locations) {
-
-        // create an arguments object for each marker
-        const markerArgs = [];
         for (let locationId in locations) {
-          markerArgs.push({
-            class: 'find-a-job__map-marker--location',
-            solid: true,
-            amount: locations[locationId].jobs.length,
-            locationId: locationId,
-            clickCallback: this.handleMapMarkerClick.bind(null, this, locationId),
-            prisonName: locations[locationId].prisonName
-          });
-        }
-
-        // iterate over the markerArgs elements and create a map marker for each one
-        for (let i in markerArgs) {
-          if (markerArgs[i].locationId == this.selectedLocationId) {
-            markerArgs[i].selected = true;
-          }
-
-          const latlng = this.getLocationLatLng(markerArgs[i].locationId);
-          const googleMapLatLng = new google.maps.LatLng(latlng.lat, latlng.lng);
-
+          const latlng = this.getLocationLatLng(locationId);
           new CustomMarker(
-            googleMapLatLng,
+            new google.maps.LatLng(latlng.lat, latlng.lng),
             this.map.object,
-            markerArgs[i]
+            {
+              class: 'find-a-job__map-marker--location',
+              solid: true,
+              amount: locations[locationId].jobs.length,
+              locationId: locationId,
+              clickCallback: this.handleMapMarkerClick.bind(null, this, locationId),
+              prisonName: locations[locationId].prisonName,
+              selected: (locationId == this.selectedLocationId),
+            }
           );
         }
       },
