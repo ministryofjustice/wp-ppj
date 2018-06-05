@@ -93,7 +93,7 @@
         <div class="find-a-job__jobs-available">{{ jobsAvailable }}</div>
       </div>
 
-      <div class="find-a-job__view-list-container" v-on:scroll="handleListScroll" ref="list">
+      <div class="find-a-job__view-list-container" @scroll="handleListScroll" ref="list">
         <div v-if="jobFeedError"
              class="find-a-job__job-feed-message find-a-job__job-feed-message--feed-error">
           <div class="find-a-job__job-feed-text-container">
@@ -117,7 +117,7 @@
               :data-location-id="job.locationId"
               v-for="(job, index) in visibleJobs"
               :key="index"
-              v-on:click="handleVacancyClick(job.locationId)">
+              @click="handleVacancyClick(job.locationId)">
             <job-summary :distance="job.distance"
                          :distance-time="job.distanceTime"
                          :position="job.role"
