@@ -9,10 +9,7 @@
       <div class="job-summary__prison-name"
            v-if="prisonName">{{prisonName}}
       </div>
-      <div class="job-summary__distance"
-           v-if="formattedDistance">
-        {{formattedDistance}}
-      </div>
+
       <div class="job-summary__salary"
            v-if="formattedSalary">{{formattedSalary}}
       </div>
@@ -20,6 +17,12 @@
            v-if="prisonName || prisonCity">
         <div class="job-summary__prison-city">
           {{prisonCity}}
+        </div>
+        <div class="job-summary__distance-container">
+          <span class="job-summary__distance"
+                v-if="formattedDistance">
+            {{formattedDistance}}
+          </span>
         </div>
       </div>
       <a class="job-summary__link"
@@ -35,16 +38,16 @@
 <script>
   export default {
     props: {
-      'distance': {default: 0}
-      , 'distance-time': {default: ''}
-      , 'position': {default: ''}
-      , 'prison-city': {default: ''}
-      , 'prison-name': {default: ''}
-      , 'prison-page-link': {default: ''}
-      , 'salary': {default: ''}
-      , 'selected': {default: false}
-      , 'title': {default: 'remove me'}
-      , 'url': {default: '/job-post.html'}
+      'distance'         : { 'default': 0 },
+      'distance-time'    : { 'default': '' },
+      'position'         : { 'default': '' },
+      'prison-city'      : { 'default': '' },
+      'prison-name'      : { 'default': '' },
+      'prison-page-link' : { 'default': '' },
+      'salary'           : { 'default': '' },
+      'selected'         : { 'default': false },
+      'title'            : { 'default': 'remove me' },
+      'url'              : { 'default': '/job-post.html' },
     },
 
     methods: {
@@ -68,7 +71,7 @@
         } else if (this.distance > 0) {
           distanceStr = parseFloat(this.distance).toFixed(1) + suffix;
         } else {
-          distanceStr = ' ';
+          distanceStr = '';
         }
 
         return distanceStr;

@@ -1,0 +1,19 @@
+@mixin display-grid()
+  display: grid
+  display: -ms-grid
+
+@mixin grid-column($start, $end)
+  grid-column-end: $end
+  grid-column-start: $start
+  -ms-grid-column: $start
+  -ms-grid-column-span: ($end - $start)
+
+@mixin grid-row($start, $end)
+  grid-row-end: $end
+  grid-row-start: $start
+  -ms-grid-row: $start
+  -ms-grid-row-span: ($end - $start)
+
+@mixin grid-template-columns($args...) // do not comma separate arguments to this mixin
+  grid-template-columns: $args
+  -ms-grid-columns: $args
