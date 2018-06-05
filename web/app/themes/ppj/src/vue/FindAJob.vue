@@ -32,8 +32,8 @@
 
       <div class="find-a-job__geolocation"
            :class="{
-                'find-a-job__geolocation--is-busy': (geolocation.isBusy == true),
-                'find-a-job__geolocation--is-active': (searchTerm.isGeolocation == true)
+                'find-a-job__geolocation--is-busy'   : geolocation.isBusy,
+                'find-a-job__geolocation--is-active' : searchTerm.isGeolocation
             }">
         <a class="find-a-job__geolocation-button"
            v-if="geolocation.isAvailable"
