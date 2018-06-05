@@ -110,7 +110,7 @@
           </div>
         </div>
 
-        <ul class="find-a-job__view-list"ref="list">
+        <ul class="find-a-job__view-list" ref="list">
 
           <li class="find-a-job__view-list-element"
               v-if="!jobFeedError && jobs.length > 0"
