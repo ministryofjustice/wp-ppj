@@ -409,7 +409,7 @@
         clearTimeout(this.handleListScrollTimeoutId);
         this.handleListScrollTimeoutId = setTimeout(()=> {
           this.persistStateToHistory();
-        }, 100)
+        }, 100);
       },
 
       updateMapWithLocationMarkers(locations) {
