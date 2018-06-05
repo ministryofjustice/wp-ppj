@@ -4,6 +4,10 @@ $breakpoints: (
   'large'     : ( min-width: $length-large )
 );
 
+$vbreakpoints: (
+  'regular'  : ( min-height: $length-regular),
+);
+
 @mixin bp($name) {
   // If the key exists in the map
   @if map-has-key($breakpoints, $name) {
@@ -15,7 +19,22 @@ $breakpoints: (
 
   // If the key doesn't exist in the map
   @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoints}`. "
++ "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+@mixin vbp($name) {
+  @if map-has-key($vbreakpoints, $name) {
+    // Prints a media query based on the value
+    @media #{inspect(map-get($vbreakpoints, $name))} {
+      @content;
+    }
+  }
+
+    // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$vbreakpoints}`. "
 + "Please make sure it is defined in `$breakpoints` map.";
   }
 }

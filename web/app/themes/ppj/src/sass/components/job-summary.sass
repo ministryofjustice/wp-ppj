@@ -30,9 +30,6 @@
   &__distance
     height: 1.3em
 
-    &-time
-      color: #cccccc
-
   &__position
     font-weight: $font-weight-bold
 
@@ -43,7 +40,6 @@
     position: absolute
     right: 0
     text-align: right
-    top: 0
     width: $salaryWidth
 
   &__link
@@ -55,7 +51,6 @@
 
   &__prison-name
     font-weight: $font-weight-bold
-    margin-right: $salaryWidth
     overflow: hidden
     text-overflow: ellipsis
     white-space: nowrap
@@ -64,7 +59,9 @@
     text-decoration: underline
 
   &--selected
+    transition: $main-transition-duration
+
     &:before
       background-color: $color-main
-
+      transition: all $main-transition-duration
 
