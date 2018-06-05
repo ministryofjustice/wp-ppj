@@ -288,7 +288,7 @@
         case 'youth-custody':
           data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/youth-custody-vacancies.json';
           data.jobListMessage = 'See prison officer jobs working with adult offenders';
-          data.jobListMessageUrl = '/prison-officer/find-a-job';
+          data.jobListMessageUrl = '/prison-officer/find-a-job/';
           break;
       }
 
