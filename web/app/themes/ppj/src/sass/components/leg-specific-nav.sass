@@ -7,8 +7,14 @@
   opacity: 1
   padding: $common-spacing
 
+  .page-template-find-a-job &
+    display: none
+
   @include bp('portrait')
     align-items: center
+
+    .page-template-find-a-job &
+      display: flex
 
   .leg &
     left: 0
