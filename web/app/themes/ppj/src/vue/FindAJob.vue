@@ -494,7 +494,6 @@
       },
 
       createLocations() {
-
         const jobs = this.jobs;
         const locations = {};
         const previousSearchTermMarkerFound = (this.searchTerm.latlng.lat && this.searchTerm.latlng.lng);
@@ -767,21 +766,11 @@
       },
 
       getUrlParamsAsJson() {
-        const search = location.search.substring(1);
-        let result = null;
-        if (search) {
-          result = JSON.parse(
-            '{"'
-            + decodeURI(search)
-              .replace(/"/g, '\\"')
-              .replace(/&/g, '","')
-              .replace(/=/g, '":"')
-            + '"}'
-          );
-        } else {
-          result = {};
-        }
-        return result;
+        const obj = {};
+        new URLSearchParams(location.search.substring(1)).forEach((val, key) => {
+          obj[key] = val
+        });
+        return obj;
       },
 
       convertJsonToUrlParameterString(json) {

@@ -1,4 +1,5 @@
 import 'details-element-polyfill';
+import 'url-search-params-polyfill';
 import scrollpoints from 'scrollpoints';
 import closestPolyfill from './polyfills/Element.closest';
 
