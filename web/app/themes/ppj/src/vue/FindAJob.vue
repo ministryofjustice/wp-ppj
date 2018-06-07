@@ -544,50 +544,64 @@
         this.updateMapWithLocationMarkers(this.searchResults.locations);
       },
 
+      initializeMap() {
+        // decide what the initial bounds for the map should be
+        if(this.previousState.lat0 && this.previousState.lng0 && this.previousState.lat1 && this.previousState.lng1) {
+          const bounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(this.previousState.lat0, this.previousState.lng0),
+            new google.maps.LatLng(this.previousState.lat1, this.previousState.lng1)
+          );
+          this.fitMapToBounds(bounds, 0);
+        } else {
+          if( this.searchTerm.isGeolocation || this.searchTerm.query) {
+            // this condition is reached only if coming from the other find-a-job page
+            this.zoomToNearbyResults(parseFloat(this.previousState['marker-lat']), parseFloat(this.previousState['marker-lng']));
+          } else {
+            this.zoomToEngland();
+          }
+        }
+
+        // Use the bounds_changed event listener to persist the state after the map has fully loaded.
+        // Only persist the state 100 milliseconds after last bounds_changed event has fired.
+        // The first bounds_changed event will be ignored as it is always fired on map creation
+        // and we don't want to persist the default state
+        let previousTimeoutId = 0,
+          ignoreBoundsChanged = true;
+
+        this.map.object.addListener('bounds_changed', () => {
+          if (ignoreBoundsChanged) {
+            ignoreBoundsChanged = false;
+          } else {
+            clearTimeout(previousTimeoutId);
+            previousTimeoutId = setTimeout(()=>{
+              this.persistStateToHistory();
+            }, 100);
+          }
+        });
+
+        // if available recreate the searchTerm marker from the previous state
+        if (this.previousState['marker-lat'] && this.previousState['marker-lng']) {
+          this.updateSearchTermMarker(this.previousState['marker-lat'], this.previousState['marker-lng']);
+        }
+      },
+
       createMap() {
         this.map.object = new google.maps.Map(
           document.getElementsByClassName('find-a-job__map')[0],
           this.map.googleMaps.options
         );
 
-        // add one time function to be fired after the map has loaded
-        google.maps.event.addListenerOnce(this.map.object, 'idle', () => {
+        axios.get(this.vacanciesDataURL, { responseType: 'json' })
+          .then(this.handleGotVacanciesData)
+          .catch((error) => {
+            this.jobFeedError = true;
+            console.log(error);
 
-          // decide what the initial bounds for the map should be
-          if(this.previousState.lat0 && this.previousState.lng0 && this.previousState.lat1 && this.previousState.lng1) {
-            const bounds = new google.maps.LatLngBounds(
-              new google.maps.LatLng(this.previousState.lat0, this.previousState.lng0),
-              new google.maps.LatLng(this.previousState.lat1, this.previousState.lng1)
-            );
-            this.fitMapToBounds(bounds, 0);
-          } else {
-            this.zoomToEngland();
-          }
-
-          // Use the bounds_changed event listener to persist the state after the map has fully loaded.
-          // Only persist the state 100 milliseconds after last bounds_changed event has fired.
-          // The first bounds_changed event will be ignored as it is always fired on map creation
-          // and we don't want to persist the default state
-          let previousTimeoutId = 0,
-              ignoreBoundsChanged = true;
-
-          this.map.object.addListener('bounds_changed', () => {
-            if (ignoreBoundsChanged) {
-              ignoreBoundsChanged = false;
-            } else {
-              clearTimeout(previousTimeoutId);
-              previousTimeoutId = setTimeout(()=>{
-                this.persistStateToHistory();
-              }, 100);
-            }
+            window.dataLayer.push({
+              event: 'job_feed_load_error',
+              error_message: error.toString()
+            });
           });
-
-          // if available recreate the searchTerm marker from the previous state
-          if (this.previousState['marker-lat'] && this.previousState['marker-lng']) {
-            this.updateSearchTermMarker(this.previousState['marker-lat'], this.previousState['marker-lng']);
-          }
-
-        });
       },
 
       initAutocomplete() {
@@ -652,7 +666,6 @@
       },
 
       zoomToNearbyResults(lat, lng) {
-
         var bounds = new google.maps.LatLngBounds();
 
         // Add user's search location to the bounds
@@ -872,6 +885,11 @@
       'searchTerm.latlng': function(val) {
         this.handleNewSearchLocation(val);
       },
+
+      'jobs': function() {
+        this.createLocations();
+        this.initializeMap();
+      }
     },
 
     computed: {
@@ -895,11 +913,6 @@
       visibleJobs: function() {
         if (this.mounted) {
 
-          if (Object.keys(this.searchResults.locations).length === 0) {
-            this.createLocations();
-          }
-
-          //this.focusOnSelectedJob(this, this.searchResults.selectedLocationId);
           let selectedLocations = null;
           if (this.deviceIsMobile) {
             selectedLocations = this.searchResults.orderedLocations.slice().splice(
@@ -927,7 +940,7 @@
 
       jobListMessageUrlWithSearchTerm: function() {
         let params = '';
-        if ( this.searchTerm.latlng.lat && this.searchTerm.latlng.lng ) {
+        if ( this.searchTerm.latlng && this.searchTerm.latlng.lat && this.searchTerm.latlng.lng ) {
           params = this.convertJsonToUrlParameterString({
             'search': this.searchTerm.query,
             'marker-lat': this.searchTerm.latlng.lat,
@@ -959,17 +972,6 @@
         this.$refs.list.scrollTo(0,this.list.scrollTop);
       }, 50);
 
-      axios.get(this.vacanciesDataURL, { responseType: 'json' })
-        .then(self.handleGotVacanciesData)
-        .catch((error) => {
-          this.jobFeedError = true;
-          console.log(error);
-
-          window.dataLayer.push({
-            event: 'job_feed_load_error',
-            error_message: error.toString()
-          });
-        });
     }
   }
 </script>
