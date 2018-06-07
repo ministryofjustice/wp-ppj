@@ -209,10 +209,10 @@
     },
 
     data() {
-      const previousState = this.getUrlParamsAsJson();
+      const urlParams = new URLSearchParams(location.search.substring(1));
 
       const data = {
-        previousState : previousState,
+        urlParams : urlParams,
 
         deviceIsMobile: false,
 
@@ -227,11 +227,11 @@
         jobs: [],
 
         list: {
-          activePage: parseInt(previousState['active-page']) || 0,
+          activePage: parseInt(urlParams.get('active-page')) || 0,
           resultsPerPage: 5,
           forwardEnabled: true,
           backwardEnabled: false,
-          scrollTop: parseInt(previousState['scroll']) || 0,
+          scrollTop: parseInt(urlParams.get('scroll')) || 0,
         },
 
         searchResults: {
@@ -239,17 +239,17 @@
           orderedLocations: [],
         },
 
-        selectedLocationId: previousState['selected-location'] || '',
+        selectedLocationId: urlParams.get('selected-location') || '',
 
         searchTerm: {
-          input: previousState['search'] || '',
-          query: previousState['search'] || '',
+          input: urlParams.get('search') || '',
+          query: urlParams.get('search') || '',
           latlng: {
-            lat: previousState['marker-lat'] || '',
-            lng: previousState['marker-lng'] || ''
+            lat: urlParams.get('marker-lat') || '',
+            lng: urlParams.get('marker-lng') || ''
           },
           marker: null,
-          isGeolocation: (previousState.geolocation == 'true') || false,
+          isGeolocation: (urlParams.get('geolocation') == 'true') || false,
           doneInitialZoom: false
         },
 
@@ -545,16 +545,16 @@
 
       initializeMap() {
         // decide what the initial bounds for the map should be
-        if(this.previousState.lat0 && this.previousState.lng0 && this.previousState.lat1 && this.previousState.lng1) {
+        if(this.urlParams.get('lat0') && this.urlParams.get('lng0') && this.urlParams.get('lat1') && this.urlParams.get('lng1')) {
           const bounds = new google.maps.LatLngBounds(
-            new google.maps.LatLng(this.previousState.lat0, this.previousState.lng0),
-            new google.maps.LatLng(this.previousState.lat1, this.previousState.lng1)
+            new google.maps.LatLng(this.urlParams.get('lat0'), this.urlParams.get('lng0')),
+            new google.maps.LatLng(this.urlParams.get('lat1'), this.urlParams.get('lng1'))
           );
           this.fitMapToBounds(bounds, 0);
         } else {
           if( this.searchTerm.isGeolocation || this.searchTerm.query) {
             // this condition is reached only if coming from the other find-a-job page
-            this.zoomToNearbyResults(parseFloat(this.previousState['marker-lat']), parseFloat(this.previousState['marker-lng']));
+            this.zoomToNearbyResults(parseFloat(this.urlParams.get('marker-lat')), parseFloat(this.urlParams.get('marker-lng')));
           } else {
             this.zoomToEngland();
           }
@@ -579,8 +579,8 @@
         });
 
         // if available recreate the searchTerm marker from the previous state
-        if (this.previousState['marker-lat'] && this.previousState['marker-lng']) {
-          this.updateSearchTermMarker(this.previousState['marker-lat'], this.previousState['marker-lng']);
+        if (this.urlParams.get('marker-lat') && this.urlParams.get('marker-lng') ) {
+          this.updateSearchTermMarker(this.urlParams.get('marker-lat'), this.urlParams.get('marker-lng'));
         }
       },
 
@@ -685,24 +685,6 @@
         this.fitMapToBounds(bounds);
       },
 
-      setWindowHistory(json) {
-        const paramString = this.convertJsonToUrlParameterString(json);
-
-        // replaceState does nothing if passed an empty string as its 3rd argument
-        // passing window.location.pathname will remove all url parameters
-        window.history.replaceState(null, null, (paramString) ? paramString : window.location.pathname);
-      },
-
-      modifyPersistedStateParam(paramName, val) {
-        const state = this.getUrlParamsAsJson();
-        if (val) {
-          state[paramName] = val;
-        } else {
-          delete state[paramName];
-        }
-        this.setWindowHistory(state);
-      },
-
       persistStateToHistory() {
         const bounds = this.map.object.getBounds();
         const currentState = {
@@ -720,7 +702,12 @@
           currentState['marker-lat'] = this.searchTerm.marker.latlng.lat();
           currentState['marker-lng'] = this.searchTerm.marker.latlng.lng();
         }
-        this.setWindowHistory(currentState);
+
+        const paramString = this.convertJsonToUrlParameterString(currentState);
+
+        // replaceState does nothing if passed an empty string as its 3rd argument
+        // passing window.location.pathname will remove all url parameters
+        window.history.replaceState(null, null, (paramString) ? paramString : window.location.pathname);
       },
 
       handleNewSearchLocation(latlng) {
@@ -765,26 +752,18 @@
         }
       },
 
-      getUrlParamsAsJson() {
-        const obj = {};
-        new URLSearchParams(location.search.substring(1)).forEach((val, key) => {
-          obj[key] = val
-        });
-        return obj;
-      },
-
       convertJsonToUrlParameterString(json) {
-        const paramsString = Object.keys(json).map(k => {
-          return encodeURI(k)
-            + '='
-            + encodeURI(json[k])
-        }).join('&');
+        const urlParams = new URLSearchParams();
+        Object.keys(json).map(k => {
+          urlParams.set(k, json[k]);
+        });
+        const paramsString = urlParams.toString();
         return (paramsString) ? '?' + paramsString : '';
       },
 
       resetSearch() {
         this.searchTerm.input = '';
-        this.modifyPersistedStateParam('search', '');
+        this.urlParams.set('search', '');
         this.searchTerm.query = '';
         this.searchTerm.latlng = null;
         this.searchTerm.isGeolocation = false;
