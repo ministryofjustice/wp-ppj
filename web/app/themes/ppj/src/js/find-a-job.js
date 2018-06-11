@@ -1,3 +1,4 @@
+import 'url-search-params-polyfill';
 import Vue from 'vue';
 import JobSummary from '../vue/JobSummary.vue';
 import FindAJob from '../vue/FindAJob.vue';
