@@ -248,7 +248,6 @@
           },
           marker: null,
           isGeolocation: (urlParams.get('geolocation') == 'true') || false,
-          doneInitialZoom: false,
         },
 
         autocomplete: null,
@@ -338,10 +337,6 @@
         return d;
       },
 
-      updateSelectedLocationId(locationId) {
-        this.selectedLocationId = locationId;
-      },
-
       calculateActivePageFromLocationId(locationId) {
         const groups = this.searchResults.orderedLocations;
         for (let i in groups) {
@@ -364,19 +359,11 @@
       },
 
       focusOnLocation(locationId) {
-        this.updateSelectedLocationId(locationId);
+        this.selectedLocationId = locationId;
         CustomMarker.changeSelectedMarkerByLocationId(locationId);
 
         const coords = this.getLocationLatLng(locationId);
         this.recenterMap(coords.lat, coords.lng);
-
-        if (
-          !this.searchTerm.isGeolocation &&
-          !this.searchTerm.query &&
-          !this.searchTerm.doneInitialZoom
-        ) {
-          this.searchTerm.doneInitialZoom = true;
-        }
       },
 
       recenterMap(lat, lng) {
@@ -699,7 +686,7 @@
 
       handleNewSearchLocation(latlng) {
         this.list.activePage = 0;
-        this.searchTerm.doneInitialZoom = false;
+        this.scrollListToTop();
 
         if (latlng == null) {
           this.removeSearchTermMarker();
@@ -716,7 +703,6 @@
             search_is_geolocation: this.searchTerm.isGeolocation
           });
         }
-        this.scrollListToTop();
       },
 
       processGeocoderResults(results, status) {
@@ -759,7 +745,7 @@
       search() {
         this.searchTerm.query = this.searchTerm.input;
         this.searchTerm.latlng = null;
-        this.updateSelectedLocationId('');
+        this.selectedLocationId = '';
         this.searchTerm.isGeolocation = false;
 
         if (this.searchTerm.query) {
