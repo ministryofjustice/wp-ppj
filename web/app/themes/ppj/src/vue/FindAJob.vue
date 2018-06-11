@@ -744,7 +744,6 @@
 
       search() {
         this.searchTerm.query = this.searchTerm.input;
-        this.searchTerm.latlng = null;
         this.selectedLocationId = '';
         this.searchTerm.isGeolocation = false;
 
