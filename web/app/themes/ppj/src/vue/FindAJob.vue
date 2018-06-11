@@ -310,10 +310,6 @@
         alert(title + "\n" + message);
       },
 
-      isDeviceMobile() {
-        return (window.innerWidth < 768);
-      },
-
       toRadians(degrees) {
         return degrees * (Math.PI / 180);
       },
@@ -796,10 +792,6 @@
       showLastPage() {
         this.showPage(this.numberOfResultPages - 1);
       },
-
-      updateIsDeviceMobile() {
-        this.deviceIsMobile = this.isDeviceMobile();
-      },
     },
 
     watch: {
@@ -909,21 +901,23 @@
     },
 
     created() {
-      this.updateIsDeviceMobile();
-
       if ("geolocation" in navigator) {
         this.geolocation.isAvailable = true;
       }
+
+      const updateDeviceIsMobile = (query) => {
+        this.deviceIsMobile = !query.matches;
+      };
+      const nonMobile = window.matchMedia('(min-width: 768px)');
+      updateDeviceIsMobile(nonMobile);
+      nonMobile.addListener(updateDeviceIsMobile);
     },
 
     mounted() {
-      const self = this;
       this.createMap();
       this.loadVacanciesData();
       this.initAutocomplete();
       this.mounted = true;
-
-      window.addEventListener('resize', debounce(this.updateIsDeviceMobile, 250));
     }
   }
 </script>
