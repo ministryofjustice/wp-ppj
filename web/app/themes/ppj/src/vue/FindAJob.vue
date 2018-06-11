@@ -93,7 +93,7 @@
         <div class="find-a-job__jobs-available">{{ jobsAvailable }}</div>
       </div>
 
-      <div class="find-a-job__view-list-container" @scroll="handleListScroll" ref="list">
+      <div class="find-a-job__view-list-container" @scroll="onListScroll" ref="list">
         <div v-if="jobFeedError"
              class="find-a-job__job-feed-message find-a-job__job-feed-message--feed-error">
           <div class="find-a-job__job-feed-text-container">
@@ -188,6 +188,7 @@
 
 <script>
   import axios from 'axios';
+  import debounce from 'debounce';
   import CustomMarker from '../js/CustomMarker';
   import dummyJobs from '../js/dummyJobs';
 
@@ -401,12 +402,9 @@
         this.focusOnLocation(locationId);
       },
 
-      handleListScroll() {
-        clearTimeout(this.handleListScrollTimeoutId);
-        this.handleListScrollTimeoutId = setTimeout(() => {
-          this.list.scrollTop = this.$refs.list.scrollTop;
-        }, 100);
-      },
+      onListScroll: debounce(function() {
+        this.list.scrollTop = this.$refs.list.scrollTop;
+      }, 250),
 
       updateMapWithLocationMarkers(locations) {
         for (let locationId in locations) {
@@ -555,22 +553,17 @@
         }
 
         // Use the bounds_changed event listener to persist the state after the map has fully loaded.
-        // Only persist the state 100 milliseconds after last bounds_changed event has fired.
         // The first bounds_changed event will be ignored as it is always fired on map creation
         // and we don't want to persist the default state
-        let previousTimeoutId = 0,
-          ignoreBoundsChanged = true;
+        let ignoreBoundsChanged = true;
 
-        this.map.object.addListener('bounds_changed', () => {
+        this.map.object.addListener('bounds_changed', debounce(() => {
           if (ignoreBoundsChanged) {
             ignoreBoundsChanged = false;
           } else {
-            clearTimeout(previousTimeoutId);
-            previousTimeoutId = setTimeout(()=>{
-              this.map.currentBounds = this.map.object.getBounds();
-            }, 100);
+            this.map.currentBounds = this.map.object.getBounds();
           }
-        });
+        }, 250));
 
         // if available recreate the searchTerm marker from the previous state
         if (this.searchTerm.latlng.lat && this.searchTerm.latlng.lng) {
@@ -807,10 +800,6 @@
       updateIsDeviceMobile() {
         this.deviceIsMobile = this.isDeviceMobile();
       },
-
-      handleScreenResize() {
-        this.updateIsDeviceMobile();
-      },
     },
 
     watch: {
@@ -934,7 +923,7 @@
       this.initAutocomplete();
       this.mounted = true;
 
-      window.addEventListener('resize', this.handleScreenResize);
+      window.addEventListener('resize', debounce(this.updateIsDeviceMobile, 250));
     }
   }
 </script>
