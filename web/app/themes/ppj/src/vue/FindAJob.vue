@@ -212,8 +212,6 @@
       const urlParams = new URLSearchParams(location.search.substring(1));
 
       const data = {
-        urlParams : urlParams,
-
         deviceIsMobile: false,
 
         geolocation: {
@@ -245,12 +243,12 @@
           input: urlParams.get('search') || '',
           query: urlParams.get('search') || '',
           latlng: {
-            lat: urlParams.get('marker-lat') || '',
-            lng: urlParams.get('marker-lng') || ''
+            lat: parseFloat(urlParams.get('marker-lat')) || false,
+            lng: parseFloat(urlParams.get('marker-lng')) || false,
           },
           marker: null,
           isGeolocation: (urlParams.get('geolocation') == 'true') || false,
-          doneInitialZoom: false
+          doneInitialZoom: false,
         },
 
         autocomplete: null,
@@ -265,9 +263,20 @@
               fullscreenControl: false,
               mapTypeControl: false,
               gestureHandling: 'greedy',
-              zoomControl: false
+              zoomControl: false,
             }
-          }
+          },
+          currentBounds: (() => {
+            if (urlParams.get('lat0') && urlParams.get('lng0') && urlParams.get('lat1') && urlParams.get('lng1')) {
+              return new google.maps.LatLngBounds(
+                new google.maps.LatLng(urlParams.get('lat0'), urlParams.get('lng0')),
+                new google.maps.LatLng(urlParams.get('lat1'), urlParams.get('lng1'))
+              );
+            }
+            else {
+              return false;
+            }
+          })(),
         },
 
         titleText: this.title,
@@ -375,7 +384,7 @@
       },
 
       scrollListToTop() {
-        this.$refs.list.scrollTo(0,this.list.scrollTop);
+        this.$refs.list.scrollTo(0, 0);
       },
 
       scrollListToJob(locationId) {
@@ -407,8 +416,8 @@
 
       handleListScroll() {
         clearTimeout(this.handleListScrollTimeoutId);
-        this.handleListScrollTimeoutId = setTimeout(()=> {
-          this.persistStateToHistory();
+        this.handleListScrollTimeoutId = setTimeout(() => {
+          this.list.scrollTop = this.$refs.list.scrollTop;
         }, 100);
       },
 
@@ -544,20 +553,18 @@
       },
 
       initializeMap() {
-        // decide what the initial bounds for the map should be
-        if(this.urlParams.get('lat0') && this.urlParams.get('lng0') && this.urlParams.get('lat1') && this.urlParams.get('lng1')) {
-          const bounds = new google.maps.LatLngBounds(
-            new google.maps.LatLng(this.urlParams.get('lat0'), this.urlParams.get('lng0')),
-            new google.maps.LatLng(this.urlParams.get('lat1'), this.urlParams.get('lng1'))
-          );
-          this.fitMapToBounds(bounds, 0);
-        } else {
-          if( this.searchTerm.isGeolocation || this.searchTerm.query) {
-            // this condition is reached only if coming from the other find-a-job page
-            this.zoomToNearbyResults(parseFloat(this.urlParams.get('marker-lat')), parseFloat(this.urlParams.get('marker-lng')));
-          } else {
-            this.zoomToEngland();
-          }
+        // Decide what the initial bounds for the map should be
+        if (this.map.currentBounds) {
+          // Zoom the map to current bounds
+          this.fitMapToBounds(this.map.currentBounds, 0);
+        }
+        else if (this.searchTerm.latlng.lat && this.searchTerm.latlng.lng) {
+          // Zoom the map to the current search term & nearby results
+          this.zoomToNearbyResults(this.searchTerm.latlng.lat, this.searchTerm.latlng.lng);
+        }
+        else {
+          // No bounds or search term were set – zoom to England
+          this.zoomToEngland();
         }
 
         // Use the bounds_changed event listener to persist the state after the map has fully loaded.
@@ -573,14 +580,14 @@
           } else {
             clearTimeout(previousTimeoutId);
             previousTimeoutId = setTimeout(()=>{
-              this.persistStateToHistory();
+              this.map.currentBounds = this.map.object.getBounds();
             }, 100);
           }
         });
 
         // if available recreate the searchTerm marker from the previous state
-        if (this.urlParams.get('marker-lat') && this.urlParams.get('marker-lng') ) {
-          this.updateSearchTermMarker(this.urlParams.get('marker-lat'), this.urlParams.get('marker-lng'));
+        if (this.searchTerm.latlng.lat && this.searchTerm.latlng.lng) {
+          this.updateSearchTermMarker(this.searchTerm.latlng.lat, this.searchTerm.latlng.lng);
         }
       },
 
@@ -589,9 +596,14 @@
           document.getElementsByClassName('find-a-job__map')[0],
           this.map.googleMaps.options
         );
+      },
 
+      loadVacanciesData() {
         axios.get(this.vacanciesDataURL, { responseType: 'json' })
-          .then(this.handleGotVacanciesData)
+          .then((response) => {
+            this.jobFeedLoaded = true;
+            this.jobs = response.data;
+          })
           .catch((error) => {
             this.jobFeedError = true;
             console.log(error);
@@ -685,31 +697,6 @@
         this.fitMapToBounds(bounds);
       },
 
-      persistStateToHistory() {
-        const bounds = this.map.object.getBounds();
-        const currentState = {
-          'search': this.searchTerm.query,
-          'geolocation': this.searchTerm.isGeolocation,
-          'lat0': bounds.getSouthWest().lat(),
-          'lng0': bounds.getSouthWest().lng(),
-          'lat1': bounds.getNorthEast().lat(),
-          'lng1': bounds.getNorthEast().lng(),
-          'selected-location': this.selectedLocationId,
-          'active-page': this.list.activePage,
-          'scroll': document.getElementsByClassName('find-a-job__view-list-container')[0].scrollTop,
-        };
-        if (this.searchTerm.marker) {
-          currentState['marker-lat'] = this.searchTerm.marker.latlng.lat();
-          currentState['marker-lng'] = this.searchTerm.marker.latlng.lng();
-        }
-
-        const paramString = this.convertJsonToUrlParameterString(currentState);
-
-        // replaceState does nothing if passed an empty string as its 3rd argument
-        // passing window.location.pathname will remove all url parameters
-        window.history.replaceState(null, null, (paramString) ? paramString : window.location.pathname);
-      },
-
       handleNewSearchLocation(latlng) {
         this.list.activePage = 0;
         this.searchTerm.doneInitialZoom = false;
@@ -752,18 +739,16 @@
         }
       },
 
-      convertJsonToUrlParameterString(json) {
-        const urlParams = new URLSearchParams();
-        Object.keys(json).map(k => {
-          urlParams.set(k, json[k]);
+      buildQueryString(parameters) {
+        const queryString = new URLSearchParams();
+        Object.keys(parameters).map(k => {
+          queryString.set(k, parameters[k]);
         });
-        const paramsString = urlParams.toString();
-        return (paramsString) ? '?' + paramsString : '';
+        return queryString.toString();
       },
 
       resetSearch() {
         this.searchTerm.input = '';
-        this.urlParams.set('search', '');
         this.searchTerm.query = '';
         this.searchTerm.latlng = null;
         this.searchTerm.isGeolocation = false;
@@ -812,7 +797,6 @@
 
       showPage(i) {
         this.list.activePage = i;
-        this.persistStateToHistory();
       },
 
       showNextPage() {
@@ -835,11 +819,6 @@
         this.showPage(this.numberOfResultPages - 1);
       },
 
-      handleGotVacanciesData(response) {
-        this.jobFeedLoaded = true;
-        this.jobs = response.data;
-      },
-
       updateIsDeviceMobile() {
         this.deviceIsMobile = this.isDeviceMobile();
       },
@@ -857,6 +836,18 @@
       'jobs': function() {
         this.createLocations();
         this.initializeMap();
+
+        // Scroll the jobs list to the expected scroll position
+        // Wrapped in nextTick so it'll perform the scroll once the view has rendered
+        this.$nextTick(() => {
+          this.$refs.list.scrollTo(0,this.list.scrollTop);
+        });
+      },
+
+      'currentState': function(state) {
+        const queryString = this.buildQueryString(state);
+        const stateUrl = (queryString) ? '?' + queryString : window.location.pathname;
+        window.history.replaceState(null, null, stateUrl);
       }
     },
 
@@ -907,16 +898,39 @@
       },
 
       jobListMessageUrlWithSearchTerm: function() {
-        let params = '';
-        if ( this.searchTerm.latlng && this.searchTerm.latlng.lat && this.searchTerm.latlng.lng ) {
-          params = this.convertJsonToUrlParameterString({
-            'search': this.searchTerm.query,
-            'marker-lat': this.searchTerm.latlng.lat,
-            'marker-lng': this.searchTerm.latlng.lng,
-            'geolocation': this.searchTerm.isGeolocation,
+        let queryString = '';
+        if (this.currentState['marker-lat'] && this.currentState['marker-lng']) {
+          queryString = '?' + this.buildQueryString({
+            'search': this.currentState['search'],
+            'geolocation': this.currentState['geolocation'],
+            'marker-lat': this.currentState['marker-lat'],
+            'marker-lng': this.currentState['marker-lng'],
           });
         }
-        return this.jobListMessageUrl + params;
+        return this.jobListMessageUrl + queryString;
+      },
+
+      currentState: function() {
+        const currentState = {
+          'search': this.searchTerm.query,
+          'geolocation': this.searchTerm.isGeolocation,
+          'selected-location': this.selectedLocationId,
+          'active-page': this.list.activePage,
+          'scroll': this.list.scrollTop,
+        };
+
+        if (this.map.currentBounds) {
+          currentState['lat0'] = this.map.currentBounds.getSouthWest().lat();
+          currentState['lng0'] = this.map.currentBounds.getSouthWest().lng();
+          currentState['lat1'] = this.map.currentBounds.getNorthEast().lat();
+          currentState['lng1'] = this.map.currentBounds.getNorthEast().lng();
+        }
+
+        if (this.searchTerm.marker) {
+          currentState['marker-lat'] = this.searchTerm.marker.latlng.lat();
+          currentState['marker-lng'] = this.searchTerm.marker.latlng.lng();
+        }
+        return currentState;
       }
     },
 
@@ -931,15 +945,11 @@
     mounted() {
       const self = this;
       this.createMap();
+      this.loadVacanciesData();
       this.initAutocomplete();
       this.mounted = true;
 
       window.addEventListener('resize', this.handleScreenResize);
-
-      setTimeout(()=>{
-        this.$refs.list.scrollTo(0,this.list.scrollTop);
-      }, 50);
-
     }
   }
 </script>
