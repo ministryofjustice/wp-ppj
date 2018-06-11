@@ -547,6 +547,11 @@
           // No bounds or search term were set – zoom to England
           this.zoomToEngland();
         }
+        console.log(this.searchTerm.marker);
+
+        if (this.searchTerm.latlng.lat && this.searchTerm.latlng.lng) {
+          this.updateSearchTermMarker(this.searchTerm.latlng.lat, this.searchTerm.latlng.lng);
+        }
 
         // Use the bounds_changed event listener to persist the state after the map has fully loaded.
         // The first bounds_changed event will be ignored as it is always fired on map creation
@@ -560,11 +565,6 @@
             this.map.currentBounds = this.map.object.getBounds();
           }
         }, 250));
-
-        // if available recreate the searchTerm marker from the previous state
-        if (this.searchTerm.latlng.lat && this.searchTerm.latlng.lng) {
-          this.updateSearchTermMarker(this.searchTerm.latlng.lat, this.searchTerm.latlng.lng);
-        }
       },
 
       createMap() {
@@ -677,7 +677,7 @@
         this.list.activePage = 0;
         this.scrollListToTop();
 
-        if (latlng == null) {
+        if (latlng.lat == false && latlng.lng == false) {
           this.removeSearchTermMarker();
           this.zoomToEngland();
           // TODO remove distances from list and reorder to default
@@ -725,10 +725,9 @@
       resetSearch() {
         this.searchTerm.input = '';
         this.searchTerm.query = '';
-        this.searchTerm.latlng = null;
+        this.searchTerm.latlng = {lat: false, lng: false};
         this.searchTerm.isGeolocation = false;
         this.$refs.searchInput.focus();
-        this.removeSearchTermMarker();
       },
 
       search() {
@@ -885,16 +884,16 @@
           'scroll': this.list.scrollTop,
         };
 
+        if (this.searchTerm.latlng.lat && this.searchTerm.latlng.lng) {
+          currentState['marker-lat'] = this.searchTerm.latlng.lat;
+          currentState['marker-lng'] = this.searchTerm.latlng.lng;
+        }
+
         if (this.map.currentBounds) {
           currentState['lat0'] = this.map.currentBounds.getSouthWest().lat();
           currentState['lng0'] = this.map.currentBounds.getSouthWest().lng();
           currentState['lat1'] = this.map.currentBounds.getNorthEast().lat();
           currentState['lng1'] = this.map.currentBounds.getNorthEast().lng();
-        }
-
-        if (this.searchTerm.marker) {
-          currentState['marker-lat'] = this.searchTerm.marker.latlng.lat();
-          currentState['marker-lng'] = this.searchTerm.marker.latlng.lng();
         }
         return currentState;
       }
