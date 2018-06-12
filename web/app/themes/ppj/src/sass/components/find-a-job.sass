@@ -52,9 +52,15 @@
       width: 40%
 
   &__prompt
+    font-size: 1.6rem
+    overflow: hidden
+    white-space: nowrap
+
     @include bp('portrait')
-      font-size: $font-size-medium
       margin-bottom: $common-spacing
+
+    @include bp('landscape')
+      font-size: 1.8rem
 
   &__form
     position: relative
