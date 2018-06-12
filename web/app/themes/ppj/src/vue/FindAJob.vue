@@ -5,7 +5,6 @@
        :class="{'find-a-job--job-selected': selectedLocationId}"
   >
     <div class="find-a-job__header">
-      <h2 class="find-a-job__title">{{ titleText }}</h2>
       <p class="find-a-job__prompt">Enter location (postcode, town or region)</p>
       <form class="find-a-job__form" @submit.prevent="" @reset.prevent="resetSearch">
         <input type="search"
@@ -278,8 +277,6 @@
             }
           })(),
         },
-
-        titleText: this.title,
 
         placeHolderText: 'e.g. SW1A 2LW, Birmingham or Essex',
 
