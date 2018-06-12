@@ -118,7 +118,6 @@
               :key="index"
               @click="handleVacancyClick(job.locationId)">
             <job-summary :distance="job.distance"
-                         :distance-time="job.distanceTime"
                          :position="job.role"
                          :prison-city="job.prison_location.town"
                          :prison-name="job.prison_name"
@@ -192,7 +191,6 @@
   import dummyJobs from '../js/dummyJobs';
 
   export default {
-
     props: {
       'title': {
         default: '',

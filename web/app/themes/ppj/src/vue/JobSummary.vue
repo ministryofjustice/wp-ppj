@@ -2,10 +2,6 @@
   <div class="job-summary"
        :class="{'job-summary--selected': selected}">
     <div class="job-summary__content">
-      <div class="job-summary__position"
-           v-if="false">
-        {{formattedRole}}
-      </div>
       <div class="job-summary__prison-name"
            v-if="prisonName">{{prisonName}}
       </div>
@@ -38,16 +34,12 @@
 <script>
   export default {
     props: {
-      'distance'         : { 'default': 0 },
-      'distance-time'    : { 'default': '' },
-      'position'         : { 'default': '' },
-      'prison-city'      : { 'default': '' },
-      'prison-name'      : { 'default': '' },
-      'prison-page-link' : { 'default': '' },
-      'salary'           : { 'default': '' },
-      'selected'         : { 'default': false },
-      'title'            : { 'default': 'remove me' },
-      'url'              : { 'default': '/job-post.html' },
+      'distance'    : { 'default': 0 },
+      'prison-city' : { 'default': '' },
+      'prison-name' : { 'default': '' },
+      'salary'      : { 'default': '' },
+      'selected'    : { 'default': false },
+      'url'         : { 'default': '' },
     },
 
     methods: {
@@ -75,16 +67,6 @@
         }
 
         return distanceStr;
-      },
-
-      formattedRole: function() {
-        let formattedRoleText = '';
-        switch (this.position) {
-          case 'prison-officer':
-            formattedRoleText = 'Prison Officer';
-            break;
-        }
-        return formattedRoleText;
       },
 
       formattedSalary: function() {
