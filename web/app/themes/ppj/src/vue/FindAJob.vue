@@ -310,19 +310,19 @@
         alert(title + "\n" + message);
       },
 
-      toRadians(degrees) {
-        return degrees * (Math.PI / 180);
-      },
-
       calculateDistanceBetweenTwoLatLngPoints(lat1, lng1, lat2, lng2) {
+        const toRadians = function(degrees) {
+          return degrees * (Math.PI / 180);
+        };
+
         const
           R = 6371 // kilometres
             * 0.621371 // kilometres per mile
           ,
-          φ1 = this.toRadians(lat1),
-          φ2 = this.toRadians(lat2),
-          Δφ = this.toRadians(lat2 - lat1),
-          Δλ = this.toRadians(lng2 - lng1)
+          φ1 = toRadians(lat1),
+          φ2 = toRadians(lat2),
+          Δφ = toRadians(lat2 - lat1),
+          Δλ = toRadians(lng2 - lng1)
         ;
 
         const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
@@ -335,10 +335,10 @@
       },
 
       calculateActivePageFromLocationId(locationId) {
-        const groups = this.searchResults.orderedLocations;
-        for (let i in groups) {
+        const locations = this.orderedLocations;
+        for (let i in locations) {
           i = parseInt(i);
-          if (groups[i][0].locationId == locationId) {
+          if (locations[i][0].locationId == locationId) {
             this.list.activePage = Math.floor(i / this.list.resultsPerPage);
             return;
           }
@@ -359,8 +359,8 @@
         this.selectedLocationId = locationId;
         CustomMarker.changeSelectedMarkerByLocationId(locationId);
 
-        const coords = this.getLocationLatLng(locationId);
-        this.recenterMap(coords.lat, coords.lng);
+        const latlng = this.locations[locationId].latlng;
+        this.recenterMap(latlng.lat, latlng.lng);
       },
 
       recenterMap(lat, lng) {
@@ -402,127 +402,21 @@
         this.list.scrollTop = this.$refs.list.scrollTop;
       }, 250),
 
-      updateMapWithLocationMarkers(locations) {
+      addLocationMarkersToMap(locations) {
         for (let locationId in locations) {
-          const latlng = this.getLocationLatLng(locationId);
+          let location = locations[locationId];
           new CustomMarker(
-            new google.maps.LatLng(latlng.lat, latlng.lng),
+            new google.maps.LatLng(location.latlng.lat, location.latlng.lng),
             this.map.object,
             {
               class: 'find-a-job__map-marker--location',
-              solid: true,
-              amount: locations[locationId].jobs.length,
               locationId: locationId,
               clickCallback: this.handleMapMarkerClick.bind(null, this, locationId),
-              prisonName: locations[locationId].prisonName,
+              prisonName: location.prisonName,
               selected: (locationId == this.selectedLocationId),
             }
           );
         }
-      },
-
-      getLocationLatLng(locationId) {
-        return {
-          lat: this.searchResults.locations[locationId].jobs[0].prison_location.lat,
-          lng: this.searchResults.locations[locationId].jobs[0].prison_location.lng
-        }
-      },
-
-      sortLocationsByDistance() {
-        this.searchResults.orderedLocations.sort(function (a, b) {
-          return a[0].distance - b[0].distance;
-        });
-      },
-
-      sortLocationsByTownName() {
-        this.searchResults.orderedLocations.sort(function (a, b) {
-          const
-            aTown = a[0].prison_location.town,
-            bTown = b[0].prison_location.town
-          ;
-          if (aTown < bTown) {
-            return -1;
-          } else {
-            if (aTown > bTown) {
-              return 1;
-            } else {
-              return 0;
-            }
-          }
-        });
-      },
-
-      updateJobsDistance(lat, lng) {
-
-        // calculate distance
-        for (let i = 0; i < this.jobs.length; i++) {
-
-          const newDistance = this.calculateDistanceBetweenTwoLatLngPoints(
-            lat,
-            lng,
-            this.jobs[i].prison_location.lat,
-            this.jobs[i].prison_location.lng
-          );
-
-          this.jobs[i].distance = newDistance;
-        }
-
-        this.searchResults.orderedLocations = [];
-        for (const id in this.searchResults.locations) {
-          const locationLatLng = this.getLocationLatLng(id);
-          const newDistance = this.calculateDistanceBetweenTwoLatLngPoints(
-            lat,
-            lng,
-            locationLatLng.lat,
-            locationLatLng.lng
-          );
-          this.searchResults.locations[id].distance = newDistance;
-          this.searchResults.orderedLocations.push(this.searchResults.locations[id].jobs);
-        }
-
-        this.sortLocationsByDistance();
-      },
-
-      createLocations() {
-        const jobs = this.jobs;
-        const locations = {};
-        const previousSearchTermMarkerFound = (this.searchTerm.latlng.lat && this.searchTerm.latlng.lng);
-
-        // update the jobs distance if we already have a search term marker
-        if (previousSearchTermMarkerFound) {
-          this.updateJobsDistance(this.searchTerm.latlng.lat, this.searchTerm.latlng.lng);
-        }
-
-        // iterate over the jobs and put them in the correct location
-        for (let i = 0; i < jobs.length; i++) {
-          const locationId = jobs[i].prison_name.replace(/ /g, '-').toLowerCase();
-          jobs[i].locationId = locationId;
-
-          if (typeof locations[locationId] == 'undefined') {
-            locations[locationId] = {
-              prisonName: jobs[i].prison_name,
-              jobs: [jobs[i]]
-            };
-          } else {
-            locations[locationId].jobs.push(jobs[i]);
-          }
-        }
-        this.searchResults.locations = locations;
-
-        // initialize orderedLocations array
-        this.searchResults.orderedLocations = [];
-        for (const id in this.searchResults.locations) {
-          this.searchResults.orderedLocations.push(this.searchResults.locations[id].jobs);
-        }
-
-        // initially sort the job location groups by town name
-        if (previousSearchTermMarkerFound) {
-          this.sortLocationsByDistance();
-        } else {
-          this.sortLocationsByTownName();
-        }
-
-        this.updateMapWithLocationMarkers(this.searchResults.locations);
       },
 
       initializeMap() {
@@ -539,7 +433,6 @@
           // No bounds or search term were set – zoom to England
           this.zoomToEngland();
         }
-        console.log(this.searchTerm.marker);
 
         if (this.searchTerm.latlng.lat && this.searchTerm.latlng.lng) {
           this.updateSearchTermMarker(this.searchTerm.latlng.lat, this.searchTerm.latlng.lng);
@@ -549,7 +442,6 @@
         // The first bounds_changed event will be ignored as it is always fired on map creation
         // and we don't want to persist the default state
         let ignoreBoundsChanged = true;
-
         this.map.object.addListener('bounds_changed', debounce(() => {
           if (ignoreBoundsChanged) {
             ignoreBoundsChanged = false;
@@ -640,18 +532,18 @@
         this.searchTerm.marker = new CustomMarker(
           new google.maps.LatLng(lat, lng),
           this.map.object,
-          {class: 'find-a-job__map-marker--search-term'}
+          {'class': 'find-a-job__map-marker--search-term'}
         );
       },
 
       zoomToNearbyResults(lat, lng) {
-        var bounds = new google.maps.LatLngBounds();
+        const bounds = new google.maps.LatLngBounds();
 
         // Add user's search location to the bounds
         bounds.extend({lat: lat, lng: lng});
 
         // Add closest tenth of search results to the bounds
-        const locations = this.searchResults.orderedLocations;
+        const locations = this.orderedLocations;
         const minVisible = Math.ceil(locations.length / 10);
         const boundLocations = locations.slice(0, minVisible);
         boundLocations.forEach((location) => {
@@ -672,11 +564,9 @@
         if (latlng.lat == false && latlng.lng == false) {
           this.removeSearchTermMarker();
           this.zoomToEngland();
-          // TODO remove distances from list and reorder to default
         }
         else {
           this.updateSearchTermMarker(latlng.lat, latlng.lng);
-          this.updateJobsDistance(latlng.lat, latlng.lng);
           this.zoomToNearbyResults(latlng.lat, latlng.lng);
 
           window.dataLayer.push({
@@ -791,7 +681,7 @@
       },
 
       'jobs': function() {
-        this.createLocations();
+        this.addLocationMarkersToMap(this.locations);
         this.initializeMap();
 
         // Scroll the jobs list to the expected scroll position
@@ -810,8 +700,7 @@
 
     computed: {
       numberOfResultPages: function () {
-        const num = Math.ceil(this.searchResults.orderedLocations.length / this.list.resultsPerPage);
-        return num;
+        return Math.ceil(this.orderedLocations.length / this.list.resultsPerPage);
       },
 
       defaultSearchResults: function () {
@@ -826,28 +715,101 @@
         return (this.list.activePage < (this.numberOfResultPages - 1));
       },
 
-      visibleJobs: function() {
-        if (this.mounted) {
+      locations: function() {
+        const jobs = this.jobsWithDistance;
+        const locations = {};
 
-          let selectedLocations = null;
-          if (this.deviceIsMobile) {
-            selectedLocations = this.searchResults.orderedLocations.slice().splice(
-              this.list.resultsPerPage * this.list.activePage,
-              this.list.resultsPerPage
-            );
+        for (let i = 0; i < jobs.length; i++) {
+          const locationId = jobs[i].prison_name.replace(/ /g, '-').toLowerCase();
+          jobs[i].locationId = locationId;
+
+          if (typeof locations[locationId] == 'undefined') {
+            locations[locationId] = {
+              prisonName: jobs[i].prison_name,
+              latlng: {
+                lat: jobs[i].prison_location.lat,
+                lng: jobs[i].prison_location.lng
+              },
+              jobs: [jobs[i]]
+            };
           } else {
-            selectedLocations = this.searchResults.orderedLocations;
+            locations[locationId].jobs.push(jobs[i]);
           }
-
-          const results = [];
-          for (const i in selectedLocations) {
-            for (const j in selectedLocations[i]) {
-              results.push(selectedLocations[i][j]);
-            }
-          }
-
-          return results;
         }
+
+        return locations;
+      },
+
+      orderedLocations: function() {
+        const sortByDistance = function (a, b) {
+          return a[0].distance - b[0].distance;
+        };
+
+        const sortByTownName = function (a, b) {
+          const aTown = a[0].prison_location.town.toLowerCase(),
+            bTown = b[0].prison_location.town.toLowerCase();
+          return aTown.localeCompare(bTown);
+        };
+
+        const locations = [];
+        for (const id in this.locations) {
+          let jobs = this.locations[id].jobs;
+          locations.push(jobs);
+        }
+
+        const searchTermIsSet = (this.searchTerm.latlng.lat && this.searchTerm.latlng.lng);
+        if (searchTermIsSet) {
+          locations.sort(sortByDistance);
+        }
+        else {
+          locations.sort(sortByTownName);
+        }
+
+        return locations;
+      },
+
+      jobsWithDistance: function() {
+        const searchLat = this.searchTerm.latlng.lat,
+              searchLng = this.searchTerm.latlng.lng,
+              searchLocationIsSet = (searchLat && searchLng);
+
+        this.jobs.map((job) => {
+          if (searchLocationIsSet) {
+            let lat = job.prison_location.lat;
+            let lng = job.prison_location.lng;
+
+            job.distance = this.calculateDistanceBetweenTwoLatLngPoints(
+              lat, lng,
+              searchLat, searchLng
+            );
+          }
+          else {
+            job.distance = false;
+          }
+        });
+
+        return this.jobs;
+      },
+
+      visibleJobs: function() {
+        let selectedLocations = null;
+        if (this.deviceIsMobile) {
+          selectedLocations = this.orderedLocations.slice().splice(
+            this.list.resultsPerPage * this.list.activePage,
+            this.list.resultsPerPage
+          );
+        } else {
+          selectedLocations = this.orderedLocations;
+        }
+
+        const results = [];
+        for (const i in selectedLocations) {
+          for (const j in selectedLocations[i]) {
+            results.push(selectedLocations[i][j]);
+          }
+        }
+
+        return results;
       },
 
       jobsAvailable: function() {
@@ -907,7 +869,7 @@
     mounted() {
       this.createMap();
       this.loadVacanciesData();
-      this.initAutocomplete();
+//      this.initAutocomplete();
       this.mounted = true;
     }
   }
