@@ -49,6 +49,9 @@
       position: absolute
       left: 0
       top: 0
+      width: 45%
+
+    @include bp('landscape')
       width: 40%
 
   &__prompt
@@ -257,9 +260,10 @@
       position: absolute
       right: 0
       top: 0
-      width: 60%
+      width: 55%
 
     @include bp('landscape')
+      width: 60%
 
   &__map-zoom-button-container
     position: absolute
@@ -322,13 +326,16 @@
       left: 0
       position: absolute
       top: 13.6rem
+      width: 45%
+
+    @include bp('landscape')
       width: 40%
 
   &__view-list-container
     @include bp('portrait')
       overflow-y: scroll
 
-    @include bp('landscape')
+
 
   // FADING:
   // https://codepen.io/anon/pen/opBRLp

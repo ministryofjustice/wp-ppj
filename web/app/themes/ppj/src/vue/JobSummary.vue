@@ -2,32 +2,33 @@
   <div class="job-summary"
        :class="{'job-summary--selected': selected}">
     <div class="job-summary__content">
-      <div class="job-summary__prison-name"
-           v-if="prisonName">{{prisonName}}
-      </div>
-
-      <div class="job-summary__salary"
-           v-if="formattedSalary">{{formattedSalary}}
-      </div>
-      <div class="job-summary__prison"
-           v-if="prisonName || prisonCity">
-        <div class="job-summary__prison-city">
-          {{prisonCity}}
+      <div class="job-summary__row">
+        <div class="job-summary__prison-name"
+             v-if="prisonName">{{prisonName}}
         </div>
-        <div class="job-summary__distance-container">
+
+        <div class="job-summary__salary"
+             v-if="formattedSalary">{{formattedSalary}}
+        </div>
+      </div>
+      <div class="job-summary__row">
+        <div class="job-summary__prison-city"
+             v-if="prisonName || prisonCity">
+          {{prisonCity}}
+
           <span class="job-summary__distance"
                 v-if="formattedDistance">
             {{formattedDistance}}
           </span>
         </div>
+        <a class="job-summary__link"
+           :href="url"
+           v-if="url"
+           @click="pushViewJobClickEventToGtm"
+        >
+          view job & apply
+        </a>
       </div>
-      <a class="job-summary__link"
-         :href="url"
-         v-if="url"
-         @click="pushViewJobClickEventToGtm"
-      >
-        view job
-      </a>
     </div>
   </div>
 </template>
@@ -71,7 +72,7 @@
 
       formattedSalary: function() {
         return '£' + Intl.NumberFormat().format(this.salary)
-      }
-    }
+      },
+    },
   }
 </script>
