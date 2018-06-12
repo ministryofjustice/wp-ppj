@@ -19,7 +19,6 @@
   $s: &
   $border: .1rem solid $color-light
   $map-shadow: 0px 4px 16px 0px $color-medium-transparent
-  $jobs-available-height: 7rem
 
   background: $color-white
   padding: $common-spacing
@@ -57,29 +56,19 @@
       font-size: $font-size-medium
       margin-bottom: $common-spacing
 
-
-
-  &__prompt
-    @include bp('portrait')
-      font-size: $font-size-medium
-      margin-bottom: $common-spacing * 2
-
   &__form
     position: relative
-
-    @include bp('portrait')
 
   &__geolocation
     $gl: &
     font-size: $font-size-small
     font-weight: $font-weight-bold
-    margin: $common-spacing 0
+    margin: $common-spacing/2 0 $common-spacing
     text-decoration: underline
     transition: $main-transition-duration
 
-    &-button
-
     @include bp('portrait')
+      margin-bottom: 0
 
     &-icon
       $size: 2rem
@@ -167,14 +156,23 @@
       right: 4rem
       top: 0
 
-  &__jobs-available-container
-    flex-shrink: 0 // https://github.com/philipwalton/flexbugs#flexbug-1
-    z-index: 2
+  &__jobs-available
+    align-items: center
+    border-bottom: $border
+    border-top: $border
+    display: flex
+    font-weight: $font-weight-bold
+    height: 100%
+    padding: $common-spacing/2
+    text-align: left
 
-    @include bp('portrait')
-      height: $jobs-available-height
-      margin: 0
-      padding: 0 $common-spacing
+    &-container
+      flex-shrink: 0 // https://github.com/philipwalton/flexbugs#flexbug-1
+      z-index: 2
+
+      @include bp('portrait')
+        margin: 0
+        padding: 0 $common-spacing
 
   &__job-feed-message
     margin: $common-spacing 0
@@ -204,16 +202,6 @@
 
       &:hover
         cursor: pointer
-
-  &__jobs-available
-    align-items: center
-    border-bottom: $border
-    border-top: $border
-    display: flex
-    font-weight: $font-weight-bold
-    height: 100%
-    padding: $common-spacing
-    text-align: left
 
   &__results
     $sr: &
@@ -320,17 +308,15 @@
         margin-top: $common-spacing
 
   &__jobs
+
     @include bp('portrait')
       bottom: 0
       display: flex
       flex-direction: column
       left: 0
       position: absolute
-      top: 19rem
+      top: 13.6rem
       width: 40%
-
-      @include vbp('regular')
-        top: 20rem
 
   &__view-list-container
     @include bp('portrait')
@@ -368,13 +354,10 @@
           position: absolute
           right: 0
 
-          @include vbp('regular')
-            height: $common-spacing * 3
-
       &:nth-child(2):before
         @include bp('portrait')
           background: linear-gradient(to bottom, $color-white, $color-transparent2)
-          top: $jobs-available-height
+          top: 3.5rem
           z-index: 1
 
       &:nth-last-child(2):after
