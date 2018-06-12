@@ -14,8 +14,4 @@ include 'page-header.php';
     ></find-a-job>
 </div>
 
-<?php
-
-include 'page-footer.php'
-
-?>
+<?php include 'page-footer.php' ?>
