@@ -30,6 +30,9 @@
     max-width: 128.4rem
     padding: $common-spacing * 2
 
+    .page-template-find-a-job &
+      padding: $common-spacing
+
   &__logo
     @extend .u-wireframe-image
     @include background-img('svg/logo.svg')
@@ -38,12 +41,13 @@
     background-position: center center
     background-size: contain
     display: block
-    flex: 0 0 9.4rem
+    flex: 0 0 15rem
+    height: 6.4rem
     width: 9.4rem // 2.35 ratio
     pointer-events: auto
 
-    flex: 0 0 15rem
-    height: 6.4rem
+    .page-template-find-a-job &
+      height: 4.8rem
 
     .youth-custody &
       @include background-img('svg/ycs_logo.svg')
@@ -70,6 +74,9 @@
       justify-content: flex-end
       margin-top: 0
       padding-bottom: $common-spacing * 2
+
+    .page-template-find-a-job &
+      padding-bottom: 0
 
   &__menu-list-element
     $nmle: &
