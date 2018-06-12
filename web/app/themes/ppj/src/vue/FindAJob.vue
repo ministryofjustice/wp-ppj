@@ -487,8 +487,6 @@
         const jobs = this.jobs;
         const locations = {};
         const previousSearchTermMarkerFound = (this.searchTerm.latlng.lat && this.searchTerm.latlng.lng);
-        let closestLocationDistance = Number.MAX_SAFE_INTEGER;
-        let closestLocationId = null;
 
         // update the jobs distance if we already have a search term marker
         if (previousSearchTermMarkerFound) {
@@ -498,6 +496,7 @@
         // iterate over the jobs and put them in the correct location
         for (let i = 0; i < jobs.length; i++) {
           const locationId = jobs[i].prison_name.replace(/ /g, '-').toLowerCase();
+          jobs[i].locationId = locationId;
 
           if (typeof locations[locationId] == 'undefined') {
             locations[locationId] = {
@@ -506,13 +505,6 @@
             };
           } else {
             locations[locationId].jobs.push(jobs[i]);
-          }
-
-          jobs[i].locationId = locationId;
-
-          if (jobs[i].distance < closestLocationDistance) {
-            closestLocationDistance = jobs[i].distance;
-            closestLocationId = locationId;
           }
         }
         this.searchResults.locations = locations;
