@@ -41,37 +41,32 @@
     padding-left: ($common-spacing / 2 + .2rem)
     position: relative
 
-    &-container
-      height: 1.2em
-      position: relative
-
-  &__position
-    font-weight: $font-weight-bold
     &:before
       content: '|'
       left: 0
       position: absolute
+
+    &-container
+      height: 1.2em
+      position: relative
 
   &__prison
     display: flex
 
   &__prison-city
     overflow: hidden
-    padding-right: $common-spacing / 2
     text-overflow: ellipsis
     white-space: nowrap
 
   &__salary
     background-color: inherit
     font-weight: $font-weight-bold
+    margin-left: auto
     padding-left: $common-spacing
-    position: absolute
     text-align: right
     width: $salaryWidth
 
   &__link
-    bottom: .7rem
-    position: absolute
     display: block
     margin-left: auto
     text-align: right
