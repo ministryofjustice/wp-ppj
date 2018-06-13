@@ -109,9 +109,20 @@
       font-size: 2rem
 
     &-text
-      @extend .underlined-link
       display: inline-block
       text-align: center
+
+      &:after
+        border-bottom-color: $color-main
+        border-bottom-style: solid
+        border-bottom-width: .4rem
+        bottom: -.8rem
+        content: ''
+        display: block
+        height: 0
+        opacity: 0
+        position: relative
+        transition: $main-transition-duration
 
     & > a
       border-bottom: 1px solid $color-white
