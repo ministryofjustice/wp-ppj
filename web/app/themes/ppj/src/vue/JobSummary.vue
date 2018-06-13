@@ -13,12 +13,7 @@
       </div>
       <div class="job-summary__row">
         <div class="job-summary__prison-city"
-             v-if="prisonName || prisonCity">
-          {{prisonCity}}
-
-          <span class="job-summary__distance"
-                v-if="formattedDistance">
-            {{formattedDistance}}
+             v-if="prisonName || prisonCity">{{prisonCity}}<span class="job-summary__distance"  v-if="formattedDistance"> {{formattedDistance}}
           </span>
         </div>
         <a class="job-summary__link"
