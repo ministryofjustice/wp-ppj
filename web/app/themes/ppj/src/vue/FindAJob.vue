@@ -869,8 +869,7 @@
     mounted() {
       this.createMap();
       this.loadVacanciesData();
-//      this.initAutocomplete();
-      this.mounted = true;
+      this.initAutocomplete();
     }
   }
 </script>
