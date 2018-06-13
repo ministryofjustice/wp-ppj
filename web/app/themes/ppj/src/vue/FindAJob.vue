@@ -118,10 +118,8 @@
               :key="index"
               @click="handleVacancyClick(job.locationId)">
             <job-summary :distance="job.distance"
-                         :position="job.role"
                          :prison-city="job.prison_location.town"
                          :prison-name="job.prison_name"
-                         :prison-page-link="job.url"
                          :salary="job.salary"
                          :selected="job.locationId == selectedLocationId"
                          :title="job.title"
