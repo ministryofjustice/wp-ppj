@@ -380,6 +380,10 @@
       },
 
       handleMapMarkerClick(self, locationId, event) {
+        window.dataLayer.push({
+          event: 'map_marker_click',
+          prisonName: locationId
+        });
         self.focusOnSelectedJob(self, locationId);
         self.focusOnLocation(locationId);
         event.preventDefault();
@@ -388,6 +392,10 @@
       },
 
       handleVacancyClick(locationId) {
+        window.dataLayer.push({
+          event: 'job_list_element_click',
+          prisonName: locationId
+        });
         this.focusOnLocation(locationId);
       },
 
@@ -713,7 +721,7 @@
         const locations = {};
 
         for (let i = 0; i < jobs.length; i++) {
-          const locationId = jobs[i].prison_name.replace(/ /g, '-').toLowerCase();
+          const locationId = jobs[i].prison_name;
           jobs[i].locationId = locationId;
 
           if (typeof locations[locationId] == 'undefined') {
