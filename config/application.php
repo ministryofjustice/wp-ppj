@@ -84,5 +84,3 @@ if (!defined('ABSPATH')) {
 }
 
 define('WP_DEFAULT_THEME', 'ppj');
-
-define('WP_TEMP_DIR', dirname(__FILE__) . '/wp-content/temp/');
