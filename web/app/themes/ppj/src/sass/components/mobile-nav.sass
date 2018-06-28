@@ -130,27 +130,12 @@ $mobileNavWidthPortrait: 48rem
     @include bp('portrait')
       transform: translate3D(-$mobileNavWidthPortrait,0,0)
 
-.page-container
 
-  &__overlay
-    background-color: $color-dark-transparent
-    bottom: 0
-    content: ''
-    cursor: pointer
-    left: 0
-    opacity: 0
-    position: absolute
-    right: 0
-    top: 0
-    transition: opacity $main-transition-duration ease 0s, z-index 0s $main-transition-duration
-    z-index: -1
 
   .mobile-nav-is-open &
 
     &__overlay
-      opacity: 1
-      transition: opacity $main-transition-duration ease
-      z-index: 4
+
 
 .mobile-nav-is-open
   height: 100vh

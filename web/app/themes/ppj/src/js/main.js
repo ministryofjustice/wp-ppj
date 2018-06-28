@@ -8,14 +8,23 @@ if ('dataLayer' in window == false) {
   window.dataLayer = [];
 }
 
+window.ppj.screenOverlay = {
+  activate : function() {
+    document.getElementsByClassName('page-container__overlay')[0].classList.add('page-container__overlay--active');
+  },
+  deactivate : function() {
+    document.getElementsByClassName('page-container__overlay')[0].classList.remove('page-container__overlay--active');
+  },
+};
+
 window.ppj.openNavMenu = function() {
-  const body = document.getElementsByTagName('body')[0];
-  body.classList.add('mobile-nav-is-open');
+  document.getElementsByTagName('body')[0].classList.add('mobile-nav-is-open');
+  window.ppj.screenOverlay.activate();
 };
 
 window.ppj.closeNavMenu = function() {
-  const body = document.getElementsByTagName('body')[0];
-  body.classList.remove('mobile-nav-is-open');
+  document.getElementsByTagName('body')[0].classList.remove('mobile-nav-is-open');
+  window.ppj.screenOverlay.deactivate();
 };
 
 window.ppj.toggleAccordion = (event) => {
