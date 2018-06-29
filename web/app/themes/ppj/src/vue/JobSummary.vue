@@ -45,6 +45,24 @@
           prisonName: this.prisonName
         };
         window.dataLayer.push(gtmEvent);
+
+        /*
+         * NB: This is fix for the issue whereby clicking the 'View Job & Apply' link
+         * in Chrome did not navigate to the location specified by the href attribute
+         *
+         * This is probably due to a race condition caused by some combination of
+         * the linked to site responding slowly and the triggered history.replaceState action
+         * happening asynchronously.
+         *
+         * By adding the following timeout function to explicitly navigate to the supplied url,
+         * the correct navigation happens, despite the fact that the timeout is set to happen
+         * zero milliseconds later. Presumably in a single threaded environment, the earliest
+         * this function gets executed is after the replaceState operation.
+         *
+         * This went unnoticed for a while due to Google Tag Manager presumably slowing
+         * some part of the execution sufficiently such that this race condition didn't exist.
+         */
+        setTimeout(()=>{window.location.href = this.url;}, 0);
       }
     },
 
