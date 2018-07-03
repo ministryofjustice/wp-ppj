@@ -1,9 +1,9 @@
 <template>
-
   <div class="find-a-job"
        v-cloak
        :class="{'find-a-job--job-selected': selectedLocationId}"
   >
+    <screen-overlay :active="screenOverlayActive" message="Loading job application site"></screen-overlay>
     <div class="find-a-job__header">
       <p class="find-a-job__prompt">Enter location (postcode, town or region)</p>
       <form class="find-a-job__form" @submit.prevent="" @reset.prevent="resetSearch">
@@ -124,6 +124,7 @@
                          :selected="job.locationId == selectedLocationId"
                          :title="job.title"
                          :url="job.url"
+                         @jobLinkClickedEvent="navigatingToJobSite"
             >
             </job-summary>
           </li>
@@ -183,12 +184,22 @@
 </template>
 
 <script>
+  // import NPM packages
   import axios from 'axios';
   import debounce from 'debounce';
+
+  // import libraries
   import CustomMarker from '../js/CustomMarker';
-  import dummyJobs from '../js/dummyJobs';
+
+  // import Vue components
+  import JobSummary from './JobSummary.vue';
+  import ScreenOverlay from '../vue/ScreenOverlay.vue'
 
   export default {
+    components: {
+      'job-summary' : JobSummary,
+      'screen-overlay' : ScreenOverlay
+    },
     props: {
       'title': {
         default: '',
@@ -277,6 +288,8 @@
         placeHolderText: 'e.g. SW1A 2LW, Birmingham or Essex',
 
         mounted: false,
+
+        screenOverlayActive: false,
       };
 
       data.jobListMessage = false;
@@ -674,6 +687,18 @@
       showLastPage() {
         this.showPage(this.numberOfResultPages - 1);
       },
+
+      activateScreenOverlay() {
+        this.screenOverlayActive = true;
+      },
+
+      deactivateScreenOverlay() {
+        this.screenOverlayActive = false;
+      },
+
+      navigatingToJobSite() {
+        this.activateScreenOverlay();
+      }
     },
 
     watch: {
@@ -871,6 +896,18 @@
       this.createMap();
       this.loadVacanciesData();
       this.initAutocomplete();
+
+      window.addEventListener('pagehide', ()=>{
+
+        /*
+         * Browsers like Firefox seem to reload the previous state of a page when using the back button
+         * instead making a new request to the server to rebuild the previous page.
+         *
+         * Therefore the loading spinner needs to be disabled when exiting the page,
+         * to make sure it isn't still active when the user uses the back button
+         */
+        this.screenOverlayActive = false;
+      });
     }
   }
 </script>

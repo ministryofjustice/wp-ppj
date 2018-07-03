@@ -1,0 +1,21 @@
+.screen-overlay
+  align-items: center
+  background-color: $color-dark-transparent
+  bottom: 0
+  display: flex
+  justify-content: center
+  left: 0
+  opacity: 0
+  position: fixed
+  right: 0
+  top: 0
+  transition: opacity $main-transition-duration ease 0s, z-index 0s $main-transition-duration
+  z-index: -1
+
+  &--active
+    opacity: 1
+    transition: opacity $main-transition-duration ease
+    z-index: 4
+
+  &__message
+    color: $color-white

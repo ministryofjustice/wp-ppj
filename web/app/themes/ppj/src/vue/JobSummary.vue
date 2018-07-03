@@ -16,10 +16,11 @@
              v-if="prisonName || prisonCity">{{prisonCity}}<span class="job-summary__distance"  v-if="formattedDistance"> {{formattedDistance}}
           </span>
         </div>
+
         <a class="job-summary__link"
-           :href="url"
            v-if="url"
-           @click="pushViewJobClickEventToGtm"
+           :href="url"
+           @click="linkClickHandler()"
         >
           view job & apply
         </a>
@@ -39,12 +40,18 @@
     },
 
     methods: {
+
       pushViewJobClickEventToGtm: function() {
         const gtmEvent = {
           event: 'view_job_click',
           prisonName: this.prisonName
         };
         window.dataLayer.push(gtmEvent);
+      },
+
+      linkClickHandler: function() {
+        this.$emit('jobLinkClickedEvent');
+        this.pushViewJobClickEventToGtm();
 
         /*
          * NB: This is fix for the issue whereby clicking the 'View Job & Apply' link
@@ -58,12 +65,17 @@
          * the correct navigation happens, despite the fact that the timeout is set to happen
          * zero milliseconds later. Presumably in a single threaded environment, the earliest
          * this function gets executed is after the replaceState operation.
+         * UPDATE: with the new loading spinner changes, it is now necessary to wait around 800
+         * milliseconds.
          *
          * This went unnoticed for a while due to Google Tag Manager presumably slowing
          * some part of the execution sufficiently such that this race condition didn't exist.
          */
-        setTimeout(()=>{window.location.href = this.url;}, 0);
-      }
+        setTimeout(()=>{
+          window.location.href = this.url;
+        }, 800);
+      },
+
     },
 
     computed: {

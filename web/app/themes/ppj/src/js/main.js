@@ -8,7 +8,7 @@ if ('dataLayer' in window == false) {
   window.dataLayer = [];
 }
 
-window.ppj.screenOverlay = {
+window.ppj.pageContainerOverlay = {
   activate : function() {
     document.getElementsByClassName('page-container__overlay')[0].classList.add('page-container__overlay--active');
   },
@@ -19,12 +19,12 @@ window.ppj.screenOverlay = {
 
 window.ppj.openNavMenu = function() {
   document.getElementsByTagName('body')[0].classList.add('mobile-nav-is-open');
-  window.ppj.screenOverlay.activate();
+  window.ppj.pageContainerOverlay.activate();
 };
 
 window.ppj.closeNavMenu = function() {
   document.getElementsByTagName('body')[0].classList.remove('mobile-nav-is-open');
-  window.ppj.screenOverlay.deactivate();
+  window.ppj.pageContainerOverlay.deactivate();
 };
 
 window.ppj.toggleAccordion = (event) => {
@@ -136,6 +136,4 @@ nonMobiles.addListener(setAriaHiddenForNonVisibleSiteWideNavLinks);
 
 // Set ARIA hidden attributes for site-wide-nav links on page load
 setAriaHiddenForNonVisibleSiteWideNavLinks(nonMobiles);
-
-
 
