@@ -124,7 +124,7 @@
                          :selected="job.locationId == selectedLocationId"
                          :title="job.title"
                          :url="job.url"
-                         @jobLinkClickedEvent="navigatingToJobSite"
+                         @job-link-clicked="loadJobUrl"
             >
             </job-summary>
           </li>
@@ -452,17 +452,19 @@
           this.updateSearchTermMarker(this.searchTerm.latlng.lat, this.searchTerm.latlng.lng);
         }
 
-        // Use the bounds_changed event listener to persist the state after the map has fully loaded.
-        // The first bounds_changed event will be ignored as it is always fired on map creation
-        // and we don't want to persist the default state
-        let ignoreBoundsChanged = true;
-        this.map.object.addListener('bounds_changed', debounce(() => {
-          if (ignoreBoundsChanged) {
-            ignoreBoundsChanged = false;
-          } else {
+        // The first map 'idle' event will be triggered whilst initialising the map,
+        // by us either panning the map to England or restoring the bounds from the URL state.
+        // We don't want to persist this default state.
+        // Therefore we don't want to update the current state for this first event.
+        let ignoreFirstIdle = true;
+        this.map.object.addListener('idle', () => {
+          if (ignoreFirstIdle) {
+            ignoreFirstIdle = false;
+          }
+          else {
             this.map.currentBounds = this.map.object.getBounds();
           }
-        }, 250));
+        });
       },
 
       createMap() {
@@ -688,16 +690,19 @@
         this.showPage(this.numberOfResultPages - 1);
       },
 
-      activateScreenOverlay() {
+      loadJobUrl(url) {
         this.screenOverlayActive = true;
-      },
 
-      deactivateScreenOverlay() {
-        this.screenOverlayActive = false;
-      },
-
-      navigatingToJobSite() {
-        this.activateScreenOverlay();
+        // We want to navigate to the job URL once the map has stopped moving
+        // and after Vue has finished processing the DOM (on 'next tick')
+        // Prior to this, the map's bounds will still be changing and therefore
+        // history.replaceState will still be called.
+        // It's only safe to navigate away from the page after that has happened.
+        google.maps.event.addListenerOnce(this.map.object, 'idle', () => {
+          this.$nextTick(() => {
+            window.location.href = url;
+          });
+        });
       }
     },
 
