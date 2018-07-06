@@ -4,7 +4,7 @@ FROM mojdigital/wordpress-base:latest
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /init
+    rm -rf /var/lib/apt/lists/* /var/tmp/* /init
 
 ADD . /bedrock
 
