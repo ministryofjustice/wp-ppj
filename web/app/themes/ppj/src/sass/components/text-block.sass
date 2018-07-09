@@ -151,8 +151,15 @@
       font-size: 2.8rem
       line-height: 3.8rem
 
-    img
-      width: 100%
+    img // alignx refers to classes that can be added by the WP visual editor display settings
+      &.alignright
+        margin-left: auto
+
+      &.alignleft
+        margin-right: auto
+
+      &.aligncenter
+        margin: auto
 
     & > *
       margin-bottom: $common-spacing
