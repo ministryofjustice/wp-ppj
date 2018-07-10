@@ -75,7 +75,9 @@ if ( $headerImageData ) {
 }
 ?>
 
-<div class="header__img-container">
+<div class="header__img-container"
+     data-ie-bg-img="url('<?= $headerImageUrl ?>')"
+>
     <img class="header__image"
          src="<?= $headerImageUrl ?>"
          srcset="<?= $srcset ?>"

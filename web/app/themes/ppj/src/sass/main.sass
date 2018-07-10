@@ -8,6 +8,17 @@
 @import 'layout'
 @import '404'
 
+@import 'utilities/top-border'
+@import 'utilities/browser-specific'
+@import 'utilities/clearfix'
+@import 'utilities/common-header'
+@import 'utilities/common-table'
+@import 'utilities/cta-link'
+@import 'utilities/embed'
+@import 'utilities/grid'
+@import 'utilities/margin'
+@import 'utilities/wire-frame'
+
 // base reset
 button
   background: none
@@ -82,6 +93,13 @@ p
 img
   object-fit: cover
 
+[data-ie-bg-img]
+  background-size: cover
+
+  @include ie11
+    img
+      display: none
+
 // TODO use this instead :
 // http://vuetips.com/v-cloak-directive-hides-html-on-startup
 html
@@ -124,18 +142,6 @@ p a
 hr
   border-top: .1rem solid $color-light
   margin: $common-spacing 0
-
-// utilities
-
-@import 'utilities/clearfix'
-@import 'utilities/top-border'
-@import 'utilities/common-header'
-@import 'utilities/common-table'
-@import 'utilities/cta-link'
-@import 'utilities/embed'
-@import 'utilities/grid'
-@import 'utilities/margin'
-@import 'utilities/wire-frame'
 
 
 // -- COMPONENTS ------------------------------------------
