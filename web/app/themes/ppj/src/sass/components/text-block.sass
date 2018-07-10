@@ -161,6 +161,13 @@
       &.aligncenter
         margin: auto
 
+      // Using .alignnone to style full width images as suggested here:
+      // https://codex.wordpress.org/CSS#WordPress_Generated_Classes
+      &.alignnone
+        height: auto
+        object-fit: unset
+        width: 100%
+
     & > *
       margin-bottom: $common-spacing
 
