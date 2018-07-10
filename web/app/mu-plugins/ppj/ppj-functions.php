@@ -56,6 +56,7 @@ function renderPageBlockData($acf)
 
                     case 'landing_page':
                         $output .= partial($fieldGroup, 'landingPage');
+                        break;
 
                     default:
                         error_log('renderPageBlockData unrecognized block type ' . $blockType);
