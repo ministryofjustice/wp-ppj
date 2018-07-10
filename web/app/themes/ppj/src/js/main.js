@@ -2,6 +2,15 @@ import 'details-element-polyfill';
 import scrollpoints from 'scrollpoints';
 import closestPolyfill from './polyfills/Element.closest';
 
+// set background images based on data-bg-img-url attributes for ie11
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+if (isIE) {
+  var imgElements = document.querySelectorAll('[data-ie-bg-img]');
+  for(var i = 0; i < imgElements.length; i++) {
+    imgElements[i].style.backgroundImage = imgElements[i].getAttribute('data-ie-bg-img');
+  }
+}
+
 closestPolyfill();
 
 if ('dataLayer' in window == false) {
@@ -144,4 +153,3 @@ nonMobiles.addListener(setAriaHiddenForNonVisibleSiteWideNavLinks);
 
 // Set ARIA hidden attributes for site-wide-nav links on page load
 setAriaHiddenForNonVisibleSiteWideNavLinks(nonMobiles);
-

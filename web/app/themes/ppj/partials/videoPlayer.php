@@ -9,7 +9,7 @@ $td = $ppj_template_data;
      id="<?= $td['id'] ?>"
 >
     <?php if ($td['cover-image-id']): ?>
-        <a href="#" class="video-player__cover" aria-label="Play Video">
+        <a href="#" class="video-player__cover" aria-label="Play Video" data-ie-bg-img="url('<?= $td['cover-image'] ?>')">
             <?php
 
             echo wp_get_attachment_image(
@@ -19,6 +19,7 @@ $td = $ppj_template_data;
                 ]);
 
             ?>
+
             <div class="video-player__play-button-container">
                 <svg class="video-player__play-button"
                      x="0px"
