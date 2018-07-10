@@ -2,13 +2,14 @@
 
 global $ppj_template_data;
 $td = $ppj_template_data;
+$groupStyle = (isset($group['style'])) ? "landing-page-groups__group--style-{$group['style']}" : '';
 
 ?>
 <div class="l-full">
     <div class="landing-page-groups__container">
         <div class="landing-page-groups">
             <?php foreach($td['groups'] as $group): ?>
-                <div class="landing-page-groups__group landing-page-groups__group--style-<?= $group['style'] ?>">
+                <div class="landing-page-groups__group <?= $groupStyle ?>">
                     <div class="landing-page-groups__group-title-container">
                         <h3 class="landing-page-groups__group-title"><?= $group['group_name'] ?></h3>
                     </div>
