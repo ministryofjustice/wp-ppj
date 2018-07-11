@@ -9,7 +9,7 @@ $td = $ppj_template_data;
      id="<?= $td['id'] ?>"
 >
     <?php if (isset($td['cover-image']) && $td['cover-image']): ?>
-        <div class="video-player__cover">
+        <a href="#" class="video-player__cover">
             <img src="<?= $td['cover-image'] ?>"
                  class="video-player__cover-image"
             />
@@ -25,7 +25,7 @@ $td = $ppj_template_data;
                     <polygon class="st0" points="96.3,69.2 48.4,41.5 48.4,96.8 96.3,69.2 48.4,41.5 48.4,96.8 	"/>
                 </svg>
             </div>
-        </div>
+        </a>
     <?php endif; ?>
      <div class="video-player__video-container">
          <?php if ($td['host'] == 'wistia'): ?>
