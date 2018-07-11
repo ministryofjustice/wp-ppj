@@ -147,7 +147,7 @@ function videoPlayer($attrs)
     $a = shortcode_atts(array(
         'host' => 'youtube',
         'id' => '',
-        'cover-image' => ''
+        'cover-image-id' => null,
     ), $attrs);
 
     return partial($a, 'videoPlayer');
