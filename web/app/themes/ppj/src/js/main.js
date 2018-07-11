@@ -49,8 +49,11 @@ window._wq = window._wq || [];
 _wq.push({ id: '_all', onReady: function(video) {
   const videoPlayer = video.container.closest('.video-player');
   const cover = videoPlayer.querySelector('.video-player__cover');
-  video.container.hidden = true;
 
+  // If this video doesn't have a cover image, do nothing
+  if (cover == null) return;
+
+  video.container.hidden = true;
   cover.addEventListener('click', function(event) {
     event.preventDefault();
     video.container.hidden = false;
