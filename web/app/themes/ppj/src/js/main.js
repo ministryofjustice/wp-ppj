@@ -48,12 +48,17 @@ window._wq = window._wq || [];
 //add callbacks to video play button for all Wistia videos
 _wq.push({ id: '_all', onReady: function(video) {
   const videoPlayer = video.container.closest('.video-player');
+  const cover = videoPlayer.querySelector('.video-player__cover');
+  video.container.hidden = true;
 
-  videoPlayer.querySelector('.video-player__play-button')
-    .addEventListener('click', function(){
-      videoPlayer.classList.add('video-player--playing');
-      video.play();
-    });
+  cover.addEventListener('click', function(event) {
+    event.preventDefault();
+    video.container.hidden = false;
+    cover.hidden = true;
+    video.container.focus();
+    videoPlayer.classList.add('video-player--playing');
+    video.play();
+  });
 }});
 
 window.addEventListener('load', function() {
