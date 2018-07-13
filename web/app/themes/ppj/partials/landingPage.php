@@ -42,9 +42,13 @@ $groupStyle = (isset($group['style'])) ? "landing-page-groups__group--style-{$gr
 
                                                     <?php echo wp_get_attachment_image(
                                                         $card['image']['id'],
-                                                        'header-portrait-home',
+                                                        '16:9x80',
                                                         false,
-                                                        array( "class" => "landing-page-groups__card-image" ) ); ?>
+                                                        array(
+                                                            "class" => "landing-page-groups__card-image",
+                                                            "sizes" => "(min-width: 1440px) 640px, 480px",
+                                                        )
+                                                    ); ?>
                                                 </a>
                                             </div>
                                         </div>
