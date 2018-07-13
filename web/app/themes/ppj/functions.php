@@ -40,7 +40,17 @@ function registerImagesSizes()
     add_image_size( 'header-landscape-home', 1024, 444, true );
 
     add_image_size( 'header-large',      1440, 560, true );
+
     add_image_size( 'header-large-home', 1440, 624, true );
+
+    add_image_size('16:9x20', 320, 180, true);
+    add_image_size('16:9x30', 480, 270, true);
+    add_image_size('16:9x40', 640, 360, true);
+    add_image_size('16:9x60', 960, 540, true);
+    add_image_size('16:9x80', 1280, 720, true);
+    add_image_size('16:9x100', 1600, 900, true);
+    add_image_size('16:9x150', 2400, 1350, true);
+    add_image_size('16:9x200', 3200, 1800, true);
 }
 add_action('init', __NAMESPACE__ . '\\registerImagesSizes');
 
