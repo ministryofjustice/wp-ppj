@@ -9,22 +9,18 @@ $td = $ppj_template_data;
      id="<?= $td['id'] ?>"
 >
     <?php if ($td['cover-image-id']):
-
         $coverImage = wp_get_attachment_image(
             $td['cover-image-id'],
-            'large',
+            '16:9x80',
             false,
             [
                 'class' => 'video-player__cover-image',
                 'sizes' => '(min-width: 1440px) 792px, (min-width: 1024px) 915px, (max-width: 768px) calc((100vw - 64px) * 0.75), 0.85vw'
             ]
         );
-        $coverImageURL = wp_get_attachment_image_url($td['cover-image-id'], 'large');
-
         ?>
         <a aria-label="Play Video"
            class="video-player__cover"
-           data-bg-img-url="<?= esc_attr($coverImageURL) ?>"
            href="#"
         >
             <?php echo $coverImage ?>
