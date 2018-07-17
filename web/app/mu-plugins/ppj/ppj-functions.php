@@ -348,14 +348,3 @@ function markCurrentlySelectedAncestorMenuItem($menuItems) {
     }
     return $modifiedMenuItems;
 }
-
-/**
- * @param $str
- *
- * Simple helper function to remove unicode characters using regex matching.
- *
- * @return mixed
- */
-function removeUnicodeCharacters($str) {
-    return preg_replace('/[^\x{00}-\x{7F}]/u', '', $str);
-}
