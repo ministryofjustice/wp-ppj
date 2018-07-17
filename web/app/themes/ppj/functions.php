@@ -43,6 +43,14 @@ function registerImagesSizes()
 
     add_image_size( 'header-large-home', 1440, 624, true );
 
+    /*
+     * Adding eight 16x9 image sizes, to span the entire gamut
+     * from very small images for small mobile devices
+     * to very large images for HiDPI screens.
+     * The x suffix refers to how many times the 16 and the 9
+     * have been multiplied to obtain the horizontal and vertical
+     * pixel values respectively.
+     */
     add_image_size('16:9x20', 320, 180, true);
     add_image_size('16:9x30', 480, 270, true);
     add_image_size('16:9x40', 640, 360, true);
