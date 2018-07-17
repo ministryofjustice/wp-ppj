@@ -11,7 +11,8 @@
  * data attribute `data-bg-img-url` on the <img> container.
  */
 export default function() {
-  if (typeof document.querySelector('img').style.objectFit == 'undefined') {
+  var img = document.createElement('img');
+  if (typeof img.style.objectFit == 'undefined') {
     document.querySelector('body').classList.add('object-fit-not-supported');
     var imgElements = document.querySelectorAll('[data-bg-img-url]');
     for(var i = 0; i < imgElements.length; i++) {
