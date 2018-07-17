@@ -79,9 +79,6 @@
     transition: $main-transition-duration
     width: 100%
 
-    @include ie11
-      display: none
-
     &--loaded
       opacity: 1
 
@@ -107,9 +104,6 @@
     position: absolute
     right: 0
     top: 0
-
-    @include ie11
-      background-size: cover
 
     &:before
       background: linear-gradient(to bottom, $color-transparency-dark-start, $color-transparent)

@@ -9,7 +9,6 @@
 @import '404'
 
 @import 'utilities/top-border'
-@import 'utilities/browser-specific'
 @import 'utilities/clearfix'
 @import 'utilities/common-header'
 @import 'utilities/common-table'
@@ -93,12 +92,11 @@ p
 img
   object-fit: cover
 
-[data-ie-bg-img]
+.object-fit-not-supported [data-bg-img-url]
   background-size: cover
 
-  @include ie11
-    img
-      display: none
+  img
+    display: none
 
 // TODO use this instead :
 // http://vuetips.com/v-cloak-directive-hides-html-on-startup
