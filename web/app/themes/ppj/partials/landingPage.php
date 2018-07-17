@@ -27,7 +27,7 @@ $td = $ppj_template_data;
                             $cardLinkUrl = (isset($card['link']['url'])) ? $card['link']['url'] : '';
 
                             $cardImg = wp_get_attachment_image_src($card['image']['id'], $size = 'header-portrait-home');
-                            $bgImgUrl = ($cardImg) ? "url('{$cardImg[0]}')" : '';
+                            $bgImgUrl = ($cardImg) ? $cardImg[0] : '';
                             ?>
                             <div class="<?= $cardClasses ?>">
                                 <?php if($cardHasImage): ?>
@@ -36,7 +36,7 @@ $td = $ppj_template_data;
                                             <div class="landing-page-groups__card-image-ratio">
                                                 <a href="<?= $cardLinkUrl ?>"
                                                    class="landing-page-groups__card-link"
-                                                   data-bg-img-url="<?= $bgImgUrl ?>"
+                                                   data-bg-img-url="<?= esc_attr($bgImgUrl) ?>"
                                                 >
 
                                                     <?php echo wp_get_attachment_image(
