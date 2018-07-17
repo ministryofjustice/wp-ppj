@@ -76,7 +76,7 @@ if ( $headerImageData ) {
 ?>
 
 <div class="header__img-container"
-     data-bg-img-url="url('<?= $headerImageUrl ?>')"
+     data-bg-img-url="<?= esc_attr($headerImageUrl) ?>"
 >
     <img class="header__image"
          src="<?= $headerImageUrl ?>"
