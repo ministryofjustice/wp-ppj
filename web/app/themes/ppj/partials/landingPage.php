@@ -36,7 +36,7 @@ $td = $ppj_template_data;
                                             <div class="landing-page-groups__card-image-ratio">
                                                 <a href="<?= $cardLinkUrl ?>"
                                                    class="landing-page-groups__card-link"
-                                                   data-ie-bg-img="<?= $bgImgUrl ?>"
+                                                   data-bg-img-url="<?= $bgImgUrl ?>"
                                                 >
 
                                                     <?php echo wp_get_attachment_image(
