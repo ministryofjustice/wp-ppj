@@ -32,7 +32,13 @@ if (LegNav\onLeg()) {
 <div class="mobile-nav">
     <div class="mobile-nav__overlay"></div>
     <button class="mobile-nav__close-button"
+            aria-label="Close mobile mobile navigation menu button"
             onclick="ppj.closeNavMenu()">
+        <span class="mobile-nav__close-button-text">Close mobile menu</span>
+        <img class="mobile-nav__close-button-image"
+             src="/app/themes/ppj/dest/img/svg/close.svg"
+             alt="Close mobile mobile navigation menu button image"
+        />
     </button>
     <nav class="mobile-nav__menu">
         <ul class="mobile-nav__menu-list mobile-nav__menu-list--primary">
