@@ -25,13 +25,17 @@ $td = $ppj_template_data;
         >
             <?php echo $coverImage ?>
             <div class="video-player__play-button-container">
-                <svg class="video-player__play-button"
+                <svg
+                    aria-labelledby="playButtonIconTitle playButtonIconDesc"
+                    class="video-player__play-button"
                      x="0px"
                      y="0px"
                      viewBox="0 0 138.3 138.3"
                      style="enable-background:new 0 0 138.3 138.3;"
                      role="img"
                 >
+                    <title id="playButtonIconTitle">PlayButton icon</title>
+                    <desc id="playButtonIconDesc">An white triangle pointing to the right, within a circle</desc>
                     <path class="st0" d="M69.2,8c33.7,0,61.2,27.4,61.2,61.2s-27.4,61.2-61.2,61.2S8,102.9,8,69.2S35.4,8,69.2,8 M69.2,0
                 C31,0,0,31,0,69.2s31,69.2,69.2,69.2s69.2-31,69.2-69.2S107.4,0,69.2,0L69.2,0z"/>
                     <polygon class="st0" points="96.3,69.2 48.4,41.5 48.4,96.8 96.3,69.2 48.4,41.5 48.4,96.8 	"/>

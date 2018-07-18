@@ -37,16 +37,19 @@
         <a class="find-a-job__geolocation-button"
            v-if="geolocation.isAvailable"
            @click.stop.prevent="useGeoLocation">
-          <svg version="1.1"
-               id="Layer_1"
-               xmlns="http://www.w3.org/2000/svg"
-               xmlns:xlink="http://www.w3.org/1999/xlink"
-               x="0px"
-               y="0px"
-               viewBox="0 0 20 20"
-               xml:space="preserve"
-               class="find-a-job__geolocation-icon"
-          ><path class="st0" d="M17.5,9.3c-0.3-3.6-3.2-6.5-6.8-6.8V0H9.3v2.5C5.7,2.9,2.9,5.7,2.5,9.3H0v1.4h2.5c0.3,3.6,3.2,6.5,6.8,6.8V20
+          <svg
+            aria-labelledby="geolocationIconTitle geolocationIconDesc"
+            class="find-a-job__geolocation-icon"
+            viewBox="0 0 20 20"
+            x="0px"
+            xml:space="preserve"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            y="0px"
+          >
+            <title id="geolocationIconTitle">Geolocation icon</title>
+            <desc id="geolocationIconDesc">A magnifying glass</desc>
+            <path class="st0" d="M17.5,9.3c-0.3-3.6-3.2-6.5-6.8-6.8V0H9.3v2.5C5.7,2.9,2.9,5.7,2.5,9.3H0v1.4h2.5c0.3,3.6,3.2,6.5,6.8,6.8V20
               h1.4v-2.5c3.6-0.3,6.5-3.2,6.8-6.8H20V9.3H17.5z M16.1,10c0,0.2,0,0.5,0,0.7c-0.3,2.8-2.6,5.1-5.4,5.4c-0.2,0-0.5,0-0.7,0
               s-0.5,0-0.7,0c-2.8-0.3-5.1-2.6-5.4-5.4c0-0.2,0-0.5,0-0.7s0-0.5,0-0.7c0.3-2.8,2.6-5.1,5.4-5.4c0.2,0,0.5,0,0.7,0s0.5,0,0.7,0
               c2.8,0.3,5.1,2.6,5.4,5.4C16.1,9.5,16.1,9.8,16.1,10z"/>
@@ -143,10 +146,15 @@
           <button class="find-a-job__pagination-direction"
                   :class="{'find-a-job__pagination-direction--enabled': (backwardEnabled == true)}"
                   @click.stop.prevent="showPreviousPage">
-            <svg x="0px" y="0px"
-                 viewBox="0 0 32.9 32.9"
-                 xml:space="preserve"
+            <svg
+                aria-labelledby="previousPageButtonTitle previousPageButtonDesc"
+                viewBox="0 0 32.9 32.9"
+                x="0px"
+                xml:space="preserve"
+                y="0px"
             >
+              <title id="previousPageButtonTitle">Previous page button</title>
+              <desc id="previousPageButtonDesc">A shape like a less than sign</desc>
                 <path class="st0" d="M21.2,11.7v0.9c0,0.2-0.1,0.3-0.2,0.3l-7.5,3.4c-0.1,0-0.1,0.1,0,0.1l7.5,3.4c0.1,0.1,0.2,0.2,0.2,0.3v0.9
                   c0,0.2-0.1,0.3-0.3,0.2l-8.9-4.1c-0.1-0.1-0.2-0.2-0.2-0.4V16c0-0.2,0.1-0.3,0.2-0.4l8.9-4.1C21.1,11.4,21.2,11.5,21.2,11.7z"/>
               </svg>
@@ -163,13 +171,16 @@
           <button class="find-a-job__pagination-direction"
                   :class="{'find-a-job__pagination-direction--enabled': (forwardEnabled == true)}"
                   @click.stop.prevent="showNextPage">
-            <svg x="0px"
-                 y="0px"
-                 viewBox="0 0 32.9 32.9"
+            <svg
+              aria-labelledby="nextPageButtonTitle nextPageButtonDesc"
+              viewBox="0 0 32.9 32.9"
+              x="0px"
+              y="0px"
             >
-                  <path class="st0" d="M11.7,21.2v-0.9c0-0.2,0.1-0.3,0.2-0.3l7.5-3.4c0.1,0,0.1-0.1,0-0.1L11.9,13c-0.1-0.1-0.2-0.2-0.2-0.3v-0.9
-                    c0-0.2,0.1-0.3,0.3-0.2l8.9,4.1c0.1,0.1,0.2,0.2,0.2,0.4v0.9c0,0.2-0.1,0.3-0.2,0.4l-8.9,4.1C11.9,21.5,11.7,21.4,11.7,21.2z"/>
-
+              <title id="nextPageButtonTitle">Next page button</title>
+              <desc id="nextPageButtonDesc">A shape like a greater than sign</desc>
+                <path class="st0" d="M11.7,21.2v-0.9c0-0.2,0.1-0.3,0.2-0.3l7.5-3.4c0.1,0,0.1-0.1,0-0.1L11.9,13c-0.1-0.1-0.2-0.2-0.2-0.3v-0.9
+                  c0-0.2,0.1-0.3,0.3-0.2l8.9,4.1c0.1,0.1,0.2,0.2,0.2,0.4v0.9c0,0.2-0.1,0.3-0.2,0.4l-8.9,4.1C11.9,21.5,11.7,21.4,11.7,21.2z"/>
             </svg>
           </button>
           <a class="find-a-job__pagination-skip-link"

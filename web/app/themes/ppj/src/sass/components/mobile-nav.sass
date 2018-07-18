@@ -60,22 +60,23 @@ $mobileNavWidthPortrait: 48rem
       text-transform: uppercase
 
   &__close-button
+    height: $common-spacing
     margin-left: auto
     position: absolute
-    right: .8rem
+    right: 1.6rem
     top: 1.6rem
     z-index: 1
+    width: $common-spacing
 
-    &:before
-      content: ''
-      @include background-img('svg/close.svg')
-      background-color: $color-transparent
-      background-repeat: no-repeat
-      background-position: center center
-      background-size: contain
-      width: $common-spacing * 0.875
-      height: $common-spacing * 0.875
-      display: inline-block
+  &__close-button-text
+    display: none
+
+  &__close-button-image
+    left: 0
+    height: 100%
+    position: absolute
+    top: 0
+    width: 100%
 
   &__menu
     $m: &
