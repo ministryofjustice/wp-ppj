@@ -57,8 +57,6 @@ $surveyURL = get_field('survey_url', 'option');
      */
     ppjUserSurvey.cookieSet = !!Cookies.get(ppjUserSurvey.cookieName);
 
-    console.log('ppjUserSurveyCookieSet', ppjUserSurvey.cookieSet);
-
     if (!ppjUserSurvey.cookieSet) {
         var randNumber = Math.floor(Math.random() * 100) + 1;
         if (<?= $displayPercentage ?> >= randNumber) {
