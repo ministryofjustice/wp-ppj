@@ -716,7 +716,7 @@
         // It's only safe to navigate away from the page after that has happened.
         google.maps.event.addListenerOnce(this.map.object, 'idle', () => {
           this.$nextTick(() => {
-            //window.location.href = url;
+            window.location.href = url;
           });
         });
       }
