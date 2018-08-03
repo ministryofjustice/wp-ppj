@@ -21,12 +21,12 @@ window.ppj.pageContainerOverlay = {
 };
 
 window.ppj.openNavMenu = function() {
-  document.getElementsByTagName('body')[0].classList.add('mobile-nav-is-open');
+  document.getElementsByTagName('body')[0].classList.add('mobile-nav-is-open', 'site-overlay-is-active');
   window.ppj.pageContainerOverlay.activate();
 };
 
 window.ppj.closeNavMenu = function() {
-  document.getElementsByTagName('body')[0].classList.remove('mobile-nav-is-open');
+  document.getElementsByTagName('body')[0].classList.remove('mobile-nav-is-open', 'site-overlay-is-active');
   window.ppj.pageContainerOverlay.deactivate();
 };
 
@@ -147,4 +147,3 @@ nonMobiles.addListener(setAriaHiddenForNonVisibleSiteWideNavLinks);
 
 // Set ARIA hidden attributes for site-wide-nav links on page load
 setAriaHiddenForNonVisibleSiteWideNavLinks(nonMobiles);
-
