@@ -3,7 +3,10 @@
        v-cloak
        :class="{'find-a-job--job-selected': selectedLocationId}"
   >
-    <screen-overlay :active="screenOverlayActive" message="Loading job description…"></screen-overlay>
+    <screen-overlay :active="screenOverlayActive" class="screen-overlay--loading-job-site">
+      <spinner></spinner>
+      <div class="screen-overlay__message">Loading job description…</div>
+    </screen-overlay>
     <div class="find-a-job__header">
       <p class="find-a-job__prompt">Enter location (postcode, town or region)</p>
       <form class="find-a-job__form" @submit.prevent="" @reset.prevent="resetSearch">
@@ -204,12 +207,14 @@
 
   // import Vue components
   import JobSummary from './JobSummary.vue';
-  import ScreenOverlay from '../vue/ScreenOverlay.vue'
+  import ScreenOverlay from '../vue/ScreenOverlay.vue';
+  import Spinner from '../vue/Spinner.vue';
 
   export default {
     components: {
       'job-summary' : JobSummary,
-      'screen-overlay' : ScreenOverlay
+      'screen-overlay' : ScreenOverlay,
+      'spinner' : Spinner,
     },
     props: {
       'title': {

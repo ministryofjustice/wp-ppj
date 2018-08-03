@@ -1,6 +1,7 @@
 import 'url-search-params-polyfill';
 import Vue from 'vue';
 import FindAJob from '../vue/FindAJob.vue';
+import Spinner from '../vue/Spinner.vue';
 
 window.addEventListener('load', function() {
 
@@ -10,6 +11,9 @@ window.addEventListener('load', function() {
 
     var vm = new Vue({
       el: '.find-a-job-container',
+      components: {
+        'spinner': Spinner
+      },
       methods: {
         pageLoaded: function () {
           this.$emit('pageLoaded');
@@ -18,4 +22,5 @@ window.addEventListener('load', function() {
     });
 
   }
+
 });
