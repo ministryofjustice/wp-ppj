@@ -7,7 +7,7 @@
             "label": "Activate survey",
             "name": "activate_survey",
             "type": "true_false",
-            "instructions": "",
+            "instructions": "If this is checked, the survey may be shown, depending on the settings below. If unchecked the survey will never be shown.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -23,10 +23,10 @@
         },
         {
             "key": "field_5a944a386e787",
-            "label": "Survey code",
-            "name": "survey_code",
+            "label": "Survey URL",
+            "name": "survey_url",
             "type": "text",
-            "instructions": "",
+            "instructions": "Enter the complete URL for the survey",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -45,7 +45,7 @@
             "label": "Popup delay",
             "name": "popup_delay",
             "type": "number",
-            "instructions": "",
+            "instructions": "Enter the number of seconds the survey will be delayed before showing on the page.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -82,6 +82,27 @@
             "multiple": 1,
             "return_format": "id",
             "ui": 1
+        },
+        {
+            "key": "field_5b61d3c1cbea7",
+            "label": "Display percentage",
+            "name": "display_percentage",
+            "type": "number",
+            "instructions": "Please enter a value between 1 and 100. This value is the percentage likelyhood this survey will be displayed. It is calculated as a random value, i.e. if the `Display percentage` is set to 2%. The user has a 1\/50 chance of seeing this survey popup.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 1,
+            "max": 100,
+            "step": 1
         }
     ],
     "location": [
@@ -101,5 +122,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1524231345
+    "modified": 1533283143
 }

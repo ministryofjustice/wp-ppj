@@ -21,6 +21,55 @@
     .screen-overlay__content
       color: $color-white
 
+  &--user-feedback-survey
+    .screen-overlay__close-button
+      $size: 4rem
+
+      background-color: $color-dark
+      border-radius: 2rem
+      color: $color-white
+      content: 'close'
+      cursor: pointer
+      display: block
+      font-size: 2rem
+      opacity: 0
+      padding: 1rem
+      position: absolute
+      right: 1rem
+      text-align: center
+      transition: all 1s 1s
+      top: 1rem
+      width: $size * 2
+
+    .screen-overlay__content
+      height: 80%
+      max-width: 800px
+      position: relative
+      width: 100%
+
+    .screen-overlay__iframe-container
+      height: 100%
+      width: 100%
+
+      & > iframe
+        height: 100%
+        width: 100%
+
+  @include bp('mobile')
+    &--user-feedback-survey
+      .screen-overlay__content
+        width: 80%
+
+  @include bp('portrait')
+    &--user-feedback-survey
+      .screen-overlay__content
+        width: 70%
+
+  @include bp('landscape')
+    &--user-feedback-survey
+      .screen-overlay__content
+        width: 60%
+
 .screen-overlay--active.screen-overlay--user-feedback-survey
   .screen-overlay__close-button
     opacity: 1

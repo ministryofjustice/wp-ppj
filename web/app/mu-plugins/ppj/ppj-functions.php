@@ -277,10 +277,10 @@ function acf_json_load_point( $paths )
 }
 add_filter('acf/settings/load_json', __NAMESPACE__ . '\\acf_json_load_point');
 
-function renderSurveyMonkeySnippet() {
-    echo partial([], 'surveyMonkeySnippet');
+function renderUserSurveyScript() {
+    echo partial([], 'userSurveyScript');
 }
-add_action('wp_footer', __NAMESPACE__ . '\\renderSurveyMonkeySnippet');
+add_action('wp_footer', __NAMESPACE__ . '\\renderUserSurveyScript');
 
 /**
  * function to determine if the supplied url
