@@ -46,6 +46,7 @@ if (LegNav\onLeg())                          $bodyClasses[] = 'leg';
             })(window,document,'script','dataLayer','GTM-WQ92V8W');
         </script>
     <?php endif; ?>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 </head>
 
 <body <?php body_class($bodyClasses); ?>>
