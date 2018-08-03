@@ -25,10 +25,10 @@ $surveyURL = get_field('survey_url', 'option');
     </div>
 </div>
 <script>
-    const activateSurvey = () => {
-        const body = document.querySelector('body');
-        const overlay = document.querySelector('.screen-overlay--user-feedback-survey');
-        const iframe = document.createElement('iframe');
+    var activateSurvey = function() {
+        var body = document.querySelector('body');
+        var overlay = document.querySelector('.screen-overlay--user-feedback-survey');
+        var iframe = document.createElement('iframe');
 
         body.classList.add('site-overlay-is-active');
         iframe.src = '<?= $surveyURL ?>';
@@ -37,7 +37,7 @@ $surveyURL = get_field('survey_url', 'option');
 
         // Add callback to close overlay when user clicks the overlay
         // This also includes the close button by default
-        overlay.addEventListener('click', ()=>{
+        overlay.addEventListener('click', function() {
             overlay.classList.remove('screen-overlay--active');
             body.classList.remove('site-overlay-is-active');
         });
@@ -49,10 +49,10 @@ $surveyURL = get_field('survey_url', 'option');
      * HTML caching does not enforce the same calculation result
      * for all users until the cache expires
      */
-    const randNumber = Math.floor(Math.random() * 100) + 1;
+    var randNumber = Math.floor(Math.random() * 100) + 1;
     if (<?= $displayPercentage ?> >= randNumber) {
         // Load the Google Forms survey in an iframe on page load ...
-        window.addEventListener('load', ()=>{
+        window.addEventListener('load', function() {
             // ... after the specified delay
             setTimeout(activateSurvey, <?= $popupDelayMilliseconds ?>)
         });
