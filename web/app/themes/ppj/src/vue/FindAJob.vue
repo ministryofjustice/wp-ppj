@@ -139,7 +139,14 @@
               <a :href="jobListMessageUrlWithSearchTerm">{{ jobListMessage }}</a>
             </div>
           </li>
+
+          <li v-if="!!this.$slots['jobAlertHTML']">
+            <div class="find-a-job__job-alert">
+              <slot name="jobAlertHTML"></slot>
+            </div>
+          </li>
         </ul>
+
         <div class="find-a-job__pagination"
              v-if="deviceIsMobile && (numberOfResultPages > 1)">
           <a class="find-a-job__pagination-skip-link"
@@ -897,7 +904,7 @@
           currentState['lng1'] = this.map.currentBounds.getNorthEast().lng();
         }
         return currentState;
-      }
+      },
     },
 
     created() {
