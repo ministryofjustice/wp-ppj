@@ -20,8 +20,7 @@ $jobAlertHTML = '';
 
 // If the job alert is active and the activate date has been set, continue.
 // Otherwise do not try to display the job alert.
-if ( (bool)get_field('job_alert_active') && $activateDateString = get_field('job_alert_activate_date')) {
-
+if ((bool)get_field('job_alert_active') && $activateDateString = get_field('job_alert_activate_date')) {
     // Explicitly set the time zone.
     // This will account for daylight savings.
     $timeZone = new DateTimeZone('Europe/London');
@@ -34,18 +33,17 @@ if ( (bool)get_field('job_alert_active') && $activateDateString = get_field('job
 
     // Compare the activate date to now, to determine if the JobAlert period has started
     if ($now->getTimestamp() > $activateDate->getTimestamp()) {
-
         // If the deactivate date has been set,
         // calculate if the Job Alert period has already ended
         // If it hasn't been set then assume the Job Alert period is active now.
         $ended = false;
 
-        if ($deactivateDateString = get_field('job_alert_deactivate_date') ) {
+        if ($deactivateDateString = get_field('job_alert_deactivate_date')) {
             $deactivateDate = DateTime::createFromFormat('Y-m-d H:i:s', $deactivateDateString, $timeZone);
             $ended          = $now->getTimestamp() > $deactivateDate->getTimestamp();
         }
 
-        if ( ! $ended ) {
+        if (! $ended) {
             $jobAlertHTML = get_field('job_alert_text');
         }
     }
@@ -57,10 +55,8 @@ if ( (bool)get_field('job_alert_active') && $activateDateString = get_field('job
 
     <find-a-job job-title="<?= $jobTitle ?>" leg="<?= $leg ?>" >
 
-        <?php if ($jobAlertHTML): ?>
-
+        <?php if ($jobAlertHTML) : ?>
             <template slot="jobAlertHTML"><?= $jobAlertHTML ?></template>
-
         <?php endif; ?>
 
     </find-a-job>
