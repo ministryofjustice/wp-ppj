@@ -20,6 +20,78 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5ba5378fbf12c",
+            "label": "Job alert active",
+            "name": "job_alert_active",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5ba52f2732b20",
+            "label": "Job alert activate date",
+            "name": "job_alert_activate_date",
+            "type": "date_time_picker",
+            "instructions": "Dates are based on the server's internal date.\r\n[ 'timezone' 'daylight saving' ]",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "[e i] Y-m-d H:i:s",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        },
+        {
+            "key": "field_5ba52fcc32b21",
+            "label": "Job alert deactivate date",
+            "name": "job_alert_deactivate_date",
+            "type": "date_time_picker",
+            "instructions": "Dates are based on the server's internal date.\r\n[ 'timezone' 'daylight saving' ]",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "[e i] Y-m-d H:i:s",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 1
+        },
+        {
+            "key": "field_5ba5172e0b38c",
+            "label": "Job alert text",
+            "name": "job_alert_text",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         }
     ],
     "location": [
@@ -39,5 +111,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1527857487
+    "modified": 1537779188
 }
