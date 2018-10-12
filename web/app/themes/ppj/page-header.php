@@ -41,6 +41,8 @@ $headerClass .= ($headerStyle == 'dark') ?  'header--style-dark' : '';
                                     ],
                                 'headerHeroImage')
                             ?>
+                        <?php elseif( \ppj\LegNav\onLeg() ): ?>
+                            <div class="header__hero-image-placeholder"></div>
                         <?php endif; ?>
 
                         <?php if ($header_text): ?>
