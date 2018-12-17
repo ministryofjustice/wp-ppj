@@ -107,13 +107,13 @@
           </div>
         </div>
 
-<!--        <div v-if="!jobFeedError && jobFeedLoaded && jobs.length == 0"
-             class="find-a-job__job-feed-message find-a-job__job-feed-message&#45;&#45;no-jobs">
+        <div v-if="!jobFeedError && jobFeedLoaded && jobs.length == 0"
+             class="find-a-job__job-feed-message find-a-job__job-feed-message--no-jobs">
           <div class="find-a-job__job-feed-text-container">
             <p>There are no jobs currently available.</p>
             <p>Please check back again soon.</p>
           </div>
-        </div>-->
+        </div>
 
         <ul class="find-a-job__view-list" ref="list">
 
