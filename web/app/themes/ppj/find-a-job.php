@@ -5,7 +5,9 @@
 
 include 'page-header.php';
 
-$jobTitle = get_field('job_title');
+$jobTitle          = get_field('job_title');
+$jobListMessage    = get_field('job_list_message');
+$jobListMessageURL = get_field('job_list_message_url');
 $leg = ppj\LegNav\legName();
 $jobAlertHTML = '';
 
@@ -53,12 +55,14 @@ if ((bool)get_field('job_alert_active') && $activateDateString = get_field('job_
 
 <div class="find-a-job-container">
 
-    <find-a-job job-title="<?= $jobTitle ?>" leg="<?= $leg ?>" >
-
+    <find-a-job job-title="<?= $jobTitle ?>"
+                leg="<?= $leg ?>"
+                job-list-message="<?= $jobListMessage ?>"
+                job-list-message-url="<?= $jobListMessageURL ?>"
+    >
         <?php if ($jobAlertHTML) : ?>
             <template slot="jobAlertHTML"><?= $jobAlertHTML ?></template>
         <?php endif; ?>
-
     </find-a-job>
 
 </div>

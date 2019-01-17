@@ -235,6 +235,14 @@
       'leg': {
         default: '',
         type: String
+      },
+      'jobListMessage': {
+        default: '',
+        type: String
+      },
+      'jobListMessageUrl': {
+        default: '',
+        type: String
       }
     },
 
@@ -315,9 +323,6 @@
         screenOverlayActive: false,
       };
 
-      data.jobListMessage = false;
-      data.jobListMessageUrl = '';
-
       switch(this.leg) {
         case 'prison-officer':
           data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/vacancies.json';
@@ -325,8 +330,6 @@
 
         case 'youth-custody':
           data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/youth-custody-vacancies.json';
-          data.jobListMessage = 'See prison officer jobs working with adult offenders';
-          data.jobListMessageUrl = '/prison-officer/find-a-job/';
           break;
       }
 
