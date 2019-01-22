@@ -135,9 +135,7 @@
             </job-summary>
           </li>
           <li v-if="jobListMessage">
-            <div class="find-a-job__job-list-message">
-              <a :href="jobListMessageUrlWithSearchTerm">{{ jobListMessage }}</a>
-            </div>
+            <div class="find-a-job__job-list-message" v-html="jobListMessageHTML"></div>
           </li>
 
           <li v-if="!!this.$slots['jobAlertHTML']">
@@ -241,8 +239,8 @@
         type: String
       },
       'jobListMessageUrl': {
+        type: String,
         default: '',
-        type: String
       }
     },
 
@@ -269,6 +267,10 @@
           backwardEnabled: false,
           scrollTop: parseInt(urlParams.get('scroll')) || 0,
         },
+
+        jobListMessageHTML : function(jobListMessage) {
+          return decodeURIComponent(jobListMessage);
+        }(this.jobListMessage),
 
         searchResults: {
           locations: {},
@@ -873,7 +875,7 @@
         return this.jobs.length + ' ' + this.jobTitle + ' jobs available: ';
       },
 
-      jobListMessageUrlWithSearchTerm: function() {
+/*      jobListMessageUrlWithSearchTerm: function() {
         let queryString = '';
         if (this.currentState['marker-lat'] && this.currentState['marker-lng']) {
           queryString = '?' + this.buildQueryString({
@@ -884,7 +886,7 @@
           });
         }
         return this.jobListMessageUrl + queryString;
-      },
+      },*/
 
       currentState: function() {
         const currentState = {

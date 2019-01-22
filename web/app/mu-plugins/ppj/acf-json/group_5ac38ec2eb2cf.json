@@ -22,7 +22,7 @@
             "key": "field_5acb7f3292fcb",
             "label": "Job list message",
             "name": "job_list_message",
-            "type": "text",
+            "type": "wysiwyg",
             "instructions": "This message appears at the bottom of the job feed in a highlighted box.",
             "required": 0,
             "conditional_logic": 0,
@@ -32,29 +32,10 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_5ad47f5c13b5d",
-            "label": "Job list message URL",
-            "name": "job_list_message_url",
-            "type": "text",
-            "instructions": "The text in the job list message can be clicked, after which the browser will be redirected to the URL  below.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         },
         {
             "key": "field_5ad89b70149c8",
@@ -93,5 +74,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1547735282
+    "modified": 1548165579
 }

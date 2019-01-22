@@ -57,7 +57,7 @@ if ((bool)get_field('job_alert_active') && $activateDateString = get_field('job_
 
     <find-a-job job-title="<?= $jobTitle ?>"
                 leg="<?= $leg ?>"
-                job-list-message="<?= $jobListMessage ?>"
+                job-list-message="<?= rawurlencode($jobListMessage) ?>"
                 job-list-message-url="<?= $jobListMessageURL ?>"
     >
         <?php if ($jobAlertHTML) : ?>
