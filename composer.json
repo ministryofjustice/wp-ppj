@@ -31,7 +31,8 @@
     "acf/advanced-custom-fields-pro": "*",
     "wpackagist-plugin/uk-cookie-consent": "*",
     "wpackagist-plugin/wp-browser-update": "*",
-    "wpackagist-plugin/safe-redirect-manager": "*"
+    "wpackagist-plugin/safe-redirect-manager": "*",
+    "wpackagist-plugin/classic-editor": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0.2",
