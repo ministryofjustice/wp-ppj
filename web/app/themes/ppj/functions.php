@@ -1,21 +1,29 @@
 <?php
-namespace ppj;
+
+//namespace ppj;
 
 function enqueue_scripts()
 {
-    $legName  = LegNav\legName();
+    $legName = LegNav\legName();
     $root_dir = get_template_directory_uri() . '/dest';
 
-    wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700', null, null );
-    wp_enqueue_style( 'main', $root_dir . mix_asset( "/css/{$legName}.css" ), null, null );
-    wp_enqueue_script( 'main-js', $root_dir . mix_asset( '/js/main.js' ), null, null, true );
-    wp_enqueue_script( 'wistia', '//fast.wistia.com/assets/external/E-v1.js', null, null, true );
+    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700', null, null);
+    wp_enqueue_style('main', $root_dir . mix_asset("/css/{$legName}.css"), null, null);
+    wp_enqueue_script('main-js', $root_dir . mix_asset('/js/main.js'), null, null, true);
+    wp_enqueue_script('wistia', '//fast.wistia.com/assets/external/E-v1.js', null, null, true);
 
     if (is_page_template('find-a-job.php')) {
-        wp_enqueue_script( 'google-maps-js','https://maps.googleapis.com/maps/api/js?key=AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA&libraries=places', null, null, true );
-        wp_enqueue_script( 'find-a-job-js', $root_dir . mix_asset('/js/find-a-job.js'), ('google-maps.js'), null, true );
+        wp_enqueue_script(
+            'google-maps-js',
+            'https://maps.googleapis.com/maps/api/js?key=AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA&libraries=places',
+            null,
+            null,
+            true
+        );
+        wp_enqueue_script('find-a-job-js', $root_dir . mix_asset('/js/find-a-job.js'), ('google-maps.js'), null, true);
     }
 }
+
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts');
 
 function mix_asset($filename)
@@ -30,18 +38,18 @@ function mix_asset($filename)
 
 function registerImagesSizes()
 {
-    add_image_size( 'header-mobile',      320, 180, true );
-    add_image_size( 'header-mobile-home', 320, 244, true );
+    add_image_size('header-mobile', 320, 180, true);
+    add_image_size('header-mobile-home', 320, 244, true);
 
-    add_image_size( 'header-portrait',      768, 320, true );
-    add_image_size( 'header-portrait-home', 768, 400, true );
+    add_image_size('header-portrait', 768, 320, true);
+    add_image_size('header-portrait-home', 768, 400, true);
 
-    add_image_size( 'header-landscape',      1024, 420, true );
-    add_image_size( 'header-landscape-home', 1024, 444, true );
+    add_image_size('header-landscape', 1024, 420, true);
+    add_image_size('header-landscape-home', 1024, 444, true);
 
-    add_image_size( 'header-large',      1440, 560, true );
+    add_image_size('header-large', 1440, 560, true);
 
-    add_image_size( 'header-large-home', 1440, 624, true );
+    add_image_size('header-large-home', 1440, 624, true);
 
     /*
      * Adding eight 16x9 image sizes, to span the entire gamut
@@ -60,18 +68,21 @@ function registerImagesSizes()
     add_image_size('16:9x150', 2400, 1350, true);
     add_image_size('16:9x200', 3200, 1800, true);
 }
+
 add_action('init', __NAMESPACE__ . '\\registerImagesSizes');
 
 /**
  * Register the navigation menu locations that this theme supports
  */
-function registerNavLocations() {
+function registerNavLocations()
+{
     register_nav_menus([
         'site-wide' => 'Site-wide menu',
         'prison-officer' => 'Prison Officer menu',
         'youth-custody' => 'Youth Custody menu',
     ]);
 }
+
 add_action('init', __NAMESPACE__ . '\\registerNavLocations');
 
 /**
@@ -83,13 +94,36 @@ add_action('init', __NAMESPACE__ . '\\registerNavLocations');
  * @param string $location
  * @return array
  */
-function navMenuItems($location) {
+function navMenuItems($location)
+{
     $menus = get_nav_menu_locations();
     if (!isset($menus[$location])) {
         // There's no menu set for this location. Gracefully fail.
         return [];
-    }
-    else {
+    } else {
         return wp_get_nav_menu_items($menus[$location]);
     }
 }
+
+
+
+/**
+ * Get the current version of WP
+ *
+ * This is provided for external resources to resolve the current wp_version
+ *
+ * @return string
+ */
+function moj_wp_version()
+{
+    global $wp_version;
+
+    return $wp_version;
+}
+
+add_action('rest_api_init', function () {
+    register_rest_route('moj', '/version', array(
+        'methods' => 'GET',
+        'callback' => 'moj_wp_version'
+    ));
+});
