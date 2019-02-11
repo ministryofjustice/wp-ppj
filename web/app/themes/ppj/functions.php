@@ -1,6 +1,6 @@
 <?php
 
-//namespace ppj;
+namespace ppj;
 
 function enqueue_scripts()
 {
