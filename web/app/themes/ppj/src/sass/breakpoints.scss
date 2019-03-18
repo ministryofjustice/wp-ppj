@@ -1,21 +1,16 @@
 $breakpoints: (
-  'portrait'  : ( min-width: $length-portrait),
-  'landscape' : ( min-width: $length-landscape ),
-  'large'     : ( min-width: $length-large )
+  'portrait' : $length-portrait,
+  'landscape' : $length-landscape,
+  'large' : $length-large
 );
 
-@mixin bp($name) {
-  // If the key exists in the map
+@mixin bp($name, $direction: min) {
+
   @if map-has-key($breakpoints, $name) {
-    // Prints a media query based on the value
-    @media #{inspect(map-get($breakpoints, $name))} {
-      @content;
-    }
+    $name: map-get($breakpoints, $name);
   }
 
-  // If the key doesn't exist in the map
-  @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoints}`. "
-+ "Please make sure it is defined in `$breakpoints` map.";
+  @media (#{$direction}-width: #{$name}) {
+    @content;
   }
 }
