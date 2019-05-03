@@ -133,7 +133,6 @@ window.ppj.setAriaHiddenAttribute = function(cssSelector, hidden) {
  * @param mobileDevicesMediaQuery
  */
 function setAriaHiddenForNonVisibleSiteWideNavLinks(mobileDevicesMediaQuery) {
-  console.log('setAria');
   const cssSelector = '.site-wide-nav__menu-list-element:not(.site-wide-nav__menu-list-element--selected)';
   if (mobileDevicesMediaQuery.matches) {
     window.ppj.setAriaHiddenAttribute(cssSelector, false);
