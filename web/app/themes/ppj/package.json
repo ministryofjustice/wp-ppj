@@ -3,30 +3,30 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/roots/roots.git"
+  },
   "dependencies": {
     "ajv": "^6.10.0",
     "axios": "^0.18.0",
-    "cross-env": "^5.2.0",
     "debounce": "^1.2.0",
-    "details-element-polyfill": "^2.0.1",
-    "imagemin": "^6.1.0",
-    "jquery": "^3.3.1",
-    "marked": "^0.3.19",
-    "npm": "^6.4.1",
-    "scrollpoints": "^0.4.0",
-    "url-search-params-polyfill": "^4.0.0",
-    "vue": "^2.5.16",
-    "vue-loader": "^13.7.2",
-    "vue-template-compiler": "^2.5.16"
+    "jquery": "^3.4.1",
+    "vue": "^2.6.10",
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.10"
   },
   "devDependencies": {
     "browser-sync": "^2.26.3",
     "browser-sync-webpack-plugin": "^2.0.1",
-    "laravel-mix": "^4.0.14",
-    "node-sass": "^4.11.0",
+    "cross-env": "^5.2.0",
+    "details-element-polyfill": "^2.0.1",
+    "laravel-mix": "^4.0.15",
     "resolve-url-loader": "^2.3.1",
     "sass": "^1.17.2",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "scrollpoints": "^0.4.0",
+    "url-search-params-polyfill": "^4.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

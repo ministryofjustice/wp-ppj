@@ -1,6 +1,9 @@
 # Editors
 .idea/
 
+.DS_*
+._DS_*
+
 # Application
 web/app/debug.log
 web/app/plugins/*
