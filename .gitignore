@@ -17,11 +17,11 @@ web/app/uploads/*
 !web/app/mu-plugins/ppj/
 !web/app/uploads/.gitkeep
 
-/web/app/themes/ppj/meta/
-/web/app/themes/ppj/node_modules/
-/web/app/themes/ppj/dist/
-/web/app/themes/ppj/vendor/
-/web/app/themes/ppj/temp-auth/.htpasswd
+web/app/themes/ppj/meta/
+web/app/themes/ppj/node_modules/
+web/app/themes/ppj/dist/
+web/app/themes/ppj/vendor/
+web/app/themes/ppj/temp-auth/.htpasswd
 
 # WordPress
 web/wp
