@@ -27,7 +27,7 @@ $surveyURL = get_field('survey_url', 'option');
 <script>
     var ppjUserSurvey = {};
 
-    ppjUserSurvey.activateSurvey = function() {
+    ppjUserSurvey.activateSurvey = function () {
         var body = document.querySelector('body');
         var overlay = document.querySelector('.screen-overlay--user-feedback-survey');
         var iframe = document.createElement('iframe');
@@ -38,7 +38,7 @@ $surveyURL = get_field('survey_url', 'option');
 
         // Add callback to close overlay when user clicks the overlay
         // This also includes the close button by default
-        overlay.addEventListener('click', function() {
+        overlay.addEventListener('click', function () {
             overlay.classList.remove('screen-overlay--active');
             body.classList.remove('site-overlay-is-active');
         });
@@ -59,13 +59,16 @@ $surveyURL = get_field('survey_url', 'option');
 
     if (!ppjUserSurvey.cookieSet) {
         var randNumber = Math.floor(Math.random() * 100) + 1;
-        if (<?= $displayPercentage ?> >= randNumber) {
+        if (<?= $displayPercentage ?> >=
+        randNumber
+    )
+        {
 
             // Create a cookie to specify the earliest time the survey can be shown again
             Cookies.set(ppjUserSurvey.cookieName, 'do not show survey', {expires: 30});
 
             // Load the Google Forms survey in an iframe on page load ...
-            window.addEventListener('load', function() {
+            window.addEventListener('load', function () {
 
                 // ... after the specified delay
                 setTimeout(ppjUserSurvey.activateSurvey, <?= $popupDelayMilliseconds ?>)

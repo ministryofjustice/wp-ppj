@@ -5,7 +5,7 @@ namespace ppj;
 function enqueue_scripts()
 {
     $legName = LegNav\legName();
-    $root_dir = get_template_directory_uri() . '/dest';
+    $root_dir = get_template_directory_uri() . '/dist';
 
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700', null, null);
     wp_enqueue_style('main', $root_dir . mix_asset("/css/{$legName}.css"), null, null);
@@ -28,7 +28,7 @@ add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts');
 
 function mix_asset($filename)
 {
-    $manifest_path = dirname(__FILE__) . '/dest/mix-manifest.json';
+    $manifest_path = dirname(__FILE__) . '/dist/mix-manifest.json';
     $manifest = json_decode(file_get_contents($manifest_path), true);
     if (!isset($manifest[$filename])) {
         error_log("Mix asset '$filename' does not exist in manifest.");
@@ -104,7 +104,6 @@ function navMenuItems($location)
         return wp_get_nav_menu_items($menus[$location]);
     }
 }
-
 
 
 /**

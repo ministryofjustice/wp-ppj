@@ -1,17 +1,17 @@
 const mix = require('laravel-mix');
 
-mix.setPublicPath('./dest/');
+mix.setPublicPath('./dist/');
 
-mix.js('src/js/main.js'                , 'dest/js')
-  .js('src/js/find-a-job.js'           , 'dest/js')
-  .sass('src/sass/landing-page.sass'   , 'dest/css/landing-page.css')
-  .sass('src/sass/prison-officer.sass' , 'dest/css/prison-officer.css')
-  .sass('src/sass/youth-custody.sass'  , 'dest/css/youth-custody.css')
-  .sass('src/sass/error-page.sass'     , 'dest/css/error-page.css')
-  .copy('src/img/*'                    , 'dest/img/')
-  /*.copy('src/img/icons/!*'              , 'dest/img/icons/')*/
-  .copy('src/img/svg/*'                , 'dest/img/svg/')
-  .copy('src/img/svg/icons/*'          , 'dest/img/svg/icons/')
+mix.js('src/js/main.js'                , 'dist/js')
+  .js('src/js/find-a-job.js'           , 'dist/js')
+  .sass('src/sass/landing-page.sass'   , 'dist/css/landing-page.css')
+  .sass('src/sass/prison-officer.sass' , 'dist/css/prison-officer.css')
+  .sass('src/sass/youth-custody.sass'  , 'dist/css/youth-custody.css')
+  .sass('src/sass/error-page.sass'     , 'dist/css/error-page.css')
+  .copy('src/img/*'                    , 'dist/img/')
+  /*.copy('src/img/icons/!*'              , 'dist/img/icons/')*/
+  .copy('src/img/svg/*'                , 'dist/img/svg/')
+  .copy('src/img/svg/icons/*'          , 'dist/img/svg/icons/')
 ;
 
 if (mix.inProduction()) {

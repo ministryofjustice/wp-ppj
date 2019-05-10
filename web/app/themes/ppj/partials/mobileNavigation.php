@@ -36,7 +36,7 @@ if (LegNav\onLeg()) {
             onclick="ppj.closeNavMenu()">
         <span class="mobile-nav__close-button-text">Close mobile menu</span>
         <img class="mobile-nav__close-button-image"
-             src="<?= get_template_directory_uri() ?>/dest/img/svg/close.svg"
+             src="<?= get_template_directory_uri() ?>/dist/img/svg/close.svg"
              alt="Close mobile navigation menu button image"
         />
     </button>

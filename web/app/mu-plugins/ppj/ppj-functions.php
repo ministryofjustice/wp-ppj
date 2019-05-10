@@ -219,7 +219,7 @@ add_shortcode('ppj-current-year', __NAMESPACE__ . '\\shortcodeCurrentYear');
 
 function inlineSVG($svgFileName) {
     $templateDirectory = get_template_directory();
-    $fullSVGPath = $templateDirectory . '/dest/img/svg/' . $svgFileName . '.svg';
+    $fullSVGPath = $templateDirectory . '/dist/img/svg/' . $svgFileName . '.svg';
     include($fullSVGPath);
 }
 

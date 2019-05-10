@@ -5,13 +5,13 @@ global $post;
 $modifiedSiteWideNavItems = ppj\markCurrentlySelectedAncestorMenuItem(ppj\navMenuItems('site-wide'));
 $logoTargetUrl = LegNav\legHomeUrl();
 $templateDirectory = get_template_directory_uri();
-$logoSrc = $templateDirectory . "/dest/img/svg/logo.svg";
+$logoSrc = $templateDirectory . "/dist/img/svg/logo.svg";
 $logoAltText = "HM Prison and Probation Service logo";
 
 // The logo for the landing page and the Prison Officer leg is the same,
 // however a specific logo is required for the Youth Custody leg
 if (ppj\LegNav\legName() == 'youth-custody') {
-    $logoSrc =  $templateDirectory . "/dest/img/svg/ycs_logo.svg";
+    $logoSrc =  $templateDirectory . "/dist/img/svg/ycs_logo.svg";
     $logoAltText = "Youth Custody Service logo";
 }
 

@@ -44,7 +44,7 @@ $isPage = (basename(get_page_template()) === 'page.php');
                     <div class="footer__container">
                         <?= $footerContent; ?>
                         <div class="footer__logo">
-                            <img src="<?= get_template_directory_uri() ?>/dest/img/svg/logo.svg" alt="HM Prison and Probation Service logo"/>
+                            <img src="<?= get_template_directory_uri() ?>/dist/img/svg/logo.svg" alt="HM Prison and Probation Service logo"/>
                         </div>
                         <div class="footer__copyright">
                             <span><?= $footerCopyright; ?></span>

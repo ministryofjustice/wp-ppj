@@ -89,7 +89,7 @@ if (isset($td['link']['title'])) {
                         <div class="text-block__multi-text-block">
                             <?php if (isset($block['icon']) && $block['icon'] != 'none' ) : ?>
                                 <div class="text-block__multi-text-block-icon">
-                                    <?php include(get_template_directory() . '/dest' . $block['icon']) ?>
+                                    <?php include(get_template_directory() . '/dist' . $block['icon']) ?>
                                 </div>
                             <?php endif; ?>
                             <div class="text-block__multi-text-block-text-container">
@@ -142,7 +142,7 @@ if (isset($td['link']['title'])) {
 
                                 <?php if (isset($row['icon']) && $row['icon'] != 'none' ) : ?>
                                     <div class="text-block__icon-rows-icon">
-                                        <?php include(get_template_directory() . '/dest' . $row['icon']) ?>
+                                        <?php include(get_template_directory() . '/dist' . $row['icon']) ?>
                                     </div>
                                 <?php endif; ?>
 

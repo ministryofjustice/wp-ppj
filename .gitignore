@@ -7,25 +7,21 @@
 # Application
 web/app/debug.log
 web/app/plugins/*
-!web/app/plugins/.gitkeep
 web/app/mu-plugins/*/
-!web/app/mu-plugins/load.php
-!web/app/mu-plugins/ppj/
 web/app/upgrade
 web/app/languages
 web/app/uploads/*
+
+!web/app/plugins/.gitkeep
+!web/app/mu-plugins/load.php
+!web/app/mu-plugins/ppj/
 !web/app/uploads/.gitkeep
 
 /web/app/themes/ppj/meta/
 /web/app/themes/ppj/node_modules/
-/web/app/themes/ppj/dest/css/
-/web/app/themes/ppj/dest/img/
-/web/app/themes/ppj/dest/js/
-/web/app/themes/ppj/dest/fonts/
-/web/app/themes/ppj/dest/*.html
+/web/app/themes/ppj/dist/
 /web/app/themes/ppj/vendor/
 /web/app/themes/ppj/temp-auth/.htpasswd
-/web/app/themes/ppj/dest/mix-manifest.json
 
 # WordPress
 web/wp
