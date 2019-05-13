@@ -3,6 +3,7 @@
 
 .DS_*
 ._DS_*
+*.sql
 
 # Application
 web/app/debug.log

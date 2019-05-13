@@ -30,8 +30,8 @@ if (WP_ENV !== 'production' && is_admin()) {
             <div class="notice warning no-persistent-edit-notice is-dismissible">
                 <p><?php
                     _e(
-                        'Content entered here may not be copied to the production site.<br>For clarification, please contact Tactical Products.',
-                        'my-text-domain'
+                        'Content entered here could be lost during database updates.<br>For clarification please contact Tactical Products.',
+                        'ppj'
                     ); ?></p>
             </div>
             <script>

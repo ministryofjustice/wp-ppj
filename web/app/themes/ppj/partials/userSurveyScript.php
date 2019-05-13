@@ -59,11 +59,8 @@ $surveyURL = get_field('survey_url', 'option');
 
     if (!ppjUserSurvey.cookieSet) {
         var randNumber = Math.floor(Math.random() * 100) + 1;
-        if (<?= $displayPercentage ?> >=
-        randNumber
-    )
+        if (<?= $displayPercentage ?> >= randNumber)
         {
-
             // Create a cookie to specify the earliest time the survey can be shown again
             Cookies.set(ppjUserSurvey.cookieName, 'do not show survey', {expires: 30});
 
