@@ -179,6 +179,37 @@ function youtubeEmbedParams($iframe) {
 }
 
 /**
+ * Adjust URL parameters used for embedded Vimeo iframe players
+ * to 'unbrand' it:
+ *   - don't show related videos at the end
+ *   - hide annotations
+ *   - don't show the video title & uploader info
+ *
+ * @param string $iframe The YouTube iframe HTML
+ * @return string Adjusted iframe HTML
+ */
+function vimeoEbedParams($iframe) {
+    // If this isn't a Vimeo iframe, do nothing
+    if (stripos($iframe, 'vimeo.com') === false || stripos($iframe, ' src=') === false) {
+        return $iframe;
+    }
+
+    preg_match('/src="(.+?)"/', $iframe, $matches);
+    $embed_url = $matches[1];
+
+    // Vimeo Embed parameters are documented here:
+    // https://developers.google.com/youtube/player_parameters#Parameters
+    $params = [
+        'rel' => 0,
+        'showinfo' => 0,
+        'iv_load_policy' => 3,
+    ];
+
+    $new_url = add_query_arg($params, $embed_url);
+    return str_replace($embed_url, $new_url, $iframe);
+}
+
+/**
  * Filter the oEmbed HTML used for YouTube videos
  * This will adjust the embed iframe URL parameters and wrap it in a responsive div.
  *
@@ -195,6 +226,24 @@ function filterYoutubeOembed($html, $url) {
     return $html;
 }
 add_filter('embed_oembed_html', __NAMESPACE__ . '\\filterYoutubeOembed', 10, 2);
+
+/**
+ * Filter the oEmbed HTML used for Vimeo videos
+ * This will adjust the embed iframe URL parameters and wrap it in a responsive div.
+ *
+ * @param string $html HTML markup for the oEmbed
+ * @param string $url URL of the content being embedded
+ *
+ * @return string Adjusted HTML markup
+ */
+function filterVimeoOembed($html, $url) {
+    if (preg_match('/https?:\/\/((www\.)?vimeo\.com)\//', $url)) {
+        //$html = vimeoEbedParams($html);
+        $html = '<div class="embed-responsive embed-responsive-16by9">' . $html . '</div>';
+    }
+    return $html;
+}
+add_filter('embed_oembed_html', __NAMESPACE__ . '\\filterVimeoOembed', 10, 2);
 
 function shortcodeQuote($attrs)
 {
