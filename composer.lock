@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a106de15d7c00288c61b340d865833ff",
+    "content-hash": "70ebb2cd8e6e4683c3f9052a1741ab4d",
     "packages": [
         {
             "name": "acf/advanced-custom-fields-pro",
@@ -330,6 +330,68 @@
             "time": "2018-02-04T10:52:01+00:00"
         },
         {
+            "name": "ministryofjustice/wp-moj-components",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ministryofjustice/wp-moj-components.git",
+                "reference": "aef300fa41e2a62a60e11d97cffb700e60979336"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.wp.dsd.io/dist/ministryofjustice/wp-moj-components/ministryofjustice-wp-moj-components-aef300fa41e2a62a60e11d97cffb700e60979336-zip-a9ada1.zip",
+                "reference": "aef300fa41e2a62a60e11d97cffb700e60979336",
+                "shasum": "c44ad9f3ea7bdd07fb579d798b6730f02d946eb4"
+            },
+            "require": {
+                "composer/installers": "^1.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": [
+                {
+                    "name": "Damien Wilson",
+                    "email": "damien.wilson@digital.justice.gov.uk"
+                }
+            ],
+            "description": "A plugin to introduce global functions to a collection of WP sites",
+            "support": {
+                "source": "https://github.com/ministryofjustice/wp-moj-components/tree/1.1.2",
+                "issues": "https://github.com/ministryofjustice/wp-moj-components/issues"
+            },
+            "time": "2019-08-01T14:02:38+00:00"
+        },
+        {
+            "name": "ministryofjustice/wp-moj-social-share",
+            "version": "1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ministryofjustice/wp-moj-social-share.git",
+                "reference": "340044cf463cdb92c9fa7b503fde208d3359dfc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.wp.dsd.io/dist/ministryofjustice/wp-moj-social-share/ministryofjustice-wp-moj-social-share-340044cf463cdb92c9fa7b503fde208d3359dfc3-zip-a8e4a0.zip",
+                "reference": "340044cf463cdb92c9fa7b503fde208d3359dfc3",
+                "shasum": "d08bad6a78477e44434d48c8fdf73998402d95bf"
+            },
+            "require": {
+                "composer/installers": "^1.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": [
+                {
+                    "name": "Stephanie David",
+                    "email": "stephanie.david@digital.justice.gov.uk"
+                }
+            ],
+            "description": "A WordPress plugin that will add share buttons to pages",
+            "support": {
+                "source": "https://github.com/ministryofjustice/wp-moj-social-share/tree/1.1",
+                "issues": "https://github.com/ministryofjustice/wp-moj-social-share/issues"
+            },
+            "time": "2019-07-02T08:39:14+00:00"
+        },
+        {
             "name": "ministryofjustice/wp-rewrite-media-to-s3",
             "version": "0.1.1",
             "source": {
@@ -359,6 +421,45 @@
                 "issues": "https://github.com/ministryofjustice/wp-rewrite-media-to-s3/issues"
             },
             "time": "2017-03-06T17:20:15+00:00"
+        },
+        {
+            "name": "ministryofjustice/wp-user-roles",
+            "version": "0.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ministryofjustice/wp-user-roles.git",
+                "reference": "d4c48b705e5cb6fbebff61acb78b98fa7db295ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.wp.dsd.io/dist/ministryofjustice/wp-user-roles/ministryofjustice-wp-user-roles-d4c48b705e5cb6fbebff61acb78b98fa7db295ee-zip-49746c.zip",
+                "reference": "d4c48b705e5cb6fbebff61acb78b98fa7db295ee",
+                "shasum": "6c996440801f2a8526c8d7935751236f5d4fecf2"
+            },
+            "require": {
+                "composer/installers": "^1.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": [
+                {
+                    "name": "Ollie Treend",
+                    "email": "ollie.treend@digital.justice.gov.uk"
+                },
+                {
+                    "name": "James Devon",
+                    "email": "james.devon@digital.justice.gov.uk"
+                },
+                {
+                    "name": "Damien Wilson",
+                    "email": "damien.wilson@digital.justice.gov.uk"
+                }
+            ],
+            "description": "A WordPress plugin to create user roles typically required by a MOJDigital WordPress site",
+            "support": {
+                "source": "https://github.com/ministryofjustice/wp-user-roles/tree/0.2.4",
+                "issues": "https://github.com/ministryofjustice/wp-user-roles/issues"
+            },
+            "time": "2019-07-01T17:37:43+00:00"
         },
         {
             "name": "oscarotero/env",
@@ -608,26 +709,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/fast-user-switching/"
-        },
-        {
-            "name": "wpackagist-plugin/revisionary",
-            "version": "1.3.7",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/revisionary/",
-                "reference": "tags/1.3.7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/revisionary.1.3.7.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/revisionary/"
         },
         {
             "name": "wpackagist-plugin/safe-redirect-manager",

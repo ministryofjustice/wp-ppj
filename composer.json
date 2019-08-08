@@ -34,7 +34,9 @@
     "wpackagist-plugin/safe-redirect-manager": "*",
     "wpackagist-plugin/fast-user-switching": "*",
     "wpackagist-plugin/classic-editor": "*",
-    "wpackagist-plugin/revisionary": "*"
+    "ministryofjustice/wp-user-roles": "*",
+    "ministryofjustice/wp-moj-social-share": "*",
+    "ministryofjustice/wp-moj-components": "^1.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0.2",
@@ -42,7 +44,11 @@
   },
   "extra": {
     "installer-paths": {
-      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "web/app/mu-plugins/{$name}/": [
+        "type:wordpress-muplugin",
+        "ministryofjustice/wp-user-roles",
+        "ministryofjustice/wp-moj-components"
+      ],
       "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
       "web/app/themes/{$name}/": ["type:wordpress-theme"]
     },
