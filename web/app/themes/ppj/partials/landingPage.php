@@ -11,7 +11,7 @@ $groupStyle = (isset($group['style'])) ? "landing-page-groups__group--style-{$gr
             <?php foreach($td['groups'] as $group): ?>
                 <div class="landing-page-groups__group <?= $groupStyle ?>">
                     <div class="landing-page-groups__group-title-container">
-                        <h3 class="landing-page-groups__group-title"><?= $group['group_name'] ?></h3>
+                        <h2 class="landing-page-groups__group-title"><?= $group['group_name'] ?></h2>
                     </div>
 
                     <?php $numberOfCardsInRow = sizeof($group['cards']); ?>
@@ -55,7 +55,7 @@ $groupStyle = (isset($group['style'])) ? "landing-page-groups__group--style-{$gr
                                     </div>
                                 <?php endif; ?>
 
-                                <h4 class="landing-page-groups__card-title"><?= $card['title'] ?></h4>
+                                <h3 class="landing-page-groups__card-title"><?= $card['title'] ?></h3>
 
                                 <div class="landing-page-groups__card-content"><?= $card['content'] ?></div>
 

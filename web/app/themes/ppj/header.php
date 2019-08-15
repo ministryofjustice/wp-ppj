@@ -20,7 +20,6 @@ if (LegNav\onLeg()) {
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

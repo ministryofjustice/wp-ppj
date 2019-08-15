@@ -21,7 +21,6 @@ $headerClass = '';
 $headerClass .= ($headerStyle == 'dark') ?  'header--style-dark' : '';
 
 ?>
-
 <div id="site-container">
     <div class="page-container">
         <div class="page-container__overlay"
@@ -44,14 +43,13 @@ $headerClass .= ($headerStyle == 'dark') ?  'header--style-dark' : '';
                         <?php elseif( \ppj\LegNav\onLeg() ): ?>
                             <div class="header__hero-image-placeholder"></div>
                         <?php endif; ?>
-
                         <?php if ($header_text): ?>
                             <div class="header__overlay">
                                 <div class="l-full">
                                     <div class="header__text-container">
                                         <?php if ($header_text): ?>
                                             <div class="header__text">
-                                                <?= $header_text ?>
+                                                <h1><?= $header_text ?></h1>
                                             </div>
                                         <?php endif; ?>
                                         <?php if ($header_subtext): ?>

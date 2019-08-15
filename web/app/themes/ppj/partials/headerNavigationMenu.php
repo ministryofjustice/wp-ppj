@@ -6,19 +6,20 @@ $modifiedSiteWideNavItems = ppj\markCurrentlySelectedAncestorMenuItem(ppj\navMen
 $logoTargetUrl = LegNav\legHomeUrl();
 $templateDirectory = get_template_directory_uri();
 $logoSrc = $templateDirectory . "/dist/img/svg/logo.svg";
-$logoAltText = "HM Prison and Probation Service logo";
+$logoAltText = "HM Prison and Probation Service - Prison and Probation Jobs home";
 
 // The logo for the landing page and the Prison Officer leg is the same,
 // however a specific logo is required for the Youth Custody leg
 if (ppj\LegNav\legName() == 'youth-custody') {
     $logoSrc =  $templateDirectory . "/dist/img/svg/ycs_logo.svg";
-    $logoAltText = "Youth Custody Service logo";
+    $logoAltText = "Youth Custody Service - Youth Justice Worker home";
 }
 
 ?>
 
-<div class="header__site-header">
-    <div class="site-wide-nav">
+<a href="#maincontent" class="maincontent" id="skip-link">Skip to main content</a>
+<header class="header__site-header">
+    <nav class="site-wide-nav">
         <ul class="site-wide-nav__menu-list">
             <?php foreach ($modifiedSiteWideNavItems as $item):
                 $listElementClass = 'site-wide-nav__menu-list-element';
@@ -33,9 +34,9 @@ if (ppj\LegNav\legName() == 'youth-custody') {
             <?php endforeach; ?>
         </ul>
         <button class="site-wide-nav__open-mobile-nav" onclick="ppj.openNavMenu()">menu</button>
-    </div>
+    </nav>
 
-    <div class="leg-specific-nav">
+    <nav class="leg-specific-nav">
 
         <a href="<?= $logoTargetUrl ?>" class="leg-specific-nav__logo"><img src="<?= $logoSrc ?>" alt="<?= $logoAltText ?>"/></a>
 
@@ -60,5 +61,6 @@ if (ppj\LegNav\legName() == 'youth-custody') {
             </ul>
         </div>
         <?php endif; ?>
-    </div>
-</div>
+    </nav>
+</header>
+<a id="maincontent">
