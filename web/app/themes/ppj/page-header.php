@@ -24,7 +24,8 @@ $headerClass .= ($headerStyle == 'dark') ?  'header--style-dark' : '';
 <div id="site-container">
     <div class="page-container">
         <div class="page-container__overlay"
-             onclick="window.ppj.closeNavMenu()"
+             onclick="window.ppj.closeNavMenu()" 
+             tabindex="0"
         ></div>
         <div class="header <?= $headerClass ?>">
             <?= ppj\partial(null, 'headerNavigationMenu') ?>

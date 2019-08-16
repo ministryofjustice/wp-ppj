@@ -75,7 +75,6 @@ if (LegNav\onLeg()) {
 <body <?php body_class($bodyClasses); ?>>
 <!-- Google Tag Manager (noscript) -->
 <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2SCJMC"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+If this message is displayed, you do not have JavaScript enabled. If you cannot enable JavaScript, telephone us on 0845 010 3508 to request the information you require in an alternative format.
 </noscript>
 <!-- End Google Tag Manager (noscript) -->

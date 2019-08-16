@@ -13,7 +13,7 @@
 >
   <title id="rolePlayIconTitle">Role play icon</title>
   <desc id="rolePlayIconDesc">Two speech balloons next to each other, offset vertically and horizontally from each other</desc>
-  <style type="text/css">
+  <style>
     .st1{fill:#FFFFFF;}
     .st2{fill:none;stroke-width:4;stroke-miterlimit:10;}
   </style>

@@ -13,7 +13,7 @@
 >
   <title id="fitnessIconTitle">Fitness icon</title>
   <desc id="fitnessIconDesc">A stylised image of dumbell</desc>
-  <style type="text/css">.st1{fill:#FFFFFF;}</style>
+  <style>.st1{fill:#FFFFFF;}</style>
   <circle class="st0" cx="66.6" cy="66.6" r="66.6"/>
   <rect x="59.9" y="62.4" class="st1" width="12.5" height="8.3"/>
   <rect x="20.2" y="62.4" class="st1" width="9.2" height="8.3"/>

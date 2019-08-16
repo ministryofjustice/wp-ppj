@@ -69,7 +69,7 @@ function renderPageBlockData($acf)
 
 function my_acf_admin_head() {
     ?>
-    <style type="text/css">
+    <style>
         /*        .acf-flexible-content {
 					background-color: black;
 				}*/

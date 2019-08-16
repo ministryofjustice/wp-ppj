@@ -17,7 +17,6 @@ if (ppj\LegNav\legName() == 'youth-custody') {
 
 ?>
 
-<a href="#maincontent" class="maincontent" id="skip-link">Skip to main content</a>
 <header class="header__site-header">
     <nav class="site-wide-nav">
         <ul class="site-wide-nav__menu-list">
@@ -63,4 +62,4 @@ if (ppj\LegNav\legName() == 'youth-custody') {
         <?php endif; ?>
     </nav>
 </header>
-<a id="maincontent">
+
