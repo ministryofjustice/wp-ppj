@@ -73,6 +73,7 @@ if (LegNav\onLeg()) {
 </head>
 
 <body <?php body_class($bodyClasses); ?>>
+<nav aria-label="Skip Links"><a href="#maincontent" id="skip-link">Skip to main content</a></nav>
 <!-- Google Tag Manager (noscript) -->
 <noscript>
 If this message is displayed, you do not have JavaScript enabled. If you cannot enable JavaScript, telephone us on 0845 010 3508 to request the information you require in an alternative format.

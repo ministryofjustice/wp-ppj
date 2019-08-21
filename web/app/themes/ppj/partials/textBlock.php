@@ -115,14 +115,14 @@ if (isset($td['link']['title'])) {
                         <?php foreach ($td['accordion'] as $el) : ?>
                             <details data-title="<?= esc_attr(trim($el['title'] . ' ' . $el['subtitle'])) ?>">
                                 <summary>
-                                    <h4 class="accordion__title">
+                                    <h3 class="accordion__title">
                                         <?= $el['title'] ?>
                                         <?php if (!empty($el['subtitle'])): ?>
                                             <span class="accordion__subtitle">
                                                 <?= $el['subtitle'] ?>
                                             </span>
                                         <?php endif; ?>
-                                    </h4>
+                                    </h3>
                                 </summary>
                                 <div class="accordion__content">
                                     <?= $el['content'] ?>
