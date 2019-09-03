@@ -32,7 +32,7 @@ if (ppj\LegNav\legName() == 'youth-custody') {
                 </li>
             <?php endforeach; ?>
         </ul>
-        <button class="site-wide-nav__open-mobile-nav" onclick="ppj.openNavMenu()">menu</button>
+        <button class="site-wide-nav__open-mobile-nav" tabindex="0" onclick="ppj.openNavMenu()">menu</button>
     </nav>
 
     <nav class="leg-specific-nav">

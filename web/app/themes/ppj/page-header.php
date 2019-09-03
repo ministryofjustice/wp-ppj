@@ -66,4 +66,4 @@ $headerClass .= ($headerStyle == 'dark') ?  'header--style-dark' : '';
                 </div>
             <?php endif; ?>
         </div>
-        <a id="maincontent"> <!-- anchor for skip-link -->
+

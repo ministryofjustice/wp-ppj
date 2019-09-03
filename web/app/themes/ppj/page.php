@@ -6,7 +6,7 @@ $page_blocks = get_field('page_blocks');
 
 ?>
 
-  <div class="page-blocks">
+  <div id="maincontent" class="page-blocks">
     <?php echo ppj\renderPageBlockData($page_blocks); ?>
   </div>
 

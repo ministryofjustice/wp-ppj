@@ -105,6 +105,14 @@ function navMenuItems($location)
     }
 }
 
+//Remove JS and CSS types
+add_action( 'template_redirect', function(){
+    ob_start( function( $buffer ){
+        $buffer = str_replace( array( 'type="text/javascript"', "type='text/javascript'", 'type="text/css"', "type='text/css'" ), '', $buffer );
+
+        return $buffer;
+    });
+});
 
 /**
  * Get the current version of WP
