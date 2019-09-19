@@ -328,10 +328,12 @@
       switch(this.leg) {
         case 'prison-officer':
           data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/vacancies.json';
+          //data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/prod/vacancies.json';
           break;
 
         case 'youth-custody':
           data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/youth-custody-vacancies.json';
+          //data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/prod/youth-custody-vacancies.json';
           break;
       }
 

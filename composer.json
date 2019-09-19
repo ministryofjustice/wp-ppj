@@ -36,7 +36,7 @@
     "wpackagist-plugin/classic-editor": "*",
     "ministryofjustice/wp-user-roles": "*",
     "ministryofjustice/wp-moj-social-share": "*",
-    "ministryofjustice/wp-moj-components": "^1.0"
+    "ministryofjustice/wp-moj-components": "^1.1.4"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0.2",
