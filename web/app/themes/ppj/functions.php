@@ -67,6 +67,9 @@ function registerImagesSizes()
     add_image_size('16:9x100', 1600, 900, true);
     add_image_size('16:9x150', 2400, 1350, true);
     add_image_size('16:9x200', 3200, 1800, true);
+
+    add_image_size('award', null,120, false );
+
 }
 
 add_action('init', __NAMESPACE__ . '\\registerImagesSizes');
