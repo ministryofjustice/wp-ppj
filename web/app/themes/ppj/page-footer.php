@@ -25,23 +25,25 @@ switch (LegNav\legName()) {
 $isPage = (basename(get_page_template()) === 'page.php');
 
 ?>
-    <div class="l-full">
-        <ul class="awards">
+    <?php if ( $isPage && $facebookFooterContent): ?>
+        <div class="l-full">
+            <ul class="awards">
 
-            <?php foreach($awards as $award): ?>
+                <?php foreach($awards as $award): ?>
 
-                <?php if(isset($award['image'])): ?>
+                    <?php if(isset($award['image'])): ?>
 
-                    <li class="award">
-                        <?= wp_get_attachment_image( $award['image']['id'], 'award'  ); ?>
-                    </li>
+                        <li class="award">
+                            <?= wp_get_attachment_image( $award['image']['id'], 'award'  ); ?>
+                        </li>
 
-                <?php endif; ?>
+                    <?php endif; ?>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
-        </ul>
-    </div>
+            </ul>
+        </div>
+    <?php endif; ?>
     <div class="l-full l-full--footer">
         <?php if ( $isPage && $facebookFooterContent): ?>
             <div class="facebook-footer">
