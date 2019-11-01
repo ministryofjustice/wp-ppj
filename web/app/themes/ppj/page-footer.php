@@ -25,7 +25,7 @@ switch (LegNav\legName()) {
 $isPage = (basename(get_page_template()) === 'page.php');
 
 ?>
-    <?php if ( $isPage && $facebookFooterContent): ?>
+    <?php if ( basename(get_page_template()) !== 'find-a-job.php'): ?>
         <div class="l-full">
             <ul class="awards">
 
