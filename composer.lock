@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7d4b2dc8c77be71edf54ab5fe2a65ff",
+    "content-hash": "f342fd4df5dbc56974cb6e3fdc87807b",
     "packages": [
         {
             "name": "acf/advanced-custom-fields-pro",
@@ -12,6 +12,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://composer.wp.dsd.io/dist/acf/advanced-custom-fields-pro/acf-advanced-custom-fields-pro-5.8.1.zip",
+                "reference": null,
                 "shasum": "1ba6174e31db0d3c2728d7bd5258c621d8eb9391"
             },
             "type": "wordpress-plugin"
@@ -271,7 +272,9 @@
             "version": "5.2.4",
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/translation/core/5.2.4/en_GB.zip"
+                "url": "https://downloads.wordpress.org/translation/core/5.2.4/en_GB.zip",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "koodimonni/composer-dropin-installer": ">=0.2.3"
@@ -321,8 +324,8 @@
             "authors": [
                 {
                     "name": "Onni Hakala",
-                    "email": "onni@koodimonni.fi",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "onni@koodimonni.fi"
                 }
             ],
             "description": "Install packages or a few files from packages into custom paths without overwriting existing stuff.",
@@ -372,22 +375,43 @@
         },
         {
             "name": "ministryofjustice/wp-moj-components",
-            "version": "1.1.4",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ministryofjustice/wp-moj-components.git",
-                "reference": "692181b888e10c669bcf4a4d8af245abbaf2300c"
+                "reference": "e761d303414e29983c9e0317d94eeb67b6bd03e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.wp.dsd.io/dist/ministryofjustice/wp-moj-components/ministryofjustice-wp-moj-components-692181b888e10c669bcf4a4d8af245abbaf2300c-zip-70296e.zip",
-                "reference": "692181b888e10c669bcf4a4d8af245abbaf2300c",
-                "shasum": "14740bd0390fe2434f2aff92e54fd1bb7d54fcaa"
+                "url": "https://composer.wp.dsd.io/dist/ministryofjustice/wp-moj-components/ministryofjustice-wp-moj-components-e761d303414e29983c9e0317d94eeb67b6bd03e9-zip-ff939d.zip",
+                "reference": "e761d303414e29983c9e0317d94eeb67b6bd03e9",
+                "shasum": "b1d9c72c1dce889d30a87572b36fc0496e40f13d"
             },
             "require": {
                 "composer/installers": "^1.0"
             },
+            "require-dev": {
+                "10up/wp_mock": "0.4.2",
+                "phpmd/phpmd": "^2.7",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
             "type": "wordpress-muplugin",
+            "autoload": {
+                "psr-4": {
+                    "component\\Introduce\\": "component/Introduce/",
+                    "component\\Security\\": "component/Security/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit",
+                    "vendor/bin/phpcs -p",
+                    "vendor/bin/phpmd component/ text cleancode,codesize,controversial,design,naming,unusedcode"
+                ],
+                "coverage": [
+                    "vendor/bin/phpunit --coverage-html coverage --whitelist component"
+                ]
+            },
             "authors": [
                 {
                     "name": "Damien Wilson",
@@ -396,10 +420,10 @@
             ],
             "description": "A plugin to introduce global functions to a collection of WP sites",
             "support": {
-                "source": "https://github.com/ministryofjustice/wp-moj-components/tree/1.1.4",
+                "source": "https://github.com/ministryofjustice/wp-moj-components/tree/3.0.1",
                 "issues": "https://github.com/ministryofjustice/wp-moj-components/issues"
             },
-            "time": "2019-09-16T15:41:19+00:00"
+            "time": "2019-11-12T23:26:43+00:00"
         },
         {
             "name": "ministryofjustice/wp-moj-social-share",
@@ -533,9 +557,9 @@
             "authors": [
                 {
                     "name": "Oscar Otero",
+                    "role": "Developer",
                     "email": "oom@oscarotero.com",
-                    "homepage": "http://oscarotero.com",
-                    "role": "Developer"
+                    "homepage": "http://oscarotero.com"
                 }
             ],
             "description": "Simple library to consume environment variables",
@@ -721,7 +745,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/classic-editor.1.5.zip"
+                "url": "https://downloads.wordpress.org/plugin/classic-editor.1.5.zip",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -739,7 +765,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/fast-user-switching.zip?timestamp=1551360022"
+                "url": "https://downloads.wordpress.org/plugin/fast-user-switching.zip?timestamp=1551360022",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -757,7 +785,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/safe-redirect-manager.1.9.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/safe-redirect-manager.1.9.2.zip",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -775,7 +805,9 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-browser-update.zip?timestamp=1568968112"
+                "url": "https://downloads.wordpress.org/plugin/wp-browser-update.zip?timestamp=1571786617",
+                "reference": null,
+                "shasum": null
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -866,20 +898,20 @@
             "authors": [
                 {
                     "name": "Manuel Pichler",
+                    "role": "Project Founder",
                     "email": "github@manuel-pichler.de",
-                    "homepage": "https://github.com/manuelpichler",
-                    "role": "Project Founder"
+                    "homepage": "https://github.com/manuelpichler"
                 },
                 {
                     "name": "Marc Würth",
+                    "role": "Project Maintainer",
                     "email": "ravage@bluewin.ch",
-                    "homepage": "https://github.com/ravage84",
-                    "role": "Project Maintainer"
+                    "homepage": "https://github.com/ravage84"
                 },
                 {
                     "name": "Other contributors",
-                    "homepage": "https://github.com/phpmd/phpmd/graphs/contributors",
-                    "role": "Contributors"
+                    "role": "Contributors",
+                    "homepage": "https://github.com/phpmd/phpmd/graphs/contributors"
                 }
             ],
             "description": "PHPMD is a spin-off project of PHP Depend and aims to be a PHP equivalent of the well known Java tool PMD.",
@@ -944,16 +976,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.5.1",
+            "version": "3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "82cd0f854ceca17731d6d019c7098e3755c45060"
+                "reference": "65b12cdeaaa6cd276d4c3033a95b9b88b12701e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/82cd0f854ceca17731d6d019c7098e3755c45060",
-                "reference": "82cd0f854ceca17731d6d019c7098e3755c45060",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/65b12cdeaaa6cd276d4c3033a95b9b88b12701e7",
+                "reference": "65b12cdeaaa6cd276d4c3033a95b9b88b12701e7",
                 "shasum": ""
             },
             "require": {
@@ -991,20 +1023,20 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2019-10-16T21:14:26+00:00"
+            "time": "2019-10-28T04:36:32+00:00"
         },
         {
             "name": "symfony/config",
-            "version": "v4.3.5",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "0acb26407a9e1a64a275142f0ae5e36436342720"
+                "reference": "8267214841c44d315a55242ea867684eb43c42ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/0acb26407a9e1a64a275142f0ae5e36436342720",
-                "reference": "0acb26407a9e1a64a275142f0ae5e36436342720",
+                "url": "https://api.github.com/repos/symfony/config/zipball/8267214841c44d315a55242ea867684eb43c42ce",
+                "reference": "8267214841c44d315a55242ea867684eb43c42ce",
                 "shasum": ""
             },
             "require": {
@@ -1055,20 +1087,20 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2019-09-19T15:51:53+00:00"
+            "time": "2019-11-08T08:31:27+00:00"
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v4.3.5",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "e1e0762a814b957a1092bff75a550db49724d05b"
+                "reference": "80c6d9e19467dfbba14f830ed478eb592ce51b64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/e1e0762a814b957a1092bff75a550db49724d05b",
-                "reference": "e1e0762a814b957a1092bff75a550db49724d05b",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/80c6d9e19467dfbba14f830ed478eb592ce51b64",
+                "reference": "80c6d9e19467dfbba14f830ed478eb592ce51b64",
                 "shasum": ""
             },
             "require": {
@@ -1128,11 +1160,11 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-02T12:58:58+00:00"
+            "time": "2019-11-08T16:22:27+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.3.5",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -1182,16 +1214,16 @@
         },
         {
             "name": "symfony/service-contracts",
-            "version": "v1.1.7",
+            "version": "v1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/service-contracts.git",
-                "reference": "ffcde9615dc5bb4825b9f6aed07716f1f57faae0"
+                "reference": "ffc7f5692092df31515df2a5ecf3b7302b3ddacf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/ffcde9615dc5bb4825b9f6aed07716f1f57faae0",
-                "reference": "ffcde9615dc5bb4825b9f6aed07716f1f57faae0",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/ffc7f5692092df31515df2a5ecf3b7302b3ddacf",
+                "reference": "ffc7f5692092df31515df2a5ecf3b7302b3ddacf",
                 "shasum": ""
             },
             "require": {
@@ -1236,7 +1268,7 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2019-09-17T11:12:18+00:00"
+            "time": "2019-10-14T12:27:06+00:00"
         }
     ],
     "aliases": [],
