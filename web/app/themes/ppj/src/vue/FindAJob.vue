@@ -290,7 +290,7 @@
           isGeolocation: (urlParams.get('geolocation') == 'true') || false,
         },
 
-        autocomplete: null,
+        // autocomplete: null,
 
         map: {
           maxZoom: 18,
@@ -521,38 +521,38 @@
           });
       },
 
-      initAutocomplete() {
-        this.autocomplete = new google.maps.places.Autocomplete(this.$refs.searchInput, {
-          componentRestrictions: {country: 'uk'}
-        });
+      // initAutocomplete() {
+      //   this.autocomplete = new google.maps.places.Autocomplete(this.$refs.searchInput, {
+      //     componentRestrictions: {country: 'uk'}
+      //   });
 
-        // Bind the map's bounds (viewport) property to the autocomplete object,
-        // so that the autocomplete requests use the current map bounds for the
-        // bounds option in the request.
-        this.autocomplete.bindTo('bounds', this.map.object);
+      //   // Bind the map's bounds (viewport) property to the autocomplete object,
+      //   // so that the autocomplete requests use the current map bounds for the
+      //   // bounds option in the request.
+      //   this.autocomplete.bindTo('bounds', this.map.object);
 
-        this.autocomplete.addListener('place_changed', this.autocompletePlaceChanged);
-      },
+      //   this.autocomplete.addListener('place_changed', this.autocompletePlaceChanged);
+      // },
 
-      autocompletePlaceChanged() {
-        const place = this.autocomplete.getPlace();
+      // autocompletePlaceChanged() {
+      //   const place = this.autocomplete.getPlace();
 
-        if (!place.geometry) {
-          // User entered the name of a Place that was not suggested and
-          // pressed the Enter key, or the Place Details request failed.
-          // Revert to a regular geolocation search
-          this.searchTerm.input = place.name;
-          return this.search();
-        }
+      //   if (!place.geometry) {
+      //     // User entered the name of a Place that was not suggested and
+      //     // pressed the Enter key, or the Place Details request failed.
+      //     // Revert to a regular geolocation search
+      //     this.searchTerm.input = place.name;
+      //     return this.search();
+      //   }
 
-        const placeName = place.formatted_address.replace(/, UK$/, '');
-        this.searchTerm.input = this.searchTerm.query = placeName;
-        this.searchTerm.isGeolocation = false;
-        this.searchTerm.latlng = {
-          lat: place.geometry.location.lat(),
-          lng: place.geometry.location.lng()
-        };
-      },
+      //   const placeName = place.formatted_address.replace(/, UK$/, '');
+      //   this.searchTerm.input = this.searchTerm.query = placeName;
+      //   this.searchTerm.isGeolocation = false;
+      //   this.searchTerm.latlng = {
+      //     lat: place.geometry.location.lat(),
+      //     lng: place.geometry.location.lng()
+      //   };
+      // },
 
       fitMapToBounds(latLngBounds, padding=null) {
         this.map.object.fitBounds(latLngBounds, padding);
@@ -930,7 +930,7 @@
     mounted() {
       this.createMap();
       this.loadVacanciesData();
-      this.initAutocomplete();
+      // this.initAutocomplete();
 
       window.addEventListener('pagehide', ()=>{
 
