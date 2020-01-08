@@ -55,6 +55,10 @@ if ((bool)get_field('job_alert_active') && $activateDateString = get_field('job_
 
 <div class="find-a-job-container">
 
+    <div class="job-alert-message">
+        <p>A technical problem has led to some Prison officer vacancies incorrectly
+            indicated as closed. <br>If this is the case, please check back after 24 hours. Thank you.</p>
+    </div>
     <find-a-job job-title="<?= $jobTitle ?>"
                 leg="<?= $leg ?>"
                 job-list-message="<?= rawurlencode($jobListMessage) ?>"
