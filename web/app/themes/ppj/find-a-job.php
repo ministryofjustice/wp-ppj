@@ -22,6 +22,8 @@ $jobAlertHTML = '';
 
 // If the job alert is active and the activate date has been set, continue.
 // Otherwise do not try to display the job alert.
+/* OLD code where active date was set - keeping for now  - need to discuss**/
+/*
 if ((bool)get_field('job_alert_active') && $activateDateString = get_field('job_alert_activate_date')) {
     // Explicitly set the time zone.
     // This will account for daylight savings.
@@ -49,7 +51,17 @@ if ((bool)get_field('job_alert_active') && $activateDateString = get_field('job_
             $jobAlertHTML = get_field('job_alert_text');
         }
     }
+}*/
+
+$jobsClosed = 0;
+
+if ((bool)get_field('jobs_closed')){
+    $jobsClosed = 1;
 }
+if ((bool)get_field('job_alert_active')){
+    $jobAlertHTML = get_field('job_alert_text');
+}
+
 
 ?>
 
@@ -61,6 +73,7 @@ if ((bool)get_field('job_alert_active') && $activateDateString = get_field('job_
     </div>
     <find-a-job job-title="<?= $jobTitle ?>"
                 leg="<?= $leg ?>"
+                jobs-closed="<?= $jobsClosed; ?>"
                 job-list-message="<?= rawurlencode($jobListMessage) ?>"
                 job-list-message-url="<?= $jobListMessageURL ?>"
     >

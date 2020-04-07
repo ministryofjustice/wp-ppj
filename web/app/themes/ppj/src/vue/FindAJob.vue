@@ -1,13 +1,13 @@
 <template>
   <div class="find-a-job"
        v-cloak
-       :class="{'find-a-job--job-selected': selectedLocationId}"
+       :class="{'find-a-job--job-selected': selectedLocationId, 'jobs-closed' : this.jobsClosed  == 1}"
   >
     <screen-overlay :active="screenOverlayActive" class="screen-overlay--loading-job-site">
       <spinner></spinner>
       <div class="screen-overlay__message">Loading job description…</div>
     </screen-overlay>
-    <div class="find-a-job__header">
+    <div v-if="this.jobsClosed == 0" class="find-a-job__header">
       <p class="find-a-job__prompt">Enter location (postcode, town or region)</p>
       <form class="find-a-job__form" @submit.prevent="" @reset.prevent="resetSearch">
         <input type="search"
@@ -107,7 +107,7 @@
           </div>
         </div>
 
-        <div v-if="!jobFeedError && jobFeedLoaded && jobs.length == 0"
+        <div v-if="!jobFeedError && jobFeedLoaded && jobs.length == 0 && this.jobsClosed == 0"
              class="find-a-job__job-feed-message find-a-job__job-feed-message--no-jobs">
           <div class="find-a-job__job-feed-text-container">
             <p>There are no jobs currently available.</p>
@@ -233,6 +233,10 @@
       'leg': {
         default: '',
         type: String
+      },
+      'jobsClosed': {
+        default: '',
+        type: Boolean
       },
       'jobListMessage': {
         default: '',
