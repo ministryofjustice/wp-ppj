@@ -1,38 +1,34 @@
-# Template WordPress project
-
-Use this template to bootstrap a new WordPress project for use in the MOJ docker hosting environment.
-
-It will provide you with a skeleton WordPress installation which runs locally in docker, and pre-configured with composer for dependency management.
+# Prison and Probation jobs
 
 ## NB
 In web/app/themes/ppj/package.json a dependency on the package
-marked@0.3.9 was created. 
+marked@0.3.9 was created.
 Marked@0.3.6 was originally just a dependency of laravel mix
 ```└─┬ laravel-mix@1.7.2
      └─┬ webpack-notifier@1.5.0
        └─┬ node-notifier@4.6.1
          └─┬ cli-usage@0.1.4
-           └── marked@0.3.6 
+           └── marked@0.3.6
 ```
 But github alerted us to the fact that this package has a known security vulnerability
 https://github.com/ministryofjustice/wp-ppj/network/dependencies#30432977
 
-So an updated version of this package (0.3.9) has been made a dependency of 
+So an updated version of this package (0.3.9) has been made a dependency of
 web/app/themes/ppj/package.json
 ```├─┬ laravel-mix@1.7.2
    │ └─┬ webpack-notifier@1.5.0
    │   └─┬ node-notifier@4.6.1
    │     └─┬ cli-usage@0.1.4
    │       └── marked@0.3.9  deduped
-   └── marked@0.3.9 
+   └── marked@0.3.9
    ```
-Once package cli-usage updates it dependency on marked@0.3.6, 
-we should drop our explicit dependency on marked@0.3.9 
+Once package cli-usage updates it dependency on marked@0.3.6,
+we should drop our explicit dependency on marked@0.3.9
 
-In addition, because package vue has been updated to 2.5.13, 
+In addition, because package vue has been updated to 2.5.13,
 the package vue-template-compiler (which is a dependency of package laravel-mix)
-was too old. 
-The version of package vue-template-compiler must be later 
+was too old.
+The version of package vue-template-compiler must be later
 than the version of package vue.
 Therefore this project now has an explicit dependency on vue-template-compiler.
 This should be removed later if possible.
@@ -45,6 +41,7 @@ This should be removed later if possible.
 - Enhanced password hashing using bcrypt
 - Builds into a docker image
 - Docker-compose is used to run as a local development server
+- Vue front end
 
 ## Requirements
 
@@ -92,6 +89,13 @@ This should be removed later if possible.
     You will need to run through the WordPress installation wizard in your browser.
 
     The WordPress admin area will be accessible at `/wp/wp-admin`.
+
+7. The front end of this website uses Vue. To see changes you make to the code, you'll need to run the npm watch script. Navigate down into the ppj folder on the command line, and start Vue up.
+
+    ```bash
+    cd web/app/themes/ppj
+    npm run watch
+    ```
 
 ## Composer + WordPress plugins
 
