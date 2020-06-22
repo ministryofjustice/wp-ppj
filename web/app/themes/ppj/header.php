@@ -48,9 +48,6 @@
             })(window, document, 'script', 'dataLayer', 'GTM-N2SCJMC');</script>
         <!-- End Google Tag Manager -->
 
-        <!-- Optimise tag -->
-        <script src="https://www.googleoptimize.com/optimize.js?id=OPT-WMXKRDM"></script>
-
         <?php wp_head(); ?>
         <script><?php // code that must be available before the HTML has finished loading. ?>
             window.ppj = {};
