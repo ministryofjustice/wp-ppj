@@ -85,10 +85,6 @@ window.addEventListener('load', function() {
     )
   }
 
-  // hide html until Vue has rendered
-  const html = document.getElementsByTagName('html')[0];
-  html.style.opacity = 1;
-
 
 }, false);
 
