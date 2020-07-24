@@ -50,12 +50,14 @@ img
 html
   font-family: $sans-serif
   font-variant-ligatures: none
+  height: unset !important
 
 h1,h2,h3,h4,h5,h6,strong
   font-weight: $font-weight-semi-bold
 
 html
-  font-size: 62.5% // 1 rem now equals 10px
+  font-size: 62.5%  !important // 1 rem now equals 10px
+  // The !important is a temporary work-around to stop the cookie banner from breaking this. The cookie banner will be refactored so that it's CSS is better encapsulated in the future.
 
 body
   font-size: $font-size-medium
