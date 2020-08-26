@@ -8,11 +8,11 @@
     "packages": [
         {
             "name": "acf/advanced-custom-fields-pro",
-            "version": "5.8.12",
+            "version": "5.9.0",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.wp.dsd.io/dist/acf/advanced-custom-fields-pro/acf-advanced-custom-fields-pro-5.8.12.zip",
-                "shasum": "165d5168a76cc8b54be4a8ba3b003bdfdec6119d"
+                "url": "https://composer.wp.dsd.io/dist/acf/advanced-custom-fields-pro/acf-advanced-custom-fields-pro-5.9.0.zip",
+                "shasum": "6bb7818baa0e7cec664f774c106909a2483f9d3d"
             },
             "type": "wordpress-plugin"
         },
@@ -341,12 +341,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress.git",
-                "reference": "56d5a7941e6599612e580019e910363e593d301c"
+                "reference": "288b7273fb5bd799d2a7acf4e9b0611dd4fd40f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ministryofjustice/cookie-compliance-for-wordpress/zipball/56d5a7941e6599612e580019e910363e593d301c",
-                "reference": "56d5a7941e6599612e580019e910363e593d301c",
+                "url": "https://api.github.com/repos/ministryofjustice/cookie-compliance-for-wordpress/zipball/288b7273fb5bd799d2a7acf4e9b0611dd4fd40f7",
+                "reference": "288b7273fb5bd799d2a7acf4e9b0611dd4fd40f7",
                 "shasum": ""
             },
             "require": {
@@ -375,21 +375,21 @@
                 "source": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress/tree/roll-out",
                 "issues": "https://github.com/ministryofjustice/cookie-compliance-for-wordpress/issues"
             },
-            "time": "2020-08-12T14:44:43+00:00"
+            "time": "2020-08-24T16:49:08+00:00"
         },
         {
             "name": "ministryofjustice/wp-moj-components",
-            "version": "3.2.2",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ministryofjustice/wp-moj-components.git",
-                "reference": "1f728c926cedc5afdea53272e7b97a4fab3dc511"
+                "reference": "56fc4277f7a42a61563951450ff3a486ffcf184d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.wp.dsd.io/dist/ministryofjustice/wp-moj-components/ministryofjustice-wp-moj-components-1f728c926cedc5afdea53272e7b97a4fab3dc511-zip-bac561.zip",
-                "reference": "1f728c926cedc5afdea53272e7b97a4fab3dc511",
-                "shasum": "91a18cb80496bd67dee0e9ee6c3595ef4afb6924"
+                "url": "https://composer.wp.dsd.io/dist/ministryofjustice/wp-moj-components/ministryofjustice-wp-moj-components-56fc4277f7a42a61563951450ff3a486ffcf184d-zip-bc6109.zip",
+                "reference": "56fc4277f7a42a61563951450ff3a486ffcf184d",
+                "shasum": "fe8fc116767f57e3c36265e8a2f889e9b2f29b53"
             },
             "require": {
                 "composer/installers": "^1.0"
@@ -424,10 +424,10 @@
             ],
             "description": "A plugin to introduce global functions to a collection of WP sites",
             "support": {
-                "source": "https://github.com/ministryofjustice/wp-moj-components/tree/3.2.2",
+                "source": "https://github.com/ministryofjustice/wp-moj-components/tree/3.3.1",
                 "issues": "https://github.com/ministryofjustice/wp-moj-components/issues"
             },
-            "time": "2020-07-02T09:16:23+00:00"
+            "time": "2020-08-14T13:39:13+00:00"
         },
         {
             "name": "ministryofjustice/wp-moj-social-share",
@@ -496,17 +496,17 @@
         },
         {
             "name": "ministryofjustice/wp-user-roles",
-            "version": "0.2.4",
+            "version": "0.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ministryofjustice/wp-user-roles.git",
-                "reference": "d4c48b705e5cb6fbebff61acb78b98fa7db295ee"
+                "reference": "62d7d2220e65e59cb200f243d36d18cf0ff84429"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.wp.dsd.io/dist/ministryofjustice/wp-user-roles/ministryofjustice-wp-user-roles-d4c48b705e5cb6fbebff61acb78b98fa7db295ee-zip-49746c.zip",
-                "reference": "d4c48b705e5cb6fbebff61acb78b98fa7db295ee",
-                "shasum": "6c996440801f2a8526c8d7935751236f5d4fecf2"
+                "url": "https://composer.wp.dsd.io/dist/ministryofjustice/wp-user-roles/ministryofjustice-wp-user-roles-62d7d2220e65e59cb200f243d36d18cf0ff84429-zip-e5f1b4.zip",
+                "reference": "62d7d2220e65e59cb200f243d36d18cf0ff84429",
+                "shasum": "4b4891c9e35010f335e4d6fcc26d9b00ce9627a5"
             },
             "require": {
                 "composer/installers": "^1.0"
@@ -528,10 +528,10 @@
             ],
             "description": "A WordPress plugin to create user roles typically required by a MOJDigital WordPress site",
             "support": {
-                "source": "https://github.com/ministryofjustice/wp-user-roles/tree/0.2.4",
+                "source": "https://github.com/ministryofjustice/wp-user-roles/tree/0.2.5",
                 "issues": "https://github.com/ministryofjustice/wp-user-roles/issues"
             },
-            "time": "2019-07-01T17:37:43+00:00"
+            "time": "2020-08-18T12:36:32+00:00"
         },
         {
             "name": "oscarotero/env",
@@ -869,16 +869,16 @@
     "packages-dev": [
         {
             "name": "composer/xdebug-handler",
-            "version": "1.4.2",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/xdebug-handler.git",
-                "reference": "fa2aaf99e2087f013a14f7432c1cd2dd7d8f1f51"
+                "reference": "ebd27a9866ae8254e873866f795491f02418c5a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/fa2aaf99e2087f013a14f7432c1cd2dd7d8f1f51",
-                "reference": "fa2aaf99e2087f013a14f7432c1cd2dd7d8f1f51",
+                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/ebd27a9866ae8254e873866f795491f02418c5a5",
+                "reference": "ebd27a9866ae8254e873866f795491f02418c5a5",
                 "shasum": ""
             },
             "require": {
@@ -909,7 +909,7 @@
                 "Xdebug",
                 "performance"
             ],
-            "time": "2020-06-04T11:16:35+00:00"
+            "time": "2020-08-19T10:27:58+00:00"
         },
         {
             "name": "pdepend/pdepend",
