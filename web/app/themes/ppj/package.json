@@ -8,20 +8,20 @@
     "url": "git://github.com/roots/roots.git"
   },
   "dependencies": {
-    "ajv": "^6.10.2",
-    "axios": "^0.19.0",
+    "ajv": "^6.12.4",
+    "axios": "^0.20.0",
     "debounce": "^1.2.0",
-    "jquery": "^3.4.1",
-    "vue": "^2.6.11",
-    "vue-loader": "^15.9.2",
-    "vue-template-compiler": "^2.6.11"
+    "jquery": "^3.5.1",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.12"
   },
   "devDependencies": {
     "details-element-polyfill": "^2.4.0",
-    "laravel-mix": "^5.0.4",
+    "laravel-mix": "^5.0.5",
     "resolve-url-loader": "^3.1.1",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
+    "sass": "^1.26.10",
+    "sass-loader": "^10.0.1",
     "scrollpoints": "^0.4.0",
     "url-search-params-polyfill": "^8.1.0"
   },
