@@ -35,7 +35,7 @@
     "ministryofjustice/wp-user-roles": "*",
     "ministryofjustice/wp-moj-social-share": "*",
     "ministryofjustice/wp-moj-components": "*",
-    "ministryofjustice/cookie-compliance-for-wordpress": "*",
+    "ministryofjustice/cookie-compliance-for-wordpress": "dev-gtm-allowlist-with-assets",
     "wpackagist-plugin/wp-analytify":"*",
     "wpackagist-plugin/analytify-analytics-dashboard-widget":"*"
   },
