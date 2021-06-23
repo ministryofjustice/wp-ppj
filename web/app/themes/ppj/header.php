@@ -61,11 +61,4 @@
     <div class="ccfw-background-grey-overlay"></div>
     <?php do_action('after_body_open_tag'); ?>
 
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2SCJMC"
-                height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
 <?php require_once( get_template_directory() . '/page-header-two.php'); ?>
