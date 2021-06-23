@@ -31,23 +31,6 @@
         <title><?= $htmlTitle ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="description" content="<?= $htmlMetaDescription ?>"/>
-
-        <!-- Google Tag Manager -->
-        <script>(function (w, d, s, l, i) {
-                w[l] = w[l] || [];
-                w[l].push({
-                    'gtm.start':
-                        new Date().getTime(), event: 'gtm.js'
-                });
-                var f = d.getElementsByTagName(s)[0],
-                    j = d.createElement(s), dl = l !== 'dataLayer' ? '&l=' + l : '';
-                j.async = true;
-                j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', 'GTM-N2SCJMC');</script>
-        <!-- End Google Tag Manager -->
-
         <?php wp_head(); ?>
         <script><?php // code that must be available before the HTML has finished loading. ?>
             window.ppj = {};
@@ -56,23 +39,6 @@
                 document.getElementsByClassName('header__image')[0].classList.add('header__image--loaded');
             };
         </script>
-        <?php if (constant('ENVIRONMENT') == 'staging' || constant('ENVIRONMENT') == 'production'): ?>
-            <script>
-                (function (w, d, s, l, i) {
-                    w[l] = w[l] || [];
-                    w[l].push({
-                        'gtm.start':
-                            new Date().getTime(), event: 'gtm.js'
-                    });
-                    var f = d.getElementsByTagName(s)[0],
-                        j = d.createElement(s), dl = l !== 'dataLayer' ? '&l=' + l : '';
-                    j.async = true;
-                    j.src =
-                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                    f.parentNode.insertBefore(j, f);
-                })(window, document, 'script', 'dataLayer', 'GTM-WQ92V8W');
-            </script>
-        <?php endif; ?>
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     </head>
 
@@ -94,12 +60,5 @@
 
     <div class="ccfw-background-grey-overlay"></div>
     <?php do_action('after_body_open_tag'); ?>
-
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2SCJMC"
-                height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
 <?php require_once( get_template_directory() . '/page-header-two.php'); ?>
