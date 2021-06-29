@@ -8,87 +8,88 @@ objectFitPolyfill();
 closestPolyfill();
 
 if ('dataLayer' in window == false) {
-  window.dataLayer = [];
+    window.dataLayer = [];
 }
 
 window.ppj.pageContainerOverlay = {
-  activate : function() {
-    document.getElementsByClassName('page-container__overlay')[0].classList.add('page-container__overlay--active');
-  },
-  deactivate : function() {
-    document.getElementsByClassName('page-container__overlay')[0].classList.remove('page-container__overlay--active');
-  },
+    activate: function () {
+        document.getElementsByClassName('page-container__overlay')[0].classList.add('page-container__overlay--active');
+    },
+    deactivate: function () {
+        document.getElementsByClassName('page-container__overlay')[0].classList.remove('page-container__overlay--active');
+    },
 };
 
-window.ppj.openNavMenu = function() {
-  document.getElementsByTagName('body')[0].classList.add('mobile-nav-is-open', 'site-overlay-is-active');
-  window.ppj.pageContainerOverlay.activate();
+window.ppj.openNavMenu = function () {
+    document.getElementsByTagName('body')[0].classList.add('mobile-nav-is-open', 'site-overlay-is-active');
+    window.ppj.pageContainerOverlay.activate();
 };
 
-window.ppj.closeNavMenu = function() {
-  document.getElementsByTagName('body')[0].classList.remove('mobile-nav-is-open', 'site-overlay-is-active');
-  window.ppj.pageContainerOverlay.deactivate();
+window.ppj.closeNavMenu = function () {
+    document.getElementsByTagName('body')[0].classList.remove('mobile-nav-is-open', 'site-overlay-is-active');
+    window.ppj.pageContainerOverlay.deactivate();
 };
 
 window.ppj.toggleAccordion = (event) => {
-  const element = event.target;
-  const gtmEvent = {
-    event: 'accordion_toggle',
-    title: element.getAttribute('data-title'),
-    open: element.open
-  };
-  window.dataLayer.push(gtmEvent);
+    const element = event.target;
+    const gtmEvent = {
+        event: 'accordion_toggle',
+        title: element.getAttribute('data-title'),
+        open: element.open
+    };
+    window.dataLayer.push(gtmEvent);
 };
 
 const details = document.querySelectorAll('.accordion details');
 for (var i = 0; i < details.length; i++) {
-  details[i].addEventListener('toggle', window.ppj.toggleAccordion);
+    details[i].addEventListener('toggle', window.ppj.toggleAccordion);
 }
 
 // _wq needs to be initialized so that Wistia's Video API can be used
 window._wq = window._wq || [];
 
 //add callbacks to video play button for all Wistia videos
-_wq.push({ id: '_all', onReady: function(video) {
-  const videoPlayer = video.container.closest('.video-player');
-  const cover = videoPlayer.querySelector('.video-player__cover');
+_wq.push({
+    id: '_all', onReady: function (video) {
+        const videoPlayer = video.container.closest('.video-player');
+        const cover = videoPlayer.querySelector('.video-player__cover');
 
-  // If this video doesn't have a cover image, do nothing
-  if (cover == null) return;
+        // If this video doesn't have a cover image, do nothing
+        if (cover == null) return;
 
-  video.container.hidden = true;
-  cover.addEventListener('click', function(event) {
-    event.preventDefault();
-    video.container.hidden = false;
-    cover.hidden = true;
-    video.container.focus();
-    videoPlayer.classList.add('video-player--playing');
-    video.play();
-  });
-}});
+        video.container.hidden = true;
+        cover.addEventListener('click', function (event) {
+            event.preventDefault();
+            video.container.hidden = false;
+            cover.hidden = true;
+            video.container.focus();
+            videoPlayer.classList.add('video-player--playing');
+            video.play();
+        });
+    }
+});
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
 
-  const scrollPointConfig = {
-    when: 'entering'
-  };
+    const scrollPointConfig = {
+        when: 'entering'
+    };
 
-  // fade content in on scroll
-  const els = document.querySelectorAll('.l-full, .l-half');
-  for (let i in els) {
-    scrollpoints.add(
-      els[i],
-      (el) => {
-        el.style.opacity = 1
-      },
-      scrollPointConfig
-    )
-  }
+    // fade content in on scroll
+    const els = document.querySelectorAll('.l-full, .l-half');
+    for (let i in els) {
+        scrollpoints.add(
+            els[i],
+            (el) => {
+                el.style.opacity = 1;
+            },
+            scrollPointConfig
+        );
+    }
 
-  // hide html until Vue has rendered
-  const html = document.getElementsByTagName('html')[0];
-  html.style.opacity = 1;
-
+    // hide html until Vue has rendered
+    const html = document.getElementsByTagName('html')[0];
+    html.style.opacity = 1;
 
 }, false);
 
@@ -102,10 +103,10 @@ const nonMobiles = window.matchMedia('(min-width: 1024px)');
  * Close mobile nav if screen becomes >= 1024px wide
  * The desktop nav will become visible, so mobile nav must be closed
  */
-nonMobiles.addListener(function(data) {
-  if (data.matches) {
-    window.ppj.closeNavMenu();
-  }
+nonMobiles.addListener(function (data) {
+    if (data.matches) {
+        window.ppj.closeNavMenu();
+    }
 });
 
 /**
@@ -114,11 +115,11 @@ nonMobiles.addListener(function(data) {
  * @param cssSelector string valid CSS selector
  * @param hidden boolean
  */
-window.ppj.setAriaHiddenAttribute = function(cssSelector, hidden) {
-  const inactiveLinks = document.querySelectorAll(cssSelector);
-  for(let link of inactiveLinks) {
-    link.setAttribute('aria-hidden', hidden);
-  }
+window.ppj.setAriaHiddenAttribute = function (cssSelector, hidden) {
+    const inactiveLinks = document.querySelectorAll(cssSelector);
+    for (let link of inactiveLinks) {
+        link.setAttribute('aria-hidden', hidden);
+    }
 };
 
 /**
@@ -132,13 +133,13 @@ window.ppj.setAriaHiddenAttribute = function(cssSelector, hidden) {
  *
  * @param mobileDevicesMediaQuery
  */
-function setAriaHiddenForNonVisibleSiteWideNavLinks(mobileDevicesMediaQuery) {
-  const cssSelector = '.site-wide-nav__menu-list-element:not(.site-wide-nav__menu-list-element--selected)';
-  if (mobileDevicesMediaQuery.matches) {
-    window.ppj.setAriaHiddenAttribute(cssSelector, false);
-  } else {
-    window.ppj.setAriaHiddenAttribute(cssSelector, true);
-  }
+function setAriaHiddenForNonVisibleSiteWideNavLinks (mobileDevicesMediaQuery) {
+    const cssSelector = '.site-wide-nav__menu-list-element:not(.site-wide-nav__menu-list-element--selected)';
+    if (mobileDevicesMediaQuery.matches) {
+        window.ppj.setAriaHiddenAttribute(cssSelector, false);
+    } else {
+        window.ppj.setAriaHiddenAttribute(cssSelector, true);
+    }
 }
 
 // Set ARIA hidden attributes for site-wide-nav links on transition between mobile and non-mobile viewport sizes
