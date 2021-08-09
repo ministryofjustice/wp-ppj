@@ -49,9 +49,9 @@
         window.dataLayer.push(gtmEvent);
       },
 
-      linkClickHandler: function() {
+      linkClickHandler: function(event) {
         this.pushViewJobClickEventToGtm();
-        this.$emit('job-link-clicked', this.url);
+        this.$emit('job-link-clicked', event.target.href); //uses target href in case of changes to url by GTM after load
       },
 
     },
