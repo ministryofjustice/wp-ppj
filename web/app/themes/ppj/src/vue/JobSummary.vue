@@ -79,7 +79,12 @@
             var salary_range = this.salary.split('-');
 
             if(salary_range.length == 2) {
-              return '£' + Intl.NumberFormat().format(salary_range[0]) + ' - £' + Intl.NumberFormat().format(salary_range[1]);
+              if(isNaN(salary_range[0]) == false && isNaN(salary_range[1]) == false) {
+                return '£' + Intl.NumberFormat().format(salary_range[0]) + ' - £' + Intl.NumberFormat().format(salary_range[1]);
+              }
+              else {
+                return '';
+              }
             }
 
           }
