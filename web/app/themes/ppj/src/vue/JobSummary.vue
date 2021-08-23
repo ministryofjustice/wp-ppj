@@ -73,7 +73,26 @@
       },
 
       formattedSalary: function() {
-        return '£' + Intl.NumberFormat().format(this.salary)
+
+        if(isNaN(this.salary)) {
+          if(this.salary.includes('-')){
+            var salary_range = this.salary.split('-');
+
+            if(salary_range.length == 2) {
+              if(isNaN(salary_range[0]) == false && isNaN(salary_range[1]) == false) {
+                return '£' + Intl.NumberFormat().format(salary_range[0]) + ' - £' + Intl.NumberFormat().format(salary_range[1]);
+              }
+              else {
+                return '';
+              }
+            }
+
+          }
+          return '';
+        }
+        else {
+          return '£' + Intl.NumberFormat().format(this.salary);
+        }
       },
     },
   }
