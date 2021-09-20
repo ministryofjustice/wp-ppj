@@ -15,7 +15,6 @@ web/app/languages
 web/app/uploads/*
 
 !web/app/plugins/.gitkeep
-!web/app/plugins/cookie-banner-temp
 !web/app/mu-plugins/load.php
 !web/app/mu-plugins/ppj/
 !web/app/uploads/.gitkeep
