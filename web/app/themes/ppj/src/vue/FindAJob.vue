@@ -329,14 +329,14 @@
 
       switch(this.leg) {
         case 'prison-officer':
-          data.vacanciesDataURL = 'http://ppj.docker/app/uploads/job-feed/prison-officer-jobs.json';
+          data.vacanciesDataURL = find_job_object.job_feed_url + 'prison-officer-jobs.json';
           //data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/vacancies.json';
           //data.vacanciesDataURL = 'https://hmpps-feed-parser.s3.eu-west-2.amazonaws.com/dev/vacancies-test.json';
           //data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/prod/vacancies.json';
           break;
 
         case 'youth-custody':
-          data.vacanciesDataURL = 'http://ppj.docker/app/uploads/job-feed/youth-custody-jobs.json';
+          data.vacanciesDataURL = find_job_object.job_feed_url + 'youth-custody-jobs.json';
           //data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/youth-custody-vacancies.json';
           //data.vacanciesDataURL = 'https://s3.eu-west-2.amazonaws.com/hmpps-feed-parser/prod/youth-custody-vacancies.json';
           break;

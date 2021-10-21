@@ -66,17 +66,16 @@ function ppj_import_jobs($force_pull = false)
     $locations_json = file_get_contents(get_template_directory() . "/jobs-handler/locations.json");
     $locations_array = json_decode($locations_json, true);
 
-    foreach($locations_array as $location){
+    foreach ($locations_array as $location) {
 
-        if($location["type"] == "Prison") {
+        if ($location["type"] == "Prison") {
             $prisons[$location["name"]] = array(
                 "town" => $location["town"],
                 "lat" => $location["lat"],
                 "lng" => $location["lng"]
 
             );
-        }
-        else if ($location["type"] == "Youth Custody") {
+        } else if ($location["type"] == "Youth Custody") {
             $youth_custody_locations[$location["name"]] = array(
                 "town" => $location["town"],
                 "lat" => $location["lat"],
@@ -87,14 +86,14 @@ function ppj_import_jobs($force_pull = false)
     }
 
     for ($x = 0; $x < $total_jobs; $x++) {
-        $job_title = (string) $xml->entry[$x]->title;
-        $job_url = (string) $xml->entry[$x]->id;
+        $job_title = (string)$xml->entry[$x]->title;
+        $job_url = (string)$xml->entry[$x]->id;
         $job_part_time = false;
         $is_prison_job = true;
 
-        if(str_contains($job_title, 'Prison Officer') || str_contains($job_title, 'Youth Justice Worker')){
+        if (str_contains($job_title, 'Prison Officer') || str_contains($job_title, 'Youth Justice Worker')) {
 
-            if(str_contains($job_title, 'Youth Justice Worker')){
+            if (str_contains($job_title, 'Youth Justice Worker')) {
                 $is_prison_job = false;
             }
 
@@ -103,70 +102,68 @@ function ppj_import_jobs($force_pull = false)
 
             //Location could be one or many locations using ',' or 'and'
             $location_names_pos = strpos($job_title, '-');
-            $location_names = substr($job_title, $location_names_pos+1);
+            $location_names = substr($job_title, $location_names_pos + 1);
             $location_names = str_replace(",", "/", str_replace(" and ", "/", $location_names)); //replace ',''and'
 
-            if(str_contains($location_names, "Part Time")){
+            if (str_contains($location_names, "Part Time")) {
                 $job_part_time = true;
                 $location_names = str_replace("Part Time", "", $location_names);
             }
             $location_names_array = explode("/", $location_names);
 
-            if(is_array($location_names_array) && count($location_names_array) > 0){
-                foreach ($location_names_array as $location_name){
+            if (is_array($location_names_array) && count($location_names_array) > 0) {
+                foreach ($location_names_array as $location_name) {
                     $location_name = trim($location_name);
-                    if($is_prison_job && key_exists($location_name, $prisons)){
+                    if ($is_prison_job && key_exists($location_name, $prisons)) {
                         $confirmed_locations[] = array("name" => $location_name, "location" => $prisons[$location_name]);
-                    }
-                    elseif(!$is_prison_job && key_exists($location_name, $youth_custody_locations)){
+                    } elseif (!$is_prison_job && key_exists($location_name, $youth_custody_locations)) {
                         $confirmed_locations[] = array("name" => $location_name, "location" => $youth_custody_locations[$location_name]);
                     }
-            }
+                }
 
-            if(count($confirmed_locations) > 0) {
-                $job_content = $xml->entry[$x]->content;
+                if (count($confirmed_locations) > 0) {
+                    $job_content = $xml->entry[$x]->content;
 
-                if (!empty($job_content)) {
-                    $job_content = (string)$job_content->div;
+                    if (!empty($job_content)) {
+                        $job_content = (string)$job_content->div;
 
-                    $job_details = preg_split("/\r\n|\n|\r/", $job_content);
+                        $job_details = preg_split("/\r\n|\n|\r/", $job_content);
 
-                    foreach ($job_details as $job_detail) {
-                        if (str_contains($job_detail, 'Salary:')) {
-                            $salary = preg_replace("/[^0-9-]/", "", $job_detail);
-                        }
-                        if (str_contains($job_detail, 'Closing Date:')) {
-                            $closing_date = str_replace('Closing Date:', "", $job_detail);
-                            $closing_date = date("j/m/Y", strtotime($closing_date));
-                        }
-                    }
-
-                    if (!empty($salary) && !empty($closing_date)) {
-
-                        foreach ($confirmed_locations as $location) {
-
-                            $new_job = array(
-                                "title" => $job_title,
-                                "salary" => $salary,
-                                "url" => $job_url,
-                                "part_time" => $job_part_time,
-                                "closing_date" => $closing_date, //not currently used by PPJ
-                                "prison_name" => $location['name'],
-                                "prison_location" => $location['location']
-
-                            );
-
-                            if($is_prison_job){
-                                $new_job["role"] = "prison-officer";
-                                $new_job["type"] = "Prison";
-                                $prison_officer_jobs[] = $new_job;
+                        foreach ($job_details as $job_detail) {
+                            if (str_contains($job_detail, 'Salary:')) {
+                                $salary = preg_replace("/[^0-9-]/", "", $job_detail);
                             }
-                            else {
-                                $new_job["role"] = "youth-custody";
-                                $new_job["type"] = "Youth Custody";
-                                $youth_custody_jobs[] = $new_job;
+                            if (str_contains($job_detail, 'Closing Date:')) {
+                                $closing_date = str_replace('Closing Date:', "", $job_detail);
+                                $closing_date = date("j/m/Y", strtotime($closing_date));
                             }
                         }
+
+                        if (!empty($salary) && !empty($closing_date)) {
+
+                            foreach ($confirmed_locations as $location) {
+
+                                $new_job = array(
+                                    "title" => $job_title,
+                                    "salary" => $salary,
+                                    "url" => $job_url,
+                                    "part_time" => $job_part_time,
+                                    "closing_date" => $closing_date, //not currently used by PPJ
+                                    "prison_name" => $location['name'],
+                                    "prison_location" => $location['location']
+
+                                );
+
+                                if ($is_prison_job) {
+                                    $new_job["role"] = "prison-officer";
+                                    $new_job["type"] = "Prison";
+                                    $prison_officer_jobs[] = $new_job;
+                                } else {
+                                    $new_job["role"] = "youth-custody";
+                                    $new_job["type"] = "Youth Custody";
+                                    $youth_custody_jobs[] = $new_job;
+                                }
+                            }
 
 
                         }

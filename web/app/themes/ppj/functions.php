@@ -20,7 +20,19 @@ function enqueue_scripts()
             null,
             true
         );
-        wp_enqueue_script('find-a-job-js', $root_dir . mix_asset('/js/find-a-job.js'), ('google-maps.js'), null, true);
+
+        wp_register_script('find-a-job-js', $root_dir . mix_asset('/js/find-a-job.js'), ('google-maps.js'), null, true);
+
+        $upload_dir = wp_get_upload_dir();
+        wp_localize_script(
+            'find-a-job-js',
+            'find_job_object',
+            array(
+                'job_feed_url' => $upload_dir['baseurl'] . "/job-feed/"
+            )
+        );
+
+        wp_enqueue_script('find-a-job-js' );
     }
 }
 
