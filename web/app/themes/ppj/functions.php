@@ -129,3 +129,9 @@ add_action('rest_api_init', function () {
         'callback' => 'moj_wp_version'
     ));
 });
+
+
+/**
+ * Load Jobs Handler file
+ */
+require 'jobs-handler/import-jobs.php';
