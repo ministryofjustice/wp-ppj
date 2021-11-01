@@ -7,7 +7,7 @@
     "type": "Prison"
   },
   {
-    "name": "IRC The Verne",
+    "name": "HMP The Verne",
     "town": "Moffat",
     "lat": 50.5615548,
     "lng": -2.4357944,
@@ -2072,7 +2072,7 @@
     "type": "Youth Custody"
   },
   {
-    "name": "IRC Verne",
+    "name": "The Verne",
     "town": "Moffat",
     "lat": 50.5615548,
     "lng": -2.4357944,
