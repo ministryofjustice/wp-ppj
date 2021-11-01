@@ -364,10 +364,10 @@ let dummyJobs =
      "prison_location": {"lat": 51.2716941, "lng": -0.4908906},
      "url": "https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9916-201706-Prison-Officer-HMP-YOI-Send/en-GB"
    }, {
-     "title": "201706: Prison Officer -  HMYOI Portland & IRC Verne",
+     "title": "201706: Prison Officer -  HMYOI Portland & HMP The Verne",
      "salary": "£22,396",
      "closing_date": "31/10/2017",
-     "prison_name": "HMYOI Portland & IRC Verne",
+     "prison_name": "HMYOI Portland & HMP The Verne",
      "prison_location": {"lat": 50.5497794, "lng": -2.4219912},
      "url": "https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-13/candidate/so/pm/1/pl/3/opp/9926-201706-Prison-Officer-HMYOI-Portland-IRC-Verne/en-GB"
    }, {
