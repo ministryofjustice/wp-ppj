@@ -144,6 +144,11 @@ add_action('rest_api_init', function () {
 
 
 /**
- * Load Jobs Handler file
+ * Load Jobs Handler files
  */
+
+require  'jobs-handler/cpt-job-locations.php';
+
 require 'jobs-handler/import-jobs.php';
+
+
