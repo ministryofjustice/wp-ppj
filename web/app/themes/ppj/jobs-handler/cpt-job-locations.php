@@ -127,11 +127,3 @@ function ppj_save_job_location( $post_id ) {
 
 // on acf save post so fires after meta fields are saved
 add_action( "acf/save_post", 'ppj_save_job_location', 10, 3 );
-
-function my_acf_init() {
-
-    acf_update_setting('google_api_key', 'AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA');
-}
-
-add_action('acf/init', 'my_acf_init');
-
