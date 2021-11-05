@@ -26,6 +26,11 @@ function ppj_import_jobs($force_pull = false)
     // get the uploads directory path
     $upload_dir = wp_get_upload_dir();
 
+    //create directory if it does not already exist
+    if (!file_exists($upload_dir['basedir'] . "/job-feed")) {
+        mkdir($upload_dir['basedir'] . "/job-feed", 0755, true);
+    }
+
     $url = "https://justicejobs.tal.net/vx/mobile-0/appcentre-1/brand-2/candidate/jobboard/vacancy/3/feed";
     $file = $upload_dir['basedir'] . "/job-feed/jobs.xml";
 
@@ -63,25 +68,56 @@ function ppj_import_jobs($force_pull = false)
     $youth_custody_jobs = array();
     $youth_custody_locations = array();
 
-    $locations_json = file_get_contents(get_template_directory() . "/jobs-handler/locations.json");
+    //generated locations fro cpt
+    $locations_file = $upload_dir['basedir'] . "/job-feed/locations.json";
+    if(!file_exists($locations_file)){
+
+        //theme backup locations
+        $locations_file = get_template_directory() . "/jobs-handler/locations.json";
+
+    }
+
+    $locations_json = file_get_contents($locations_file);
     $locations_array = json_decode($locations_json, true);
 
     foreach ($locations_array as $location) {
 
-        if ($location["type"] == "Prison") {
+        if (in_array("Prison", $location["type"])) {
             $prisons[$location["name"]] = array(
                 "town" => $location["town"],
                 "lat" => $location["lat"],
                 "lng" => $location["lng"]
 
             );
-        } else if ($location["type"] == "Youth Custody") {
+
+            //add variations
+            if(array_key_exists("name_variations", $location) && !empty($location["name_variations"])){
+                foreach ($location["name_variations"] as $name){
+                    $prisons[$name] = array(
+                        "town" => $location["town"],
+                        "lat" => $location["lat"],
+                        "lng" => $location["lng"]
+                    );
+                }
+            }
+        } else if (in_array("Youth Custody", $location["type"])) {
             $youth_custody_locations[$location["name"]] = array(
                 "town" => $location["town"],
                 "lat" => $location["lat"],
                 "lng" => $location["lng"]
 
             );
+
+            //add variations
+            if(array_key_exists("name_variations", $location) && !empty($location["name_variations"])){
+                foreach ($location["name_variations"] as $name){
+                    $youth_custody_locations[$name] = array(
+                        "town" => $location["town"],
+                        "lat" => $location["lat"],
+                        "lng" => $location["lng"]
+                    );
+                }
+            }
         }
     }
 
