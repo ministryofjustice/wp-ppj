@@ -68,6 +68,7 @@ function ppj_import_jobs($force_pull = false)
     $youth_custody_jobs = array();
     $youth_custody_locations = array();
 
+    clearstatcache(); //clear cache to check file exists
     //generated locations fro cpt
     $locations_file = $upload_dir['basedir'] . "/job-feed/locations.json";
     if(!file_exists($locations_file)){
