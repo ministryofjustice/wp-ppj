@@ -114,7 +114,7 @@ function ppj_save_job_location( $post_id ) {
 
             if(count($job_loc_array) > 0){
                 $upload_dir = wp_get_upload_dir();
-                $locations_file = $upload_dir['basedir'] . "/job-feed/temp-locations.json";
+                $locations_file = $upload_dir['basedir'] . "/job-feed/locations.json";
 
                 //Write location json file
                 $fp = fopen($locations_file, 'w');
