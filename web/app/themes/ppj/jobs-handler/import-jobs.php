@@ -101,7 +101,9 @@ function ppj_import_jobs($force_pull = false)
                     );
                 }
             }
-        } else if (in_array("Youth Custody", $location["type"])) {
+        }
+
+        if (in_array("Youth Custody", $location["type"])) {
             $youth_custody_locations[$location["name"]] = array(
                 "town" => $location["town"],
                 "lat" => $location["lat"],
