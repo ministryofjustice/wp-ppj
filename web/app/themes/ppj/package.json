@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "ajv": "^6.12.4",
-    "axios": "^0.20.0",
+    "axios": "^0.26.0",
     "debounce": "^1.2.0",
     "jquery": "^3.5.1",
     "vue": "^2.6.12",
@@ -23,9 +23,9 @@
     "resolve-url-loader": "^4.0.0",
     "sass": "^1.35.1",
     "sass-loader": "^12.1.0",
-    "vue-template-compiler": "^2.6.12",
     "scrollpoints": "^0.4.0",
-    "url-search-params-polyfill": "^8.1.1"
+    "url-search-params-polyfill": "^8.1.1",
+    "vue-template-compiler": "^2.6.12"
   },
   "scripts": {
     "dev": "NODE_ENV=development webpack --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
