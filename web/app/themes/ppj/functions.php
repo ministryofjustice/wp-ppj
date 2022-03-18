@@ -13,9 +13,17 @@ function enqueue_scripts()
     wp_enqueue_script('wistia', '//fast.wistia.com/assets/external/E-v1.js', null, null, true);
 
     if (is_page_template('find-a-job.php')) {
+
+        $map_src = 'https://maps.googleapis.com/maps/api/js?libraries=places';
+        $map_key = get_field( 'google_maps_api_key', 'option' );
+
+        if(strlen($map_key) > 0) {
+            $map_src = 'https://maps.googleapis.com/maps/api/js?key=' . $map_key . '&libraries=places';
+        }
+        
         wp_enqueue_script(
             'google-maps-js',
-            'https://maps.googleapis.com/maps/api/js?key=AIzaSyDDplfBkLzNA3voskfGyExYnQ46MJ0VtpA&libraries=places',
+            $map_src,
             null,
             null,
             true
