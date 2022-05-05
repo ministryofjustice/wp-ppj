@@ -3,20 +3,25 @@
        :class="{'job-summary--selected': selected}">
     <div class="job-summary__content">
       <div class="job-summary__row">
-        <div class="job-summary__prison-name"
-             v-if="prisonName">{{prisonName}}
+        <div v-if="prisonName || formattedPartTime">
+          <div class="job-summary__prison-name" v-if="prisonName">
+            {{prisonName}}
+            <div class="job-summary__tag job-summary__tag--part-time" v-if="formattedPartTime">
+                {{formattedPartTime}}
+            </div>
+          </div>
         </div>
-
-        <div class="job-summary__salary"
-             v-if="formattedSalary">{{formattedSalary}}
+        <div class="job-summary__salary" v-if="formattedSalary">
+             {{formattedSalary}}
         </div>
       </div>
       <div class="job-summary__row">
-        <div class="job-summary__prison-city"
-             v-if="prisonName || prisonCity">{{prisonCity}}<span class="job-summary__distance"  v-if="formattedDistance"> {{formattedDistance}}
-          </span>
+        <div class="job-summary__prison-city" v-if="prisonName || prisonCity">
+            {{prisonCity}}
+            <span class="job-summary__distance" v-if="formattedDistance">
+                {{formattedDistance}}
+            </span>
         </div>
-
         <a class="job-summary__link"
            v-if="url"
            :href="url"
@@ -25,6 +30,15 @@
           view job & apply
         </a>
       </div>
+        <div class="job-summary__expiry"  v-if="formattedExpiry">
+            Deadline:
+            <span class="job-summary__expiry__date" v-if="formattedExpiry[1]=='normal'">
+              {{formattedExpiry[0]}}
+            </span>
+            <span class="job-summary__expiry__date--soon" v-if="formattedExpiry[1]=='imminent'">
+              {{formattedExpiry[0]}}
+            </span>
+        </div>
     </div>
   </div>
 </template>
@@ -34,6 +48,8 @@
       'distance'    : { 'default': 0 },
       'prison-city' : { 'default': '' },
       'prison-name' : { 'default': '' },
+      'part_time'   : { 'default': false },
+      'closing_date': { 'default': '' },
       'salary'      : { 'default': '' },
       'selected'    : { 'default': false },
       'url'         : { 'default': '' },
@@ -70,6 +86,32 @@
         }
 
         return distanceStr;
+      },
+
+      formattedExpiry: function() {
+        if(this.closing_date) {
+          const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+          let today = new Date();
+          let d = new Date(this.closing_date.substring(6,12) + "-" +  this.closing_date.substring(3, 5) + "-" + this.closing_date.substring(0, 2));
+          let diffTime = Math.abs(d - today);
+          let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          let deadlineType = "normal";
+          let expiry = d.getDate() + " " + month[d.getMonth()];
+          if (diffDays == 0) {
+            deadlineType = "imminent";
+            expiry = "Today";
+          } else if (diffDays == 1) {
+            deadlineType = "imminent";
+            expiry = "Tomorrow";
+          }
+          return [expiry,deadlineType];
+        }
+      },
+
+      formattedPartTime: function(){
+        if(this.part_time) {
+          return "Part time only";
+        }
       },
 
       formattedSalary: function() {

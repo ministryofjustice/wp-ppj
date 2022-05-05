@@ -126,9 +126,11 @@
             <job-summary :distance="job.distance"
                          :prison-city="job.prison_location.town"
                          :prison-name="job.prison_name"
+                         :part_time="job.part_time"
                          :salary="job.salary"
                          :selected="job.locationId == selectedLocationId"
                          :title="job.title"
+                         :closing_date="job.closing_date"
                          :url="job.url"
                          @job-link-clicked="loadJobUrl"
             >

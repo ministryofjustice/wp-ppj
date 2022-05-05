@@ -50,13 +50,32 @@
       height: 1.2em
       position: relative
 
+  &__tag
+    background-color: #005ea5
+    color: white
+    padding: 2px 6px 1px
+    font-weight: 700
+    font-size: 85%
+    text-transform: uppercase
+    letter-spacing: 1px
+    margin-top: 3px
+
+    @media (min-width: 769px)
+      margin-left: 9px
+      display: inline-block
+
   &__prison
     display: flex
 
-  &__prison-city
+  &__prison-city, &__expiry
     overflow: hidden
     text-overflow: ellipsis
     white-space: nowrap
+
+    &__date--soon
+      letter-spacing: 1px
+      font-weight: $font-weight-bold
+      padding-left: 3px
 
   &__salary
     background-color: inherit
