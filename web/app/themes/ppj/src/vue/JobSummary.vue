@@ -110,7 +110,7 @@
 
       formattedPartTime: function(){
         if(this.part_time) {
-          return "Part time role";
+          return "Part-time role";
         }
       },
 
