@@ -20,7 +20,7 @@ function enqueue_scripts()
         if(strlen($map_key) > 0) {
             $map_src = 'https://maps.googleapis.com/maps/api/js?key=' . $map_key . '&libraries=places';
         }
-        
+
         wp_enqueue_script(
             'google-maps-js',
             $map_src,
@@ -160,3 +160,8 @@ require  'jobs-handler/cpt-job-locations.php';
 require 'jobs-handler/import-jobs.php';
 
 
+//Shows shortcut link button when using classic editor
+add_filter( 'get_shortlink', function ( $shortlink ) {
+
+    return $shortlink;
+} );
