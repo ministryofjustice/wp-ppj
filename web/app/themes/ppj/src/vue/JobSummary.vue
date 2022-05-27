@@ -31,7 +31,7 @@
         </a>
       </div>
         <div class="job-summary__expiry"  v-if="formattedExpiry">
-            Deadline:
+            Closing date:
             <span class="job-summary__expiry__date" v-if="formattedExpiry[1]=='normal'">
               {{formattedExpiry[0]}}
             </span>
@@ -92,9 +92,13 @@
         if(this.closing_date) {
           const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
           let today = new Date();
-          let d = new Date(this.closing_date.substring(6,12) + "-" +  this.closing_date.substring(3, 5) + "-" + this.closing_date.substring(0, 2));
+          let deadline = this.closing_date.split("/");
+          let d = new Date(deadline[2] + "-" + deadline[1] + "-" + deadline[0]);
           let diffTime = Math.abs(d - today);
           let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          if (isNaN(diffDays)) {
+            return false;
+          }
           let deadlineType = "normal";
           let expiry = d.getDate() + " " + month[d.getMonth()];
           if (diffDays == 0) {
