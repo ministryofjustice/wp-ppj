@@ -2,6 +2,42 @@
 // bootstrap WP
 require_once(ABSPATH . "wp-load.php");
 
+/**
+ * Manually invoke a jobs import process
+ */
+function ppj_jobs_import_override ($params)
+{
+    $query = get_query_var('jobs_process');
+    if (is_user_logged_in() && current_user_can('administrator')) {
+        switch ($query) {
+            case 'import-jobs':
+                ppj_import_jobs(true);
+                ppj_jobs_import_override_complete();
+                break;
+        }
+    }
+}
+
+add_action('wp', 'ppj_jobs_import_override');
+
+function ppj_jobs_import_override_complete($redirect = false)
+{
+    if (WP_ENV === 'production' || $redirect === true) {
+        if (wp_redirect('/', 301)) {
+            exit;
+        }
+    }
+    die();
+}
+
+function ppj_add_query_vars_filter($vars)
+{
+    $vars[] = "jobs_process";
+    return $vars;
+}
+
+add_filter('query_vars', 'ppj_add_query_vars_filter');
+
 function ppj_import_jobs($force_pull = false)
 {
     // get admin email for messaging
@@ -85,6 +121,7 @@ function ppj_import_jobs($force_pull = false)
 
         if (in_array("Prison", $location["type"])) {
             $prisons[$location["name"]] = array(
+                "name" => $location["name"],
                 "town" => $location["town"],
                 "lat" => $location["lat"],
                 "lng" => $location["lng"]
@@ -95,6 +132,7 @@ function ppj_import_jobs($force_pull = false)
             if(array_key_exists("name_variations", $location) && !empty($location["name_variations"])){
                 foreach ($location["name_variations"] as $name){
                     $prisons[$name] = array(
+                        "name" => $location["name"], // Use standardised name regardless of whats used in feed
                         "town" => $location["town"],
                         "lat" => $location["lat"],
                         "lng" => $location["lng"]
@@ -105,16 +143,17 @@ function ppj_import_jobs($force_pull = false)
 
         if (in_array("Youth Custody", $location["type"])) {
             $youth_custody_locations[$location["name"]] = array(
+                "name" => $location["name"],
                 "town" => $location["town"],
                 "lat" => $location["lat"],
                 "lng" => $location["lng"]
-
             );
 
             //add variations
             if(array_key_exists("name_variations", $location) && !empty($location["name_variations"])){
                 foreach ($location["name_variations"] as $name){
                     $youth_custody_locations[$name] = array(
+                        "name" => $location["name"], // Use standardised name regardless of whats used in feed
                         "town" => $location["town"],
                         "lat" => $location["lat"],
                         "lng" => $location["lng"]
@@ -154,9 +193,11 @@ function ppj_import_jobs($force_pull = false)
                 foreach ($location_names_array as $location_name) {
                     $location_name = trim($location_name);
                     if ($is_prison_job && key_exists($location_name, $prisons)) {
-                        $confirmed_locations[] = array("name" => $location_name, "location" => $prisons[$location_name]);
+                        //Location name is set to Title of Location CPT for all variations
+                        $confirmed_locations[] = array("name" => $prisons[$location_name]['name'], "location" => $prisons[$location_name]);
                     } elseif (!$is_prison_job && key_exists($location_name, $youth_custody_locations)) {
-                        $confirmed_locations[] = array("name" => $location_name, "location" => $youth_custody_locations[$location_name]);
+                        //Location name is set to Title of Location CPT for all variations
+                        $confirmed_locations[] = array("name" => $youth_custody_locations[$location_name]['name'], "location" => $youth_custody_locations[$location_name]);
                     }
                 }
 
