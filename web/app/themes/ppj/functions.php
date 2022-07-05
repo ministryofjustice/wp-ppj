@@ -165,4 +165,3 @@ add_filter( 'get_shortlink', function ( $shortlink ) {
 
     return $shortlink;
 } );
-

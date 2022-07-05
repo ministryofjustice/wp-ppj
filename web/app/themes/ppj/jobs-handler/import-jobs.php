@@ -2,7 +2,6 @@
 // bootstrap WP
 require_once(ABSPATH . "wp-load.php");
 
-
 /**
  * Manually invoke a jobs import process
  */
