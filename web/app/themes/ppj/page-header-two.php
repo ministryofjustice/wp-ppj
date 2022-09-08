@@ -18,8 +18,8 @@ if ( $headerImageData ) {
 $headerClass = '';
 $headerClass .= ($headerStyle == 'dark') ?  'header--style-dark' : '';
 
+include "partials/emergency-banner.php";
 ?>
-
 <div id="site-container">
     <div class="page-container">
         <div class="page-container__overlay"
