@@ -165,3 +165,9 @@ add_filter( 'get_shortlink', function ( $shortlink ) {
 
     return $shortlink;
 } );
+
+/**
+ * Emergency banner
+ */
+
+require 'partials/emergency-banner-settings.php';
