@@ -181,13 +181,13 @@ function ppj_import_jobs($force_pull = false)
             //Location could be one or many locations using ',' or 'and'
             $location_names_pos = strpos($job_title, '-');
             $location_names = substr($job_title, $location_names_pos + 1);
-            $location_names = str_replace(",", "/", str_replace(" and ", "/", $location_names)); //replace ',''and'
+            $location_names = str_replace(",", "#", str_replace(" and ", "#", $location_names)); //replace ',''and'
 
             if (str_contains($location_names, "Part Time")) {
                 $job_part_time = true;
                 $location_names = str_replace("Part Time", "", $location_names);
             }
-            $location_names_array = explode("/", $location_names);
+            $location_names_array = explode("#", $location_names);
 
             if (is_array($location_names_array) && count($location_names_array) > 0) {
                 foreach ($location_names_array as $location_name) {
