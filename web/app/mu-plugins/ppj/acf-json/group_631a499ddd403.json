@@ -62,7 +62,7 @@
         {
             "key": "field_631a49d721ca9",
             "label": "Banner Link Destination",
-            "name": "banner_description_link",
+            "name": "banner_link_destination",
             "type": "url",
             "instructions": "If anything is entered, it will be linked to via a \"more information\" link at the bottom of the banner.",
             "required": 0,
@@ -94,5 +94,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1662667787
+    "modified": 1662708537
 }

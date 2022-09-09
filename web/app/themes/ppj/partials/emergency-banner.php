@@ -32,7 +32,7 @@
 			?>
 			</div>
 			<?php
-				$moreinfolink = get_field('banner_destination_link', 'option');
+				$moreinfolink = get_field('banner_link_destination', 'option');
 				if (isset($moreinfolink) && $moreinfolink != "") {
 			?>
 				<div style="
@@ -43,7 +43,7 @@
 					"
 					href="
 						<?php
-							echo get_field('banner_destination_link', 'option');
+							echo get_field('banner_link_destination', 'option');
 						?>
 					">
 						More information
