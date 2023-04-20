@@ -1,7 +1,7 @@
 # Prison and Probation jobs
 
 ## NB
-In web/app/themes/ppj/package.json a dependency on the package:
+In web/app/themes/ppj/package.json a dependency on the package
 marked@0.3.9 was created.
 Marked@0.3.6 was originally just a dependency of laravel mix
 ```└─┬ laravel-mix@1.7.2
